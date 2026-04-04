@@ -1,0 +1,18 @@
+{
+  "source_file": "data/raw/pg68527.txt",
+  "source_format": "project_gutenberg_txt",
+  "title": "Gereformeerde dogmatiek. Derde deel",
+  "author": "Herman Bavinck",
+  "language": "Dutch",
+  "release_date": "July 15, 2022",
+  "updated_date": "October 18, 2024",
+  "ebook_id": "68527",
+  "gutenberg_url": "www.gutenberg.org/ebooks/68527",
+  "original_publication": "Netherlands: J. H. Bos, 1898",
+  "credits": "Jeroen Hellingman, Hans Pieterse and the Online Distributed Proofreading Team at https://www.pgdp.net",
+  "raw_char_count": 1383517,
+  "clean_char_count": 1364022,
+  "raw_sha256": "75c9ac8947eb227e048cac720761a1ed9c817b03caa0d14a43f4147fc1909b25",
+  "clean_sha256": "7bfad79c5ca736baa515c74a351cc1e24fb5ad84edb245cef877e6205086a424",
+  "preserves_editor_notes": true
+}

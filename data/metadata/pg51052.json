@@ -1,0 +1,18 @@
+{
+  "source_file": "data/raw/pg51052.txt",
+  "source_format": "project_gutenberg_txt",
+  "title": "Gereformeerde dogmatiek. Eerste deel. Inleiding. Principia.",
+  "author": "Herman Bavinck",
+  "language": "Dutch",
+  "release_date": "January 27, 2016",
+  "updated_date": "October 22, 2024",
+  "ebook_id": "51052",
+  "gutenberg_url": "www.gutenberg.org/ebooks/51052",
+  "original_publication": null,
+  "credits": "Produced by Anna Tuinman, Eline Visser, Hans Pieterse and the Online Distributed Proofreading Team at http://www.pgdp.net.",
+  "raw_char_count": 1283732,
+  "clean_char_count": 1264148,
+  "raw_sha256": "27bebcecf70d86a7a099618647e8ec11e34279968155b31b002608e38745892a",
+  "clean_sha256": "7d960c171fcd1621c475dc61c866449da6eacae6ba9ec230df47a96dfcce2f4a",
+  "preserves_editor_notes": true
+}
