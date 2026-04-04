@@ -22,6 +22,17 @@ Each calibration run SHALL persist the inputs and outputs needed for later compa
 - **WHEN** the same calibration slice is rerun after prompt or pipeline changes
 - **THEN** the system retains enough artifacts from each run to compare outcomes across runs
 
+### Requirement: Calibration runs SHALL record the exact variable inputs used
+Each calibration run SHALL record which prompt bundle, model profile, and other configurable inputs were used so future reruns remain comparable even when providers or prompt text change.
+
+#### Scenario: Recording prompt and model choices
+- **WHEN** a calibration run starts
+- **THEN** the system records the prompt bundle identifier and model profile identifier associated with that run
+
+#### Scenario: Reviewing an old run after model changes
+- **WHEN** an operator inspects a historical calibration run after the project's preferred model has changed
+- **THEN** the run metadata still identifies the exact prompt and model configuration that produced the stored outputs
+
 ### Requirement: Calibration evaluation SHALL separate pass-fail checks from narrative findings
 The system SHALL represent calibration evaluation as both explicit checks and reviewer-facing commentary so regressions can be compared without losing qualitative context.
 
