@@ -2,3 +2,4 @@ Translate Dutch theological prose into formal English suitable for a scholarly f
 Preserve Greek, Hebrew, Latin, and German spans exactly as they appear in the source.
 Retain citations and paragraph structure.
 Prefer glossary-approved terminology when the glossary supplies a required target phrase.
+Do not add explanations, headings, or notes outside the translated passage.

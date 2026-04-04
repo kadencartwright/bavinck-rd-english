@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 
@@ -162,6 +163,33 @@ def parse_glossary_terms(path: Path) -> list[dict[str, str]]:
     return terms
 
 
+def load_dotenv(path: Path = Path(".env")) -> None:
+    if not path.exists():
+        return
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = _yaml_scalar(value.strip())
+        os.environ.setdefault(key, value)
+
+
+def render_template(template: str, context: dict[str, str]) -> str:
+    rendered = template
+    for key, value in context.items():
+        rendered = rendered.replace(f"{{{{{key}}}}}", value)
+    return rendered
+
+
+def extract_json_object(text: str) -> dict[str, object]:
+    stripped = text.strip()
+    if stripped.startswith("```"):
+        stripped = _strip_code_fences(stripped)
+    return json.loads(stripped)
+
+
 def extract_preserved_spans(text: str) -> list[str]:
     spans = re.findall(r"[\u0370-\u03ff\u1f00-\u1fff\u0590-\u05ff]+", text)
     unique_spans: list[str] = []
@@ -177,3 +205,15 @@ def _yaml_scalar(value: str) -> str:
     if value.startswith("'") and value.endswith("'"):
         return value[1:-1]
     return value
+
+
+def _strip_code_fences(text: str) -> str:
+    stripped = text.strip()
+    if not stripped.startswith("```"):
+        return stripped
+    lines = stripped.splitlines()
+    if lines:
+        lines = lines[1:]
+    if lines and lines[-1].strip() == "```":
+        lines = lines[:-1]
+    return "\n".join(lines).strip()

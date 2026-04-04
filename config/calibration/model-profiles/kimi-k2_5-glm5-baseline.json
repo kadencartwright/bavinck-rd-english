@@ -8,6 +8,8 @@
       "model": "kimi-k2.5",
       "mode": "batch",
       "temperature": 0.2,
+      "max_tokens": 6000,
+      "timeout_seconds": 300,
       "notes": "Primary draft translation for theological prose."
     },
     "review": {
@@ -15,6 +17,8 @@
       "model": "glm-5",
       "mode": "batch",
       "temperature": 0.1,
+      "max_tokens": 3000,
+      "timeout_seconds": 300,
       "notes": "Structured review and consistency checks."
     }
   }
