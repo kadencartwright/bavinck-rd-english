@@ -1,9 +1,26 @@
 #!/usr/bin/env sh
 set -eu
 
+manifest="config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json"
+prev=""
+for arg in "$@"; do
+  if [ "$prev" = "--run-manifest" ]; then
+    manifest="$arg"
+    break
+  fi
+  case "$arg" in
+    --run-manifest=*)
+      manifest="${arg#*=}"
+      break
+      ;;
+  esac
+  prev="$arg"
+done
+
+python3 src/calibration/validate_calibration.py --run-manifest "$manifest"
+
 if [ "$#" -eq 0 ]; then
-  exec python3 src/calibration/run_calibration.py \
-    --run-manifest config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json
+  exec python3 src/calibration/run_calibration.py --run-manifest "$manifest"
 fi
 
 exec python3 src/calibration/run_calibration.py "$@"

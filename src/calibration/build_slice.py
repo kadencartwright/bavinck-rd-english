@@ -13,12 +13,17 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from calibration.common import (
-    load_json,
     read_excerpt,
     relative_to_repo,
     select_slice_range,
     sha256_text,
     write_json,
+)
+from calibration.validation import (
+    ValidationError,
+    load_and_validate_json,
+    validate_slice_manifest,
+    validate_source_metadata,
 )
 
 
@@ -72,7 +77,11 @@ def main() -> int:
     args = parse_args()
     source_text = args.source_text.read_text(encoding="utf-8")
     lines = source_text.splitlines()
-    metadata = load_json(args.source_metadata)
+    metadata = load_and_validate_json(
+        args.source_metadata,
+        validate_source_metadata,
+        validate_paths=True,
+    )
 
     selection = select_slice_range(
         lines,
@@ -126,6 +135,7 @@ def main() -> int:
         },
         "report_root": f"data/calibration/runs/{args.slice_id}",
     }
+    validate_slice_manifest(manifest, path=manifest_path, validate_paths=False)
     write_json(manifest_path, manifest)
 
     print(f"Wrote excerpt: {relative_to_repo(excerpt_path)}")
@@ -139,4 +149,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except (RuntimeError, ValueError, ValidationError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        raise SystemExit(1)

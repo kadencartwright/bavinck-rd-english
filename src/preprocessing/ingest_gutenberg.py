@@ -7,11 +7,18 @@ import argparse
 import hashlib
 import json
 import re
+import sys
 from pathlib import Path
 
 
 START_MARKER_RE = re.compile(r"^\*\*\* START OF THE PROJECT GUTENBERG EBOOK .+ \*\*\*$")
 END_MARKER_RE = re.compile(r"^\*\*\* END OF THE PROJECT GUTENBERG EBOOK .+ \*\*\*$")
+
+SRC_ROOT = Path(__file__).resolve().parents[1]
+if str(SRC_ROOT) not in sys.path:
+    sys.path.insert(0, str(SRC_ROOT))
+
+from calibration.validation import ValidationError, validate_source_metadata
 
 
 def parse_args() -> argparse.Namespace:
@@ -122,6 +129,7 @@ def main() -> None:
     header = "\n".join(lines[:start_index]).strip()
     cleaned_text = "\n".join(lines[start_index + 1 : end_index]).strip() + "\n"
     metadata = build_metadata(args.input, header, cleaned_text, raw_text)
+    validate_source_metadata(metadata, path=args.output_metadata, validate_paths=True)
 
     args.output_text.parent.mkdir(parents=True, exist_ok=True)
     args.output_metadata.parent.mkdir(parents=True, exist_ok=True)
@@ -133,4 +141,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (RuntimeError, ValueError, ValidationError) as exc:
+        raise SystemExit(f"error: {exc}")

@@ -14,9 +14,5 @@
     "style_guide_path",
     "rubric_path"
   ],
-  "optional": [
-    "seed_translation_path",
-    "seed_findings_path",
-    "manual_checks"
-  ]
+  "optional": []
 }
