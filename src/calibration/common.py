@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import re
+from json import JSONDecodeError
 from pathlib import Path
 
 
@@ -187,7 +188,12 @@ def extract_json_object(text: str) -> dict[str, object]:
     stripped = text.strip()
     if stripped.startswith("```"):
         stripped = _strip_code_fences(stripped)
-    return json.loads(stripped)
+    try:
+        return json.loads(stripped)
+    except JSONDecodeError as exc:
+        raise RuntimeError(
+            f"Could not parse model JSON output at line {exc.lineno} column {exc.colno}: {exc.msg}"
+        ) from exc
 
 
 def extract_preserved_spans(text: str) -> list[str]:

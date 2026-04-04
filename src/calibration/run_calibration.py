@@ -16,15 +16,29 @@ if str(SRC_ROOT) not in sys.path:
 from calibration.common import (
     extract_json_object,
     extract_preserved_spans,
-    load_json,
     load_dotenv,
-    parse_glossary_terms,
     relative_to_repo,
     render_template,
     sha256_text,
     write_json,
 )
 from calibration.openai_compat import create_chat_completion, extract_message_text
+from calibration.validation import (
+    REPO_ROOT,
+    ValidationError,
+    load_and_validate_glossary,
+    load_and_validate_json,
+    load_and_validate_rubric,
+    resolve_repo_path,
+    validate_evaluation_report,
+    validate_model_profile,
+    validate_prompt_bundle_metadata,
+    validate_review_payload,
+    validate_review_request_record,
+    validate_run_manifest_bundle,
+    validate_slice_manifest,
+    validate_translation_request_record,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -60,10 +74,26 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     load_dotenv(args.dotenv_path)
-    run_manifest = load_json(args.run_manifest)
-    slice_manifest = load_json(Path(str(run_manifest["slice_manifest_path"])))
-    prompt_bundle_metadata = load_json(Path(str(run_manifest["prompt_bundle_path"])) / "metadata.json")
-    model_profile = load_json(Path(str(run_manifest["model_profile_path"])))
+    run_manifest_path = resolve_repo_path(args.run_manifest, repo_root=REPO_ROOT)
+    run_manifest = validate_run_manifest_bundle(run_manifest_path)
+    slice_manifest_path = resolve_repo_path(str(run_manifest["slice_manifest_path"]), repo_root=REPO_ROOT)
+    slice_manifest = load_and_validate_json(
+        slice_manifest_path,
+        validate_slice_manifest,
+        validate_paths=True,
+    )
+    prompt_bundle_path = resolve_repo_path(str(run_manifest["prompt_bundle_path"]), repo_root=REPO_ROOT)
+    prompt_bundle_metadata = load_and_validate_json(
+        prompt_bundle_path / "metadata.json",
+        validate_prompt_bundle_metadata,
+        bundle_dir=prompt_bundle_path,
+        validate_paths=True,
+    )
+    model_profile_path = resolve_repo_path(str(run_manifest["model_profile_path"]), repo_root=REPO_ROOT)
+    model_profile = load_and_validate_json(
+        model_profile_path,
+        validate_model_profile,
+    )
 
     run_id = str(run_manifest["run_id"])
     run_dir = args.output_root / run_id
@@ -74,14 +104,14 @@ def main() -> int:
     for directory in [inputs_dir, outputs_dir, review_dir, reports_dir]:
         directory.mkdir(parents=True, exist_ok=True)
 
-    source_text_path = Path(str(slice_manifest["source"]["text_path"]))
-    source_metadata_path = Path(str(slice_manifest["source"]["metadata_path"]))
-    slice_excerpt_path = Path(str(slice_manifest["excerpt"]["path"]))
-    glossary_path = Path(str(run_manifest["glossary_path"]))
-    style_guide_path = Path(str(run_manifest["style_guide_path"]))
-    rubric_path = Path(str(run_manifest["rubric_path"]))
-    prompt_bundle_path = Path(str(run_manifest["prompt_bundle_path"]))
-    model_profile_path = Path(str(run_manifest["model_profile_path"]))
+    source_text_path = resolve_repo_path(str(slice_manifest["source"]["text_path"]), repo_root=REPO_ROOT)
+    source_metadata_path = resolve_repo_path(str(slice_manifest["source"]["metadata_path"]), repo_root=REPO_ROOT)
+    slice_excerpt_path = resolve_repo_path(str(slice_manifest["excerpt"]["path"]), repo_root=REPO_ROOT)
+    glossary_path = resolve_repo_path(str(run_manifest["glossary_path"]), repo_root=REPO_ROOT)
+    style_guide_path = resolve_repo_path(str(run_manifest["style_guide_path"]), repo_root=REPO_ROOT)
+    rubric_path = resolve_repo_path(str(run_manifest["rubric_path"]), repo_root=REPO_ROOT)
+    glossary_doc = load_and_validate_glossary(glossary_path, expected_slice_id=str(run_manifest["slice_id"]))
+    load_and_validate_rubric(rubric_path, expected_slice_id=str(run_manifest["slice_id"]))
 
     current_source_text = source_text_path.read_text(encoding="utf-8")
     current_source_sha = sha256_text(current_source_text)
@@ -99,8 +129,8 @@ def main() -> int:
     _copy(glossary_path, inputs_dir / "glossary.yaml")
     _copy(style_guide_path, inputs_dir / "style-guide.md")
     _copy(rubric_path, inputs_dir / "rubric.yaml")
-    _copy(args.run_manifest, inputs_dir / "run-manifest.json")
-    _copy(Path(str(run_manifest["slice_manifest_path"])), inputs_dir / "slice-manifest.json")
+    _copy(run_manifest_path, inputs_dir / "run-manifest.json")
+    _copy(slice_manifest_path, inputs_dir / "slice-manifest.json")
     _copy(model_profile_path, inputs_dir / "model-profile.json")
     _copy(prompt_bundle_path / "metadata.json", inputs_dir / "prompt-bundle-metadata.json")
     _copy(prompt_bundle_path / "translation-system.txt", inputs_dir / "translation-system.txt")
@@ -120,6 +150,7 @@ def main() -> int:
         style_guide_path=style_guide_path,
         prompt_bundle_path=prompt_bundle_path,
     )
+    validate_translation_request_record(translation_request["request_record"])
     write_json(inputs_dir / "translation-request.json", translation_request["request_record"])
     translation_response = create_chat_completion(
         provider_name=translation_request["provider_name"],
@@ -147,6 +178,7 @@ def main() -> int:
         rubric_path=rubric_path,
         prompt_bundle_path=prompt_bundle_path,
     )
+    validate_review_request_record(review_request["request_record"])
     write_json(review_dir / "review-request.json", review_request["request_record"])
     review_response = create_chat_completion(
         provider_name=review_request["provider_name"],
@@ -158,11 +190,12 @@ def main() -> int:
     )
     write_json(review_dir / "review-response.json", review_response)
     review_payload = extract_json_object(extract_message_text(review_response))
+    validate_review_payload(review_payload)
     write_json(review_dir / "review-structured.json", review_payload)
     findings_path.write_text(render_findings_markdown(review_payload), encoding="utf-8")
 
     excerpt_text = slice_excerpt_path.read_text(encoding="utf-8")
-    glossary_terms = parse_glossary_terms(glossary_path)
+    glossary_terms = glossary_doc["terms"]
     preserved_spans = extract_preserved_spans(excerpt_text)
     missing_spans = [span for span in preserved_spans if span not in translation_text]
 
@@ -260,6 +293,7 @@ def main() -> int:
         "glossary_hits": glossary_hits,
         "glossary_misses": glossary_misses,
     }
+    validate_evaluation_report(report)
     write_json(reports_dir / "evaluation.json", report)
     write_markdown_report(reports_dir / "evaluation.md", report)
 
@@ -439,6 +473,6 @@ def _copy(source: Path, destination: Path) -> None:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-    except RuntimeError as exc:
+    except (RuntimeError, ValidationError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         raise SystemExit(1)
