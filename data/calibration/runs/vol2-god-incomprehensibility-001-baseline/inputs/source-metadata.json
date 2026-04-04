@@ -1,0 +1,18 @@
+{
+  "source_file": "data/raw/pg67966.txt",
+  "source_format": "project_gutenberg_txt",
+  "title": "Gereformeerde dogmatiek. Tweede deel.",
+  "author": "Herman Bavinck",
+  "language": "Dutch",
+  "release_date": "May 1, 2022",
+  "updated_date": "October 18, 2024",
+  "ebook_id": "67966",
+  "gutenberg_url": "www.gutenberg.org/ebooks/67966",
+  "original_publication": "Netherlands: J. H. Bos, 1897",
+  "credits": "Jeroen Hellingman, Hans Pieterse and the Online Distributed Proofreading Team at https://www.pgdp.net",
+  "raw_char_count": 1390102,
+  "clean_char_count": 1370601,
+  "raw_sha256": "75fceff252781c2c4b18a5308d378903497749c7d1846111fb4bd7225adb00be",
+  "clean_sha256": "4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a",
+  "preserves_editor_notes": true
+}

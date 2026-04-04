@@ -1,0 +1,30 @@
+{
+  "run_id": "vol2-god-incomprehensibility-001-baseline",
+  "slice_id": "vol2-god-incomprehensibility-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "excerpt_path": "inputs/excerpt.txt",
+  "glossary_path": "inputs/glossary.yaml",
+  "style_guide_path": "inputs/style-guide.md",
+  "rubric_path": "inputs/rubric.yaml",
+  "prompt_files": {
+    "translation_system": "translation-system.txt",
+    "review_system": "review-system.txt"
+  },
+  "model_stages": {
+    "translation": {
+      "provider": "moonshot",
+      "model": "kimi-k2.5",
+      "mode": "batch",
+      "temperature": 0.2,
+      "notes": "Primary draft translation for theological prose."
+    },
+    "review": {
+      "provider": "z-ai",
+      "model": "glm-5",
+      "mode": "batch",
+      "temperature": 0.1,
+      "notes": "Structured review and consistency checks."
+    }
+  }
+}
