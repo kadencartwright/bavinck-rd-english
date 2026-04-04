@@ -8,7 +8,9 @@
   ],
   "prompt_files": {
     "translation_system": "translation-system.txt",
-    "review_system": "review-system.txt"
+    "translation_user_template": "translation-user-template.txt",
+    "review_system": "review-system.txt",
+    "review_user_template": "review-user-template.txt"
   },
   "notes": [
     "Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source.",

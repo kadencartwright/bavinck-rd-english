@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ "$#" -eq 0 ]; then
+  exec python3 src/calibration/run_calibration.py \
+    --run-manifest config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json
+fi
+
+exec python3 src/calibration/run_calibration.py "$@"

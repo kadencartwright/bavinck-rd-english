@@ -9,17 +9,5 @@
   "model_profile_path": "config/calibration/model-profiles/kimi-k2_5-glm5-baseline.json",
   "glossary_path": "data/calibration/slices/vol2-god-incomprehensibility-001/inputs/glossary.yaml",
   "style_guide_path": "data/calibration/slices/vol2-god-incomprehensibility-001/inputs/style-guide.md",
-  "rubric_path": "data/calibration/slices/vol2-god-incomprehensibility-001/inputs/rubric.yaml",
-  "seed_translation_path": "data/calibration/slices/vol2-god-incomprehensibility-001/inputs/seed-translation.md",
-  "seed_findings_path": "data/calibration/slices/vol2-god-incomprehensibility-001/inputs/seed-findings.md",
-  "manual_checks": {
-    "prose-quality": {
-      "status": "fail",
-      "details": "The seed run uses a source-mirroring placeholder translation to validate repository plumbing, so English prose quality is not yet acceptable."
-    },
-    "review-flagging": {
-      "status": "pass",
-      "details": "Reviewer findings were captured in a separate narrative file for follow-up."
-    }
-  }
+  "rubric_path": "data/calibration/slices/vol2-god-incomprehensibility-001/inputs/rubric.yaml"
 }

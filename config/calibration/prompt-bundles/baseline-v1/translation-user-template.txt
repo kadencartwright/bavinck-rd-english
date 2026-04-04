@@ -1,0 +1,19 @@
+Run ID: {{run_id}}
+Slice ID: {{slice_id}}
+Slice Title: {{slice_title}}
+
+Selection rationale:
+{{selection_rationale}}
+
+Excerpt-scoped glossary:
+{{glossary_terms}}
+
+Style guide:
+{{style_guide}}
+
+Source excerpt:
+{{source_excerpt}}
+
+Translate the source excerpt into formal English theological prose.
+Preserve all non-Dutch spans in their original language exactly as written.
+Return only the translated passage with paragraph structure intact and no prefatory commentary.

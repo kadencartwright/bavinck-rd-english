@@ -11,6 +11,8 @@
     "provider",
     "model",
     "mode",
-    "temperature"
+    "temperature",
+    "max_tokens",
+    "timeout_seconds"
   ]
 }
