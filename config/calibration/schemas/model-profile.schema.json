@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "type": "model_profile",
+  "required": [
+    "schema_version",
+    "model_profile_id",
+    "description",
+    "stages"
+  ],
+  "stage_fields": [
+    "provider",
+    "model",
+    "mode",
+    "temperature",
+    "max_tokens",
+    "timeout_seconds"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "type": "prompt_bundle",
+  "required": [
+    "schema_version",
+    "prompt_bundle_id",
+    "description",
+    "prompt_files",
+    "stages"
+  ],
+  "prompt_files_required": [
+    "translation_system",
+    "translation_user_template",
+    "review_system",
+    "review_user_template"
+  ]
+}

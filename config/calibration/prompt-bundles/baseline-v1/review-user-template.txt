@@ -1,0 +1,32 @@
+Run ID: {{run_id}}
+Slice ID: {{slice_id}}
+Slice Title: {{slice_title}}
+
+Rubric:
+{{rubric}}
+
+Excerpt-scoped glossary:
+{{glossary_terms}}
+
+Style guide:
+{{style_guide}}
+
+Source excerpt:
+{{source_excerpt}}
+
+Translation output:
+{{translation_output}}
+
+Review the translation against the source, glossary, style guide, and rubric.
+Return valid JSON with this shape:
+{
+  "summary": "short paragraph",
+  "checks": {
+    "prose-quality": {"status": "pass|fail|incomplete", "details": "reason"},
+    "review-flagging": {"status": "pass|fail|incomplete", "details": "reason"}
+  },
+  "findings": [
+    {"severity": "high|medium|low", "category": "label", "detail": "specific issue"}
+  ],
+  "recommended_follow_up": ["action 1", "action 2"]
+}

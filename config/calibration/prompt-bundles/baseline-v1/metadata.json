@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "prompt_bundle_id": "baseline-v1",
+  "description": "Initial calibration prompts for the first volume 2 theological slice.",
+  "stages": [
+    "translation",
+    "review"
+  ],
+  "prompt_files": {
+    "translation_system": "translation-system.txt",
+    "translation_user_template": "translation-user-template.txt",
+    "review_system": "review-system.txt",
+    "review_user_template": "review-user-template.txt"
+  },
+  "notes": [
+    "Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source.",
+    "Keep the English register formal and suitable for scholarly theological prose."
+  ]
+}

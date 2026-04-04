@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "type": "run_manifest",
+  "required": [
+    "schema_version",
+    "run_id",
+    "slice_id",
+    "slice_manifest_path",
+    "prompt_bundle_id",
+    "prompt_bundle_path",
+    "model_profile_id",
+    "model_profile_path",
+    "glossary_path",
+    "style_guide_path",
+    "rubric_path"
+  ],
+  "optional": []
+}
