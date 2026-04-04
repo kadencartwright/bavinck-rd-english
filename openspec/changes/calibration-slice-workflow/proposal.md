@@ -8,12 +8,14 @@ The repository has a project-level translation plan, but it does not yet define 
 - Define the metadata and manifest required to describe a calibration slice, including source location, selection rationale, and expected stressors such as Greek, Hebrew, citations, and dense theological prose.
 - Define the artifacts required for a first-pass calibration run, including excerpt text, glossary/style inputs, evaluation rubric, translation outputs, and review findings.
 - Define the acceptance criteria for a calibration run so later implementation can judge whether the pipeline is ready to expand beyond the sample excerpt.
+- Encode prompt evaluation into the repository structure so prompt sets and model choices can be swapped without rewriting fixtures, reports, or core workflow code.
 
 ## Capabilities
 
 ### New Capabilities
 - `calibration-slices`: Create and manage representative calibration excerpts from the cleaned source text with stable manifests and selection criteria.
 - `calibration-evaluation`: Record the rubric, outputs, and findings for a repeatable calibration run over a selected excerpt.
+- `run-configurations`: Store versioned prompt bundles, model profiles, and run manifests as structured project assets instead of hard-coding them in scripts.
 
 ### Modified Capabilities
 
@@ -21,4 +23,4 @@ None.
 
 ## Impact
 
-Affected systems include source ingestion outputs under `data/`, future preprocessing and translation scripts under `src/`, and the evaluation artifacts that will live alongside calibration fixtures and reports. This change establishes the contract for the first executable slice of the translation pipeline and will guide prompt files, glossary inputs, and review automation.
+Affected systems include source ingestion outputs under `data/`, future preprocessing and translation scripts under `src/`, prompt and model configuration assets under stable project directories, and the evaluation artifacts that will live alongside calibration fixtures and reports. This change establishes the contract for the first executable slice of the translation pipeline and ensures prompt/model experiments remain replaceable inputs rather than baked-in code paths.

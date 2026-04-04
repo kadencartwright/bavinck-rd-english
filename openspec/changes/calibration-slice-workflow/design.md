@@ -5,6 +5,7 @@ The repository currently contains a project-level plan, a downloaded Project Gut
 This change sits across multiple parts of the future pipeline:
 - preprocessing must select and package a representative excerpt
 - shared inputs must define a localized glossary and style guide for the excerpt
+- prompt and model configuration must be stored as replaceable project assets
 - translation and review stages must write outputs in a repeatable layout
 - evaluation must express whether the run is acceptable to expand beyond the sample
 
@@ -17,10 +18,11 @@ The calibration slice should stress the hardest parts of the pipeline early: for
 - Define the required files and metadata for a calibration fixture.
 - Define the required outputs and rubric for a calibration run.
 - Make the first calibration run comparable across prompt and pipeline revisions.
+- Keep prompts and model choice external to core workflow code so future model swaps do not require structural rewrites.
 
 **Non-Goals:**
 - Translating a full chapter or volume.
-- Finalizing model providers, prompt wording, or production orchestration.
+- Locking the project to a specific model provider or prompt wording.
 - Designing publication/export formats such as EPUB, PDF, or DOCX.
 - Solving long-range coherence beyond the calibration excerpt.
 
@@ -65,6 +67,32 @@ Alternatives considered:
 - Human review only: high signal, but too inconsistent for iterative prompt tuning.
 - Automated scoring only: insufficient for doctrinal and register-sensitive prose.
 
+### Decision: Prompt bundles and model profiles are versioned project assets
+
+Prompt text, model selection, and provider-specific settings will live in structured files referenced by a run manifest rather than being embedded directly in scripts.
+
+Rationale:
+- The user wants the repository to remain durable even as model options change over time.
+- Stable fixture and evaluation layouts are only useful if the variable inputs can be swapped independently.
+- Externalized configuration makes prompt and model experiments reproducible and easier to compare.
+
+Alternatives considered:
+- Hard-coding model IDs and prompts in scripts: fast initially, but guarantees churn as models change.
+- Storing prompts in ad hoc notes outside the repo: lower implementation cost, but poor traceability and reproducibility.
+
+### Decision: Calibration runs reference immutable input versions
+
+Each calibration run will record which prompt bundle version, model profile, glossary input, and source fixture it used.
+
+Rationale:
+- Evaluation results are not comparable unless the exact variable inputs are known.
+- This creates a stable distinction between durable assets and ephemeral run outputs.
+- Future model upgrades can be assessed by changing a profile reference instead of redesigning the workflow.
+
+Alternatives considered:
+- Recording only the final model name in reports: insufficient because prompts and provider settings also affect outcomes.
+- Recomputing inputs from current repo state: too fragile for long-term comparison.
+
 ### Decision: Initial calibration inputs stay local to the excerpt
 
 The first glossary and style materials will be excerpt-scoped instead of attempting a project-wide canonical reference set.
@@ -84,6 +112,7 @@ Alternatives considered:
 - [Keeping glossary and style inputs local may create later migration work into shared references] → Mitigation: require stable fields and documented rationale so local inputs can be promoted into shared assets.
 - [Evaluator subjectivity may still blur pass/fail decisions] → Mitigation: require explicit acceptance criteria and separate them from reviewer commentary.
 - [Source line ranges may drift if the cleaned text is regenerated differently] → Mitigation: record source hashes alongside line ranges in fixture metadata.
+- [Provider-specific features may leak into otherwise generic workflow code] → Mitigation: isolate provider settings in model profiles and keep execution code keyed to normalized run manifests.
 
 ## Migration Plan
 
@@ -94,3 +123,4 @@ No runtime migration is required. Implementation will introduce new calibration 
 - Which exact section or contiguous set of sections should be the first canonical calibration slice?
 - How much of the first-pass review must be human-authored versus model-assisted?
 - Should the first acceptance rubric include quantitative thresholds beyond preservation and glossary adherence?
+- What normalized schema should model profiles use so different providers can be swapped with minimal adapter logic?
