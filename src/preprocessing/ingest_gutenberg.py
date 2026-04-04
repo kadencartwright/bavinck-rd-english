@@ -46,18 +46,36 @@ def find_marker(lines: list[str], pattern: re.Pattern[str]) -> int:
     raise ValueError(f"Could not find marker matching: {pattern.pattern}")
 
 
-def extract_field(header: str, label: str) -> str | None:
-    match = re.search(rf"^{re.escape(label)}:\s*(.+)$", header, re.MULTILINE)
-    if match:
-        return match.group(1).strip()
-    return None
+def parse_header_fields(header: str) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    current_label: str | None = None
+
+    for raw_line in header.split("\n"):
+        line = raw_line.rstrip()
+        field_match = re.match(r"^([A-Za-z][A-Za-z ]+):\s*(.*)$", line)
+        if field_match:
+            current_label = field_match.group(1)
+            fields[current_label] = field_match.group(2).strip()
+            continue
+
+        if current_label and raw_line[:1].isspace() and line.strip():
+            continuation = line.strip()
+            existing = fields[current_label]
+            fields[current_label] = f"{existing} {continuation}".strip()
+            continue
+
+        current_label = None
+
+    return fields
 
 
-def extract_release_fields(header: str) -> tuple[str | None, str | None, str | None]:
-    match = re.search(
-        r"^Release date:\s*(.+?)\s*\[eBook #(\d+)\]\s*(?:\n\s*Most recently updated:\s*(.+))?$",
-        header,
-        re.MULTILINE,
+def extract_release_fields(release_value: str | None) -> tuple[str | None, str | None, str | None]:
+    if not release_value:
+        return None, None, None
+
+    match = re.match(
+        r"^(.+?)\s*\[eBook #(\d+)\](?:\s*Most recently updated:\s*(.+))?$",
+        release_value,
     )
     if not match:
         return None, None, None
@@ -71,19 +89,20 @@ def sha256_hex(text: str) -> str:
 
 
 def build_metadata(input_path: Path, header: str, cleaned_text: str, raw_text: str) -> dict[str, object]:
-    release_date, ebook_id, updated_date = extract_release_fields(header)
+    fields = parse_header_fields(header)
+    release_date, ebook_id, updated_date = extract_release_fields(fields.get("Release date"))
     return {
         "source_file": str(input_path),
         "source_format": "project_gutenberg_txt",
-        "title": extract_field(header, "Title"),
-        "author": extract_field(header, "Author"),
-        "language": extract_field(header, "Language"),
+        "title": fields.get("Title"),
+        "author": fields.get("Author"),
+        "language": fields.get("Language"),
         "release_date": release_date,
         "updated_date": updated_date,
         "ebook_id": ebook_id,
-        "gutenberg_url": extract_field(header, "Other information and formats"),
-        "original_publication": extract_field(header, "Original publication"),
-        "credits": extract_field(header, "Credits"),
+        "gutenberg_url": fields.get("Other information and formats"),
+        "original_publication": fields.get("Original publication"),
+        "credits": fields.get("Credits"),
         "raw_char_count": len(raw_text),
         "clean_char_count": len(cleaned_text),
         "raw_sha256": sha256_hex(raw_text),

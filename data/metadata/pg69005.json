@@ -1,0 +1,18 @@
+{
+  "source_file": "data/raw/pg69005.txt",
+  "source_format": "project_gutenberg_txt",
+  "title": "Gereformeerde dogmatiek. Vierde deel",
+  "author": "Herman Bavinck",
+  "language": "Dutch",
+  "release_date": "September 17, 2022",
+  "updated_date": "October 19, 2024",
+  "ebook_id": "69005",
+  "gutenberg_url": "www.gutenberg.org/ebooks/69005",
+  "original_publication": "Netherlands: J. H. Bos, 1901",
+  "credits": "Jeroen Hellingman, Hans Pieterse and the Online Distributed Proofreading Team at https://www.pgdp.net",
+  "raw_char_count": 1454171,
+  "clean_char_count": 1434669,
+  "raw_sha256": "6c4d3c57c6cead4679b6f7aef1557fb5d5055e9e72ccd1e607dcafd951bc57fa",
+  "clean_sha256": "3b9b3bbb233f268907abab22883e37e40938c7c4e431dcdeace7221befef4ce1",
+  "preserves_editor_notes": true
+}
