@@ -1,0 +1,10 @@
+config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json
+config/calibration/run-manifests/vol2-god-knowability-insita-001-baseline.json
+config/calibration/run-manifests/vol2-god-knowability-acquisita-001-baseline.json
+config/calibration/run-manifests/vol2-god-names-001-baseline.json
+config/calibration/run-manifests/vol2-god-name-classification-001-baseline.json
+config/calibration/run-manifests/vol2-god-proper-names-001-baseline.json
+config/calibration/run-manifests/vol2-god-essential-names-001-baseline.json
+config/calibration/run-manifests/vol2-god-personal-names-001-baseline.json
+config/calibration/run-manifests/vol2-god-counsel-001-baseline.json
+config/calibration/run-manifests/vol2-creation-001-baseline.json

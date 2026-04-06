@@ -1,0 +1,6 @@
+schema_version: "1.0"
+slice_id: "vol2-god-name-classification-001"
+terms:
+  - source: "INDEELING DER NAMEN GODS"
+    target: "classification of the names of God"
+    notes: "Section-title term for this slice."

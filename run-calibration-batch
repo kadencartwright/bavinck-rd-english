@@ -1,0 +1,105 @@
+#!/usr/bin/env sh
+set -eu
+
+manifest_list="config/calibration/run-manifests/vol2-parallel-10.txt"
+max_parallel=3
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --manifest-list)
+      manifest_list="$2"
+      shift 2
+      ;;
+    --manifest-list=*)
+      manifest_list="${1#*=}"
+      shift
+      ;;
+    --max-parallel)
+      max_parallel="$2"
+      shift 2
+      ;;
+    --max-parallel=*)
+      max_parallel="${1#*=}"
+      shift
+      ;;
+    *)
+      echo "usage: ./run-calibration-batch [--manifest-list PATH] [--max-parallel N]" >&2
+      exit 2
+      ;;
+  esac
+done
+
+if [ ! -f "$manifest_list" ]; then
+  echo "[run-calibration-batch] manifest list not found: $manifest_list" >&2
+  exit 1
+fi
+
+case "$max_parallel" in
+  ''|*[!0-9]*)
+    echo "[run-calibration-batch] --max-parallel must be a positive integer" >&2
+    exit 2
+    ;;
+  0)
+    echo "[run-calibration-batch] --max-parallel must be greater than zero" >&2
+    exit 2
+    ;;
+esac
+
+log_root="data/calibration/runs/logs"
+mkdir -p "$log_root"
+
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT INT TERM
+
+run_one() {
+  manifest_path="$1"
+  run_name=$(basename "$manifest_path" .json)
+  log_path="$log_root/$run_name.log"
+  echo "[run-calibration-batch] starting $run_name" >&2
+  ./run-calibration --run-manifest "$manifest_path" >"$log_path" 2>&1
+}
+
+index=0
+active=0
+while IFS= read -r manifest_path || [ -n "$manifest_path" ]; do
+  if [ -z "$manifest_path" ]; then
+    continue
+  fi
+  index=$((index + 1))
+  status_path="$tmpdir/$index.status"
+  (
+    if run_one "$manifest_path"; then
+      echo "ok $manifest_path" >"$status_path"
+    else
+      echo "fail $manifest_path" >"$status_path"
+    fi
+  ) &
+  active=$((active + 1))
+  if [ "$active" -ge "$max_parallel" ]; then
+    wait
+    active=0
+  fi
+done <"$manifest_list"
+
+wait
+
+failures=0
+for status_file in "$tmpdir"/*.status; do
+  [ -e "$status_file" ] || continue
+  status=$(cut -d' ' -f1 <"$status_file")
+  manifest_path=$(cut -d' ' -f2- <"$status_file")
+  run_name=$(basename "$manifest_path" .json)
+  if [ "$status" = "ok" ]; then
+    echo "[run-calibration-batch] completed $run_name" >&2
+  else
+    echo "[run-calibration-batch] failed $run_name (see $log_root/$run_name.log)" >&2
+    failures=$((failures + 1))
+  fi
+done
+
+if [ "$failures" -gt 0 ]; then
+  echo "[run-calibration-batch] finished with $failures failure(s)" >&2
+  exit 1
+fi
+
+echo "[run-calibration-batch] all runs completed successfully" >&2

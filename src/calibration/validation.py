@@ -14,6 +14,9 @@ from typing import Callable
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
+FIXED_TEMPERATURE_MODELS = {
+    ("moonshot", "kimi-k2.5"): 1.0,
+}
 
 
 @dataclass
@@ -372,17 +375,26 @@ def validate_model_profile(
                 errors.append(f"stages.{stage_name}: must be an object")
                 continue
             provider = _required_nested_string(stage, f"stages.{stage_name}", "provider", errors)
-            _required_nested_string(stage, f"stages.{stage_name}", "model", errors)
+            model = _required_nested_string(stage, f"stages.{stage_name}", "model", errors)
             mode = _required_nested_string(stage, f"stages.{stage_name}", "mode", errors)
             temperature = _required_nested_number(stage, f"stages.{stage_name}", "temperature", errors)
-            _required_nested_positive_int(stage, f"stages.{stage_name}", "max_tokens", errors)
-            _required_nested_positive_int(stage, f"stages.{stage_name}", "timeout_seconds", errors)
+            _optional_nested_positive_int(stage, f"stages.{stage_name}", "max_tokens", errors)
+            _optional_nested_positive_int(stage, f"stages.{stage_name}", "timeout_seconds", errors)
             if provider and provider not in {"moonshot", "z-ai"}:
                 errors.append(f"stages.{stage_name}.provider: unsupported provider '{provider}'")
             if mode and mode not in {"batch", "standard"}:
                 errors.append(f"stages.{stage_name}.mode: unsupported mode '{mode}'")
             if temperature is not None and not (0.0 <= temperature <= 2.0):
                 errors.append(f"stages.{stage_name}.temperature: must be between 0.0 and 2.0")
+            fixed_temperature = FIXED_TEMPERATURE_MODELS.get((provider, model))
+            if (
+                fixed_temperature is not None
+                and temperature is not None
+                and float(temperature) != fixed_temperature
+            ):
+                errors.append(
+                    f"stages.{stage_name}.temperature: must equal {fixed_temperature} for {provider} model '{model}'"
+                )
 
     if errors:
         raise ValidationError("model_profile", display_path(path, repo_root=repo_root) if path else None, errors)
@@ -827,7 +839,7 @@ def _validate_request_record(
     provider = _required_string(payload, "provider", errors)
     _required_string(payload, "model", errors)
     temperature = _required_number(payload, "temperature", errors)
-    _required_positive_int(payload, "max_tokens", errors)
+    _optional_positive_int(payload, "max_tokens", errors)
     messages = _required_list(payload, "messages", errors)
     prompt_files = _required_object(payload, "prompt_files", errors)
 
@@ -993,6 +1005,16 @@ def _required_positive_int(payload: dict[str, object], field: str, errors: list[
     return value
 
 
+def _optional_positive_int(payload: dict[str, object], field: str, errors: list[str]) -> int | None:
+    value = payload.get(field)
+    if value is None:
+        return None
+    if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
+        errors.append(f"{field}: must be a positive integer when present")
+        return None
+    return value
+
+
 def _required_nonnegative_int(payload: dict[str, object], field: str, errors: list[str]) -> int | None:
     value = payload.get(field)
     if not isinstance(value, int) or isinstance(value, bool) or value < 0:
@@ -1071,6 +1093,21 @@ def _required_nested_positive_int(
     value = payload.get(nested_field)
     if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
         errors.append(f"{field}.{nested_field}: must be a positive integer")
+        return None
+    return value
+
+
+def _optional_nested_positive_int(
+    payload: dict[str, object],
+    field: str,
+    nested_field: str,
+    errors: list[str],
+) -> int | None:
+    value = payload.get(nested_field)
+    if value is None:
+        return None
+    if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
+        errors.append(f"{field}.{nested_field}: must be a positive integer when present")
         return None
     return value
 

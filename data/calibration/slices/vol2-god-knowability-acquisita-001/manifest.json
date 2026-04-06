@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "slice_id": "vol2-god-knowability-acquisita-001",
+  "title": "Volume 2 § 22.1-3 The Knowability of God (Acquisita)",
+  "rationale": "This slice captures the opening of § 22 as a bounded calibration target for acquired knowledge of God, emphasizing philosophical argument and doctrinal terminology.",
+  "stressors": [
+    "philosophical theological prose",
+    "citation-heavy argument",
+    "glossary-sensitive doctrinal terminology"
+  ],
+  "source": {
+    "text_path": "data/clean/pg67966.txt",
+    "metadata_path": "data/metadata/pg67966.json",
+    "title": "Gereformeerde dogmatiek. Tweede deel.",
+    "author": "Herman Bavinck",
+    "ebook_id": "67966",
+    "language": "Dutch"
+  },
+  "selection": {
+    "section_number": 22,
+    "section_title": "DE KENBAARHEID GODS. (Cognitio Dei acquisita.)",
+    "start_subsection": 1,
+    "end_subsection": 3,
+    "start_line": 1654,
+    "end_line": 1833
+  },
+  "source_identity": {
+    "clean_sha256": "4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a",
+    "clean_char_count": 1370601
+  },
+  "excerpt": {
+    "path": "data/calibration/slices/vol2-god-knowability-acquisita-001/excerpt.txt",
+    "line_count": 180,
+    "word_count": 1989,
+    "sha256": "0ab363b249e1f29984d609587e3aca9a111d42e3020283a0cd8339a0e16e02fa"
+  },
+  "expected_inputs": {
+    "glossary_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/inputs/glossary.yaml",
+    "style_guide_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/inputs/style-guide.md",
+    "rubric_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/inputs/rubric.yaml"
+  },
+  "report_root": "data/calibration/runs/vol2-god-knowability-acquisita-001"
+}

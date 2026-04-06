@@ -1,0 +1,6 @@
+schema_version: "1.0"
+slice_id: "vol2-god-names-001"
+terms:
+  - source: "NAMEN GODS"
+    target: "names of God"
+    notes: "Section-title term for this slice."

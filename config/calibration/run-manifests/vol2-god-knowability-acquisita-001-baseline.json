@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-knowability-acquisita-001-baseline",
+  "slice_id": "vol2-god-knowability-acquisita-001",
+  "slice_manifest_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/manifest.json",
+  "prompt_bundle_id": "baseline-v1",
+  "prompt_bundle_path": "config/calibration/prompt-bundles/baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "model_profile_path": "config/calibration/model-profiles/kimi-k2_5-glm5-baseline.json",
+  "glossary_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/inputs/glossary.yaml",
+  "style_guide_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/inputs/style-guide.md",
+  "rubric_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/inputs/rubric.yaml"
+}

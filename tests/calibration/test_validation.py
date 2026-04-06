@@ -146,6 +146,21 @@ class ValidationTests(unittest.TestCase):
             validate_model_profile(payload)
         self.assertIn("temperature", str(context.exception))
 
+    def test_fixed_temperature_model_fails_when_profile_uses_other_value(self) -> None:
+        payload = self.load_json("config/calibration/model-profiles/kimi-k2_5-glm5-baseline.json")
+        payload["stages"]["translation"]["temperature"] = 0.2
+        with self.assertRaises(ValidationError) as context:
+            validate_model_profile(payload)
+        self.assertIn("must equal 1.0", str(context.exception))
+
+    def test_model_profile_allows_omitted_runtime_limits(self) -> None:
+        payload = self.load_json("config/calibration/model-profiles/kimi-k2_5-glm5-baseline.json")
+        payload["stages"]["translation"].pop("max_tokens", None)
+        payload["stages"]["translation"].pop("timeout_seconds", None)
+        payload["stages"]["review"].pop("max_tokens", None)
+        payload["stages"]["review"].pop("timeout_seconds", None)
+        validate_model_profile(payload)
+
     def test_valid_run_manifest_passes(self) -> None:
         payload = self.load_json("config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json")
         validate_run_manifest(payload, validate_paths=True)

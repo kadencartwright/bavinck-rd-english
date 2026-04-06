@@ -13,3 +13,6 @@ terms:
   - source: "openbaring"
     target: "revelation"
     notes: "Prefer the standard theological rendering."
+  - source: "de zĳnde"
+    target: "Being"
+    notes: "Use as a metaphysical divine title rather than an ordinary common noun."

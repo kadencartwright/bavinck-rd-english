@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "slice_id": "vol2-god-counsel-001",
+  "title": "Volume 2 § 28.1-3 The Counsel of God",
+  "rationale": "This slice captures the opening of § 28 as a calibration target for decretal theology, scholastic distinctions, and dense doctrinal prose.",
+  "stressors": [
+    "decretal theology",
+    "citation-heavy theological prose",
+    "glossary-sensitive terminology"
+  ],
+  "source": {
+    "text_path": "data/clean/pg67966.txt",
+    "metadata_path": "data/metadata/pg67966.json",
+    "title": "Gereformeerde dogmatiek. Tweede deel.",
+    "author": "Herman Bavinck",
+    "ebook_id": "67966",
+    "language": "Dutch"
+  },
+  "selection": {
+    "section_number": 28,
+    "section_title": "DE RAAD GODS.",
+    "start_subsection": 1,
+    "end_subsection": 3,
+    "start_line": 11240,
+    "end_line": 11567
+  },
+  "source_identity": {
+    "clean_sha256": "4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a",
+    "clean_char_count": 1370601
+  },
+  "excerpt": {
+    "path": "data/calibration/slices/vol2-god-counsel-001/excerpt.txt",
+    "line_count": 328,
+    "word_count": 3708,
+    "sha256": "0165a6a1b3ed94fe6b1e27b2b5ab59655ebaf186a36d592429575c6e9bea0252"
+  },
+  "expected_inputs": {
+    "glossary_path": "data/calibration/slices/vol2-god-counsel-001/inputs/glossary.yaml",
+    "style_guide_path": "data/calibration/slices/vol2-god-counsel-001/inputs/style-guide.md",
+    "rubric_path": "data/calibration/slices/vol2-god-counsel-001/inputs/rubric.yaml"
+  },
+  "report_root": "data/calibration/runs/vol2-god-counsel-001"
+}

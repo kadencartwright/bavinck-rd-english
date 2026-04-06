@@ -68,14 +68,34 @@ def parse_args() -> argparse.Namespace:
         default=Path(".env"),
         help="Optional .env file that supplies provider API keys.",
     )
+    parser.add_argument(
+        "--skip-provider-smoke-test",
+        action="store_true",
+        help="Skip the low-cost provider auth/model smoke test that runs before materializing outputs.",
+    )
+    parser.add_argument(
+        "--smoke-test-only",
+        action="store_true",
+        help="Run only the low-cost provider smoke test and exit without materializing a calibration run.",
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    _log(
+        "starting calibration runner "
+        f"(run_manifest={args.run_manifest}, output_root={args.output_root}, "
+        f"smoke_test_only={args.smoke_test_only}, "
+        f"skip_provider_smoke_test={args.skip_provider_smoke_test})"
+    )
+    _log(f"loading dotenv from {args.dotenv_path}")
     load_dotenv(args.dotenv_path)
+    _log("resolving run manifest path")
     run_manifest_path = resolve_repo_path(args.run_manifest, repo_root=REPO_ROOT)
+    _log(f"validating run manifest bundle: {relative_to_repo(run_manifest_path)}")
     run_manifest = validate_run_manifest_bundle(run_manifest_path)
+    _log("resolving and validating slice manifest")
     slice_manifest_path = resolve_repo_path(str(run_manifest["slice_manifest_path"]), repo_root=REPO_ROOT)
     slice_manifest = load_and_validate_json(
         slice_manifest_path,
@@ -83,6 +103,7 @@ def main() -> int:
         validate_paths=True,
     )
     prompt_bundle_path = resolve_repo_path(str(run_manifest["prompt_bundle_path"]), repo_root=REPO_ROOT)
+    _log("resolving and validating prompt bundle metadata")
     prompt_bundle_metadata = load_and_validate_json(
         prompt_bundle_path / "metadata.json",
         validate_prompt_bundle_metadata,
@@ -90,10 +111,20 @@ def main() -> int:
         validate_paths=True,
     )
     model_profile_path = resolve_repo_path(str(run_manifest["model_profile_path"]), repo_root=REPO_ROOT)
+    _log("resolving and validating model profile")
     model_profile = load_and_validate_json(
         model_profile_path,
         validate_model_profile,
     )
+    if not args.skip_provider_smoke_test:
+        _log("running provider smoke tests")
+        smoke_test_provider_connections(model_profile)
+        if args.smoke_test_only:
+            _log("smoke-test-only mode complete")
+            print("Provider smoke tests passed.")
+            return 0
+    else:
+        _log("skipping provider smoke tests")
 
     run_id = str(run_manifest["run_id"])
     run_dir = args.output_root / run_id
@@ -101,18 +132,22 @@ def main() -> int:
     outputs_dir = run_dir / "outputs"
     review_dir = run_dir / "review"
     reports_dir = run_dir / "reports"
+    _log(f"preparing run directories under {run_dir}")
     for directory in [inputs_dir, outputs_dir, review_dir, reports_dir]:
         directory.mkdir(parents=True, exist_ok=True)
 
+    _log("resolving slice and input artifact paths")
     source_text_path = resolve_repo_path(str(slice_manifest["source"]["text_path"]), repo_root=REPO_ROOT)
     source_metadata_path = resolve_repo_path(str(slice_manifest["source"]["metadata_path"]), repo_root=REPO_ROOT)
     slice_excerpt_path = resolve_repo_path(str(slice_manifest["excerpt"]["path"]), repo_root=REPO_ROOT)
     glossary_path = resolve_repo_path(str(run_manifest["glossary_path"]), repo_root=REPO_ROOT)
     style_guide_path = resolve_repo_path(str(run_manifest["style_guide_path"]), repo_root=REPO_ROOT)
     rubric_path = resolve_repo_path(str(run_manifest["rubric_path"]), repo_root=REPO_ROOT)
+    _log("loading glossary and rubric")
     glossary_doc = load_and_validate_glossary(glossary_path, expected_slice_id=str(run_manifest["slice_id"]))
     load_and_validate_rubric(rubric_path, expected_slice_id=str(run_manifest["slice_id"]))
 
+    _log("checking source drift against stored manifest identity")
     current_source_text = source_text_path.read_text(encoding="utf-8")
     current_source_sha = sha256_text(current_source_text)
     expected_source_sha = str(slice_manifest["source_identity"]["clean_sha256"])
@@ -123,6 +158,7 @@ def main() -> int:
             "Rerun with --allow-source-drift only if you are intentionally auditing drift."
         )
 
+    _log("copying stable input artifacts into run directory")
     _copy(source_text_path, inputs_dir / "source.txt")
     _copy(source_metadata_path, inputs_dir / "source-metadata.json")
     _copy(slice_excerpt_path, inputs_dir / "excerpt.txt")
@@ -139,19 +175,28 @@ def main() -> int:
     _copy(prompt_bundle_path / "review-user-template.txt", inputs_dir / "review-user-template.txt")
 
     translation_output_path = outputs_dir / "translation.md"
+    _log("reading excerpt text and building translation request")
+    excerpt_text = slice_excerpt_path.read_text(encoding="utf-8")
     translation_request = build_translation_request(
         run_id=run_id,
         run_manifest=run_manifest,
         slice_manifest=slice_manifest,
         prompt_bundle_metadata=prompt_bundle_metadata,
         model_profile=model_profile,
-        excerpt_text=slice_excerpt_path.read_text(encoding="utf-8"),
+        excerpt_text=excerpt_text,
         glossary_path=glossary_path,
         style_guide_path=style_guide_path,
         prompt_bundle_path=prompt_bundle_path,
     )
+    _log("validating and writing translation request record")
     validate_translation_request_record(translation_request["request_record"])
     write_json(inputs_dir / "translation-request.json", translation_request["request_record"])
+    _log(
+        "calling translation provider "
+        f"{translation_request['provider_name']}/{translation_request['model']} "
+        f"(max_tokens={translation_request['max_tokens']}, timeout_seconds={translation_request['timeout_seconds']})"
+    )
+    translation_stream_logger = _ResponseStreamLogger("translation")
     translation_response = create_chat_completion(
         provider_name=translation_request["provider_name"],
         model=translation_request["model"],
@@ -159,27 +204,39 @@ def main() -> int:
         temperature=translation_request["temperature"],
         max_tokens=translation_request["max_tokens"],
         timeout_seconds=translation_request["timeout_seconds"],
+        stream=True,
+        on_stream_delta=translation_stream_logger,
     )
+    translation_stream_logger.finish()
+    _log("received translation response; writing translation artifacts")
     write_json(outputs_dir / "translation-response.json", translation_response)
     translation_text = extract_message_text(translation_response).strip() + "\n"
     translation_output_path.write_text(translation_text, encoding="utf-8")
 
     findings_path = review_dir / "findings.md"
+    _log("building review request")
     review_request = build_review_request(
         run_id=run_id,
         run_manifest=run_manifest,
         slice_manifest=slice_manifest,
         prompt_bundle_metadata=prompt_bundle_metadata,
         model_profile=model_profile,
-        excerpt_text=slice_excerpt_path.read_text(encoding="utf-8"),
+        excerpt_text=excerpt_text,
         translation_text=translation_text,
         glossary_path=glossary_path,
         style_guide_path=style_guide_path,
         rubric_path=rubric_path,
         prompt_bundle_path=prompt_bundle_path,
     )
+    _log("validating and writing review request record")
     validate_review_request_record(review_request["request_record"])
     write_json(review_dir / "review-request.json", review_request["request_record"])
+    _log(
+        "calling review provider "
+        f"{review_request['provider_name']}/{review_request['model']} "
+        f"(max_tokens={review_request['max_tokens']}, timeout_seconds={review_request['timeout_seconds']})"
+    )
+    review_stream_logger = _ResponseStreamLogger("review")
     review_response = create_chat_completion(
         provider_name=review_request["provider_name"],
         model=review_request["model"],
@@ -187,14 +244,18 @@ def main() -> int:
         temperature=review_request["temperature"],
         max_tokens=review_request["max_tokens"],
         timeout_seconds=review_request["timeout_seconds"],
+        stream=True,
+        on_stream_delta=review_stream_logger,
     )
+    review_stream_logger.finish()
+    _log("received review response; validating structured review payload")
     write_json(review_dir / "review-response.json", review_response)
     review_payload = extract_json_object(extract_message_text(review_response))
     validate_review_payload(review_payload)
     write_json(review_dir / "review-structured.json", review_payload)
     findings_path.write_text(render_findings_markdown(review_payload), encoding="utf-8")
 
-    excerpt_text = slice_excerpt_path.read_text(encoding="utf-8")
+    _log("computing evaluation checks and summary")
     glossary_terms = glossary_doc["terms"]
     preserved_spans = extract_preserved_spans(excerpt_text)
     missing_spans = [span for span in preserved_spans if span not in translation_text]
@@ -293,10 +354,12 @@ def main() -> int:
         "glossary_hits": glossary_hits,
         "glossary_misses": glossary_misses,
     }
+    _log("validating and writing final evaluation report")
     validate_evaluation_report(report)
     write_json(reports_dir / "evaluation.json", report)
     write_markdown_report(reports_dir / "evaluation.md", report)
 
+    _log(f"run complete: {relative_to_repo(run_dir)}")
     print(f"Materialized run: {relative_to_repo(run_dir)}")
     print(f"Evaluation report: {relative_to_repo(reports_dir / 'evaluation.json')}")
     return 0
@@ -340,8 +403,10 @@ def build_translation_request(
         "provider_name": str(translation_stage["provider"]),
         "model": str(translation_stage["model"]),
         "temperature": float(translation_stage.get("temperature", 0.2)),
-        "max_tokens": int(translation_stage.get("max_tokens", 6000)),
-        "timeout_seconds": int(translation_stage.get("timeout_seconds", 300)),
+        "max_tokens": int(translation_stage["max_tokens"]) if "max_tokens" in translation_stage else None,
+        "timeout_seconds": (
+            int(translation_stage["timeout_seconds"]) if "timeout_seconds" in translation_stage else None
+        ),
         "messages": messages,
         "request_record": {
             "run_id": run_id,
@@ -352,7 +417,6 @@ def build_translation_request(
             "provider": translation_stage["provider"],
             "model": translation_stage["model"],
             "temperature": translation_stage.get("temperature", 0.2),
-            "max_tokens": translation_stage.get("max_tokens", 6000),
             "messages": messages,
             "prompt_files": prompt_bundle_metadata.get("prompt_files"),
         },
@@ -400,8 +464,8 @@ def build_review_request(
         "provider_name": str(review_stage["provider"]),
         "model": str(review_stage["model"]),
         "temperature": float(review_stage.get("temperature", 0.1)),
-        "max_tokens": int(review_stage.get("max_tokens", 3000)),
-        "timeout_seconds": int(review_stage.get("timeout_seconds", 300)),
+        "max_tokens": int(review_stage["max_tokens"]) if "max_tokens" in review_stage else None,
+        "timeout_seconds": int(review_stage["timeout_seconds"]) if "timeout_seconds" in review_stage else None,
         "messages": messages,
         "request_record": {
             "run_id": run_id,
@@ -412,7 +476,6 @@ def build_review_request(
             "provider": review_stage["provider"],
             "model": review_stage["model"],
             "temperature": review_stage.get("temperature", 0.1),
-            "max_tokens": review_stage.get("max_tokens", 3000),
             "messages": messages,
             "prompt_files": prompt_bundle_metadata.get("prompt_files"),
         },
@@ -468,6 +531,76 @@ def render_findings_markdown(review_payload: dict[str, object]) -> str:
 def _copy(source: Path, destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_bytes(source.read_bytes())
+
+
+def _log(message: str) -> None:
+    print(f"[run_calibration] {message}", file=sys.stderr, flush=True)
+
+
+class _ResponseStreamLogger:
+    def __init__(self, stage_name: str) -> None:
+        self.stage_name = stage_name
+        self.current_field: str | None = None
+        self.started = False
+
+    def __call__(self, field_name: str, text: str) -> None:
+        if self.current_field != field_name:
+            if self.started:
+                print("", file=sys.stderr, flush=True)
+            _log(f"{self.stage_name} stream: {field_name}")
+            self.current_field = field_name
+            self.started = True
+        print(text, file=sys.stderr, end="", flush=True)
+
+    def finish(self) -> None:
+        if self.started:
+            print("", file=sys.stderr, flush=True)
+        _log(f"{self.stage_name} stream complete")
+
+
+def smoke_test_provider_connections(model_profile: dict[str, object]) -> None:
+    stages = model_profile.get("stages", {})
+    _log("starting provider smoke tests")
+    for stage_name in ["translation", "review"]:
+        stage = stages.get(stage_name)
+        if not isinstance(stage, dict):
+            raise RuntimeError(f"Cannot smoke test stage '{stage_name}': missing stage configuration")
+
+        provider_name = str(stage["provider"])
+        model = str(stage["model"])
+        temperature = float(stage.get("temperature", 1.0))
+        timeout_seconds = min(int(stage.get("timeout_seconds", 300)), 30)
+
+        try:
+            _log(
+                f"smoke test request: stage={stage_name}, provider={provider_name}, "
+                f"model={model}, max_tokens=1, timeout_seconds={timeout_seconds}"
+            )
+            create_chat_completion(
+                provider_name=provider_name,
+                model=model,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are a connectivity probe. Reply with OK.",
+                    },
+                    {
+                        "role": "user",
+                        "content": f"Smoke test for the {stage_name} stage. Reply with OK.",
+                    },
+                ],
+                temperature=temperature,
+                max_tokens=1,
+                timeout_seconds=timeout_seconds,
+            )
+        except RuntimeError as exc:
+            raise RuntimeError(
+                f"Provider smoke test failed for stage '{stage_name}' "
+                f"({provider_name}/{model}): {exc}"
+            ) from exc
+
+        _log(f"smoke test success: stage={stage_name}, provider={provider_name}, model={model}")
+        print(f"Provider smoke test passed: {stage_name} ({provider_name}/{model})")
 
 
 if __name__ == "__main__":
