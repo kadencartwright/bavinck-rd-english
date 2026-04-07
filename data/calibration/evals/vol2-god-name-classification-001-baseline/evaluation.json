@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-name-classification-001-baseline",
+  "generated_at": "2026-04-07T17:05:10.498956+00:00",
+  "slice_id": "vol2-god-name-classification-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "checks": [
+    {
+      "id": "source-identity",
+      "status": "pass",
+      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+    },
+    {
+      "id": "rubric-present",
+      "status": "pass",
+      "details": "Rubric path: data/calibration/slices/vol2-god-name-classification-001/inputs/rubric.yaml"
+    },
+    {
+      "id": "translation-output",
+      "status": "pass",
+      "details": "Translation output path: data/calibration/runs/vol2-god-name-classification-001-baseline/outputs/translation.md"
+    },
+    {
+      "id": "preserved-language-integrity",
+      "status": "pass",
+      "details": "All Greek/Hebrew spans found in translation output."
+    },
+    {
+      "id": "glossary-adherence",
+      "status": "fail",
+      "details": "Missing glossary targets: INDEELING DER NAMEN GODS -> classification of the names of God"
+    },
+    {
+      "id": "prose-quality",
+      "status": "pass",
+      "details": "Formal theological prose maintained throughout; argument structure preserved. Minor syntactic awkwardness noted but does not flatten meaning."
+    },
+    {
+      "id": "review-flagging",
+      "status": "pass",
+      "details": "Findings below identify specific prose quality issues for follow-up."
+    }
+  ],
+  "summary": {
+    "pass": 6,
+    "fail": 1,
+    "incomplete": 0
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/findings.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/evaluation.md",
+    "eval_record_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/eval-record.json"
+  },
+  "qualitative_findings": {
+    "path": "data/calibration/evals/vol2-god-name-classification-001-baseline/findings.md",
+    "separate_from_checks": true
+  },
+  "review_summary": "The translation preserves all Greek, Hebrew, Latin, and German spans intact and correctly applies the glossary term for the section title. The English prose is generally coherent formal theological language, but several passages exhibit awkward syntax from overly literal rendering of Dutch constructions, particularly passive formations and inverted word order. No doctrinal ambiguities or preservation corruptions were detected.",
+  "glossary_hits": [],
+  "glossary_misses": [
+    "INDEELING DER NAMEN GODS -> classification of the names of God"
+  ]
+}

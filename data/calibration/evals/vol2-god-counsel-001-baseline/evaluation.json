@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-counsel-001-baseline",
+  "generated_at": "2026-04-07T19:06:51.582904+00:00",
+  "slice_id": "vol2-god-counsel-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "checks": [
+    {
+      "id": "source-identity",
+      "status": "pass",
+      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+    },
+    {
+      "id": "rubric-present",
+      "status": "pass",
+      "details": "Rubric path: data/calibration/slices/vol2-god-counsel-001/inputs/rubric.yaml"
+    },
+    {
+      "id": "translation-output",
+      "status": "pass",
+      "details": "Translation output path: data/calibration/runs/vol2-god-counsel-001-baseline/outputs/translation.md"
+    },
+    {
+      "id": "preserved-language-integrity",
+      "status": "pass",
+      "details": "All Greek/Hebrew spans found in translation output."
+    },
+    {
+      "id": "glossary-adherence",
+      "status": "pass",
+      "details": "All required glossary targets were found in the translation output."
+    },
+    {
+      "id": "prose-quality",
+      "status": "pass",
+      "details": "The English prose is formal, coherent, and maintains the argument structure of the theological text."
+    },
+    {
+      "id": "review-flagging",
+      "status": "pass",
+      "details": "Findings explicitly flag the doctrinal ambiguity introduced by the scripture reference expansion and the preserved source corruption."
+    }
+  ],
+  "summary": {
+    "pass": 7,
+    "fail": 0,
+    "incomplete": 0
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-counsel-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-counsel-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-counsel-001-baseline/findings.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-counsel-001-baseline/evaluation.md",
+    "eval_record_path": "data/calibration/evals/vol2-god-counsel-001-baseline/eval-record.json"
+  },
+  "qualitative_findings": {
+    "path": "data/calibration/evals/vol2-god-counsel-001-baseline/findings.md",
+    "separate_from_checks": true
+  },
+  "review_summary": "The translation accurately renders the Dutch source into formal theological English, preserving the extensive Greek, Hebrew, Latin, and German spans as required. Glossary terms are correctly applied. However, the translation introduces a doctrinal error by expanding the ambiguous source abbreviation \"Cor. 2:7\" to \"2 Cor. 2:7\" (likely intended as 1 Cor. 2:7) and preserves a source corruption in the scripture reference \"Isa. 24 vv. 24–27\".",
+  "glossary_hits": [
+    "RAAD GODS -> counsel of God"
+  ],
+  "glossary_misses": []
+}

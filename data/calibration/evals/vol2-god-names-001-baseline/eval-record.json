@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "sanitization_version": "1.0",
+  "run_id": "vol2-god-names-001-baseline",
+  "slice_id": "vol2-god-names-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "generated_at": "2026-04-07T16:58:19.252586+00:00",
+  "source_refs": {
+    "run_manifest_path": "config/calibration/run-manifests/vol2-god-names-001-baseline.json",
+    "slice_manifest_path": "data/calibration/slices/vol2-god-names-001/manifest.json",
+    "prompt_bundle_path": "config/calibration/prompt-bundles/baseline-v1",
+    "model_profile_path": "config/calibration/model-profiles/kimi-k2_5-glm5-baseline.json",
+    "glossary_path": "data/calibration/slices/vol2-god-names-001/inputs/glossary.yaml",
+    "style_guide_path": "data/calibration/slices/vol2-god-names-001/inputs/style-guide.md",
+    "rubric_path": "data/calibration/slices/vol2-god-names-001/inputs/rubric.yaml"
+  },
+  "stages": {
+    "translation": {
+      "provider": "moonshot",
+      "model": "kimi-k2.5",
+      "temperature": 1.0,
+      "prompt_files": {
+        "translation_system": "translation-system.txt",
+        "translation_user_template": "translation-user-template.txt",
+        "review_system": "review-system.txt",
+        "review_user_template": "review-user-template.txt"
+      }
+    },
+    "review": {
+      "provider": "z-ai",
+      "model": "glm-5",
+      "temperature": 0.1,
+      "prompt_files": {
+        "translation_system": "translation-system.txt",
+        "translation_user_template": "translation-user-template.txt",
+        "review_system": "review-system.txt",
+        "review_user_template": "review-user-template.txt"
+      },
+      "usage": {
+        "prompt_tokens": 13217,
+        "completion_tokens": 4519,
+        "total_tokens": 17736,
+        "reasoning_tokens": 3853,
+        "cached_tokens": 0
+      }
+    }
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-names-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-names-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-names-001-baseline/findings.md",
+    "evaluation_report_path": "data/calibration/evals/vol2-god-names-001-baseline/evaluation.json",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-names-001-baseline/evaluation.md"
+  },
+  "hashes": {
+    "run_manifest_sha256": "fdce4fb85998bbc6cf117e92c81d5b9dc2a4294115ed34eafd66971e65d8460b",
+    "slice_manifest_sha256": "2f88ee352246c3f6f5ea69c9f54c1fdeea7578f5af31477be227fb6ad60554d9",
+    "prompt_bundle_metadata_sha256": "42a49de33a345ef40c49f53767447506bcf60355c88dfcd542cb283fad0ae388",
+    "model_profile_sha256": "5ed2a01f09d09db59e1754be316cfaf49c764a0b6a136bb879a158237d6dde9e",
+    "glossary_sha256": "b6b289b816059c5602dd8615ef3e3ee4763870782a065b46fd8d0135c72d2628",
+    "style_guide_sha256": "99eb45a09233aa80d5c413c7f109974d21da9cb76cf100c402cbe190f05048c0",
+    "rubric_sha256": "b7009f50a4e05b2bb5db210aeee9777c7227b312271eae6c507d6b6e47dd9d4c",
+    "translation_output_sha256": "e6122da4893120419ad905a1417da5d7a43fd5babc9788bdac8b328fbcf07386",
+    "review_structured_sha256": "7681f1f847df489faf610ec4e1c7cdb556e87f10ca84072e02fbe3392384082a",
+    "findings_sha256": "ad66b1a93dd2f38b3169d2808840614a6c55e71e2f0aad485b1f28a9c6c6d429",
+    "evaluation_report_sha256": "2f02e4c81c5dc23cb31f0a0a3707e1c9364deb4c8bf5322b1abf8c79e16812eb",
+    "evaluation_markdown_sha256": "8c326a548e64351e7aa420c69de540b6760a4d08722693bfc632d1ab6db22712"
+  }
+}

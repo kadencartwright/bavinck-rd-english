@@ -13,7 +13,7 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from calibration import run_calibration
-from calibration.validation import REPO_ROOT
+from calibration.validation import REPO_ROOT, validate_commit_safe_eval_record
 
 
 class RunPreflightTests(unittest.TestCase):
@@ -82,6 +82,156 @@ class RunPreflightTests(unittest.TestCase):
 
         self.assertNotIn("the following arguments are required: --run-manifest", result.stderr)
         self.assertIn("validated run manifest bundle", result.stdout)
+
+    def test_runner_exports_commit_safe_eval_bundle(self) -> None:
+        manifest_path = self.repo_root / "config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json"
+        translation_response = {
+            "id": "chatcmpl-translation",
+            "created": 1,
+            "model": "kimi-k2.5",
+            "choices": [
+                {
+                    "index": 0,
+                    "message": {
+                        "role": "assistant",
+                        "content": "Sample translation output.\n",
+                        "reasoning_content": "internal chain of thought",
+                    },
+                    "finish_reason": "stop",
+                }
+            ],
+            "usage": {
+                "prompt_tokens": 11,
+                "completion_tokens": 22,
+                "total_tokens": 33,
+                "completion_tokens_details": {"reasoning_tokens": 7},
+            },
+        }
+        review_response = {
+            "id": "chatcmpl-review",
+            "created": 2,
+            "model": "glm-5",
+            "choices": [
+                {
+                    "index": 0,
+                    "message": {
+                        "role": "assistant",
+                        "content": json.dumps(
+                            {
+                                "summary": "Review completed.",
+                                "checks": {
+                                    "prose-quality": {"status": "pass", "details": "Readable."},
+                                    "review-flagging": {"status": "pass", "details": "Issues called out."},
+                                },
+                                "findings": [{"severity": "low", "category": "style", "detail": "Minor issue."}],
+                                "recommended_follow_up": ["Keep comparing runs."],
+                            }
+                        ),
+                        "reasoning_content": "review internals",
+                    },
+                    "finish_reason": "stop",
+                }
+            ],
+            "usage": {
+                "prompt_tokens": 44,
+                "completion_tokens": 55,
+                "total_tokens": 99,
+                "prompt_tokens_details": {"cached_tokens": 3},
+            },
+        }
+
+        with TemporaryDirectory(dir=self.repo_root) as temp_dir:
+            run_root = Path(temp_dir) / "runs"
+            eval_root = Path(temp_dir) / "evals"
+            argv = [
+                "run_calibration.py",
+                "--run-manifest",
+                str(manifest_path),
+                "--output-root",
+                str(run_root),
+                "--eval-root",
+                str(eval_root),
+                "--skip-provider-smoke-test",
+            ]
+            with (
+                patch.object(sys, "argv", argv),
+                patch(
+                    "calibration.run_calibration.create_chat_completion",
+                    side_effect=[translation_response, review_response],
+                ),
+            ):
+                result = run_calibration.main()
+            self.assertEqual(result, 0)
+            eval_dir = eval_root / "vol2-god-incomprehensibility-001-baseline"
+            eval_record_path = eval_dir / "eval-record.json"
+            evaluation_path = eval_dir / "evaluation.json"
+
+            self.assertTrue(eval_record_path.exists())
+            self.assertTrue(evaluation_path.exists())
+
+            eval_record = json.loads(eval_record_path.read_text(encoding="utf-8"))
+            validate_commit_safe_eval_record(eval_record, validate_paths=True)
+            self.assertNotIn("messages", json.dumps(eval_record))
+            self.assertNotIn("reasoning_content", json.dumps(eval_record))
+            self.assertEqual(eval_record["stages"]["translation"]["usage"]["reasoning_tokens"], 7)
+            self.assertEqual(eval_record["stages"]["review"]["usage"]["cached_tokens"], 3)
+
+            safe_report = json.loads(evaluation_path.read_text(encoding="utf-8"))
+            artifact_paths = json.dumps(safe_report["artifacts"])
+            self.assertNotIn("translation_response_path", safe_report["artifacts"])
+            self.assertNotIn("review_response_path", safe_report["artifacts"])
+            self.assertNotIn("translation_request_path", safe_report["artifacts"])
+            self.assertNotIn("review_request_path", safe_report["artifacts"])
+            self.assertNotIn("data/calibration/runs/", artifact_paths)
+
+    def test_runner_fails_fast_on_empty_translation_output(self) -> None:
+        manifest_path = self.repo_root / "config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json"
+        translation_response = {
+            "id": "chatcmpl-translation",
+            "created": 1,
+            "model": "kimi-k2.5",
+            "choices": [
+                {
+                    "index": 0,
+                    "message": {
+                        "role": "assistant",
+                        "content": "   ",
+                        "reasoning_content": "internal chain of thought",
+                    },
+                    "finish_reason": "stop",
+                }
+            ],
+        }
+
+        with TemporaryDirectory(dir=self.repo_root) as temp_dir:
+            run_root = Path(temp_dir) / "runs"
+            eval_root = Path(temp_dir) / "evals"
+            argv = [
+                "run_calibration.py",
+                "--run-manifest",
+                str(manifest_path),
+                "--output-root",
+                str(run_root),
+                "--eval-root",
+                str(eval_root),
+                "--skip-provider-smoke-test",
+            ]
+            with (
+                patch.object(sys, "argv", argv),
+                patch(
+                    "calibration.run_calibration.create_chat_completion",
+                    side_effect=[translation_response],
+                ) as mock_completion,
+            ):
+                with self.assertRaises(RuntimeError) as context:
+                    run_calibration.main()
+
+            self.assertIn("empty output", str(context.exception))
+            self.assertEqual(mock_completion.call_count, 1)
+            self.assertFalse((eval_root / "vol2-god-incomprehensibility-001-baseline").exists())
+            self.assertFalse(
+                (run_root / "vol2-god-incomprehensibility-001-baseline" / "review" / "review-request.json").exists()
+            )
 
 
 if __name__ == "__main__":

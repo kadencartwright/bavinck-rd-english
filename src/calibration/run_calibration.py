@@ -30,6 +30,7 @@ from calibration.validation import (
     load_and_validate_json,
     load_and_validate_rubric,
     resolve_repo_path,
+    validate_commit_safe_eval_record,
     validate_evaluation_report,
     validate_model_profile,
     validate_prompt_bundle_metadata,
@@ -56,6 +57,12 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=Path("data/calibration/runs"),
         help="Root directory that will receive stable run outputs.",
+    )
+    parser.add_argument(
+        "--eval-root",
+        type=Path,
+        default=Path("data/calibration/evals"),
+        help="Root directory that will receive commit-safe eval exports.",
     )
     parser.add_argument(
         "--allow-source-drift",
@@ -86,6 +93,7 @@ def main() -> int:
     _log(
         "starting calibration runner "
         f"(run_manifest={args.run_manifest}, output_root={args.output_root}, "
+        f"eval_root={args.eval_root}, "
         f"smoke_test_only={args.smoke_test_only}, "
         f"skip_provider_smoke_test={args.skip_provider_smoke_test})"
     )
@@ -211,6 +219,11 @@ def main() -> int:
     _log("received translation response; writing translation artifacts")
     write_json(outputs_dir / "translation-response.json", translation_response)
     translation_text = extract_message_text(translation_response).strip() + "\n"
+    if not translation_text.strip():
+        raise RuntimeError(
+            "Translation provider returned empty output. "
+            f"Aborting run before review for {translation_request['provider_name']}/{translation_request['model']}."
+        )
     translation_output_path.write_text(translation_text, encoding="utf-8")
 
     findings_path = review_dir / "findings.md"
@@ -250,7 +263,17 @@ def main() -> int:
     review_stream_logger.finish()
     _log("received review response; validating structured review payload")
     write_json(review_dir / "review-response.json", review_response)
-    review_payload = extract_json_object(extract_message_text(review_response))
+    review_text = extract_message_text(review_response)
+    try:
+        review_payload = extract_json_object(review_text)
+    except RuntimeError:
+        _log("review output was not valid JSON; requesting one-shot JSON repair")
+        review_payload = repair_review_payload(
+            review_request=review_request,
+            malformed_review_text=review_text,
+        )
+        write_json(review_dir / "review-repaired.json", review_payload)
+    review_payload = normalize_review_payload(review_payload)
     validate_review_payload(review_payload)
     write_json(review_dir / "review-structured.json", review_payload)
     findings_path.write_text(render_findings_markdown(review_payload), encoding="utf-8")
@@ -358,9 +381,29 @@ def main() -> int:
     validate_evaluation_report(report)
     write_json(reports_dir / "evaluation.json", report)
     write_markdown_report(reports_dir / "evaluation.md", report)
+    _log("exporting commit-safe eval bundle")
+    eval_dir = export_commit_safe_eval_bundle(
+        eval_root=args.eval_root,
+        run_manifest_path=run_manifest_path,
+        slice_manifest_path=slice_manifest_path,
+        prompt_bundle_path=prompt_bundle_path,
+        model_profile_path=model_profile_path,
+        glossary_path=glossary_path,
+        style_guide_path=style_guide_path,
+        rubric_path=rubric_path,
+        translation_request=translation_request,
+        translation_response=translation_response,
+        translation_text=translation_text,
+        review_request=review_request,
+        review_response=review_response,
+        review_payload=review_payload,
+        findings_markdown=findings_path.read_text(encoding="utf-8"),
+        evaluation_report=report,
+    )
 
     _log(f"run complete: {relative_to_repo(run_dir)}")
     print(f"Materialized run: {relative_to_repo(run_dir)}")
+    print(f"Commit-safe eval bundle: {relative_to_repo(eval_dir)}")
     print(f"Evaluation report: {relative_to_repo(reports_dir / 'evaluation.json')}")
     return 0
 
@@ -503,6 +546,148 @@ def write_markdown_report(path: Path, report: dict[str, object]) -> None:
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
+def export_commit_safe_eval_bundle(
+    *,
+    eval_root: Path,
+    run_manifest_path: Path,
+    slice_manifest_path: Path,
+    prompt_bundle_path: Path,
+    model_profile_path: Path,
+    glossary_path: Path,
+    style_guide_path: Path,
+    rubric_path: Path,
+    translation_request: dict[str, object],
+    translation_response: dict[str, object],
+    translation_text: str,
+    review_request: dict[str, object],
+    review_response: dict[str, object],
+    review_payload: dict[str, object],
+    findings_markdown: str,
+    evaluation_report: dict[str, object],
+) -> Path:
+    run_id = str(evaluation_report["run_id"])
+    eval_dir = eval_root / run_id
+    eval_dir.mkdir(parents=True, exist_ok=True)
+
+    translation_output_path = eval_dir / "translation.md"
+    review_structured_path = eval_dir / "review-structured.json"
+    findings_path = eval_dir / "findings.md"
+    evaluation_json_path = eval_dir / "evaluation.json"
+    evaluation_markdown_path = eval_dir / "evaluation.md"
+    eval_record_path = eval_dir / "eval-record.json"
+
+    translation_output_path.write_text(translation_text, encoding="utf-8")
+    write_json(review_structured_path, review_payload)
+    findings_path.write_text(findings_markdown, encoding="utf-8")
+
+    safe_report = dict(evaluation_report)
+    safe_report["artifacts"] = {
+        "translation_output_path": relative_to_repo(translation_output_path),
+        "review_structured_path": relative_to_repo(review_structured_path),
+        "findings_path": relative_to_repo(findings_path),
+        "evaluation_markdown_path": relative_to_repo(evaluation_markdown_path),
+        "eval_record_path": relative_to_repo(eval_record_path),
+    }
+    safe_report["qualitative_findings"] = {
+        "path": relative_to_repo(findings_path),
+        "separate_from_checks": True,
+    }
+    validate_evaluation_report(safe_report)
+    write_json(evaluation_json_path, safe_report)
+    write_markdown_report(evaluation_markdown_path, safe_report)
+
+    eval_record = {
+        "schema_version": "1.0",
+        "sanitization_version": "1.0",
+        "run_id": run_id,
+        "slice_id": evaluation_report["slice_id"],
+        "prompt_bundle_id": evaluation_report["prompt_bundle_id"],
+        "model_profile_id": evaluation_report["model_profile_id"],
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "source_refs": {
+            "run_manifest_path": relative_to_repo(run_manifest_path),
+            "slice_manifest_path": relative_to_repo(slice_manifest_path),
+            "prompt_bundle_path": relative_to_repo(prompt_bundle_path),
+            "model_profile_path": relative_to_repo(model_profile_path),
+            "glossary_path": relative_to_repo(glossary_path),
+            "style_guide_path": relative_to_repo(style_guide_path),
+            "rubric_path": relative_to_repo(rubric_path),
+        },
+        "stages": {
+            "translation": build_commit_safe_stage_record(
+                request=translation_request,
+                response=translation_response,
+            ),
+            "review": build_commit_safe_stage_record(
+                request=review_request,
+                response=review_response,
+            ),
+        },
+        "artifacts": {
+            "translation_output_path": relative_to_repo(translation_output_path),
+            "review_structured_path": relative_to_repo(review_structured_path),
+            "findings_path": relative_to_repo(findings_path),
+            "evaluation_report_path": relative_to_repo(evaluation_json_path),
+            "evaluation_markdown_path": relative_to_repo(evaluation_markdown_path),
+        },
+        "hashes": {
+            "run_manifest_sha256": sha256_text(run_manifest_path.read_text(encoding="utf-8")),
+            "slice_manifest_sha256": sha256_text(slice_manifest_path.read_text(encoding="utf-8")),
+            "prompt_bundle_metadata_sha256": sha256_text((prompt_bundle_path / "metadata.json").read_text(encoding="utf-8")),
+            "model_profile_sha256": sha256_text(model_profile_path.read_text(encoding="utf-8")),
+            "glossary_sha256": sha256_text(glossary_path.read_text(encoding="utf-8")),
+            "style_guide_sha256": sha256_text(style_guide_path.read_text(encoding="utf-8")),
+            "rubric_sha256": sha256_text(rubric_path.read_text(encoding="utf-8")),
+            "translation_output_sha256": sha256_text(translation_output_path.read_text(encoding="utf-8")),
+            "review_structured_sha256": sha256_text(review_structured_path.read_text(encoding="utf-8")),
+            "findings_sha256": sha256_text(findings_path.read_text(encoding="utf-8")),
+            "evaluation_report_sha256": sha256_text(evaluation_json_path.read_text(encoding="utf-8")),
+            "evaluation_markdown_sha256": sha256_text(evaluation_markdown_path.read_text(encoding="utf-8")),
+        },
+    }
+    validate_commit_safe_eval_record(eval_record, validate_paths=True)
+    write_json(eval_record_path, eval_record)
+    return eval_dir
+
+
+def build_commit_safe_stage_record(
+    *,
+    request: dict[str, object],
+    response: dict[str, object],
+) -> dict[str, object]:
+    stage_record = {
+        "provider": request["provider_name"],
+        "model": request["model"],
+        "temperature": request["temperature"],
+        "prompt_files": dict(request["request_record"].get("prompt_files", {})),
+    }
+    if request.get("max_tokens") is not None:
+        stage_record["max_tokens"] = request["max_tokens"]
+    if request.get("timeout_seconds") is not None:
+        stage_record["timeout_seconds"] = request["timeout_seconds"]
+
+    usage = response.get("usage")
+    if isinstance(usage, dict):
+        normalized_usage: dict[str, int] = {}
+        for key in ["prompt_tokens", "completion_tokens", "total_tokens"]:
+            value = usage.get(key)
+            if isinstance(value, int) and value >= 0:
+                normalized_usage[key] = value
+        completion_details = usage.get("completion_tokens_details")
+        if isinstance(completion_details, dict):
+            reasoning_tokens = completion_details.get("reasoning_tokens")
+            if isinstance(reasoning_tokens, int) and reasoning_tokens >= 0:
+                normalized_usage["reasoning_tokens"] = reasoning_tokens
+        prompt_details = usage.get("prompt_tokens_details")
+        if isinstance(prompt_details, dict):
+            cached_tokens = prompt_details.get("cached_tokens")
+            if isinstance(cached_tokens, int) and cached_tokens >= 0:
+                normalized_usage["cached_tokens"] = cached_tokens
+        if normalized_usage:
+            stage_record["usage"] = normalized_usage
+    return stage_record
+
+
 def render_findings_markdown(review_payload: dict[str, object]) -> str:
     lines = ["# Reviewer Findings", ""]
     summary = review_payload.get("summary")
@@ -526,6 +711,54 @@ def render_findings_markdown(review_payload: dict[str, object]) -> str:
             lines.append(f"- {item}")
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
+
+
+def normalize_review_payload(review_payload: dict[str, object]) -> dict[str, object]:
+    findings = review_payload.get("findings")
+    if isinstance(findings, list):
+        for item in findings:
+            if not isinstance(item, dict):
+                continue
+            severity = item.get("severity")
+            if isinstance(severity, str) and severity.strip().lower() == "info":
+                item["severity"] = "low"
+    return review_payload
+
+
+def repair_review_payload(
+    *,
+    review_request: dict[str, object],
+    malformed_review_text: str,
+) -> dict[str, object]:
+    repair_response = create_chat_completion(
+        provider_name=review_request["provider_name"],
+        model=review_request["model"],
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You repair malformed review outputs. "
+                    "Return exactly one valid JSON object matching the required review schema. "
+                    "Do not include markdown, code fences, or commentary. "
+                    "Use severity values high, medium, or low only."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    "Reformat the following review output into valid JSON with keys "
+                    "summary, checks, findings, and recommended_follow_up. "
+                    "If a finding severity is 'info', convert it to 'low'.\n\n"
+                    f"{malformed_review_text}"
+                ),
+            },
+        ],
+        temperature=0.0,
+        max_tokens=2000,
+        timeout_seconds=120,
+        stream=False,
+    )
+    return extract_json_object(extract_message_text(repair_response))
 
 
 def _copy(source: Path, destination: Path) -> None:

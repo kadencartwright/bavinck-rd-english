@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-essential-names-001-baseline",
+  "generated_at": "2026-04-07T17:26:23.962592+00:00",
+  "slice_id": "vol2-god-essential-names-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "checks": [
+    {
+      "id": "source-identity",
+      "status": "pass",
+      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+    },
+    {
+      "id": "rubric-present",
+      "status": "pass",
+      "details": "Rubric path: data/calibration/slices/vol2-god-essential-names-001/inputs/rubric.yaml"
+    },
+    {
+      "id": "translation-output",
+      "status": "pass",
+      "details": "Translation output path: data/calibration/runs/vol2-god-essential-names-001-baseline/outputs/translation.md"
+    },
+    {
+      "id": "preserved-language-integrity",
+      "status": "pass",
+      "details": "All Greek/Hebrew spans found in translation output."
+    },
+    {
+      "id": "glossary-adherence",
+      "status": "fail",
+      "details": "Missing glossary targets: WEZENSNAMEN GODS -> essential names of God"
+    },
+    {
+      "id": "prose-quality",
+      "status": "fail",
+      "details": "The output contains ungrammatical phrasing such as 'avoided of God' and 'on different manner', which disrupt coherence. Additionally, 'He is from nothing' introduces doctrinal confusion."
+    },
+    {
+      "id": "review-flagging",
+      "status": "pass",
+      "details": "Findings clearly identify the preservation failures, grammatical errors, and doctrinal ambiguity."
+    }
+  ],
+  "summary": {
+    "pass": 5,
+    "fail": 2,
+    "incomplete": 0
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/findings.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/evaluation.md",
+    "eval_record_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/eval-record.json"
+  },
+  "qualitative_findings": {
+    "path": "data/calibration/evals/vol2-god-essential-names-001-baseline/findings.md",
+    "separate_from_checks": true
+  },
+  "review_summary": "The translation adheres to the glossary and preserves most foreign language spans, but fails to preserve the Latin phrase 'a reali potentiae immensitate' and inconsistently translates Latin names (Cartesius, Hieronymus) while preserving others. The English prose contains grammatical errors ('avoided of God', 'on different manner') and a significant doctrinal ambiguity regarding God's origin ('He is from nothing').",
+  "glossary_hits": [],
+  "glossary_misses": [
+    "WEZENSNAMEN GODS -> essential names of God"
+  ]
+}

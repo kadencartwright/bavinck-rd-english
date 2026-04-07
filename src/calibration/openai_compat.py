@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import os
+import time
 from dataclasses import dataclass
 from typing import Callable
 from urllib.error import HTTPError, URLError
@@ -42,6 +43,7 @@ def create_chat_completion(
     timeout_seconds: int | None = None,
     stream: bool = False,
     on_stream_delta: Callable[[str, str], None] | None = None,
+    max_retries: int = 2,
 ) -> dict[str, object]:
     provider = PROVIDERS.get(provider_name)
     if provider is None:
@@ -77,22 +79,29 @@ def create_chat_completion(
         method="POST",
     )
 
-    try:
-        if timeout_seconds is None:
-            response_context = urlopen(request)
-        else:
-            response_context = urlopen(request, timeout=timeout_seconds)
-        with response_context as response:
-            if stream:
-                return _read_streaming_chat_completion(response, on_stream_delta=on_stream_delta)
-            return json.loads(response.read().decode("utf-8"))
-    except HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(
-            f"{provider_name} API request failed with HTTP {exc.code}: {body}"
-        ) from exc
-    except URLError as exc:
-        raise RuntimeError(f"{provider_name} API request failed: {exc}") from exc
+    attempt = 0
+    while True:
+        try:
+            if timeout_seconds is None:
+                response_context = urlopen(request)
+            else:
+                response_context = urlopen(request, timeout=timeout_seconds)
+            with response_context as response:
+                if stream:
+                    return _read_streaming_chat_completion(response, on_stream_delta=on_stream_delta)
+                return json.loads(response.read().decode("utf-8"))
+        except HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            if exc.code == 429 and attempt < max_retries:
+                delay_seconds = _retry_delay_seconds(exc, attempt)
+                time.sleep(delay_seconds)
+                attempt += 1
+                continue
+            raise RuntimeError(
+                f"{provider_name} API request failed with HTTP {exc.code}: {body}"
+            ) from exc
+        except URLError as exc:
+            raise RuntimeError(f"{provider_name} API request failed: {exc}") from exc
 
 
 def extract_message_text(response: dict[str, object]) -> str:
@@ -218,3 +227,13 @@ def _read_streaming_chat_completion(
     if usage is not None:
         result["usage"] = usage
     return result
+
+
+def _retry_delay_seconds(exc: HTTPError, attempt: int) -> float:
+    retry_after = exc.headers.get("Retry-After") if exc.headers is not None else None
+    if retry_after:
+        try:
+            return max(float(retry_after), 0.0)
+        except ValueError:
+            pass
+    return float(2 ** attempt)

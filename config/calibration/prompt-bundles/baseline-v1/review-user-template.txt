@@ -30,3 +30,5 @@ Return valid JSON with this shape:
   ],
   "recommended_follow_up": ["action 1", "action 2"]
 }
+Return only the JSON object. Do not include markdown, code fences, prefaces, or checklists.
+Limit findings to the 3 most important issues.

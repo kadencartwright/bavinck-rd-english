@@ -1,0 +1,30 @@
+{
+  "summary": "The translation maintains doctrinal accuracy and preserves the required Greek, Latin, and German spans, but it fails to translate two Dutch terms ('Jonische School' and 'Urstof') which fall outside the style guide's preservation criteria. The English prose is generally formal and coherent, though one sentence exhibits awkward syntax. Glossary adherence is satisfied.",
+  "checks": {
+    "prose-quality": {
+      "status": "fail",
+      "details": "Untranslated Dutch terms 'Jonische School' and 'Urstof' disrupt the English prose and violate the requirement to translate source text not explicitly marked for preservation."
+    },
+    "review-flagging": {
+      "status": "pass",
+      "details": "Findings clearly identify the untranslated source terms and the specific location of the prose issue."
+    }
+  },
+  "findings": [
+    {
+      "severity": "medium",
+      "category": "untranslated-source",
+      "detail": "The Dutch terms 'Jonische School' and 'Urstof' were preserved in the translation output, but the style guide mandates preservation only for Greek, Hebrew, Latin, and German; these Dutch terms should be rendered into English (e.g., 'Ionian School' and 'primal matter' or 'Urstoff')."
+    },
+    {
+      "severity": "low",
+      "category": "prose-quality",
+      "detail": "The sentence 'True religion distinguishes itself... by this from all other religions' is syntactically awkward; a smoother rendering would be 'distinguishes itself... in this from all other religions, that...'."
+    }
+  ],
+  "recommended_follow_up": [
+    "Translate 'Jonische School' to 'Ionian School'.",
+    "Translate 'Urstof' to 'primal matter' or correct to the standard German 'Urstoff' if intended as a preserved loanword.",
+    "Revise the syntax in the sentence regarding 'True religion distinguishes itself' for better flow."
+  ]
+}
