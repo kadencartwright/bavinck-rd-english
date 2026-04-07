@@ -219,6 +219,11 @@ def main() -> int:
     _log("received translation response; writing translation artifacts")
     write_json(outputs_dir / "translation-response.json", translation_response)
     translation_text = extract_message_text(translation_response).strip() + "\n"
+    if not translation_text.strip():
+        raise RuntimeError(
+            "Translation provider returned empty output. "
+            f"Aborting run before review for {translation_request['provider_name']}/{translation_request['model']}."
+        )
     translation_output_path.write_text(translation_text, encoding="utf-8")
 
     findings_path = review_dir / "findings.md"

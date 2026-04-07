@@ -184,6 +184,55 @@ class RunPreflightTests(unittest.TestCase):
             self.assertNotIn("review_request_path", safe_report["artifacts"])
             self.assertNotIn("data/calibration/runs/", artifact_paths)
 
+    def test_runner_fails_fast_on_empty_translation_output(self) -> None:
+        manifest_path = self.repo_root / "config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json"
+        translation_response = {
+            "id": "chatcmpl-translation",
+            "created": 1,
+            "model": "kimi-k2.5",
+            "choices": [
+                {
+                    "index": 0,
+                    "message": {
+                        "role": "assistant",
+                        "content": "   ",
+                        "reasoning_content": "internal chain of thought",
+                    },
+                    "finish_reason": "stop",
+                }
+            ],
+        }
+
+        with TemporaryDirectory(dir=self.repo_root) as temp_dir:
+            run_root = Path(temp_dir) / "runs"
+            eval_root = Path(temp_dir) / "evals"
+            argv = [
+                "run_calibration.py",
+                "--run-manifest",
+                str(manifest_path),
+                "--output-root",
+                str(run_root),
+                "--eval-root",
+                str(eval_root),
+                "--skip-provider-smoke-test",
+            ]
+            with (
+                patch.object(sys, "argv", argv),
+                patch(
+                    "calibration.run_calibration.create_chat_completion",
+                    side_effect=[translation_response],
+                ) as mock_completion,
+            ):
+                with self.assertRaises(RuntimeError) as context:
+                    run_calibration.main()
+
+            self.assertIn("empty output", str(context.exception))
+            self.assertEqual(mock_completion.call_count, 1)
+            self.assertFalse((eval_root / "vol2-god-incomprehensibility-001-baseline").exists())
+            self.assertFalse(
+                (run_root / "vol2-god-incomprehensibility-001-baseline" / "review" / "review-request.json").exists()
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

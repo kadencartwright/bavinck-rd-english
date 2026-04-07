@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-counsel-001-baseline",
-  "generated_at": "2026-04-07T17:34:09.234060+00:00",
+  "generated_at": "2026-04-07T19:06:51.582904+00:00",
   "slice_id": "vol2-god-counsel-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -18,34 +18,34 @@
     },
     {
       "id": "translation-output",
-      "status": "incomplete",
+      "status": "pass",
       "details": "Translation output path: data/calibration/runs/vol2-god-counsel-001-baseline/outputs/translation.md"
     },
     {
       "id": "preserved-language-integrity",
-      "status": "fail",
-      "details": "Missing preserved spans: ἐνεργεια, בחר, ידע, עֵצָה, βουλη, θελημα, του, θεληματος, ὁρισας, κειμαι, εἰς, πτωσιν, κρισις, λιθος, προσκομματος, και, πετρα, σκανδαλου, θεου, εὐδοκια, προθεσις, προγνωσις, ἐκλογη, προορισμος, ὁσοι, ἠσαν, τεταγμενοι, ζωην, αἰωνιον, προητοιμασεν, κατ, ἐκλογην, Προθεσις, προθεσιν, προγνωσιν, προορισμον, προ, εκλεκτοι, κατηρτισμενα, ἀπωλειαν"
+      "status": "pass",
+      "details": "All Greek/Hebrew spans found in translation output."
     },
     {
       "id": "glossary-adherence",
-      "status": "fail",
-      "details": "Missing glossary targets: RAAD GODS -> counsel of God"
+      "status": "pass",
+      "details": "All required glossary targets were found in the translation output."
     },
     {
       "id": "prose-quality",
-      "status": "incomplete",
-      "details": "No translation text was provided to review."
+      "status": "pass",
+      "details": "The English prose is formal, coherent, and maintains the argument structure of the theological text."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "Findings correctly identify the critical failure of missing input."
+      "details": "Findings explicitly flag the doctrinal ambiguity introduced by the scripture reference expansion and the preserved source corruption."
     }
   ],
   "summary": {
-    "pass": 3,
-    "fail": 2,
-    "incomplete": 2
+    "pass": 7,
+    "fail": 0,
+    "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-counsel-001-baseline/translation.md",
@@ -58,9 +58,9 @@
     "path": "data/calibration/evals/vol2-god-counsel-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation output section was empty, preventing any evaluation of glossary adherence, preservation of Greek and Hebrew spans, or English prose quality.",
-  "glossary_hits": [],
-  "glossary_misses": [
+  "review_summary": "The translation accurately renders the Dutch source into formal theological English, preserving the extensive Greek, Hebrew, Latin, and German spans as required. Glossary terms are correctly applied. However, the translation introduces a doctrinal error by expanding the ambiguous source abbreviation \"Cor. 2:7\" to \"2 Cor. 2:7\" (likely intended as 1 Cor. 2:7) and preserves a source corruption in the scripture reference \"Isa. 24 vv. 24–27\".",
+  "glossary_hits": [
     "RAAD GODS -> counsel of God"
-  ]
+  ],
+  "glossary_misses": []
 }
