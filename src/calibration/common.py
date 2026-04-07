@@ -191,6 +191,12 @@ def extract_json_object(text: str) -> dict[str, object]:
     try:
         return json.loads(stripped)
     except JSONDecodeError as exc:
+        candidate = _extract_first_json_object_candidate(stripped)
+        if candidate is not None:
+            try:
+                return json.loads(candidate)
+            except JSONDecodeError:
+                pass
         raise RuntimeError(
             f"Could not parse model JSON output at line {exc.lineno} column {exc.colno}: {exc.msg}"
         ) from exc
@@ -223,3 +229,35 @@ def _strip_code_fences(text: str) -> str:
     if lines and lines[-1].strip() == "```":
         lines = lines[:-1]
     return "\n".join(lines).strip()
+
+
+def _extract_first_json_object_candidate(text: str) -> str | None:
+    start = text.find("{")
+    if start == -1:
+        return None
+
+    depth = 0
+    in_string = False
+    escape = False
+    for index in range(start, len(text)):
+        char = text[index]
+        if in_string:
+            if escape:
+                escape = False
+            elif char == "\\":
+                escape = True
+            elif char == '"':
+                in_string = False
+            continue
+
+        if char == '"':
+            in_string = True
+            continue
+        if char == "{":
+            depth += 1
+            continue
+        if char == "}":
+            depth -= 1
+            if depth == 0:
+                return text[start : index + 1]
+    return None

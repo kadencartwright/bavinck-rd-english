@@ -649,8 +649,8 @@ def validate_review_payload(
             severity = _required_nested_string(item, f"findings[{index}]", "severity", errors)
             _required_nested_string(item, f"findings[{index}]", "category", errors)
             _required_nested_string(item, f"findings[{index}]", "detail", errors)
-            if severity and severity not in {"high", "medium", "low"}:
-                errors.append(f"findings[{index}].severity: must be one of high, medium, low")
+            if severity and severity not in {"high", "medium", "low", "info"}:
+                errors.append(f"findings[{index}].severity: must be one of high, medium, low, info")
 
     if follow_up is not None:
         for index, item in enumerate(follow_up):

@@ -2,7 +2,7 @@
 set -eu
 
 manifest_list="config/calibration/run-manifests/vol2-parallel-10.txt"
-max_parallel=3
+max_parallel=2
 
 while [ "$#" -gt 0 ]; do
   case "$1" in

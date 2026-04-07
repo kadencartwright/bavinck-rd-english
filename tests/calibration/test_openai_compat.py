@@ -5,6 +5,7 @@ import sys
 import unittest
 from unittest.mock import patch
 from pathlib import Path
+from urllib.error import HTTPError
 
 SRC_ROOT = Path(__file__).resolve().parents[2] / "src"
 if str(SRC_ROOT) not in sys.path:
@@ -76,6 +77,36 @@ class OpenAICompatTests(unittest.TestCase):
         self.assertEqual(response["choices"][0]["message"]["content"], "Hello world")
         self.assertEqual(response["choices"][0]["finish_reason"], "stop")
         self.assertEqual(response["usage"]["total_tokens"], 3)
+
+    def test_chat_completion_retries_rate_limit_once(self) -> None:
+        http_error = HTTPError(
+            url="https://example.test",
+            code=429,
+            msg="rate limited",
+            hdrs={"Retry-After": "0"},
+            fp=None,
+        )
+        http_error.read = lambda: b'{"error":{"message":"rate limit"}}'
+        success_response = FakeStreamingResponse([])
+        success_response.read = lambda: b'{"choices":[{"message":{"content":"OK"}}]}'
+
+        with (
+            patch.dict("os.environ", {"ZAI_API_KEY": "test-key"}, clear=False),
+            patch("calibration.openai_compat.urlopen", side_effect=[http_error, success_response]) as mock_urlopen,
+            patch("calibration.openai_compat.time.sleep") as mock_sleep,
+        ):
+            response = create_chat_completion(
+                provider_name="z-ai",
+                model="glm-5",
+                messages=[{"role": "user", "content": "Hello"}],
+                temperature=1.0,
+                stream=False,
+                max_retries=1,
+            )
+
+        self.assertEqual(mock_urlopen.call_count, 2)
+        mock_sleep.assert_called_once_with(0.0)
+        self.assertEqual(response["choices"][0]["message"]["content"], "OK")
 
 
 if __name__ == "__main__":

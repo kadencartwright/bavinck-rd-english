@@ -250,7 +250,17 @@ def main() -> int:
     review_stream_logger.finish()
     _log("received review response; validating structured review payload")
     write_json(review_dir / "review-response.json", review_response)
-    review_payload = extract_json_object(extract_message_text(review_response))
+    review_text = extract_message_text(review_response)
+    try:
+        review_payload = extract_json_object(review_text)
+    except RuntimeError:
+        _log("review output was not valid JSON; requesting one-shot JSON repair")
+        review_payload = repair_review_payload(
+            review_request=review_request,
+            malformed_review_text=review_text,
+        )
+        write_json(review_dir / "review-repaired.json", review_payload)
+    review_payload = normalize_review_payload(review_payload)
     validate_review_payload(review_payload)
     write_json(review_dir / "review-structured.json", review_payload)
     findings_path.write_text(render_findings_markdown(review_payload), encoding="utf-8")
@@ -526,6 +536,54 @@ def render_findings_markdown(review_payload: dict[str, object]) -> str:
             lines.append(f"- {item}")
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
+
+
+def normalize_review_payload(review_payload: dict[str, object]) -> dict[str, object]:
+    findings = review_payload.get("findings")
+    if isinstance(findings, list):
+        for item in findings:
+            if not isinstance(item, dict):
+                continue
+            severity = item.get("severity")
+            if isinstance(severity, str) and severity.strip().lower() == "info":
+                item["severity"] = "low"
+    return review_payload
+
+
+def repair_review_payload(
+    *,
+    review_request: dict[str, object],
+    malformed_review_text: str,
+) -> dict[str, object]:
+    repair_response = create_chat_completion(
+        provider_name=review_request["provider_name"],
+        model=review_request["model"],
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You repair malformed review outputs. "
+                    "Return exactly one valid JSON object matching the required review schema. "
+                    "Do not include markdown, code fences, or commentary. "
+                    "Use severity values high, medium, or low only."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    "Reformat the following review output into valid JSON with keys "
+                    "summary, checks, findings, and recommended_follow_up. "
+                    "If a finding severity is 'info', convert it to 'low'.\n\n"
+                    f"{malformed_review_text}"
+                ),
+            },
+        ],
+        temperature=0.0,
+        max_tokens=2000,
+        timeout_seconds=120,
+        stream=False,
+    )
+    return extract_json_object(extract_message_text(repair_response))
 
 
 def _copy(source: Path, destination: Path) -> None:

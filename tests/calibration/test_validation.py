@@ -232,6 +232,18 @@ criteria:
         }
         validate_review_payload(payload)
 
+    def test_review_payload_allows_info_severity(self) -> None:
+        payload = {
+            "summary": "Looks good.",
+            "checks": {
+                "prose-quality": {"status": "pass", "details": "Okay"},
+                "review-flagging": {"status": "pass", "details": "Okay"},
+            },
+            "findings": [{"severity": "info", "category": "style", "detail": "Minor"}],
+            "recommended_follow_up": ["Ship it"],
+        }
+        validate_review_payload(payload)
+
     def test_malformed_review_payload_fails(self) -> None:
         payload = {
             "summary": "Bad.",
@@ -288,6 +300,10 @@ criteria:
         with self.assertRaises(RuntimeError) as context:
             extract_json_object("{not json}")
         self.assertIn("Could not parse model JSON output", str(context.exception))
+
+    def test_extract_json_object_salvages_embedded_json(self) -> None:
+        payload = extract_json_object('preface\\n```json\\n{\"summary\": \"ok\"}\\n```\\ntrailer')
+        self.assertEqual(payload["summary"], "ok")
 
 
 if __name__ == "__main__":
