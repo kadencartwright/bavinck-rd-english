@@ -752,6 +752,127 @@ def validate_evaluation_report(
             "evaluation_report",
             display_path(path, repo_root=repo_root) if path else None,
             errors,
+    )
+    return payload
+
+
+def validate_commit_safe_eval_record(
+    payload: dict[str, object],
+    *,
+    path: Path | None = None,
+    repo_root: Path | None = None,
+    validate_paths: bool = False,
+) -> dict[str, object]:
+    errors: list[str] = []
+    repo_root = repo_root or REPO_ROOT
+
+    schema_version = _required_string(payload, "schema_version", errors)
+    sanitization_version = _required_string(payload, "sanitization_version", errors)
+    _required_slug(payload, "run_id", errors)
+    _required_string(payload, "slice_id", errors)
+    _required_string(payload, "prompt_bundle_id", errors)
+    _required_string(payload, "model_profile_id", errors)
+    _required_string(payload, "generated_at", errors)
+    source_refs = _required_object(payload, "source_refs", errors)
+    stages = _required_object(payload, "stages", errors)
+    artifacts = _required_object(payload, "artifacts", errors)
+    hashes = _required_object(payload, "hashes", errors)
+
+    if schema_version and schema_version != "1.0":
+        errors.append("schema_version: must equal '1.0'")
+    if sanitization_version and sanitization_version != "1.0":
+        errors.append("sanitization_version: must equal '1.0'")
+
+    if source_refs is not None:
+        for key in [
+            "run_manifest_path",
+            "slice_manifest_path",
+            "prompt_bundle_path",
+            "model_profile_path",
+            "glossary_path",
+            "style_guide_path",
+            "rubric_path",
+        ]:
+            _required_nested_string(source_refs, "source_refs", key, errors)
+
+    if stages is not None:
+        for stage_name in ["translation", "review"]:
+            stage = stages.get(stage_name)
+            if not isinstance(stage, dict):
+                errors.append(f"stages.{stage_name}: must be an object")
+                continue
+            provider = _required_nested_string(stage, f"stages.{stage_name}", "provider", errors)
+            _required_nested_string(stage, f"stages.{stage_name}", "model", errors)
+            temperature = _required_nested_number(stage, f"stages.{stage_name}", "temperature", errors)
+            _optional_nested_positive_int(stage, f"stages.{stage_name}", "max_tokens", errors)
+            _optional_nested_positive_int(stage, f"stages.{stage_name}", "timeout_seconds", errors)
+            prompt_files = stage.get("prompt_files")
+            if not isinstance(prompt_files, dict) or not prompt_files:
+                errors.append(f"stages.{stage_name}.prompt_files: must be a non-empty object")
+            else:
+                for key, value in prompt_files.items():
+                    if not isinstance(value, str) or not value.strip():
+                        errors.append(f"stages.{stage_name}.prompt_files.{key}: must be a non-empty string")
+            usage = stage.get("usage")
+            if usage is not None:
+                if not isinstance(usage, dict):
+                    errors.append(f"stages.{stage_name}.usage: must be an object when present")
+                else:
+                    for key, value in usage.items():
+                        if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+                            errors.append(f"stages.{stage_name}.usage.{key}: must be a non-negative integer")
+            if provider and provider not in {"moonshot", "z-ai"}:
+                errors.append(f"stages.{stage_name}.provider: unsupported provider '{provider}'")
+            if temperature is not None and not (0.0 <= temperature <= 2.0):
+                errors.append(f"stages.{stage_name}.temperature: must be between 0.0 and 2.0")
+            for forbidden_key in ["messages", "response", "reasoning_content", "raw_response"]:
+                if forbidden_key in stage:
+                    errors.append(f"stages.{stage_name}.{forbidden_key}: is not allowed in commit-safe eval records")
+
+    if artifacts is not None:
+        for key in [
+            "translation_output_path",
+            "review_structured_path",
+            "findings_path",
+            "evaluation_report_path",
+            "evaluation_markdown_path",
+        ]:
+            _required_nested_string(artifacts, "artifacts", key, errors)
+
+    if hashes is not None:
+        required_hashes = {
+            "run_manifest_sha256",
+            "slice_manifest_sha256",
+            "prompt_bundle_metadata_sha256",
+            "model_profile_sha256",
+            "glossary_sha256",
+            "style_guide_sha256",
+            "rubric_sha256",
+            "translation_output_sha256",
+            "review_structured_sha256",
+            "findings_sha256",
+            "evaluation_report_sha256",
+            "evaluation_markdown_sha256",
+        }
+        for key in sorted(required_hashes):
+            _required_nested_sha256(hashes, "hashes", key, errors)
+
+    if validate_paths:
+        for obj_name, container in [("source_refs", source_refs), ("artifacts", artifacts)]:
+            if container is None:
+                continue
+            for key, value in container.items():
+                if not isinstance(value, str) or not value.strip():
+                    continue
+                resolved = resolve_repo_path(value, repo_root=repo_root)
+                if not resolved.exists():
+                    errors.append(f"{obj_name}.{key}: path does not exist: {display_path(resolved, repo_root=repo_root)}")
+
+    if errors:
+        raise ValidationError(
+            "commit_safe_eval_record",
+            display_path(path, repo_root=repo_root) if path else None,
+            errors,
         )
     return payload
 

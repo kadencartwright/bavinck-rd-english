@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "sanitization_version": "1.0",
+  "run_id": "vol2-god-personal-names-001-baseline",
+  "slice_id": "vol2-god-personal-names-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "generated_at": "2026-04-07T17:27:11.864738+00:00",
+  "source_refs": {
+    "run_manifest_path": "config/calibration/run-manifests/vol2-god-personal-names-001-baseline.json",
+    "slice_manifest_path": "data/calibration/slices/vol2-god-personal-names-001/manifest.json",
+    "prompt_bundle_path": "config/calibration/prompt-bundles/baseline-v1",
+    "model_profile_path": "config/calibration/model-profiles/kimi-k2_5-glm5-baseline.json",
+    "glossary_path": "data/calibration/slices/vol2-god-personal-names-001/inputs/glossary.yaml",
+    "style_guide_path": "data/calibration/slices/vol2-god-personal-names-001/inputs/style-guide.md",
+    "rubric_path": "data/calibration/slices/vol2-god-personal-names-001/inputs/rubric.yaml"
+  },
+  "stages": {
+    "translation": {
+      "provider": "moonshot",
+      "model": "kimi-k2.5",
+      "temperature": 1.0,
+      "prompt_files": {
+        "translation_system": "translation-system.txt",
+        "translation_user_template": "translation-user-template.txt",
+        "review_system": "review-system.txt",
+        "review_user_template": "review-user-template.txt"
+      }
+    },
+    "review": {
+      "provider": "z-ai",
+      "model": "glm-5",
+      "temperature": 0.1,
+      "prompt_files": {
+        "translation_system": "translation-system.txt",
+        "translation_user_template": "translation-user-template.txt",
+        "review_system": "review-system.txt",
+        "review_user_template": "review-user-template.txt"
+      },
+      "usage": {
+        "prompt_tokens": 14700,
+        "completion_tokens": 9160,
+        "total_tokens": 23860,
+        "reasoning_tokens": 8657,
+        "cached_tokens": 0
+      }
+    }
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/findings.md",
+    "evaluation_report_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/evaluation.json",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/evaluation.md"
+  },
+  "hashes": {
+    "run_manifest_sha256": "1e492feb95f105979bd367203676f5e105f03a007b65843c433e42f6e57c1894",
+    "slice_manifest_sha256": "059d95968e6f4232d96aac5952637478520e12af29f414bc5d45c5e88a222818",
+    "prompt_bundle_metadata_sha256": "42a49de33a345ef40c49f53767447506bcf60355c88dfcd542cb283fad0ae388",
+    "model_profile_sha256": "5ed2a01f09d09db59e1754be316cfaf49c764a0b6a136bb879a158237d6dde9e",
+    "glossary_sha256": "1d1499ffc49c897111eea81231fb4ec829a4d0d6fa3f8e1a05fe4a3dcb286326",
+    "style_guide_sha256": "99eb45a09233aa80d5c413c7f109974d21da9cb76cf100c402cbe190f05048c0",
+    "rubric_sha256": "c5cac6e9e53aa281e21a973c091a03420d46c734f923983b06ea77ea3a0b2c92",
+    "translation_output_sha256": "bf8359880267b7e1b4169c67f395c1a959a63ea510d58f63c3042db817bbcf8d",
+    "review_structured_sha256": "2e8e9cdb3781a49d203eb5a650e770bc7b2bc268bb84eb57993585e03e795c14",
+    "findings_sha256": "ba09ac6842bfa1559941902677277809a19b314c4106d2d5cb76733971c2e48f",
+    "evaluation_report_sha256": "66a33a70bf8f4d7ca119d879d2c3af352a162c5039ce357444ebfcf0042bbde1",
+    "evaluation_markdown_sha256": "4bc9e7f2b4c3cfeb435ca71e9a49186fe3bd1de92cbb89047192ead0173b760a"
+  }
+}

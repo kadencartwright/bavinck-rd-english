@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-knowability-acquisita-001-baseline",
+  "generated_at": "2026-04-07T16:53:22.309530+00:00",
+  "slice_id": "vol2-god-knowability-acquisita-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "checks": [
+    {
+      "id": "source-identity",
+      "status": "pass",
+      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+    },
+    {
+      "id": "rubric-present",
+      "status": "pass",
+      "details": "Rubric path: data/calibration/slices/vol2-god-knowability-acquisita-001/inputs/rubric.yaml"
+    },
+    {
+      "id": "translation-output",
+      "status": "pass",
+      "details": "Translation output path: data/calibration/runs/vol2-god-knowability-acquisita-001-baseline/outputs/translation.md"
+    },
+    {
+      "id": "preserved-language-integrity",
+      "status": "fail",
+      "details": "Missing preserved spans: νους"
+    },
+    {
+      "id": "glossary-adherence",
+      "status": "fail",
+      "details": "Missing glossary targets: KENBAARHEID GODS -> knowability of God"
+    },
+    {
+      "id": "prose-quality",
+      "status": "pass",
+      "details": "Formal theological prose maintained throughout; some Dutch-influenced syntax (inverted word order, feminine pronouns for Scripture) but argument structure preserved and readable."
+    },
+    {
+      "id": "review-flagging",
+      "status": "pass",
+      "details": "Findings below identify preservation risk and stylistic issues requiring attention."
+    }
+  ],
+  "summary": {
+    "pass": 5,
+    "fail": 2,
+    "incomplete": 0
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/findings.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.md",
+    "eval_record_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/eval-record.json"
+  },
+  "qualitative_findings": {
+    "path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/findings.md",
+    "separate_from_checks": true
+  },
+  "review_summary": "The translation preserves most Latin, German, and Greek terminology and renders the Dutch source into generally coherent formal theological prose. However, the Greek term νους was modified to νοῦς with an accent, violating the preservation requirement. Several Dutch-influenced constructions remain, including feminine pronouns for Scripture and inverted word order, though these do not obscure meaning. The glossary term for the section title is correctly applied.",
+  "glossary_hits": [],
+  "glossary_misses": [
+    "KENBAARHEID GODS -> knowability of God"
+  ]
+}

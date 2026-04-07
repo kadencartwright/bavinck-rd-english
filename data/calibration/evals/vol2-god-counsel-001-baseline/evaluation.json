@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-counsel-001-baseline",
+  "generated_at": "2026-04-07T17:34:09.234060+00:00",
+  "slice_id": "vol2-god-counsel-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "checks": [
+    {
+      "id": "source-identity",
+      "status": "pass",
+      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+    },
+    {
+      "id": "rubric-present",
+      "status": "pass",
+      "details": "Rubric path: data/calibration/slices/vol2-god-counsel-001/inputs/rubric.yaml"
+    },
+    {
+      "id": "translation-output",
+      "status": "incomplete",
+      "details": "Translation output path: data/calibration/runs/vol2-god-counsel-001-baseline/outputs/translation.md"
+    },
+    {
+      "id": "preserved-language-integrity",
+      "status": "fail",
+      "details": "Missing preserved spans: ἐνεργεια, בחר, ידע, עֵצָה, βουλη, θελημα, του, θεληματος, ὁρισας, κειμαι, εἰς, πτωσιν, κρισις, λιθος, προσκομματος, και, πετρα, σκανδαλου, θεου, εὐδοκια, προθεσις, προγνωσις, ἐκλογη, προορισμος, ὁσοι, ἠσαν, τεταγμενοι, ζωην, αἰωνιον, προητοιμασεν, κατ, ἐκλογην, Προθεσις, προθεσιν, προγνωσιν, προορισμον, προ, εκλεκτοι, κατηρτισμενα, ἀπωλειαν"
+    },
+    {
+      "id": "glossary-adherence",
+      "status": "fail",
+      "details": "Missing glossary targets: RAAD GODS -> counsel of God"
+    },
+    {
+      "id": "prose-quality",
+      "status": "incomplete",
+      "details": "No translation text was provided to review."
+    },
+    {
+      "id": "review-flagging",
+      "status": "pass",
+      "details": "Findings correctly identify the critical failure of missing input."
+    }
+  ],
+  "summary": {
+    "pass": 3,
+    "fail": 2,
+    "incomplete": 2
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-counsel-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-counsel-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-counsel-001-baseline/findings.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-counsel-001-baseline/evaluation.md",
+    "eval_record_path": "data/calibration/evals/vol2-god-counsel-001-baseline/eval-record.json"
+  },
+  "qualitative_findings": {
+    "path": "data/calibration/evals/vol2-god-counsel-001-baseline/findings.md",
+    "separate_from_checks": true
+  },
+  "review_summary": "The translation output section was empty, preventing any evaluation of glossary adherence, preservation of Greek and Hebrew spans, or English prose quality.",
+  "glossary_hits": [],
+  "glossary_misses": [
+    "RAAD GODS -> counsel of God"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-knowability-insita-001-baseline",
+  "generated_at": "2026-04-07T16:37:23.867552+00:00",
+  "slice_id": "vol2-god-knowability-insita-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "checks": [
+    {
+      "id": "source-identity",
+      "status": "pass",
+      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+    },
+    {
+      "id": "rubric-present",
+      "status": "pass",
+      "details": "Rubric path: data/calibration/slices/vol2-god-knowability-insita-001/inputs/rubric.yaml"
+    },
+    {
+      "id": "translation-output",
+      "status": "pass",
+      "details": "Translation output path: data/calibration/runs/vol2-god-knowability-insita-001-baseline/outputs/translation.md"
+    },
+    {
+      "id": "preserved-language-integrity",
+      "status": "pass",
+      "details": "All Greek/Hebrew spans found in translation output."
+    },
+    {
+      "id": "glossary-adherence",
+      "status": "pass",
+      "details": "All required glossary targets were found in the translation output."
+    },
+    {
+      "id": "prose-quality",
+      "status": "pass",
+      "details": "The translation reads as coherent formal theological prose without flattening the argument structure. Sentence complexity and logical flow are maintained appropriately."
+    },
+    {
+      "id": "review-flagging",
+      "status": "pass",
+      "details": "Findings below identify preservation risks and unresolved quality issues related to Dutch abbreviations and citations."
+    }
+  ],
+  "summary": {
+    "pass": 7,
+    "fail": 0,
+    "incomplete": 0
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/findings.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/evaluation.md",
+    "eval_record_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/eval-record.json"
+  },
+  "qualitative_findings": {
+    "path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/findings.md",
+    "separate_from_checks": true
+  },
+  "review_summary": "The translation successfully preserves all Greek, Hebrew, Latin, German, and French spans exactly as required, and correctly renders the glossary term 'KENBAARHEID GODS' as 'knowability of God.' The English prose reads as coherent formal theological language maintaining the argument structure. However, several Dutch Scripture abbreviations and citation titles remain untranslated, creating potential confusion for English readers.",
+  "glossary_hits": [
+    "KENBAARHEID GODS -> knowability of God"
+  ],
+  "glossary_misses": []
+}

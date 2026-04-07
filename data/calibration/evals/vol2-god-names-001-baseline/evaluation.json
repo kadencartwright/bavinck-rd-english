@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-names-001-baseline",
+  "generated_at": "2026-04-07T16:58:19.251652+00:00",
+  "slice_id": "vol2-god-names-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "checks": [
+    {
+      "id": "source-identity",
+      "status": "pass",
+      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+    },
+    {
+      "id": "rubric-present",
+      "status": "pass",
+      "details": "Rubric path: data/calibration/slices/vol2-god-names-001/inputs/rubric.yaml"
+    },
+    {
+      "id": "translation-output",
+      "status": "pass",
+      "details": "Translation output path: data/calibration/runs/vol2-god-names-001-baseline/outputs/translation.md"
+    },
+    {
+      "id": "preserved-language-integrity",
+      "status": "pass",
+      "details": "All Greek/Hebrew spans found in translation output."
+    },
+    {
+      "id": "glossary-adherence",
+      "status": "pass",
+      "details": "All required glossary targets were found in the translation output."
+    },
+    {
+      "id": "prose-quality",
+      "status": "fail",
+      "details": "English prose is inconsistent due to untranslated Dutch Scripture abbreviations and a syntactic error in translating a Dutch idiom."
+    },
+    {
+      "id": "review-flagging",
+      "status": "pass",
+      "details": "Findings explicitly call out the abbreviation inconsistency and the idiom mistranslation."
+    }
+  ],
+  "summary": {
+    "pass": 6,
+    "fail": 1,
+    "incomplete": 0
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-names-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-names-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-names-001-baseline/findings.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-names-001-baseline/evaluation.md",
+    "eval_record_path": "data/calibration/evals/vol2-god-names-001-baseline/eval-record.json"
+  },
+  "qualitative_findings": {
+    "path": "data/calibration/evals/vol2-god-names-001-baseline/findings.md",
+    "separate_from_checks": true
+  },
+  "review_summary": "The translation successfully preserves Greek and Hebrew spans and adheres to the provided glossary term. However, the prose quality is marred by inconsistent and partially untranslated Scripture abbreviations (retaining Dutch forms like 'Richt.', 'Op.', 'Hd.' alongside English ones) and a mistranslation of a Dutch idiom regarding emotions attributed to God. These issues disrupt the coherence of the formal theological prose.",
+  "glossary_hits": [
+    "NAMEN GODS -> names of God"
+  ],
+  "glossary_misses": []
+}

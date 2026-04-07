@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "sanitization_version": "1.0",
+  "run_id": "vol2-god-counsel-001-baseline",
+  "slice_id": "vol2-god-counsel-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "generated_at": "2026-04-07T17:34:09.235040+00:00",
+  "source_refs": {
+    "run_manifest_path": "config/calibration/run-manifests/vol2-god-counsel-001-baseline.json",
+    "slice_manifest_path": "data/calibration/slices/vol2-god-counsel-001/manifest.json",
+    "prompt_bundle_path": "config/calibration/prompt-bundles/baseline-v1",
+    "model_profile_path": "config/calibration/model-profiles/kimi-k2_5-glm5-baseline.json",
+    "glossary_path": "data/calibration/slices/vol2-god-counsel-001/inputs/glossary.yaml",
+    "style_guide_path": "data/calibration/slices/vol2-god-counsel-001/inputs/style-guide.md",
+    "rubric_path": "data/calibration/slices/vol2-god-counsel-001/inputs/rubric.yaml"
+  },
+  "stages": {
+    "translation": {
+      "provider": "moonshot",
+      "model": "kimi-k2.5",
+      "temperature": 1.0,
+      "prompt_files": {
+        "translation_system": "translation-system.txt",
+        "translation_user_template": "translation-user-template.txt",
+        "review_system": "review-system.txt",
+        "review_user_template": "review-user-template.txt"
+      }
+    },
+    "review": {
+      "provider": "z-ai",
+      "model": "glm-5",
+      "temperature": 0.1,
+      "prompt_files": {
+        "translation_system": "translation-system.txt",
+        "translation_user_template": "translation-user-template.txt",
+        "review_system": "review-system.txt",
+        "review_user_template": "review-user-template.txt"
+      },
+      "usage": {
+        "prompt_tokens": 8743,
+        "completion_tokens": 1743,
+        "total_tokens": 10486,
+        "reasoning_tokens": 1558,
+        "cached_tokens": 0
+      }
+    }
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-counsel-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-counsel-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-counsel-001-baseline/findings.md",
+    "evaluation_report_path": "data/calibration/evals/vol2-god-counsel-001-baseline/evaluation.json",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-counsel-001-baseline/evaluation.md"
+  },
+  "hashes": {
+    "run_manifest_sha256": "3d9d4799f20333457b0436c06b62f75980838adb1eb0c311a919c7ef22c99bc8",
+    "slice_manifest_sha256": "22c167159b1e41d2554f27173032fa9692bbbea8f20baa7f657b0d5ecece0613",
+    "prompt_bundle_metadata_sha256": "42a49de33a345ef40c49f53767447506bcf60355c88dfcd542cb283fad0ae388",
+    "model_profile_sha256": "5ed2a01f09d09db59e1754be316cfaf49c764a0b6a136bb879a158237d6dde9e",
+    "glossary_sha256": "27c5f7324ea4a559f7891f50a5ec63116c871f86f96d12c3155f09dc48dca829",
+    "style_guide_sha256": "99eb45a09233aa80d5c413c7f109974d21da9cb76cf100c402cbe190f05048c0",
+    "rubric_sha256": "da9fb134cd4caebda47ce5e450a6d3d4e2a418a2c1bef1238cfaf05539271bae",
+    "translation_output_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "review_structured_sha256": "0c300ba9dc782ca157a024a4d95ccdfffb9d7a6ba6d85d4135e30ece288df270",
+    "findings_sha256": "613703c5761f560b5e27465d0a5aaf5ffcc16ffb581fbc7ed03a217ad274ec47",
+    "evaluation_report_sha256": "a0c8d72b235c358c342b43209968554802a78fd275ced535f19156441c8a8875",
+    "evaluation_markdown_sha256": "58725af2a1642a4f8b45ba82ec402411c28de1b9ccec38d1d134b368baa4fa5d"
+  }
+}

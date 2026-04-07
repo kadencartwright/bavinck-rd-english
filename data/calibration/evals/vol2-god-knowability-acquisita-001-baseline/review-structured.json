@@ -1,0 +1,43 @@
+{
+  "summary": "The translation preserves most Latin, German, and Greek terminology and renders the Dutch source into generally coherent formal theological prose. However, the Greek term νους was modified to νοῦς with an accent, violating the preservation requirement. Several Dutch-influenced constructions remain, including feminine pronouns for Scripture and inverted word order, though these do not obscure meaning. The glossary term for the section title is correctly applied.",
+  "checks": {
+    "preserved-language-integrity": {
+      "status": "fail",
+      "details": "Greek νους in source (paragraph 3) was changed to accented νοῦς in translation. All other Latin, German, and Greek spans appear preserved correctly."
+    },
+    "glossary-adherence": {
+      "status": "pass",
+      "details": "KENBAARHEID GODS correctly rendered as 'knowability of God' in section title."
+    },
+    "prose-quality": {
+      "status": "pass",
+      "details": "Formal theological prose maintained throughout; some Dutch-influenced syntax (inverted word order, feminine pronouns for Scripture) but argument structure preserved and readable."
+    },
+    "review-flagging": {
+      "status": "pass",
+      "details": "Findings below identify preservation risk and stylistic issues requiring attention."
+    }
+  },
+  "findings": [
+    {
+      "severity": "high",
+      "category": "preserved-language-corruption",
+      "detail": "Greek νους in source paragraph 3 ('begaafd met een νους') was altered to accented νοῦς in translation. Greek spans must remain exactly as they appear in source."
+    },
+    {
+      "severity": "medium",
+      "category": "unnatural-english-prose",
+      "detail": "Scripture referred to with feminine pronoun 'her' ('It is fixed for her that God reveals himself'), reflecting Dutch grammatical gender; English requires neuter 'it' for Scripture."
+    },
+    {
+      "severity": "low",
+      "category": "stylistic-infelicity",
+      "detail": "'Willy-nilly' renders 'zĳns ondanks' but is colloquial; formal alternatives like 'whether he will or not' or 'in spite of himself' better suit theological prose."
+    }
+  ],
+  "recommended_follow_up": [
+    "Restore Greek νους to unaccented form as in source",
+    "Change feminine pronouns referring to Scripture to neuter 'it'",
+    "Consider replacing 'willy-nilly' with more formal equivalent"
+  ]
+}

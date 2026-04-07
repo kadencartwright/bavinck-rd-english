@@ -1,0 +1,23 @@
+{
+  "summary": "The translation output section was empty, preventing any evaluation of glossary adherence, preservation of Greek and Hebrew spans, or English prose quality.",
+  "checks": {
+    "prose-quality": {
+      "status": "incomplete",
+      "details": "No translation text was provided to review."
+    },
+    "review-flagging": {
+      "status": "pass",
+      "details": "Findings correctly identify the critical failure of missing input."
+    }
+  },
+  "findings": [
+    {
+      "severity": "high",
+      "category": "missing-input",
+      "detail": "The translation output field is empty; the source excerpt was provided but no English translation followed."
+    }
+  ],
+  "recommended_follow_up": [
+    "Resubmit the run with the generated English translation included in the 'Translation output' field."
+  ]
+}
