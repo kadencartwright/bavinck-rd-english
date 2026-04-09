@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import re
 import shutil
 import sys
@@ -676,22 +677,7 @@ def export_commit_safe_eval_bundle(
             encoding="utf-8",
         )
 
-        safe_report = dict(evaluation_report)
-        safe_report["artifacts"] = {
-            "translation_output_path": relative_to_repo(eval_dir / "translation.md"),
-            "review_structured_path": relative_to_repo(eval_dir / "review-structured.json"),
-            "findings_path": relative_to_repo(eval_dir / "findings.md"),
-            "translation_system_prompt_path": relative_to_repo(eval_dir / "prompts/translation-system.txt"),
-            "translation_user_prompt_path": relative_to_repo(eval_dir / "prompts/translation-user.txt"),
-            "review_system_prompt_path": relative_to_repo(eval_dir / "prompts/review-system.txt"),
-            "review_user_prompt_path": relative_to_repo(eval_dir / "prompts/review-user.txt"),
-            "evaluation_markdown_path": relative_to_repo(eval_dir / "evaluation.md"),
-            "eval_record_path": relative_to_repo(eval_dir / "eval-record.json"),
-        }
-        safe_report["qualitative_findings"] = {
-            "path": relative_to_repo(eval_dir / "findings.md"),
-            "separate_from_checks": True,
-        }
+        safe_report = build_safe_evaluation_report(evaluation_report=evaluation_report, eval_dir=eval_dir)
         validate_evaluation_report(safe_report)
         write_json(evaluation_json_path, safe_report)
         write_markdown_report(evaluation_markdown_path, safe_report)
@@ -811,6 +797,42 @@ def build_commit_safe_stage_record(
     return stage_record
 
 
+def build_safe_evaluation_report(
+    *,
+    evaluation_report: dict[str, object],
+    eval_dir: Path,
+) -> dict[str, object]:
+    run_id = str(evaluation_report["run_id"])
+    safe_report = copy.deepcopy(evaluation_report)
+    checks = safe_report.get("checks")
+    if isinstance(checks, list):
+        for check in checks:
+            if not isinstance(check, dict):
+                continue
+            details = check.get("details")
+            if isinstance(details, str):
+                check["details"] = _sanitize_report_text(details, run_id=run_id, eval_dir=eval_dir)
+    review_summary = safe_report.get("review_summary")
+    if isinstance(review_summary, str):
+        safe_report["review_summary"] = _sanitize_report_text(review_summary, run_id=run_id, eval_dir=eval_dir)
+    safe_report["artifacts"] = {
+        "translation_output_path": relative_to_repo(eval_dir / "translation.md"),
+        "review_structured_path": relative_to_repo(eval_dir / "review-structured.json"),
+        "findings_path": relative_to_repo(eval_dir / "findings.md"),
+        "translation_system_prompt_path": relative_to_repo(eval_dir / "prompts/translation-system.txt"),
+        "translation_user_prompt_path": relative_to_repo(eval_dir / "prompts/translation-user.txt"),
+        "review_system_prompt_path": relative_to_repo(eval_dir / "prompts/review-system.txt"),
+        "review_user_prompt_path": relative_to_repo(eval_dir / "prompts/review-user.txt"),
+        "evaluation_markdown_path": relative_to_repo(eval_dir / "evaluation.md"),
+        "eval_record_path": relative_to_repo(eval_dir / "eval-record.json"),
+    }
+    safe_report["qualitative_findings"] = {
+        "path": relative_to_repo(eval_dir / "findings.md"),
+        "separate_from_checks": True,
+    }
+    return safe_report
+
+
 def remove_transient_publishable_run_artifacts(
     *,
     translation_output_path: Path,
@@ -846,6 +868,24 @@ def _extract_finish_reason(response: dict[str, object]) -> str | None:
     if not isinstance(finish_reason, str) or not finish_reason.strip():
         return None
     return finish_reason
+
+
+def _sanitize_report_text(text: str, *, run_id: str, eval_dir: Path) -> str:
+    replacements = {
+        f"data/calibration/runs/{run_id}/outputs/translation.md": relative_to_repo(eval_dir / "translation.md"),
+        f"data/calibration/runs/{run_id}/review/review-structured.json": relative_to_repo(
+            eval_dir / "review-structured.json"
+        ),
+        f"data/calibration/runs/{run_id}/review/findings.md": relative_to_repo(eval_dir / "findings.md"),
+        f"data/calibration/runs/{run_id}/reports/evaluation.json": relative_to_repo(eval_dir / "evaluation.json"),
+        f"data/calibration/runs/{run_id}/reports/evaluation.md": relative_to_repo(eval_dir / "evaluation.md"),
+    }
+    sanitized = text
+    for old_value, new_value in replacements.items():
+        sanitized = sanitized.replace(old_value, new_value)
+    if sanitized.startswith("Translation output path: ") and "data/calibration/runs/" in text:
+        return f"Translation output path: {relative_to_repo(eval_dir / 'translation.md')}"
+    return sanitized
 
 
 def render_findings_markdown(review_payload: dict[str, object]) -> str:

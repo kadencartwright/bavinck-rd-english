@@ -1,11 +1,11 @@
 {
-  "schema_version": "1.0",
-  "sanitization_version": "1.0",
+  "schema_version": "1.1",
+  "sanitization_version": "1.1",
   "run_id": "vol2-god-incomprehensibility-001-baseline",
   "slice_id": "vol2-god-incomprehensibility-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
-  "generated_at": "2026-04-09T15:01:45.548853+00:00",
+  "generated_at": "2026-04-09T16:38:14.725935+00:00",
   "source_refs": {
     "run_manifest_path": "config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json",
     "slice_manifest_path": "data/calibration/slices/vol2-god-incomprehensibility-001/manifest.json",
@@ -25,7 +25,8 @@
         "translation_user_template": "translation-user-template.txt",
         "review_system": "review-system.txt",
         "review_user_template": "review-user-template.txt"
-      }
+      },
+      "finish_reason": "stop"
     },
     "review": {
       "provider": "z-ai",
@@ -37,6 +38,7 @@
         "review_system": "review-system.txt",
         "review_user_template": "review-user-template.txt"
       },
+      "finish_reason": "stop",
       "usage": {
         "prompt_tokens": 9557,
         "completion_tokens": 6695,
@@ -50,6 +52,10 @@
     "translation_output_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/review-user.txt",
     "evaluation_report_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/evaluation.json",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/evaluation.md"
   },
@@ -64,7 +70,11 @@
     "translation_output_sha256": "9b075cfde143924b0cf2f9783167b5ac436cce4503de258b969da2074258a3d7",
     "review_structured_sha256": "fb46f23ff04dde887e92e228f94c0a1121686282db40065f7e8bec5431eeb50d",
     "findings_sha256": "a504ae3e07d0d372f88c1c0972c5994cafd6b563055766e2795391ce7841a375",
-    "evaluation_report_sha256": "49b9a9e69dc70ab109cfedb203558e949c207bd3de5258c97e18ab76cc774e80",
-    "evaluation_markdown_sha256": "4511f1cde47d1e2117c7a70ea13c0307ae22906a6834c7e90f494040b9a6c66a"
+    "evaluation_report_sha256": "a7e764a5be3e3a0ec92f8bca4e5d2c3e58dab3ddb129fbe918e8f7043a8846a1",
+    "evaluation_markdown_sha256": "e4f8229b9d254d5e5120b6416dfb70e8cfeac7e1005e5bfaf9d805e6c66869d2",
+    "translation_system_prompt_sha256": "e88459c2542b810f3c237adfbf3875021954ab378645fd6bd5c6a51b689b3524",
+    "translation_user_prompt_sha256": "0f5554576e59bf6ca0a4310803e4c91f43e0dc943dd17b4a82676b14fdbb1b0b",
+    "review_system_prompt_sha256": "d32ea79f07f205d43763ea59eeda6c6186edadd1de334c6cabc96e38adb24876",
+    "review_user_prompt_sha256": "eb1fa6a5918ca7276d10b71e28d8f2b110256a87c220e9b1e698e7afbe8618e6"
   }
 }

@@ -1,0 +1,288 @@
+Run ID: vol2-god-incomprehensibility-001-baseline
+Slice ID: vol2-god-incomprehensibility-001
+Slice Title: Volume 2 § 20.1-3 The Incomprehensibility of God
+
+Rubric:
+schema_version: "1.0"
+slice_id: "vol2-god-incomprehensibility-001"
+criteria:
+  - id: "preserved-language-integrity"
+    requirement: "All Greek and Hebrew spans from the source excerpt remain unchanged in the translation output."
+    status_values: "pass|fail|incomplete"
+  - id: "glossary-adherence"
+    requirement: "Required glossary targets appear where the source excerpt exercises those source terms."
+    status_values: "pass|fail|incomplete"
+  - id: "prose-quality"
+    requirement: "English output reads as coherent formal theological prose without flattening argument structure and renders Dutch Scripture references in standard English forms."
+    status_values: "pass|fail|incomplete"
+  - id: "review-flagging"
+    requirement: "Reviewer findings explicitly call out preservation risks, doctrinal ambiguity, and unresolved quality issues."
+    status_values: "pass|fail|incomplete"
+
+Excerpt-scoped glossary:
+schema_version: "1.0"
+slice_id: "vol2-god-incomprehensibility-001"
+terms:
+  - source: "dogmatiek"
+    target: "dogmatics"
+    notes: "Use the discipline name consistently."
+  - source: "kennisse Gods"
+    target: "knowledge of God"
+    notes: "Central doctrinal phrase in this excerpt."
+  - source: "Onbegrĳpelĳke"
+    target: "the Incomprehensible"
+    notes: "Retain the theological force of the title-case epithet."
+  - source: "openbaring"
+    target: "revelation"
+    notes: "Prefer the standard theological rendering."
+  - source: "de zĳnde"
+    target: "Being"
+    notes: "Use as a metaphysical divine title rather than an ordinary common noun."
+
+Style guide:
+# Style Guide
+
+- Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source excerpt.
+- Retain citation structure, but translate Dutch Scripture references, book names, and abbreviations into standard English forms; keep patristic or scholastic citations intact.
+- Translate into formal but readable English theological prose; do not modernize into colloquial language.
+- Prefer glossary-approved renderings when the glossary lists a source phrase from the excerpt.
+- Flag ambiguous doctrinal phrasing instead of smoothing over uncertainty.
+
+Source excerpt:
+§ 20. DE ONBEGRIJPELIJKHEID GODS.
+
+
+1. Het mysterie is het levenselement der dogmatiek. Wel verstaat de
+Schrift onder μυστηριον geen abstract-bovennatuurlĳke waarheid in
+Roomschen zin; maar zĳ is even ver verwĳderd van de gedachte, dat de
+geloovige de geopenbaarde mysteriën in wetenschappelĳken zin verstaan
+en begrĳpen zou, cf. deel I 532. Veeleer gaat de kennis, welke God van
+zichzelven in natuur en Schrift heeft geopenbaard, de voorstelling
+en het begrip van den mensch zeer verre te boven. In zooverre is het
+alles mysterie, waar de dogmatiek over handelt. Zĳ heeft het immers
+niet te doen met eindige schepselen, maar van het begin tot het einde
+verheft ze zich boven alle creatuur tot den Eeuwige en den Oneindige
+zelven. Reeds terstond als ze een aanvang maakt, staat zĳ voor den
+Onbegrĳpelĳke. Van Hem neemt ze haar aanvang, want uit Hem zĳn alle
+dingen. Maar ook in de verdere loci, als ze afdaalt tot de schepselen,
+beschouwt zĳ deze niet anders dan in hunne relatie tot God, gelĳk ze
+uit en door en tot Hem zĳn. Zoo is dan de kennisse Gods het eenige
+dogma, de uitsluitende inhoud der gansche dogmatiek. Alle leerstukken,
+die in haar behandeld worden, over de wereld, over den mensch, over
+Christus enz., zĳn maar de explicatie van het ééne, centrale dogma der
+cognitio Dei. Van Hem uit wordt alles beschouwd. Onder Hem wordt alles
+gesubsumeerd. Tot Hem wordt alles teruggeleid. Het is altĳd God en God
+alleen, wiens glorie in schepping en herschepping, in natuur en genade,
+in wereld en kerk zĳ te bepeinzen en te beschrĳven heeft. Het is zĳne
+kennisse alleen, die ze uitstallen en ten toon spreiden moet. Daardoor
+wordt de dogmatiek geen dorre, schoolsche wetenschap, zonder vrucht
+voor het leven. Hoemeer ze Hem bepeinst, wiens kennisse haar eenige
+inhoud is, des te meer zal ze overgaan in bewondering en aanbidding.
+Indien ze maar nimmer vergeet, om over de _zaken_ in plaats van over
+de _woorden_ te denken en te spreken; indien ze maar eene Theologie
+der Thatsachen blĳft en niet ontaardt in eene Theologie der Rhetorik,
+is zĳ als wetenschappelĳke beschrĳving van de kennisse Gods ook ten
+hoogste vruchtbaar voor het leven. De kennisse Gods in Christus is
+immers het leven zelf, Ps. 89:16; Jes. 11:9; Jer. 31:34; Joh. 17:3.
+Daarom begeerde Augustinus niets anders en niets meer te kennen dan
+God en zichzelven: Deum et animam scire cupio. Nihilne plus? Nihil
+omnino. Daarom begon Calvĳn zĳne Institutie met de kennisse Gods en
+van ons zelven. En daarom gaf de Catechismus van Genève op de eerste
+vraag: quis humanae vitae praecipuus est finis? ten antwoord: ut Deum,
+a quo conditi sunt homines, ipsi noverint, cf. ook den Catech. van
+Westminster.
+
+Maar zoodra we ons onderwinden, om over God te spreken, rĳst de vraag,
+hoe we dat zullen vermogen. Wĳ zĳn menschen en Hĳ is de Heere onze God.
+Er schĳnt tusschen Hem en ons geen verwantschap en geen gemeenschap
+te bestaan, dat wĳ Hem zouden kunnen noemen naar waarheid. Er is
+tusschen Hem en ons een afstand als tusschen het oneindige en het
+eindige, tusschen eeuwigheid en tĳd, tusschen het zĳn en het worden,
+tusschen het al en het niet. Hoe weinig we van God weten, reeds de
+zwakste notie houdt in, dat Hĳ een wezen is, oneindig verre boven alle
+schepsel verheven. En de Schrift bevestigt dat niet alleen, zĳ stelt
+die majesteit en verhevenheid des Heeren Heeren voor ons eerst in het
+volle licht. Reeds het eerste hoofdstuk van Genesis schildert zĳne
+onbegrĳpelĳke verhevenheid; Hĳ spreekt en het is er. En ofschoon de
+Schrift ons dan vervolgens God beschrĳft in zĳne nederbuigende liefde,
+en zegt, dat Hĳ woont bĳ dien, die eens verbrĳzelden en nederigen
+geestes is, toch is Hĳ de Hooge en de Verhevene, die in de eeuwigheid
+woont, Jes. 57:15. God is groot en wĳ begrĳpen het niet, Job 26:14,
+36:26, 37:5. Hĳ is onvergelĳkelĳk, Jes. 40:18, 25, 46:5, wonende in het
+donker, 1 Kon. 8:12; Jes. 45:15, in een ontoegankelĳk licht, 1 Tim.
+6:16. Niemand heeft Hem gezien of kan Hem zien, Ex. 33:20; Joh. 1:18,
+6:46; 1 Tim. 6:16. De verborgen grond, de diepte Gods, ‎‏חֵקֶר‏‎, en
+de grens, het uiterste, het wezen des Almachtigen, ‎‏תַּכְלִית‏‎, is
+niet te bereiken, Job 11:7; Eccl. Sir. 43:34, 35. Hĳ is geest, zonder
+gedaante, Deut. 4:12, 15; Joh. 4:24, 5:37, boven al het creatuurlĳke,
+boven behoefte, Job 22:2, 3; Hd. 17:25; verandering, Jak. 1:17; tĳd,
+Jes. 41:4, 44:6, 48:12; Op. 1:8, 22:13; ruimte, Hd. 17:27, 28 enz.,
+oneindig verre verheven. Hĳ is niet te beschrĳven en met geen naam te
+noemen. Hĳ is zonder naam, zĳn naam is wonderlĳk, Gen. 32:29; Richt.
+13:18; Spr. 30:4.
+
+
+2. Zelfs buiten het terrein der bĳzondere openbaring is deze hoogheid
+Gods erkend. Bĳ de Brahmanen is God de Onkenbare, zonder namen en
+eigenschappen, alleen gekend door dengene, die niet kent, Hoekstra,
+Wĳsg. Godsd. II 2. Hartmann, Religionsphilos. I 278 f. De Koran
+beschrĳft Allah menigmaal op zeer menschvormige wĳze, maar onder de
+volgelingen van Mohammed stonden er velen op, die deze beschrĳving
+geestelĳk duidden en zelfs alle eigenschappen aan God ontzeiden, Dozy,
+Het Islamisme bl. 131 v. Houtsma, De strĳd over het dogma in den Islam
+tot op El-Ash’ari 1875 bl. 120 v. Saussaye, Lehrb. der Rel. II 385.
+Ook de Grieksche wĳsbegeerte heeft menigmaal deze onkenbaarheid Gods
+duidelĳk erkend en uitgesproken. Naar het bekende verhaal verzocht
+de philosoof Simonides telkens langer uitstel voor het antwoord op
+de vraag van den tiran Hiero, wie God was, Cic. de nat. deor. I 22.
+Volgens Diogenes begon Protagoras zĳn boek over de goden aldus: περι
+μεν θεων οὐκ ἐχω εἰδεναι οὐδ’ ὡς εἰσιν οὐδ’ ὡς οὐκ εἰσιν πολλα γαρ τα
+κωλυοντα εἰδεναι, ἡ τ’ ἀδηλοτης και βραχυς ὠν ὁ βιος των ἀνθρωπων,
+Ritter et Preller, Hist. phil. gr. 183. Cic. de nat. deor. I 63.
+Karneades van Cyrene onderwierp het geloof aan de goden niet alleen aan
+eene scherpe kritiek, maar bestreed ook de mogelĳkheid, om zich een
+denkbeeld van God te vormen. Plato verwierp alle anthropomorphische en
+anthropopathische voorstelling der Godheid en verklaarde in den Timaeus
+§ 34: τον μεν οὐν ποιητην και πατερα τονδε του παντος εὑρειν τε ἐργον
+και εὑροντα εἰς παντας ἀδυνατον λεγειν, Zeller, Philos. der Gr. II 4
+928 f. En in gelĳken zin zegt hĳ in de Republiek VI 19, dat de Godheid
+of de idee van het goede niet slechts boven al het bestaande, maar ook
+boven het zĳn zelf verheven is, ἐπεκεινα πασες οὐσιας. Philo verbond
+deze platonische philosophie met de leer des O. Test. en vond in den
+naam Ihvh dezelfde gedachte uitgedrukt. Niet alleen is God vrĳ van
+alle onvolmaaktheid, die er in de eindige, veranderlĳke, afhankelĳke
+schepselen aanwezig is; neen, God gaat ook alle volmaaktheid der
+schepselen ver te boven. Hĳ is beter dan de deugd, de kennis, de
+schoonheid, zuiverder dan de eenheid, zaliger dan de zaligheid. Hĳ
+is eigenlĳk zonder eigenschappen, ἀποιος, en zonder namen, en kan
+daarom ook niet begrepen en beschreven worden. Naar zĳn wezen is God
+onkenbaar. Wĳ kunnen weten, dat Hĳ is, maar niet wat Hĳ is. Alleen het
+zĳn kan in eigenlĳken zin Hem worden toegeschreven; de naam Ihvh is de
+eenige, die zĳn wezen aanduidt, Zeller, Philos. d. Gr. V³ 353 f. Dähne,
+Gesch. Darstellung der jüdisch-alex. Religionsphilos. 1834 I 114 f.
+Schürer, Neutest. Zeitgesch. 1874 S. 655 f. Het verst ging Plotinus.
+Plato schreef aan God nog vele eigenschappen toe. Philo vulde zĳne
+negatieve theologie met eene positieve aan, waarin hĳ God omschrĳft
+als een persoonlĳk, almachtig, volmaakt wezen. Maar bĳ Plotinus is er
+niets van God te zeggen dan alleen negatief. God is absoluut één, boven
+alle veelheid verheven en daarom ook niet door het denken, het goede,
+zelfs niet door het zĳn te omschrĳven, want al deze bepalingen sluiten
+nog eene veelheid in. God als de zuivere eenheid is wel de oorzaak van
+het denken, het zĳn, het goede, maar Hĳ is er zelf van onderscheiden
+en staat er transcendent boven. Hĳ is onbegrensd, oneindig, zonder
+gedaante, en zoozeer van alle schepsel onderscheiden, dat zelfs
+werkzaamheid, leven, denken, bewustzĳn, zĳn, Hem niet kan worden
+toegeschreven. Hĳ is onbereikbaar voor onze gedachte en voor onze taal.
+Wĳ kunnen niet zeggen, wat Hĳ is, maar alleen wat Hĳ niet is. Zelfs
+de benamingen van το ἑν en το ἀγαθον, waarvan Plotinus zich doorgaans
+bedient, zĳn geen beschrĳving van Gods wezen, maar alleen van zĳne
+verhouding tot de schepselen, en duiden niets aan dan zĳne absolute
+causaliteit, Zeller, ib. 476-496. Nog grooter werd de afstand tusschen
+God en zĳn schepsel in het gnosticisme. Het maakte eene absolute
+scheiding tusschen den hoogsten God en de wereld. In de natuur, in
+Israël, in het Christendom was er geen wezenlĳke openbaring van God
+maar alleen van de aeonen. Er was daarom geen theologia naturalis, noch
+insita noch acquisita, en evenmin eene theologia revelata. De hoogste
+God was volstrekt onkenbaar en ongenaakbaar voor het schepsel; Hĳ was
+βυθος ἀγνωστος, ἀρρητος, eeuwige σιγη, Iren., adv. haer. I 11. 24.
+
+
+3. Maar deze leer van de onbegrĳpelĳkheid Gods en van de onkenbaarheid
+van zĳn wezen is ook uitgangspunt en grondgedachte der christelĳke
+theologie geweest. God gaat in zĳne openbaring niet op, noch in de
+schepping noch in de herschepping. Hĳ kan zich aan schepselen niet
+ten volle mededeelen, wĳl deze dan zelf God moesten zĳn. Daarom is
+er geen adaequate kennis van God. Er is geen naam, die ons zĳn wezen
+kennen doet. Er is geen begrip, dat Hem ten volle omvat. Er is geen
+beschrĳving, die Hem volledig bepaalt. Wat achter de openbaring ligt,
+is ten eenenmale onkenbaar. Wĳ kunnen het noch met onze gedachte of
+verbeelding, noch met onze taal benaderen. Reeds de brief van Barnabas
+c. 5 vraagt: indien de zoon van God niet in het vleesch gekomen ware,
+hoe zouden dan de menschen Hem gezien hebben en behouden zĳn gebleven?
+Justinus Martyr noemt God onuitsprekelĳk, onbewegelĳk, naamloos, Apol.
+I 61; ook woorden als Vader, God, Heer zĳn geen eigenlĳke namen ἀλλ’
+ἐκ των εὐποιϊων και των ἐργων προσρησεις, Apol. II 6. God kan niet
+verschĳnen, niet gaan, niet gezien worden enz., indien daarvan in het
+O. Test. sprake is, slaat dit op den Zoon, die zĳn gezant is, Dial.
+127. Ook bĳ Irenaeus, adv. haer. IV 20 komt de in zĳn tĳd zeer gewone
+maar toch onjuiste en ten deele gnostische tegenstelling voor tusschen
+den Vader, die verborgen, onzichtbaar, onkenbaar is, en den Zoon, die
+Hem heeft geopenbaard. Bĳ Clemens Alex. is God zuivere μονας, Strom.
+V 11. Als wĳ al het creatuurlĳke wegdenken, bereiken wĳ niet wat God
+is, maar wat Hĳ niet is. Vorm, beweging, plaats, getal, eigenschap,
+naam enz. kunnen Hem niet toegekend worden. Indien wĳ Hem toch één,
+goed, Vader, Schepper, Heer enz. noemen, dan spreken we daarmede zĳn
+eigenlĳk wezen niet uit maar duiden slechts zĳne macht aan, Strom.
+V 12. Hĳ is zelfs boven het ééne verheven, ὑπερ αὐτην την μοναδα,
+Paedag. I 8. In één woord, God is, gelĳk Athanasius, c. gent. 2 zegt,
+ἐπεκεινα πασης οὐσιας και ἀνθρωπινης ἐννοιας. En evenzoo spreken
+Orig., de princ. I 1, 5. sq. c. Cels. VI 65. Eusebius, Praep. Evang.
+V 1. Theophilus, ad Autol. I 3. Tatianus. c. Gr. 5. Minucius Felix.
+Octav. c. 18. Novatianus, de trin. 2. Cyprianus, de idol. vanit. 5.
+Lactantius, Instit. div. I 6. Cf. Münscher- v. Coelln, Dogmengesch. I
+132 f. Hagenbach, Dogm. § 37. Schwane, Dogmengesch. I² 72 f. Dezelfde
+voorstelling treffen wĳ ook aan bĳ Augustinus en Joh. Damascenus.
+Augustinus gaat bĳ de omschrĳving Gods uit van het begrip des zĳns.
+Hĳ is de zĳnde, gelĳk zĳn naam Ihvh ook te kennen geeft; deze is zĳn
+eigenlĳke naam, zĳn nomen in se; alle andere namen zĳn ad nos, Serm. 6
+n. 4. Serm. 7 n. 7. Daarom, als wĳ zeggen willen wat Hĳ is, zeggen we
+alleen, wat Hĳ in onderscheiding van alle eindige substantiën niet is.
+Hĳ is ineffabilis. Facilius dicemus quid non sit quam quid sit. Hĳ is
+geen aarde, zee, hemel, engel enz., niets van al wat het schepsel is;
+hoc solum potui dicere quid non sit, Enarr. in Ps. 85 n. 12. de doctr.
+chr. I 6, de ord. II 47. Hĳ wordt zóó gedacht, ut aliquid quo nihil
+melius sit atque sublimius illa cogitatio conetur attingere, de doctr.
+chr. I 7. Maar Hĳ kan niet gedacht worden gelĳk Hĳ is. Want Hĳ is boven
+al het lichamelĳke, veranderlĳke, gewordene verheven, tract. 23 in Ev.
+Joh. n. 9. Quis est autem, qui sic cogitat Deum, quemadmodum ille est?
+quaest. in Jos. VI 29. Hĳ is onbegrĳpelĳk en moet dat zĳn, si enim
+comprehendis, non est Deus, Serm. 117 n. 5. En als wĳ dan ten slotte
+zeggen willen wat wĳ van Hem denken, dan worstelen wĳ met de taal.
+Verius enim cogitatur Deus quam dicitur, et verius est quam cogitatur,
+de trin. VII 4, de doctr. chr. I 6. Zoo we toch iets aangaande Hem
+uitspreken, dan is dat niet adaequaat, maar dient het alleen, om ons
+iets te doen zeggen en om ons te doen denken aan een wezen, dat alles
+overtreft, de doctr. chr. I 6. Sicut Deus a nullo intellectu valet
+proprie cogitari, ita nulla definitione potest proprie definiri aut
+determinari, de cogn. verae vitae 7. Deus scitur melius nesciendo, de
+ord. II 44. Evenzoo zegt Damascenus, dat God το θειον, ἀρρητον και
+ἀκαταληπτον is, de fide orth. I c. 1. Wĳ spreken van God op onze wĳze
+en weten wat God van zichzelf heeft geopenbaard; maar wat Gods wezen en
+hoe Hĳ in allen is, weten wĳ niet, ib. c. 2. Dat God is, is duidelĳk;
+maar τι ἐστιν κατ’ οὐσιαν και φυσιν, ἀκαταληπτον τουτο παντελως και
+ἀγνωστον. Dat God ongeboren, onveranderlĳk, zonder aanvang is enz.,
+zegt alleen wat Hĳ niet is. Te zeggen, wat Hĳ wel is, is onmogelĳk. Hĳ
+is niets van al het zĳnde, niet omdat Hĳ niet is, maar omdat Hĳ is ὑπερ
+παντα τα ὀντα και ὑπερ αὐτο το εἰναι. Wat wĳ positief van God zeggen,
+duidt niet zĳn natuur aan, maar de betrekkingen zĳner natuur, τα περι
+την φυσιν, ib. c. 4 cf. c. 9.
+
+Translation output:
+§ 20. THE INCOMPREHENSIBILITY OF GOD.
+
+
+1. Mystery is the vital element of dogmatics. To be sure, Scripture understands by μυστηριον no abstract supernatural truth in the Roman sense; but it is equally far removed from the thought that the believer would understand and comprehend the revealed mysteries in a scientific sense, cf. vol. I 532. Rather, the knowledge which God has revealed of Himself in nature and Scripture far transcends human representation and conception. Insofar it is all mystery with which dogmatics deals. For it does not have to do with finite creatures, but from beginning to end it raises itself above all creation to the Eternal and the Infinite Himself. Immediately as it makes a beginning, it stands before the Incomprehensible. From Him it takes its beginning, for from Him are all things. But also in the further loci, as it descends to the creatures, it considers these only in their relation to God, inasmuch as they are from and through and to Him. Thus the knowledge of God is the sole dogma, the exclusive content of the whole dogmatics. All doctrines treated in it, concerning the world, concerning man, concerning Christ, etc., are but the explication of the one, central dogma of the cognitio Dei. From Him everything is considered. Under Him everything is subsumed. To Him everything is traced back. It is always God and God alone, whose glory in creation and re-creation, in nature and grace, in world and church it has to contemplate and describe. It is His knowledge alone which it must display and set forth. Thereby dogmatics does not become a barren, scholastic science, without fruit for life. The more it contemplates Him, whose knowledge is its sole content, the more it will pass over into admiration and worship. If only it never forgets to think and speak about _things_ rather than about _words_; if only it remains a Theology of Thatsachen and does not degenerate into a Theology of Rhetoric, it is also as a scientific description of the knowledge of God most fruitful for life. The knowledge of God in Christ is indeed life itself, Ps. 89:16; Isa. 11:9; Jer. 31:34; John 17:3. Therefore Augustine desired to know nothing else and nothing more than God and himself: Deum et animam scire cupio. Nihilne plus? Nihil omnino. Therefore Calvin began his Institutes with the knowledge of God and of ourselves. And therefore the Catechism of Geneva gave to the first question: quis humanae vitae praecipuus est finis? the answer: ut Deum, a quo conditi sunt homines, ipsi noverint, cf. also the Cat. of Westminster.
+
+But as soon as we undertake to speak about God, the question arises how we shall be able to do so. We are men and He is the Lord our God. There seems to exist between Him and us no kinship and no communion, that we could name Him according to truth. There is between Him and us a distance as between the infinite and the finite, between eternity and time, between Being and becoming, between the All and the nothing. How little we know of God, already the weakest notion includes that He is a being, infinitely exalted far above all creature. And Scripture not only confirms that, it places that majesty and exaltation of the Lord of lords before us first in full light. Already the first chapter of Genesis depicts His incomprehensible exaltation; He speaks and it is there. And although Scripture then subsequently describes God in His condescending love, and says that He dwells with him who is of a contrite and humble spirit, yet He is the High and Lofty One who inhabits eternity, Isa. 57:15. God is great and we do not comprehend it, Job 26:14, 36:26, 37:5. He is incomparable, Isa. 40:18, 25, 46:5, dwelling in darkness, 1 Kings 8:12; Isa. 45:15, in unapproachable light, 1 Tim. 6:16. No one has seen Him or can see Him, Ex. 33:20; John 1:18, 6:46; 1 Tim. 6:16. The hidden ground, the depth of God, ‎‏חֵקֶר‏‎, and the limit, the extremity, the essence of the Almighty, ‎‏תַּכְלִית‏‎, cannot be reached, Job 11:7; Ecclus. 43:34, 35. He is spirit, without form, Deut. 4:12, 15; John 4:24, 5:37, above all that is creaturely, above need, Job 22:2, 3; Acts 17:25; change, James 1:17; time, Isa. 41:4, 44:6, 48:12; Rev. 1:8, 22:13; space, Acts 17:27, 28 etc., infinitely far exalted. He cannot be described and named by no name. He is without name, His name is wonderful, Gen. 32:29; Judg. 13:18; Prov. 30:4.
+
+
+2. Even outside the domain of special revelation this exaltation of God has been acknowledged. Among the Brahmans God is the Unknowable, without names and attributes, known only by him who does not know, Hoekstra, Wijsbegeerte der Godsdienst II 2. Hartmann, Religionsphilos. I 278 f. The Koran describes Allah many times in very anthropomorphic manner, but among the followers of Mohammed there were many who stood up to interpret this description spiritually and even denied all attributes to God, Dozy, Het Islamisme p. 131 f. Houtsma, De strijd over het dogma in den Islam tot op El-Ash’ari 1875 p. 120 f. Saussaye, Lehrb. der Rel. II 385. Also Greek philosophy has many times clearly acknowledged and expressed this unknowability of God. According to the well-known story the philosopher Simonides repeatedly requested longer delay for the answer to the question of the tyrant Hiero, who God was, Cic. de nat. deor. I 22. According to Diogenes Protagoras began his book about the gods thus: περι μεν θεων οὐκ ἐχω εἰδεναι οὐδ’ ὡς εἰσιν οὐδ’ ὡς οὐκ εἰσιν πολλα γαρ τα κωλυοντα εἰδεναι, ἡ τ’ ἀδηλοτης και βραχυς ὠν ὁ βιος των ἀνθρωπων, Ritter et Preller, Hist. phil. gr. 183. Cic. de nat. deor. I 63. Carneades of Cyrene subjected the belief in the gods not only to sharp criticism, but also disputed the possibility of forming a concept of God. Plato rejected all anthropomorphic and anthropopathic representations of the Deity and declared in the Timaeus § 34: τον μεν οὐν ποιητην και πατερα τονδε του παντος εὑρειν τε ἐργον και εὑροντα εἰς παντας ἀδυνατον λεγειν, Zeller, Philos. der Gr. II 4 928 f. And in like sense he says in the Republic VI 19, that the Deity or the idea of the good is exalted not only above all that exists, but also above Being itself, ἐπεκεινα πασες οὐσιας. Philo connected this Platonic philosophy with the teaching of the O. T. and found the same thought expressed in the name Ihvh. Not only is God free from all imperfection which is present in finite, changeable, dependent creatures; no, God also far surpasses all perfection of creatures. He is better than virtue, knowledge, beauty, purer than unity, more blessed than blessedness. He is actually without attributes, ἀποιος, and without names, and therefore cannot be comprehended and described. According to His essence God is unknowable. We can know that He is, but not what He is. Only Being can in the proper sense be ascribed to Him; the name Ihvh is the only one which indicates His essence, Zeller, Philos. d. Gr. V³ 353 f. Dähne, Gesch. Darstellung der jüdisch-alex. Religionsphilos. 1834 I 114 f. Schürer, Neutest. Zeitgesch. 1874 S. 655 f. Plotinus went the farthest. Plato still ascribed many attributes to God. Philo filled his negative theology with a positive one, in which he describes God as a personal, almighty, perfect being. But with Plotinus there is nothing to say of God than only negatively. God is absolutely One, exalted above all multiplicity and therefore also not to be described by thought, the good, even not by Being, for all these determinations still include a multiplicity. God as the pure unity is indeed the cause of thought, Being, the good, but He is Himself distinguished from them and stands transcendent above them. He is unlimited, infinite, without form, and so far distinguished from all creature that even activity, life, thought, consciousness, Being, cannot be ascribed to Him. He is unreachable for our thought and for our language. We cannot say what He is, but only what He is not. Even the designations of το ἑν and το ἀγαθον, which Plotinus generally uses, are no description of God's essence, but only of His relation to the creatures, and indicate nothing but His absolute causality, Zeller, ib. 476-496. Even greater became the distance between God and His creature in Gnosticism. It made an absolute separation between the highest God and the world. In nature, in Israel, in Christianity there was no essential revelation of God but only of the aeons. Therefore there was no theologia naturalis, neither insita nor acquisita, and equally no theologia revelata. The highest God was absolutely unknowable and inaccessible for the creature; He was βυθος ἀγνωστος, ἀρρητος, eternal σιγη, Iren., adv. haer. I 11. 24.
+
+
+3. But this doctrine of the incomprehensibility of God and of the unknowability of His essence has also been point of departure and fundamental thought of Christian theology. God does not exhaust Himself in His revelation, neither in creation nor in re-creation. He cannot fully communicate Himself to creatures, for these would then themselves have to be God. Therefore there is no adequate knowledge of God. There is no name which makes known to us His essence. There is no concept which fully encompasses Him. There is no description which fully determines Him. What lies behind the revelation is altogether unknowable. We can approach it neither with our thought or imagination, nor with our language. Already the epistle of Barnabas ch. 5 asks: if the Son of God had not come in the flesh, how then would men have seen Him and remained saved? Justin Martyr calls God unspeakable, immovable, nameless, Apol. I 61; also words such as Father, God, Lord are not proper names ἀλλ’ ἐκ των εὐποιϊων και των ἐργων προσρησεις, Apol. II 6. God cannot appear, cannot go, cannot be seen, etc.; if this is spoken of in the O. T., this refers to the Son, who is His messenger, Dial. 127. Also in Irenaeus, adv. haer. IV 20 there appears the in his time very common but yet incorrect and partly gnostic antithesis between the Father, who is hidden, invisible, unknowable, and the Son, who has revealed Him. In Clement of Alexandria God is pure μονας, Strom. V 11. If we think away all that is creaturely, we do not reach what God is, but what He is not. Form, motion, place, number, attribute, name etc. cannot be ascribed to Him. If we nevertheless call Him One, Good, Father, Creator, Lord, etc., then we do not thereby express His proper essence but only indicate His power, Strom. V 12. He is even exalted above the One, ὑπερ αὐτην την μοναδα, Paedag. I 8. In a word, God is, as Athanasius, c. gent. 2 says, ἐπεκεινα πασης οὐσιας και ἀνθρωπινης ἐννοιας. And likewise speak Orig., de princ. I 1, 5. sq. c. Cels. VI 65. Eusebius, Praep. Evang. V 1. Theophilus, ad Autol. I 3. Tatianus. c. Gr. 5. Minucius Felix. Octav. c. 18. Novatianus, de trin. 2. Cyprianus, de idol. vanit. 5. Lactantius, Instit. div. I 6. Cf. Münscher- v. Coelln, Dogmengesch. I 132 f. Hagenbach, Dogm. § 37. Schwane, Dogmengesch. I² 72 f. The same representation we also find in Augustine and John of Damascus. Augustine proceeds in the description of God from the concept of Being. He is Being, as His name Ihvh also indicates; this is His proper name, His nomen in se; all other names are ad nos, Serm. 6 n. 4. Serm. 7 n. 7. Therefore, if we want to say what He is, we say only what He is not in distinction from all finite substances. He is ineffabilis. Facilius dicemus quid non sit quam quid sit. He is no earth, sea, heaven, angel, etc., nothing of all that the creature is; hoc solum potui dicere quid non sit, Enarr. in Ps. 85 n. 12. de doctr. chr. I 6, de ord. II 47. He is thought thus, ut aliquid quo nihil melius sit atque sublimius illa cogitatio conetur attingere, de doctr. chr. I 7. But He cannot be thought as He is. For He is exalted above all that is corporeal, changeable, become, tract. 23 in Ev. Joh. n. 9. Quis est autem, qui sic cogitat Deum, quemadmodum ille est? quaest. in Jos. VI 29. He is incomprehensible and must be so, si enim comprehendis, non est Deus, Serm. 117 n. 5. And when we then finally want to say what we think of Him, we struggle with language. Verius enim cogitatur Deus quam dicitur, et verius est quam cogitatur, de trin. VII 4, de doctr. chr. I 6. Thus if we speak something concerning Him, it is not adequate, but serves only to make us say something and to make us think of a being who surpasses all, de doctr. chr. I 6. Sicut Deus a nullo intellectu valet proprie cogitari, ita nulla definitione potest proprie definiri aut determinari, de cogn. verae vitae 7. Deus scitur melius nesciendo, de ord. II 44. Likewise Damascene says that God is το θειον, ἀρρητον και ἀκαταληπτον, de fide orth. I c. 1. We speak of God in our manner and know what God has revealed of Himself; but what God's essence is and how He is in all, we do not know, ib. c. 2. That God is, is clear; but τι ἐστιν κατ’ οὐσιαν και φυσιν, ἀκαταληπτον τουτο παντελως και ἀγνωστον. That God is unbegotten, unchangeable, without beginning, etc., says only what He is not. To say what He is, is impossible. He is nothing of all that is, not because He is not, but because He is ὑπερ παντα τα ὀντα και ὑπερ αὐτο το εἰναι. What we say positively of God does not indicate His nature, but the relations of His nature, τα περι την φυσιν, ib. c. 4 cf. c. 9.
+
+Review the translation against the source, glossary, style guide, and rubric.
+Return valid JSON with this shape:
+{
+  "summary": "short paragraph",
+  "checks": {
+    "prose-quality": {"status": "pass|fail|incomplete", "details": "reason"},
+    "review-flagging": {"status": "pass|fail|incomplete", "details": "reason"}
+  },
+  "findings": [
+    {"severity": "high|medium|low", "category": "label", "detail": "specific issue"}
+  ],
+  "recommended_follow_up": ["action 1", "action 2"]
+}
+Return only the JSON object. Do not include markdown, code fences, prefaces, or checklists.
+Limit findings to the 3 most important issues.

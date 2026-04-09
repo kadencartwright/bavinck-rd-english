@@ -4,7 +4,7 @@
 
 - `source-identity`: **pass** — Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a.
 - `rubric-present`: **pass** — Rubric path: data/calibration/slices/vol2-god-incomprehensibility-001/inputs/rubric.yaml
-- `translation-output`: **pass** — Translation output path: data/calibration/runs/vol2-god-incomprehensibility-001-baseline/outputs/translation.md
+- `translation-output`: **pass** — Translation output path: data/calibration/evals/vol2-god-incomprehensibility-001-baseline/translation.md
 - `preserved-language-integrity`: **pass** — All Greek/Hebrew spans found in translation output.
 - `glossary-adherence`: **pass** — All required glossary targets were found in the translation output.
 - `scripture-reference-normalization`: **pass** — Dutch Scripture references were normalized to standard English forms.
