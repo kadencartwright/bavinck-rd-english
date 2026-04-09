@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-proper-names-001-baseline",
-  "generated_at": "2026-04-07T17:13:10.685523+00:00",
+  "generated_at": "2026-04-09T17:18:03.270893+00:00",
   "slice_id": "vol2-god-proper-names-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -19,12 +19,12 @@
     {
       "id": "translation-output",
       "status": "pass",
-      "details": "Translation output path: data/calibration/runs/vol2-god-proper-names-001-baseline/outputs/translation.md"
+      "details": "Translation output captured successfully for eval export."
     },
     {
       "id": "preserved-language-integrity",
-      "status": "pass",
-      "details": "All Greek/Hebrew spans found in translation output."
+      "status": "fail",
+      "details": "Missing preserved spans: אלי, אל, אלהים, אול, אלה, מים, שׁמים, קדשׁים, עשׂים, בראים, האדון, אדון, אדונים, כל, הארץ, שׁ, אשׁר, שׁדד, שׁדה, אשׁד, αιδιος, יהוה, אני, הוא"
     },
     {
       "id": "glossary-adherence",
@@ -32,25 +32,34 @@
       "details": "Missing glossary targets: EIGENNAMEN GODS -> proper names of God"
     },
     {
+      "id": "scripture-reference-normalization",
+      "status": "pass",
+      "details": "Dutch Scripture references were normalized to standard English forms."
+    },
+    {
       "id": "prose-quality",
       "status": "fail",
-      "details": "The English prose is corrupted by the presence of untranslated Dutch words (e.g., 'interpunctie', 'vocalisatie') and abbreviations (e.g., 'o. a.', 'e. a.'), which renders the text unnatural and inconsistent with formal English theological discourse."
+      "details": "Dutch bibliographic abbreviations (e.g., 'Wijs. Godsd.', 'G. v. I.') were left untranslated, and the opening sentence uses the awkward calque 'distinguish themselves' for 'zonderen zich af', flattening the argument structure."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "The review explicitly identifies the preservation of Dutch terms as a corruption risk and flags the specific instances of untranslated vocabulary."
+      "details": "Findings explicitly identify the preservation corruption, the drift in handling Dutch abbreviations, and the prose quality issue."
     }
   ],
   "summary": {
     "pass": 5,
-    "fail": 2,
+    "fail": 3,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-proper-names-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-proper-names-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-proper-names-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-proper-names-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-proper-names-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-proper-names-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-proper-names-001-baseline/prompts/review-user.txt",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-proper-names-001-baseline/evaluation.md",
     "eval_record_path": "data/calibration/evals/vol2-god-proper-names-001-baseline/eval-record.json"
   },
@@ -58,7 +67,7 @@
     "path": "data/calibration/evals/vol2-god-proper-names-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation successfully preserves the required Greek, Hebrew, Latin, and German spans and adheres to the provided glossary, but it critically fails to translate several Dutch terms and abbreviations—most notably 'interpunctie', 'vocalisatie', 'o. a.', and 'e. a.'—leaving them as untranslated artifacts in the English prose. While the formal theological tone is generally maintained, these lapses constitute a significant corruption of the target language.",
+  "review_summary": "The translation correctly renders the section title per the glossary and successfully converts Dutch Scripture references to standard English forms, including versification adjustments. However, it violates the preservation requirement by adding vowel points to unpointed Hebrew spans and fails to translate Dutch bibliographic abbreviations such as 'Wijs. Godsd.' and 'G. v. I.', leaving them unintelligible to the target audience. The opening sentence also suffers from a calqued translation that obscures the original meaning.",
   "glossary_hits": [],
   "glossary_misses": [
     "EIGENNAMEN GODS -> proper names of God"

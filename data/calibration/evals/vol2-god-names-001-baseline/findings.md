@@ -2,16 +2,16 @@
 
 ## Summary
 
-The translation successfully preserves Greek and Hebrew spans and adheres to the provided glossary term. However, the prose quality is marred by inconsistent and partially untranslated Scripture abbreviations (retaining Dutch forms like 'Richt.', 'Op.', 'Hd.' alongside English ones) and a mistranslation of a Dutch idiom regarding emotions attributed to God. These issues disrupt the coherence of the formal theological prose.
+The translation successfully preserves Greek and Hebrew terminology and renders Dutch Scripture references into standard English forms, adhering to the glossary requirement. However, the English prose contains significant Dutch-influenced syntax, resulting in unnatural constructions and a mistranslated idiom that obscures the theological meaning.
 
 ## Findings
 
-- [medium] prose-quality: Scripture abbreviations are inconsistently handled; many remain in Dutch (e.g., 'Richt.' for Judges, 'Op.' for Revelation, 'Hd.' for Acts, 'Jes.' for Isaiah, 'Spr.' for Proverbs), while others are correctly translated to English (Gen., Ex., Mt.), creating a disjointed reading experience.
-- [medium] prose-quality: The sentence 'there is no human emotion or it is also present in God' mistranslates the Dutch idiom 'er is geen...of...' (meaning 'there is no...but...'); it should read 'there is no human emotion but it is also present in God' or 'that is not also present'.
-- [low] prose-quality: In the list of human actions transferred to God, 'kennis nemen' (taking notice/investigating) is translated simply as 'knowing', duplicating the translation for 'weten' and losing the distinct nuance of the source.
+- [high] prose-quality: The sentence 'Furthermore there is no human affection or it is also present in God' mistranslates the Dutch idiom 'er is geen... of...' (there is no... but...). It must be rendered as 'There is no human affection that is not also present in God' to convey the correct theological meaning.
+- [medium] prose-quality: The literal translation of the Dutch passive construction 'Er wordt gesproken van' as 'There is spoken of' is unnatural in English; it should be rendered as 'His face is spoken of' or 'There is mention of His face'.
+- [low] preserved-language-integrity: The Latin span 'subjecta en adjuncta humana' in the source (containing the Dutch conjunction 'en') was altered to 'subjecta et adjuncta humana' in the translation. While grammatically improved, this violates the style guide requirement to preserve spans exactly as they appear.
 
 ## Recommended Follow-Up
 
-- Standardize all Scripture abbreviations to standard English forms (e.g., Judg., Rev., Acts, Isa., Prov.).
-- Correct the logical connector in the sentence regarding human emotions in God to reflect the inclusive force of the original idiom.
-- Revise the translation of 'kennis nemen' to 'taking notice' or 'inquiring' to distinguish it from 'weten' (knowing).
+- Correct the translation of the 'er is geen... of...' construction to ensure logical coherence.
+- Revise Dutch passive constructions (e.g., 'Er wordt...') into natural English equivalents.
+- Restore the original conjunction in the Latin span or confirm if grammatical correction supersedes strict preservation.

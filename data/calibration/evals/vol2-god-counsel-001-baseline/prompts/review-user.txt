@@ -1,0 +1,390 @@
+Run ID: vol2-god-counsel-001-baseline
+Slice ID: vol2-god-counsel-001
+Slice Title: Volume 2 § 28.1-3 The Counsel of God
+
+Rubric:
+schema_version: "1.0"
+slice_id: "vol2-god-counsel-001"
+criteria:
+  - id: "preserved-language-integrity"
+    requirement: "All Greek and Hebrew spans from the source excerpt remain unchanged in the translation output."
+    status_values: "pass|fail|incomplete"
+  - id: "glossary-adherence"
+    requirement: "Required glossary targets appear where the source excerpt exercises those source terms."
+    status_values: "pass|fail|incomplete"
+  - id: "prose-quality"
+    requirement: "English output reads as coherent formal theological prose without flattening argument structure and renders Dutch Scripture references in standard English forms."
+    status_values: "pass|fail|incomplete"
+  - id: "review-flagging"
+    requirement: "Reviewer findings explicitly call out preservation risks, doctrinal ambiguity, and unresolved quality issues."
+    status_values: "pass|fail|incomplete"
+
+Excerpt-scoped glossary:
+schema_version: "1.0"
+slice_id: "vol2-god-counsel-001"
+terms:
+  - source: "RAAD GODS"
+    target: "counsel of God"
+    notes: "Section-title term for this slice."
+
+Style guide:
+# Style Guide
+
+- Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source excerpt.
+- Retain citation structure, but translate Dutch Scripture references, book names, and abbreviations into standard English forms; keep patristic or scholastic citations intact.
+- Translate into formal but readable English theological prose; do not modernize into colloquial language.
+- Prefer glossary-approved renderings when the glossary lists a source phrase from the excerpt.
+- Flag ambiguous doctrinal phrasing instead of smoothing over uncertainty.
+
+Source excerpt:
+§ 28. DE RAAD GODS.
+
+
+1. Tot dusver handelden wĳ over het Goddelĳk wezen, gelĳk het is en
+bestaat in zichzelf. Niet in dien zin, alsof wĳ over God dachten en
+spraken, buiten zĳne openbaring in natuur en Schrift om. Immers wĳ
+kunnen van God niet spreken dan op grond van zĳne openbaring; als wĳ
+ons onderwonden zĳne namen op onze lippen te nemen, spraken wĳ van
+Hem als Christenen, onderwezen door zĳn Woord. Maar toch handelden wĳ
+over God, gelĳk Hĳ blĳkens zĳne openbaring in zichzelf bestaat. En wĳ
+leerden Hem kennen als het eeuwige wezen, dat tegelĳk het hoogste zĳn
+en het hoogste leven is, als summum esse, louter essentia en tevens als
+ipsissima ἐνεργεια, actus purissimus, totus actuosus; Hĳ werkt altĳd.
+Thans dalen wĳ tot zĳne werken af. Die werken zĳn de schepselen, opera
+ad extra. Maar voordat wĳ deze kunnen beschouwen, rĳst de vraag: Welk
+is het verband tusschen God, gelĳk Hĳ in zichzelf bestaat en deze zĳne
+werken? En dat verband wordt aangegeven in den Raad Gods, die de opera
+essentialia ad intra, d. i. de besluiten omvat. Deze worden ons in
+de Schrift niet in het afgetrokkene beschreven, maar in de historie
+zelve ons voor oogen gesteld. God is Heer der gansche aarde en betoont
+dat van dag tot dag in de schepping, onderhouding en regeering aller
+dingen. En zoo is het ook met de verkiezing en de verwerping. Deze
+worden in het O. T. niet als eeuwige besluiten geteekend, maar zĳ
+treden ons op iedere bladzĳde als feiten in de historie tegemoet. Van
+den aanvang af gaat het menschelĳk geslacht in tweeën uiteen, in de
+heilige linie van Seth, Gen. 4:25, 26, 5:1-32 en de meer en meer van
+God zich vervreemdende van Kain, Gen. 4:17-24. Als beide geslachten
+zich vermengen en de ongerechtigheid doen toenemen, vindt Noach alleen
+genade in de oogen des Heeren, Gen. 6. Na den zondvloed wordt de zegen
+uitgesproken over Sem en Japhet, de vloek daarentegen over Kanaan, Gen.
+9:25-27. Uit Sems geslacht wordt Abraham verkoren, Gen. 12. Van zĳne
+zonen is niet Ismael maar Izak de zoon der belofte, Gen. 17:19-21,
+21:12, 13. Onder Izaks zonen wordt Ezau gehaat en Jakob geliefd, Gen.
+25:23, Mal. 1:2, Rom. 9:11, 12. Van de zonen van Jakob krĳgt elk een
+eigen rang en taak, en ontvangt Juda het primaat, Gen. 49. Terwĳl alle
+andere volken tĳdelĳk voorbĳgegaan worden en hun eigen wegen wandelen,
+wordt Israel alleen uitverkoren door den Heere tot een volk des
+eigendoms. Deze verkiezing, ‎‏בחר‏‎, ‎‏ידע‏‎, Hos. 13:5, Am. 3:2, is
+niet geschied om Israels waardigheid maar alleen naar Gods ontfermende
+liefde, Deut. 4:37, 7:6-8, 8:17, 9:4-6, 10:15, Ezech. 16:1v. Am. 9:7
+en deze liefde is van oude dagen af, Jer. 31:3. Zĳ had tot object
+Israel als volk en natie, ofschoon duizenden het verbond verbraken en
+er onderscheid is tusschen Israel naar het vleesch en naar de belofte,
+Rom. 2:28, 29, Rom. 9-11. En zĳ had tot doel, dat Israel den Heere
+toebehooren, zĳn volk en eigendom wezen, en in heiligheid voor zĳn
+aangezicht wandelen zou, Ex. 19:5, Deut. 7:6, 14:2, 26:18, Ps. 135:4,
+Mal. 3:17. In den kring van Israel is er dan telkens weer sprake van
+een bĳzondere verkiezing tot een waardigheid of dienst, zoo b. v. van
+Jerusalem en Sion tot eene woning des Heeren, Deut. 12:5, 14:23, 1
+Kon. 11:30, 2 K. 21:7, Ps. 78:68, 70, van Mozes tot middelaar des O.
+Verbonds, Ex. 3, van Levi tot het priesterschap, Deut. 18:5, 21:5, van
+Saul en David tot koning, 1 Sam. 10:24, 2 Sam. 6:21, van de profeten
+tot hun ambt, 1 Sam. 3, Jes. 6, Jer. 1, Ezech. 1-3, Am. 3:7, 8, 7:15,
+bovenal van den Messias tot Verlosser van zĳn volk, die de Israel, de
+knecht des Heeren bĳ uitnemendheid is, Jes. 41:8, 42:1, 44:1, 45:4
+enz. Toch ofschoon deze verkiezing in het O. T. meest als feit in de
+historie optreedt en alzoo met de roeping zelve samenvalt, toch berust
+ze op eene voorkennis en voorbepaling Gods. In het algemeen leert
+het O. Testament, dat God alle dingen schept, onderhoudt en regeert
+door het woord en met wĳsheid, Ps. 33:6, 104:24, Job 38, Spr. 8 enz.,
+zoodat alles berust op gedachte Gods. Maar er wordt ook uitdrukkelĳk
+gezegd, dat God het toekomstige weet en vooraf verkondigt, Jes. 41:22,
+23, 42:9, 43:9-12, 44:7, 46:10, 48:3v., Amos 3:7. In de profetie
+maakt Hĳ van te voren de dingen bekend, welke en zooals ze geschieden
+zullen, Gen. 3:14v. 6:13, 9:25v. 12:2v. 15:13v. 25:23, 49:8v. enz. De
+levensdagen van een mensch zĳn alle reeds te voren bepaald en in ’t
+boek Gods geschreven, voordat er nog een in het aanzĳn getreden is,
+Ps. 139:16, 31:16, 39:6, Job 14:5. De rechtvaardigen zĳn geschreven
+in het boek des levens, gelĳk de burgers van een stad of een rĳk zĳn
+opgeteekend, en hebben daarin de verzekering, dat zĳ deel zullen hebben
+aan het leven in de gemeenschap met God in de theocratie van Israel,
+Ex. 32:32, Ps. 87:6, Ezech. 13:9, Jer. 17:13, Ps. 69:29; in Jes. 4:3
+en Dan. 12:1 wordt dit verder zoo ontwikkeld, dat aan het theocratisch
+heil in de toekomst zĳ deel zullen hebben, die opgeschreven zĳn ten
+leven. De Nieuwtest. gedachte wordt hier voorbereid, dat het boek des
+levens de namen bevat van de erfgenamen des eeuwigen levens. En alle
+dingen geschieden naar den raad Gods. Bĳ Hem is wĳsheid en macht,
+raad, ‎‏עֵצָה‏‎ en verstand, Job 12:13, Spr. 8:14, Jes. 9:5, 11:2,
+28:29, Jer. 32:19. Hĳ kiest daardoor altĳd de beste wegen tot bereiking
+van zĳn doel, heeft niemands raad noodig, en is vreeselĳk, verre
+verheven, boven den raad der heiligen en van allen, die rondom Hem
+zĳn, Jes. 40:13, Jer. 23:18, 22, Ps. 89:8. Gods raad is zĳne bepaalde
+gedachte, zĳn vast besluit over alle dingen, Jes. 14:24-27, Dan. 4:24.
+Die raad is wel verborgen, Job 15:8 maar komt in de historie zelve
+tot werkelĳkheid. Want naar dien raad geschiedt alles, hĳ bestaat
+in eeuwigheid, niemand kan hem weerstaan, Jes. 24 vs. 24-27, 46:10,
+Ps. 33:11, Spr. 19:21; en daartegenover wordt de raad der vĳanden
+vernietigd, Neh. 4:15, Ps. 33:10, Spr. 21:30, Jer. 19:7.
+
+
+2. Het N. Test. stelt dezen raad Gods in nog veel helderder licht. Niet
+alleen zĳn Gode al zĳne werken van eeuwigheid bekend, Hd. 15:18 (cf.
+echter de variae lectiones), maar alles geschiedt naar den bepaalden
+raad en voorkennis Gods. Het N. T. woord βουλη duidt aan den wil Gods
+als berustend op raad en overleg, en is daarin van θελημα, den wil als
+wil, onderscheiden, cf. Ef. 1:11 βουλη του θεληματος. Zulk een raad
+Gods gaat er aan alle dingen vooraf. Hĳ omvat alles, Ef. 1:11, ook
+de zondige daden der menschen, Hd. 2:23, 4:28, cf. Luk. 22:22. God
+heeft de woonplaats der volken zoowel in tĳd als in uitbreiding te
+voren bepaald, ὁρισας, Hd. 17:26. Gods wil wordt openbaar ook in de
+verderving van Judas, Joh. 17:12, in de overgave der Heidenen, Rom.
+1:24, in de verwerping van Ezau, Rom. 9:13, in de verharding van de
+goddeloozen, Rom. 9:18, in de verwekking van Pharao, Rom. 9:17, in het
+verdragen van de vaten des toorns tot het verderf toebereid, Rom. 9:22,
+in het gezet zĳn (κειμαι) van Christus niet alleen tot eene opstanding
+maar ook εἰς πτωσιν, Luk. 2:34, tot een κρισις, Joh. 3:19-21, tot een
+λιθος προσκομματος και πετρα σκανδαλου, 1 Petr. 2:7, 8, cf. 1 Thess.
+5:9, Judas vs. 4. Maar vooral heeft de βουλη του θεου toch betrekking
+op het werk der verlossing, Luk. 7:30, Hd. 13:36, 20:27, Hebr. 6:17. En
+het N. T. is rĳk in woorden, om dezen raad Gods nader te omschrĳven.
+Zĳ spreekt van εὐδοκια, welbehagen, welgevallen, Mt. 11:26, Luk. 2:14,
+10:21, Ef. 1:5, 9, Phil. 2:13, 2 Thess. 1:11; προθεσις, voornemen, Rom.
+8 vs. 28, 9:11, Ef. 1:11, 3:11, 2 Tim. 1:9; προγνωσις, voorkennis,
+Rom. 8:29, 11:2, 1 Petr. 1:2; ἐκλογη, uitverkiezing, Mk. 13:20, Hd.
+9:15, 13:17, 15:7, Rom. 9:11, 11:5, 28, 1 Cor. 1:27, 28, Ef. 1:4, 1
+Thess. 1:4, 2 Petr. 1:10, Jak. 2:5; προορισμος, Rom. 8:29, Cor. 2:7,
+Ef. 1:5, 11; cf. ook Hd. 13 vs. 48 waar gezegd wordt, dat er zoovelen
+geloofden, ὁσοι ἠσαν τεταγμενοι εἰς ζωην αἰωνιον, d. i. niet als er
+zich geschikt hadden of subjectief gepraedisponeerd waren maar als
+er verordend, besteld waren ten eeuwigen leven; en ook nog Ef. 2:10,
+waar van de goede werken der geloovigen gezegd wordt, dat God ze
+προητοιμασεν. De woorden zĳn aldus onderscheiden: προθεσις duidt aan,
+dat God in het werk der zaligheid niet naar willekeur of toeval maar
+naar een vast plan, naar een onveranderlĳk voornemen te werk gaat;
+ἐκλογη wĳzigt dit aldus, dat dat voornemen niet allen omvat, maar dat
+het een προθεσις κατ’ ἐκλογην, Rom. 9:11, een verkiezend voornemen is,
+zoodat niet allen maar velen tot de zaligheid komen; προγνωσις let op
+de personen, die in dit verkiezend voornemen Gods het object zĳn niet
+van zĳne nuda praescientia maar van zĳne dilectio practica; terwĳl
+eindelĳk προορισμος meer ziet op de middelen, welke God beschikt, om
+deze gekenden te brengen tot de voor hen bepaalde bestemming. Προθεσις
+certitudinem eventus indicat, προγνωσις personarum singularitatem,
+προορισμος mediorum ordinem. De verkiezing is certa per προθεσιν,
+determinata per προγνωσιν, ordinata per προορισμον, Turretinus, Theol.
+El. IV qu. 7. De eeuwigheid van dit voornemen ligt niet vanzelf reeds
+opgesloten in de praepositie προ, waarmede de woorden zĳn samengesteld,
+maar wordt toch duidelĳk uitgesproken in Ef. 3:11, 2 Tim. 1:9, cf. Mt.
+25:34, 1 Cor. 2:7, Ef. 1:4. Wel is beweerd, dat Paulus in Rom. 9 niet
+handelt over de absolute vrĳmacht en het eeuwig besluit Gods, maar
+alleen over een Verhalten Gottes, das in der Zeit, in der Geschichte
+seine Ursachen wie seine Wirkungen hat, W. Beyschlag, Die paulin.
+Theodicee Röm. IX-XI, 2te Aufl. Halle 1895. Dr. van Dĳk, De leer der
+verkiezing volgens het N. T., Studiën ond. red. van de la Saussaye,
+Valeton en Van Dĳk IV 3e stuk. Buhl, Der Gedankengang von Röm. 9-11,
+Stud. u. Kr. 1887 S. 295-322. Kübel, Herzog² 12, 158. Maar deze
+bewering wordt door Rom. 9 weerlegd. Immers, de προθεσις κατ’ ἐκλογην
+gaat duidelĳk aan de feiten der historie vooraf; de geschiedenis
+dient dus om dat voornemen, dat al bestond, vast te doen blĳven, Rom.
+9:11. Aan Sara wordt lang te voren een zaad der belofte beloofd, v.
+9. Voordat de kinderen van Izak geboren waren, had God al gezegd, dat
+de meerdere den mindere zou dienen, vs. 11. De verzen 15-18 leeren
+dat de verkiezing haar oorzaken niet heeft in de werken maar enkel
+en alleen in den wil van den roepende. Zeer zeker spreekt Rom. 9 van
+een handelen Gods in den tĳd maar de oorzaak van dat handelen valt
+buiten den tĳd, ligt alleen in Gods wil en welbehagen. Daarbĳ komt,
+dat de causa electionis elders ook duidelĳk alleen en uitsluitend aan
+Gods genade, liefde, welbehagen toegeschreven wordt, Mt. 11:25, Luk.
+12:32, Ef. 1:5, 9, 11, 2 Tim. 1:9, 10. Zelfs is het niet juist, om
+bĳ Rom. 9:21 hetzĳ uitsluitend met het supralapsarisme aan de massa
+incorrupta of met Augustinus en het infralapsarisme alleen aan de
+massa corrupta te danken. Paulus denkt hier in ’t geheel niet aan deze
+onderscheiding. Wat hĳ zeggen wil, is alleen dit, dat God het absolute
+recht heeft, om aan zĳne schepselen die bestemming te geven, welke
+Hem goeddunkt, cf. Jes. 10:15, Jer. 18, Mt. 20:15. Van het standpunt
+van het absolute recht heeft een schepsel niets tegen zĳn Schepper
+te zeggen. Paulus weerlegt alle bedenkingen tegen de verkiezing niet
+daarmede, dat zĳ rechtvaardig en billĳk is maar met een beroep op
+de souvereiniteit en het absolute recht Gods. Evenals het N. T. de
+eeuwigheid der verkiezing duidelĳker uitspreekt dan het O. T., zoo vat
+het die verkiezing ook meer individueel en persoonlĳk op. Terwĳl in het
+O. T. het volk van Israel als het object der verkiezing voorkomt, zĳn
+het hier bĳzondere personen, die in Christus verkoren zĳn, saam zĳn
+lichaam vormen en den naam van εκλεκτοι dragen, Mt. 24:31, Luk. 18:7,
+Hd. 13:48, Rom. 8:33, Ef. 1:4, Tit. 1:1, 2 Tim. 2:10, 1 Petr. 1 vs. 1,
+2, 9 enz. Vooral blĳkt dit ook uit het boek des levens, waarin de namen
+zĳn opgeschreven van de erfgenamen des eeuwigen levens, Luk. 10:20,
+Hebr. 12:23, Phil. 4:3, Op. 3:5, 13:8, 20:12, 21:27, 22:19. Eindelĳk
+is het de duidelĳke leer van het N. Test. dat de verkiezing haar doel
+heeft, niet in een aardsch leven in Kanaan, noch ook in eene eminente
+plaats in het Godsrĳk, maar bepaaldelĳk in de hemelsche zaligheid.
+Wel is er binnen de gemeente ook weer eene verkiezing tot een of ander
+ambt of dienst, bv. van de apostelen, Luk. 6:13, Joh. 6 vs. 70 enz.,
+maar de eigenlĳke verkiezing heeft tot doel de heiligheid, Ef. 1:4,
+het kindschap, Ef. 1:5, de zaligheid, 2 Thess. 2 vs. 13, het eeuwige
+leven, Hd. 13:48, de gelĳkvormigheid aan Christus, Rom. 8:29, Joh.
+17:24, de verheerlĳking Gods, Ef. 1 vs. 6, 12. Ook in Rom. 9 handelt
+Paulus niet over eene hoogere of lagere plaats in het Godsrĳk, maar
+hĳ maakt onderscheid in Israel zelf tusschen kinderen des vleesches
+en kinderen der belofte. Hĳ spreekt bepaald van vaten ter eere en van
+vaten ter oneere, κατηρτισμενα εἰς ἀπωλειαν. Hĳ plaatst ontferming en
+verharding tegenover elkander, en laat in vs. 14 en 19 tegenwerpingen
+aan het woord komen, wier ernst juist de leer van zulk eene vrĳmachtige
+verkiezing onderstelt.
+
+
+3. Ook buiten de christelĳke religie is er over praedestinatie en
+wilsvrĳheid velerlei strĳd gevoerd. De philosophie is beurtelings
+gekomen tot een pantheistisch determinisme of tot eene deistische
+vrĳheidsleer. De Joden schrĳven den mensch ook in den toestand van
+zonde de wilsvrĳheid toe, Weber, System 223. In het Mohammedanisme
+is over praedestinatie en wilsvrĳheid een strĳd gevoerd, die in veel
+opzichten analoog is aan dien in de christelĳke kerk. In den Islam is
+God de volstrekte almacht, de absolute willekeur, tegenover welke de
+mensch volkomen lĳdelĳk is. Daartegen kwam in de tweede eeuw der Hedjra
+verzet van den kant der Motazelieten, die den vrĳen wil verdedigden,
+de voorbeschikking bestreden en niet de almacht maar de gerechtigheid
+beschouwden als het wezen Gods, Houtsma, De strĳd over het dogma tot
+op El-Ash’ari, Leiden 1875. Kuenen, Volksgodsd. en wereldgodsd. 1882
+blz. 40 v.; verg. ook den strĳd in de school van Ramanuja in Indië, die
+dikwerf met dien van Gomaristen en Arminianen vergeleken is, Saussaye,
+Rel. gesch. I 448. In de christelĳke kerk legde men in den eersten tĳd
+tegenover het heidensche noodlot en het gnostische naturalisme allen
+nadruk op de zedelĳke natuur, de vrĳheid en de verantwoordelĳkheid
+van den mensch en kon daarom de leer der Schrift over den raad Gods
+niet tot haar recht doen komen. De mensch was wel in meerdere of
+mindere mate door de zonde bedorven maar bleef toch nog vrĳ en kon de
+aangebodene genade Gods aannemen. Eene absolute praedestinatie en eene
+onwederstandelĳke genade werd niet geleerd; de raad Gods bestond in
+de praescientia en de daarvan afhankelĳke bepaling van loon of straf.
+God geeft aan het ongeloof over hen, van wie hĳ vooruit weet dat zĳ
+niet zullen gelooven, en Hĳ verkiest degenen, wier verdiensten Hĳ
+vooruit heeft gezien, Justinus, c. Tryph. § 141. Iren. adv. haer. IV
+29. Tertull. adv. Marc. II 23 enz., cf. Münscher--v. Coelln I 356 f.
+Hagenbach, § 48 en 57. Calvĳn, Inst. II 2, 4, 9. Dit is wezenlĳk het
+standpunt gebleven van de grieksche kerk. De mensch is door de zonde
+verzwakt en sterfelĳk geworden. Toch kan hĳ nog het natuurlĳk goede
+willen en ook de aangeboden genade (gratia praeveniens) aannemen of
+verwerpen. Neemt hĳ ze aan, dan wordt hĳ door die genade ondersteund
+(gratia cooperans), en moet tot den einde toe volharden, want hĳ kan
+nog altĳd afvallen. Degenen, die de genade aannemen en volharden,
+heeft God te voren gekend en voor de zaligheid bestemd. De anderen,
+ofschoon Hĳ voluntate antecedente aller zaligheid wil, laat Hĳ liggen
+in hun val en bestemt hen ten verderve, Damascenus, de fide orthod.
+II 29, 30. Conf. orthod. qu. 26-30. In de wĳze van uitdrukking sloot
+Pelagius zich bĳ de ouderen aan, maar hĳ leerde toch, door miskenning
+van de door de kerkvaders steeds tegelĳk gehandhaafde leer van de
+verlossing, iets wezenlĳk nieuws, Harnack, D. G. III 183. De zonde was
+bĳ hem geen hebbelĳkheid of toestand, maar alleen eene daad, welke
+de menschelĳke natuur met haar vrĳen wil volkomen ongeschonden laat.
+De genade bestaat daarin, dat God aan den mensch door de schepping
+het posse in natura schenkt en voorts in de wet en de leer en het
+voorbeeld van Christus hem een auxilium divinum biedt; deze gratia per
+Christum wordt echter geschonken secundum merita aan zulken, die hun
+vrĳen wil goed gebruiken. De praedestinatie eindelĳk was niets dan een
+vooruitzien Gods van de vrĳe daden en verdiensten der menschen en de
+daaraan beantwoordende vooruitbepaling van loon en straf. Eigenlĳk is
+er dus geen praedestinatie van de zĳde Gods, noch tot de genade, noch
+tot de zaligheid; ze hangt geheel af van de praevisio der goede daden
+van den mensch. Alleen kwam Pelagius bĳ den kinderdoop in eene groote
+moeilĳkheid, want deze werd zonder eenige verdiensten geschonken; en
+hĳ kon zich daaruit niet redden dan door allerlei uitvluchten en
+inconsequenties. De leer van Pelagius werd eenigszins verzacht in
+het in de Middeleeuwen zoo genoemde semipelagianisme van Johannes
+Cassianus, abt in Marseille, leerling van Chrysostomus en goed bekend
+met de grieksche patres. Deze leerde wel, dat de zonde de menschelĳke
+natuur bedorven had. Doch de mensch was niet dood, maar krank. Hĳ was
+gelĳk aan een zieke, die zichzelf niet genezen maar toch de medicĳn
+tot zich nemen en naar genezing verlangen kan; aan iemand, die in een
+put gevallen, zichzelf niet redden maar toch het toegeworpen touw
+aangrĳpen kan. De zondige mensch kan daarom de genade niet verdienen,
+maar toch wel aannemen, en, door haar ondersteund, volharden. En God
+schenkt die genade aan hen, van wie Hĳ vooruit heeft gezien, dat zĳ
+haar zouden aannemen en in haar zouden volharden; zoo ook bĳ kinderen
+en volken. Hĳ onthoudt ze daarentegen aan hen, van wie hĳ het tegendeel
+voorziet. En hierin bestaat de praedestinatie en reprobatie; zĳ hangt
+af van de praescientia Dei aangaande de houding des menschen tegenover
+de aangeboden genade. Nostrum est velle, Dei perficere. Cf. G. J.
+Vossius, Historia Pelagianismi 1618, betere editie 1655. Wiggers,
+Pragm. Darstellung des Aug. u. Pelag. 1831-33. Wörter, Der Pelag.
+nach seinem Ursprunge und seiner Lehre, Freiburg 1866. Munscher-v.
+Coelln I 371 f. Harnack, D. G. III 151 f. Schwane, Dogm. II² 512 f.
+Möller, art. Pelagius in Herzog². Reeds lang vóór den pelagiaanschen
+strĳd leerde Augustinus de praedestinatie. Hĳ kwam daartoe door zĳne
+studie van den brief aan de Romeinen, Reuter, Augustin. Studien
+1887 S. 5 f., en wilde hierin niets anders geven dan de leer der
+Schrift, de dono pers. c. 19. Hĳ gaf ze reeds in zĳne quaestiones ad
+Simplicianum van het jaar 397 en ontwikkelde ze dan breeder in zĳne
+geschriften de correptione et gratia 427, de praedestinatione sanctorum
+en de dono perseverantiae 428 of 429. Augustinus maakt onderscheid
+tusschen praescientia en praedestinatio. Gene is ruimer dan deze.
+Praedestinasse est hoc praescisse, quod (Deus) fuerat ipse facturus,
+de dono persev. 18. de praed. sanct. 10. 19. De praedestinatie is
+niets anders dan praescientia scilicet et praeparatio beneficiorum
+Dei, quibus certissime liberantur quicunque liberantur, de dono pers.
+14. Deze praedestinatie geschiedt niet naar verdienste of waardigheid
+maar uit loutere genade; niet om maar tot het geloof, non eliguntur
+quia crediderunt sed eliguntur ut credant, de praed. sanct. 17. Alle
+menschen waren immers gelĳk, eene massa damnata, de civ. XIV 26. de
+praed. sanct. 8. de nat. et gr. 4. 8 enz. Vooral komt dit uit in de
+praedestinatie van jonge kinderen, van wie er sommigen zonder doop
+verloren gaan en anderen door den doop behouden worden, de praed.
+sanct. 12. Enchir. 98. De praedestinatie heeft haar eenige oorzaak in
+den souvereinen wil Gods, in zĳne absolute vrĳmacht. Hĳ is niemand iets
+schuldig, en kan rechtvaardig allen verdoemen, maar naar zĳn welbehagen
+maakt Hĳ het eene vat ter eere en het andere ter oneere, de praed.
+sanct. 8. Naast de praedestinatie komt dus de reprobatie te staan.
+Augustinus rekent deze meermalen tot de praedestinatie. Hĳ spreekt van
+een praedestinare ad aeternam mortem, de an. et ejus orig. IV 10. de
+civ. XXII 24, van praedestinati ad sempiternum interitum, in Joh. Ev.
+tract. 48, van mundus damnationi praedestinatus, ib. 111, van Judas als
+perditioni praedestinatus, ib. 107 enz. De tekst 1 Tim. 2:4 werd daarom
+door Augustinus in beperkten zin en op verschillende wĳze verklaard,
+Enchir. 103. de corr. et gr. 14. Meestal echter wordt praedestinatie
+opgevat als voorbeschikking ter zaligheid. Bĳ het goede is er
+praedestinatie noodig, bĳ het kwade is praescientia voldoende, ofschoon
+deze toch ook weer niet louter passief, doch actief wordt opgevat.
+Want God verordineert niet op dezelfde wĳze tot het verderf en tot de
+daartoe leidende middelen, nl. de zonden, als Hĳ verordineert tot de
+zaligheid en tot de middelen, die daartoe strekken. De praedestinatie
+is nl. bĳ Augustinus altĳd eene praedestinatio adaequata, d. i. tot de
+zaligheid en daarom ook tot de genade. Tot de praedestinati behooren
+ook zĳ, die nu nog niet gelooven of zelfs nog niet geboren zĳn. Maar
+hun getal staat vast en is onveranderlĳk. In den tĳd komen zĳ tot
+Christus, ontvangen den doop, het geloof en bovenal ook het donum
+perseverantiae. Want dit wordt alleen aan de praedestinati geschonken.
+Of iemand gepraedestineerd is, kan hĳ alleen daaruit weten, dat hĳ
+ten einde toe volhardt. Want God heeft in de kerk sommigen opgenomen
+die niet verkoren zĳn en niet volharden, opdat de praedestinati zich
+niet verheffen en valsche rust zouden zoeken, de corr. et gr. 13.
+Waarom God nu slechts sommigen behoudt en anderen verloren laat gaan,
+is eene geheimenis. Onrechtvaardig is het niet, want Hĳ is niemand
+iets schuldig. De reprobatie is een daad van gerechtigheid, gelĳk
+de praedestinatie een daad van genade was. In beide maakt God zĳne
+deugden openbaar, de civ. XIV 26, cf. Wiggers, I 290 f. Schwane II²
+557 f. Baltzer, Des h. Aug. Lehre über Prädest. und Reprob. Wien 1871.
+Rottmanner, Der Augustinismus. München 1892.
+
+Translation output:
+§ 28. THE COUNSEL OF GOD.
+
+1. Thus far we have treated the divine being as it is and exists in itself. Not in the sense that we thought and spoke of God apart from His revelation in nature and Scripture. For we cannot speak of God except on the ground of His revelation; when we venture to take His names upon our lips, we speak of Him as Christians, instructed by His Word. Yet we treated God as He, according to His revelation, exists in Himself. And we learned to know Him as the eternal being who is at once the highest being and the highest life, as summum esse, pure essentia, and also as ipsissima ἐνεργεια, actus purissimus, totus actuosus; He always works. Now we descend to His works. These works are the creatures, opera ad extra. But before we can consider these, the question arises: What is the connection between God as He exists in Himself and these His works? And that connection is indicated in the counsel of God, which comprises the opera essentialia ad intra, d. i. the decrees. These are not described to us in Scripture in the abstract, but are set before our eyes in history itself. God is Lord of the whole earth and demonstrates that from day to day in the creation, preservation, and government of all things. And so it is also with election and reprobation. These are not depicted in the O.T. as eternal decrees, but they confront us on every page as facts in history. From the beginning the human race divides into two, into the holy line of Seth, Gen. 4:25, 26, 5:1–32, and that of Cain, which increasingly alienates itself from God, Gen. 4:17–24. When both lines intermingle and cause unrighteousness to increase, Noah alone finds grace in the eyes of the Lord, Gen. 6. After the flood the blessing is pronounced upon Shem and Japheth, but the curse upon Canaan, Gen. 9:25–27. From the line of Shem Abraham is chosen, Gen. 12. Of his sons, not Ishmael but Isaac is the son of promise, Gen. 17:19–21, 21:12, 13. Among Isaac’s sons, Esau is hated and Jacob loved, Gen. 25:23, Mal. 1:2, Rom. 9:11, 12. Of the sons of Jacob each receives his own rank and task, and Judah receives the primacy, Gen. 49. While all other nations are passed by for the time being and walk their own ways, Israel alone is chosen by the Lord to be a people of His own possession. This election, ‎‏בחר‏‎, ‎‏ידע‏‎, Hos. 13:5, Am. 3:2, has not occurred for Israel’s worth but only according to God’s merciful love, Deut. 4:37, 7:6–8, 8:17, 9:4–6, 10:15, Ezek. 16:1ff., Am. 9:7, and this love is from of old, Jer. 31:3. It had as its object Israel as a people and nation, although thousands broke the covenant and there is a distinction between Israel according to the flesh and according to the promise, Rom. 2:28, 29, Rom. 9–11. And it had as its purpose that Israel should belong to the Lord, be His people and possession, and walk in holiness before His face, Ex. 19:5, Deut. 7:6, 14:2, 26:18, Ps. 135:4, Mal. 3:17. Within the circle of Israel there is then repeatedly mention of a special election to an office or service, thus for example of Jerusalem and Zion to a dwelling of the Lord, Deut. 12:5, 14:23, 1 Kings 11:30, 2 Kings 21:7, Ps. 78:68, 70, of Moses as mediator of the Old Covenant, Ex. 3, of Levi to the priesthood, Deut. 18:5, 21:5, of Saul and David as king, 1 Sam. 10:24, 2 Sam. 6:21, of the prophets to their office, 1 Sam. 3, Isa. 6, Jer. 1, Ezek. 1–3, Am. 3:7, 8, 7:15, above all of the Messiah as Redeemer of His people, who is Israel, the servant of the Lord par excellence, Isa. 41:8, 42:1, 44:1, 45:4, etc. Yet although this election in the O.T. appears mostly as a fact in history and thus coincides with the calling itself, it nevertheless rests upon a foreknowledge and predestination of God. In general the O.T. teaches that God creates, maintains, and governs all things by the word and with wisdom, Ps. 33:6, 104:24, Job 38, Prov. 8, etc., so that everything rests upon the thought of God. But it is also expressly said that God knows the future and proclaims it beforehand, Isa. 41:22, 23, 42:9, 43:9–12, 44:7, 46:10, 48:3ff., Amos 3:7. In prophecy He makes known beforehand the things which and how they shall come to pass, Gen. 3:14ff., 6:13, 9:25ff., 12:2ff., 15:13ff., 25:23, 49:8ff., etc. The days of a man’s life are all already determined beforehand and written in the book of God before any have come into being, Ps. 139:16, 31:16, 39:6, Job 14:5. The righteous are written in the book of life, just as the citizens of a city or a kingdom are enrolled, and have therein the assurance that they shall have part in the life in communion with God in the theocracy of Israel, Ex. 32:32, Ps. 87:6, Ezek. 13:9, Jer. 17:13, Ps. 69:29; in Isa. 4:3 and Dan. 12:1 this is further developed so that they who are written unto life shall have part in the theocratic salvation in the future. The N.T. thought is here prepared for, that the book of life contains the names of the heirs of eternal life. And all things come to pass according to the counsel of God. With Him are wisdom and power, counsel, ‎‏עֵצָה‏‎, and understanding, Job 12:13, Prov. 8:14, Isa. 9:6, 11:2, 28:29, Jer. 32:19. He therefore always chooses the best ways to achieve His end, has need of no one’s counsel, and is terrible, far exalted, above the counsel of the holy ones and of all who are around Him, Isa. 40:13, Jer. 23:18, 22, Ps. 89:7. God’s counsel is His determined thought, His firm decree concerning all things, Isa. 14:24–27, Dan. 4:24. This counsel is indeed hidden, Job 15:8, but comes to realization in history itself. For according to that counsel everything comes to pass, it exists in eternity, no one can resist it, Isa. 14:24–27, 46:10, Ps. 33:11, Prov. 19:21; and in contrast the counsel of the enemies is destroyed, Neh. 4:15, Ps. 33:10, Prov. 21:30, Jer. 19:7.
+
+2. The N.T. places this counsel of God in a much clearer light. Not only are all His works known to God from eternity, Acts 15:18 (cf. however the variae lectiones), but everything comes to pass according to God’s determined counsel and foreknowledge. The N.T. word βουλη indicates the will of God as resting upon counsel and deliberation, and is thereby distinguished from θελημα, the will as will, cf. Eph. 1:11 βουλη του θεληματος. Such a counsel of God precedes all things. It comprises everything, Eph. 1:11, also the sinful deeds of men, Acts 2:23, 4:28, cf. Luke 22:22. God has predetermined the dwelling place of the nations both in time and in extent, ὁρισας, Acts 17:26. God’s will is revealed also in the perdition of Judas, John 17:12, in the giving up of the Gentiles, Rom. 1:24, in the rejection of Esau, Rom. 9:13, in the hardening of the ungodly, Rom. 9:18, in the raising up of Pharaoh, Rom. 9:17, in the enduring of the vessels of wrath fitted for destruction, Rom. 9:22, in the being set (κειμαι) of Christ not only unto resurrection but also εἰς πτωσιν, Luke 2:34, unto a κρισις, John 3:19–21, unto a λιθος προσκομματος και πετρα σκανδαλου, 1 Pet. 2:7, 8, cf. 1 Thess. 5:9, Jude vs. 4. But above all the βουλη του θεου relates to the work of redemption, Luke 7:30, Acts 13:36, 20:27, Heb. 6:17. And the N.T. is rich in words to describe more closely this counsel of God. It speaks of εὐδοκια, good pleasure, Matt. 11:26, Luke 2:14, 10:21, Eph. 1:5, 9, Phil. 2:13, 2 Thess. 1:11; προθεσις, purpose, Rom. 8:28, 9:11, Eph. 1:11, 3:11, 2 Tim. 1:9; προγνωσις, foreknowledge, Rom. 8:29, 11:2, 1 Pet. 1:2; ἐκλογη, election, Mark 13:20, Acts 9:15, 13:17, 15:7, Rom. 9:11, 11:5, 28, 1 Cor. 1:27, 28, Eph. 1:4, 1 Thess. 1:4, 2 Pet. 1:10, Jas. 2:5; προορισμος, Rom. 8:29, 1 Cor. 2:7, Eph. 1:5, 11; cf. also Acts 13:48 where it is said that as many as were ordained to eternal life believed, ὁσοι ἠσαν τεταγμενοι εἰς ζωην αἰωνιον, i.e., not as having fitted themselves or been subjectively predisposed but as having been ordained, appointed unto eternal life; and also Eph. 2:10, where of the good works of believers it is said that God προητοιμασεν them. The words are thus distinguished: προθεσις indicates that God in the work of salvation proceeds not according to caprice or chance but according to a fixed plan, according to an unchangeable purpose; ἐκλογη modifies this thus, that that purpose does not include all, but that it is a προθεσις κατ’ ἐκλογην, Rom. 9:11, a choosing purpose, so that not all but many come to salvation; προγνωσις regards the persons who in this choosing purpose of God are the object not of His nuda praescientia but of His dilectio practica; while finally προορισμος regards more the means which God ordains to bring these known ones to the destination appointed for them. Προθεσις certitudinem eventus indicat, προγνωσις personarum singularitatem, προορισμος mediorum ordinem. Election is certa per προθεσιν, determinata per προγνωσιν, ordinata per προορισμον, Turretin, Theol. El. IV qu. 7. The eternity of this purpose is not of itself already enclosed in the preposition προ with which the words are compounded, but is nevertheless clearly expressed in Eph. 3:11, 2 Tim. 1:9, cf. Matt. 25:34, 1 Cor. 2:7, Eph. 1:4. It has indeed been asserted that Paul in Rom. 9 does not treat of the absolute freedom and the eternal decree of God, but only of a Verhalten Gottes, das in der Zeit, in der Geschichte seine Ursachen wie seine Wirkungen hat, W. Beyschlag, Die paulin. Theodicee Röm. IX–XI, 2te Aufl. Halle 1895. Dr. van Dijk, De leer der verkiezing volgens het N. T., Studiën onder redactie van de la Saussaye, Valeton en Van Dijk IV 3e stuk. Buhl, Der Gedankengang von Röm. 9–11, Stud. u. Kr. 1887 S. 295–322. Kübel, Herzog² 12, 158. But this assertion is refuted by Rom. 9. For the προθεσις κατ’ ἐκλογην clearly precedes the facts of history; history therefore serves to confirm that purpose which already existed, Rom. 9:11. To Sarah the seed of promise is promised long beforehand, v. 9. Before the children of Isaac were born, God had already said that the elder would serve the younger, vs. 11. Verses 15–18 teach that election has its causes not in works but solely and alone in the will of the one who calls. To be sure, Rom. 9 speaks of an acting of God in time, but the cause of that acting falls outside of time, lies alone in God’s will and good pleasure. Moreover, the causa electionis elsewhere is also clearly ascribed solely and exclusively to God’s grace, love, good pleasure, Matt. 11:25, Luke 12:32, Eph. 1:5, 9, 11, 2 Tim. 1:9, 10. It is not even correct to ascribe to Rom. 9:21 exclusively, either with supralapsarianism to the massa incorrupta or with Augustine and infralapsarianism only to the massa corrupta. Paul does not here think at all of this distinction. What he wishes to say is only this, that God has the absolute right to give to His creatures that destiny which seems good to Him, cf. Isa. 10:15, Jer. 18, Matt. 20:15. From the standpoint of absolute right a creature has nothing to say against its Creator. Paul refutes all objections against election not by showing that it is righteous and equitable, but by an appeal to the sovereignty and absolute right of God. Just as the N.T. expresses the eternity of election more clearly than the O.T., so it also conceives of that election more individually and personally. While in the O.T. the people of Israel appears as the object of election, here it is particular persons who are chosen in Christ, form His body together, and bear the name of εκλεκτοι, Matt. 24:31, Luke 18:7, Acts 13:48, Rom. 8:33, Eph. 1:4, Tit. 1:1, 2 Tim. 2:10, 1 Pet. 1:1, 2, 9, etc. This appears especially from the book of life, in which are written the names of the heirs of eternal life, Luke 10:20, Heb. 12:23, Phil. 4:3, Rev. 3:5, 13:8, 20:12, 21:27, 22:19. Finally, it is the clear teaching of the N.T. that election has its end not in an earthly life in Canaan, nor even in an eminent place in the kingdom of God, but specifically in heavenly blessedness. To be sure, within the church there is again an election to one or another office or service, e.g., of the apostles, Luke 6:13, John 6:70, etc., but the proper election has as its purpose holiness, Eph. 1:4, sonship, Eph. 1:5, blessedness, 2 Thess. 2:13, eternal life, Acts 13:48, conformity to Christ, Rom. 8:29, John 17:24, the glorification of God, Eph. 1:6, 12. Also in Rom. 9 Paul does not treat of a higher or lower place in the kingdom of God, but he makes a distinction in Israel itself between children of the flesh and children of the promise. He speaks specifically of vessels unto honor and vessels unto dishonor, κατηρτισμενα εἰς ἀπωλειαν. He places mercy and hardening over against each other, and in vs. 14 and 19 allows objections to be raised whose very seriousness presupposes the doctrine of such a free election.
+
+3. Also outside the Christian religion various conflicts have been waged concerning predestination and freedom of the will. Philosophy has alternately come to a pantheistic determinism or to a deistic doctrine of freedom. The Jews also ascribe freedom of the will to man even in the state of sin, Weber, System 223. In Mohammedanism a conflict has been waged concerning predestination and freedom of the will which in many respects is analogous to that in the Christian church. In Islam God is absolute omnipotence, absolute arbitrariness, over against which man is completely passive. Against this there arose in the second century of the Hegira resistance on the part of the Mutazilites, who defended free will, opposed foreordination, and regarded not omnipotence but righteousness as the essence of God, Houtsma, De strijd over het dogma tot op El-Ash’ari, Leiden 1875. Kuenen, Volksgodsd. en wereldgodsd. 1882 blz. 40 v.; cf. also the conflict in the school of Ramanuja in India, which is often compared with that of the Gomarists and Arminians, Saussaye, Rel. gesch. I 448. In the Christian church in the earliest time, over against the heathen fate and the Gnostic naturalism, all emphasis was placed upon the moral nature, freedom, and responsibility of man, and therefore the doctrine of Scripture concerning the counsel of God could not come into its own. Man was indeed corrupted by sin to a greater or lesser degree, but remained nevertheless free and could accept the grace of God offered to him. An absolute predestination and an irresistible grace were not taught; the counsel of God consisted in the praescientia and the determination of reward or punishment dependent upon it. God gives over to unbelief those of whom He knows beforehand that they will not believe, and He chooses those whose merits He has foreseen, Justin, c. Tryph. § 141. Iren. adv. haer. IV 29. Tertull. adv. Marc. II 23, etc., cf. Münscher–v. Coelln I 356 ff. Hagenbach, § 48 and 57. Calvin, Inst. II 2, 4, 9. This has essentially remained the standpoint of the Greek church. Man has become weakened and mortal through sin. Nevertheless he can still will the naturally good and also accept or reject the offered grace (gratia praeveniens). If he accepts it, he is supported by that grace (gratia cooperans), and must persevere to the end, for he can still fall away at any time. Those who accept grace and persevere, God has foreknown and destined for blessedness. The others, although He voluntate antecedente wills all blessedness, He leaves in their fall and destines them for destruction, Damascenus, de fide orthod. II 29, 30. Conf. orthod. qu. 26–30. In mode of expression Pelagius joined the ancients, but he nevertheless taught, by disregard of the doctrine of redemption which the Church Fathers always maintained at the same time, something essentially new, Harnack, D. G. III 183. Sin with him was not an habitude or state, but only an act, which leaves human nature with its free will completely unimpaired. Grace consists in this, that God gives to man through creation the posse in natura and furthermore offers him an auxilium divinum in the law and doctrine and example of Christ; this gratia per Christum is however given secundum merita to such as make good use of their free will. Predestination finally was nothing but a foreseeing by God of the free acts and merits of men and the corresponding predestination of reward and punishment. Properly speaking there is thus no predestination on the part of God, either unto grace or unto blessedness; it depends entirely upon the praevisio of the good acts of man. Only in infant baptism did Pelagius fall into great difficulty, for this was given without any merits; and he could not extricate himself from this except by various evasions and inconsistencies. The teaching of Pelagius was somewhat softened in the so-called semi-Pelagianism of John Cassian, abbot in Marseille, disciple of Chrysostom and well acquainted with the Greek fathers. He indeed taught that sin had corrupted human nature. But man was not dead, but sick. He was like a sick person who cannot heal himself but can nevertheless take the medicine and desire healing; like someone who has fallen into a pit, who cannot save himself but can nevertheless grasp the rope thrown to him. The sinful man can therefore not merit grace, but can nevertheless accept it and, supported by it, persevere. And God gives that grace to those of whom He has foreseen that they would accept it and persevere in it; so also with children and nations. He withholds it, on the other hand, from those of whom He foresees the opposite. And in this consists predestination and reprobation; it depends upon the praescientia Dei concerning man’s attitude toward the offered grace. Nostrum est velle, Dei perficere. Cf. G. J. Vossius, Historia Pelagianismi 1618, better edition 1655. Wiggers, Pragm. Darstellung des Aug. u. Pelag. 1831–33. Wörter, Der Pelag. nach seinem Ursprunge und seiner Lehre, Freiburg 1866. Munscher-v. Coelln I 371 ff. Harnack, D. G. III 151 ff. Schwane, Dogm. II² 512 ff. Möller, art. Pelagius in Herzog². Already long before the Pelagian conflict Augustine taught predestination. He came to this through his study of the epistle to the Romans, Reuter, Augustin. Studien 1887 S. 5 ff., and wished to present in this nothing other than the doctrine of Scripture, de dono pers. c. 19. He gave it already in his quaestiones ad Simplicianum of the year 397 and developed it more broadly in his writings de correptione et gratia 427, de praedestinatione sanctorum and de dono perseverantiae 428 or 429. Augustine makes a distinction between praescientia and praedestinatio. The former is broader than the latter. Praedestinasse est hoc praescisse, quod (Deus) fuerat ipse facturus, de dono persev. 18, de praed. sanct. 10, 19. Predestination is nothing other than praescientia scilicet et praeparatio beneficiorum Dei, quibus certissime liberantur quicunque liberantur, de dono pers. 14. This predestination occurs not according to merit or worth but out of pure grace; not on account of but unto faith, non eliguntur quia crediderunt sed eliguntur ut credant, de praed. sanct. 17. All men were equal, a massa damnata, de civ. XIV 26, de praed. sanct. 8, de nat. et gr. 4, 8, etc. This appears especially in the predestination of young children, some of whom perish without baptism and others are saved through baptism, de praed. sanct. 12, Enchir. 98. Predestination has its sole cause in the sovereign will of God, in His absolute freedom. He owes nothing to anyone, and can justly condemn all, but according to His good pleasure He makes one vessel unto honor and another unto dishonor, de praed. sanct. 8. Thus reprobation stands alongside predestination. Augustine reckons this often to predestination. He speaks of a praedestinare ad aeternam mortem, de an. et ejus orig. IV 10, de civ. XXII 24, of praedestinati ad sempiternum interitum, in Joh. Ev. tract. 48, of mundus damnationi praedestinatus, ib. 111, of Judas as perditioni praedestinatus, ib. 107, etc. The text 1 Tim. 2:4 was therefore explained by Augustine in a limited sense and in various ways, Enchir. 103, de corr. et gr. 14. Most often, however, predestination is conceived as foreordination unto salvation. For the good, predestination is necessary; for the evil, praescientia is sufficient, although this is indeed again conceived not as purely passive but as active. For God does not ordain in the same manner unto destruction and unto the means leading thereto, namely sins, as He ordains unto salvation and unto the means which serve that end. Predestination is, namely, with Augustine always a praedestinatio adaequata, i.e., unto salvation and therefore also unto grace. To the praedestinati belong also those who do not yet believe or are not even yet born. But their number is fixed and unchangeable. In time they come to Christ, receive baptism, faith, and above all also the donum perseverantiae. For this is given only to the praedestinati. Whether someone is predestined, he can only know from the fact that he perseveres to the end. For God has taken up into the church some who are not chosen and do not persevere, so that the praedestinati might not exalt themselves and seek false rest, de corr. et gr. 13. Why God now saves only some and allows others to be lost is a mystery. It is not unjust, for He owes nothing to anyone. Reprobation is an act of righteousness, just as predestination was an act of grace. In both God manifests His virtues, de civ. XIV 26, cf. Wiggers, I 290 ff., Schwane II² 557 ff., Baltzer, Des h. Aug. Lehre über Prädest. und Reprob. Wien 1871. Rottmanner, Der Augustinismus. München 1892.
+
+Review the translation against the source, glossary, style guide, and rubric.
+Return valid JSON with this shape:
+{
+  "summary": "short paragraph",
+  "checks": {
+    "prose-quality": {"status": "pass|fail|incomplete", "details": "reason"},
+    "review-flagging": {"status": "pass|fail|incomplete", "details": "reason"}
+  },
+  "findings": [
+    {"severity": "high|medium|low", "category": "label", "detail": "specific issue"}
+  ],
+  "recommended_follow_up": ["action 1", "action 2"]
+}
+Return only the JSON object. Do not include markdown, code fences, prefaces, or checklists.
+Limit findings to the 3 most important issues.

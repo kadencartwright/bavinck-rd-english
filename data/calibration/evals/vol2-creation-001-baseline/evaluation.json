@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-creation-001-baseline",
-  "generated_at": "2026-04-07T17:34:08.869294+00:00",
+  "generated_at": "2026-04-09T17:39:11.535663+00:00",
   "slice_id": "vol2-creation-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -19,7 +19,7 @@
     {
       "id": "translation-output",
       "status": "pass",
-      "details": "Translation output path: data/calibration/runs/vol2-creation-001-baseline/outputs/translation.md"
+      "details": "Translation output captured successfully for eval export."
     },
     {
       "id": "preserved-language-integrity",
@@ -32,25 +32,34 @@
       "details": "All required glossary targets were found in the translation output."
     },
     {
+      "id": "scripture-reference-normalization",
+      "status": "pass",
+      "details": "Dutch Scripture references were normalized to standard English forms."
+    },
+    {
       "id": "prose-quality",
       "status": "fail",
-      "details": "Untranslated Dutch terms 'Jonische School' and 'Urstof' disrupt the English prose and violate the requirement to translate source text not explicitly marked for preservation."
+      "details": "The rendering 'The Romans' for 'De Roomschen' creates confusion with ancient Romans; 'Urstof' is retained as a Dutch spelling of a German concept; syntax in the first paragraph is awkward."
     },
     {
       "id": "review-flagging",
-      "status": "pass",
-      "details": "Findings clearly identify the untranslated source terms and the specific location of the prose issue."
+      "status": "fail",
+      "details": "The translation fails to flag the ambiguity in 'De Roomschen' and smooths over the term with a misleading translation, violating the requirement to flag ambiguous doctrinal phrasing."
     }
   ],
   "summary": {
     "pass": 6,
-    "fail": 1,
+    "fail": 2,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-creation-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-creation-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-creation-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/review-user.txt",
     "evaluation_markdown_path": "data/calibration/evals/vol2-creation-001-baseline/evaluation.md",
     "eval_record_path": "data/calibration/evals/vol2-creation-001-baseline/eval-record.json"
   },
@@ -58,7 +67,7 @@
     "path": "data/calibration/evals/vol2-creation-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation maintains doctrinal accuracy and preserves the required Greek, Latin, and German spans, but it fails to translate two Dutch terms ('Jonische School' and 'Urstof') which fall outside the style guide's preservation criteria. The English prose is generally formal and coherent, though one sentence exhibits awkward syntax. Glossary adherence is satisfied.",
+  "review_summary": "The translation successfully preserves Greek, Latin, and German citations and adheres to the glossary for the term 'creation,' but it introduces a significant doctrinal ambiguity by rendering 'De Roomschen' as 'The Romans' instead of 'Roman Catholics.' Prose quality is further compromised by Dutch syntactic interference and the retention of the non-standard loanword 'Urstof'.",
   "glossary_hits": [
     "SCHEPPING -> creation"
   ],

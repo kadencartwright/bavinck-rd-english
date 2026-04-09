@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-knowability-insita-001-baseline",
-  "generated_at": "2026-04-07T16:37:23.867552+00:00",
+  "generated_at": "2026-04-09T16:55:19.042492+00:00",
   "slice_id": "vol2-god-knowability-insita-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -19,12 +19,12 @@
     {
       "id": "translation-output",
       "status": "pass",
-      "details": "Translation output path: data/calibration/runs/vol2-god-knowability-insita-001-baseline/outputs/translation.md"
+      "details": "Translation output captured successfully for eval export."
     },
     {
       "id": "preserved-language-integrity",
-      "status": "pass",
-      "details": "All Greek/Hebrew spans found in translation output."
+      "status": "fail",
+      "details": "Missing preserved spans: νους, ἀθεος, ἀντιθεος, κοιναι, ἐννοιαι, φυσικαι, ἐμφυτοι, προληψεις, δοξα"
     },
     {
       "id": "glossary-adherence",
@@ -32,25 +32,34 @@
       "details": "All required glossary targets were found in the translation output."
     },
     {
-      "id": "prose-quality",
+      "id": "scripture-reference-normalization",
       "status": "pass",
-      "details": "The translation reads as coherent formal theological prose without flattening the argument structure. Sentence complexity and logical flow are maintained appropriately."
+      "details": "Dutch Scripture references were normalized to standard English forms."
+    },
+    {
+      "id": "prose-quality",
+      "status": "fail",
+      "details": "Dutch book titles 'Afst. des menschen,' 'Afst. v. d. mensch,' and 'Proeve van de leer der aangeb. begrippen' remain untranslated, violating the style guide requirement to translate Dutch book names into standard English forms."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "Findings below identify preservation risks and unresolved quality issues related to Dutch abbreviations and citations."
+      "details": "Findings explicitly identify preservation risks (Greek accent modifications), unresolved quality issues (inconsistent Dutch title translation), and prose quality concerns."
     }
   ],
   "summary": {
-    "pass": 7,
-    "fail": 0,
+    "pass": 6,
+    "fail": 2,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/prompts/review-user.txt",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/evaluation.md",
     "eval_record_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/eval-record.json"
   },
@@ -58,7 +67,7 @@
     "path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation successfully preserves all Greek, Hebrew, Latin, German, and French spans exactly as required, and correctly renders the glossary term 'KENBAARHEID GODS' as 'knowability of God.' The English prose reads as coherent formal theological language maintaining the argument structure. However, several Dutch Scripture abbreviations and citation titles remain untranslated, creating potential confusion for English readers.",
+  "review_summary": "The translation renders the Dutch theological text into generally coherent formal English prose and correctly applies the glossary term 'knowability of God.' However, it fails the preserved-language-integrity requirement by adding Greek accents not present in the source excerpt, and it inconsistently handles Dutch book titles—translating some (Hoekstra, Doedes) while leaving others untranslated (Darwin, Spruyt).",
   "glossary_hits": [
     "KENBAARHEID GODS -> knowability of God"
   ],

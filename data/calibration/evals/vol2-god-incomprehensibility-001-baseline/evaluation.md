@@ -4,12 +4,12 @@
 
 - `source-identity`: **pass** — Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a.
 - `rubric-present`: **pass** — Rubric path: data/calibration/slices/vol2-god-incomprehensibility-001/inputs/rubric.yaml
-- `translation-output`: **pass** — Translation output path: data/calibration/evals/vol2-god-incomprehensibility-001-baseline/translation.md
+- `translation-output`: **pass** — Translation output captured successfully for eval export.
 - `preserved-language-integrity`: **pass** — All Greek/Hebrew spans found in translation output.
 - `glossary-adherence`: **pass** — All required glossary targets were found in the translation output.
 - `scripture-reference-normalization`: **pass** — Dutch Scripture references were normalized to standard English forms.
-- `prose-quality`: **fail** — A double negative error in paragraph 1 ('cannot be described and named by no name') inverts the source meaning, and Dutch-influenced syntax ('Insofar it is all mystery', 'Also Greek philosophy has') creates awkwardness.
-- `review-flagging`: **pass** — Findings explicitly identify the doctrinal ambiguity caused by the prose error and flag specific syntactic issues relative to the style guide.
+- `prose-quality`: **fail** — Dutch word 'adaequaat' left untranslated; German words 'Thatsachen' and 'Rhetorik' embedded in Dutch prose should be translated; awkward English construction present.
+- `review-flagging`: **pass** — Findings explicitly flag untranslated terms and prose quality issues requiring correction.
 
 ## Qualitative Findings
 

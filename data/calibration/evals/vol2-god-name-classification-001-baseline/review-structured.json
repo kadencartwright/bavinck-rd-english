@@ -1,43 +1,43 @@
 {
-  "summary": "The translation preserves all Greek, Hebrew, Latin, and German spans intact and correctly applies the glossary term for the section title. The English prose is generally coherent formal theological language, but several passages exhibit awkward syntax from overly literal rendering of Dutch constructions, particularly passive formations and inverted word order. No doctrinal ambiguities or preservation corruptions were detected.",
+  "summary": "The translation correctly preserves all Greek, Hebrew, Latin, and German spans and follows the glossary for the section title. Dutch Scripture references are rendered into standard English forms. However, prose quality is compromised by multiple grammatical issues: subject-verb agreement errors, missing articles, unidiomatic phrasing, and awkward word order that impede readability without altering doctrinal content.",
   "checks": {
     "preserved-language-integrity": {
       "status": "pass",
-      "details": "All Greek, Hebrew, Latin, and German spans from the source appear unchanged in the translation."
+      "details": "All Greek, Hebrew, Latin, and German spans are preserved exactly as they appear in the source."
     },
     "glossary-adherence": {
       "status": "pass",
-      "details": "Section title 'INDEELING DER NAMEN GODS' correctly rendered as 'CLASSIFICATION OF THE NAMES OF GOD' per glossary."
+      "details": "Section title 'INDEELING DER NAMEN GODS' correctly rendered as 'Classification of the Names of God.'"
     },
     "prose-quality": {
-      "status": "pass",
-      "details": "Formal theological prose maintained throughout; argument structure preserved. Minor syntactic awkwardness noted but does not flatten meaning."
+      "status": "fail",
+      "details": "Multiple grammatical and stylistic defects: agreement errors, missing articles, unidiomatic constructions, and awkward word order."
     },
     "review-flagging": {
       "status": "pass",
-      "details": "Findings below identify specific prose quality issues for follow-up."
+      "details": "Findings identify specific prose quality issues requiring correction."
     }
   },
   "findings": [
     {
       "severity": "medium",
       "category": "prose-quality",
-      "detail": "Awkward passive constructions: 'there is spoken there of the being or nature of God' and 'In the confessions it is also often spoken of God in that manner' mirror Dutch syntax rather than natural English word order."
+      "detail": "Agreement error: 'The names of God were indication not only of the nomina propria' — 'indication' should be 'indications' to agree with plural 'names.'"
     },
     {
       "severity": "medium",
       "category": "prose-quality",
-      "detail": "Inverted word order in 'Against this cold, moralistic concept of God came again reaction from the side of philosophy' and 'Schelling distinguished himself from both thereby, that he reckoned' impedes readability."
+      "detail": "Unidiomatic English: 'He would have an own life for and outside the world' — 'an own life' should be 'a life of His own' or 'His own life.'"
     },
     {
       "severity": "low",
       "category": "prose-quality",
-      "detail": "'God was equal to him to the pure ego' in the Fichte passage is confusing; clearer rendering would be 'God was for him identical with the pure ego.'"
+      "detail": "Missing articles and phrasing: 'in univocal sense' needs 'a'; 'His being is no subject' should be 'not a subject'; word order issues in sentences about the Reformed and Schelling."
     }
   ],
   "recommended_follow_up": [
-    "Revise passive constructions to natural English word order where Dutch syntax has been carried over.",
-    "Restructure sentences with inverted or awkward word order for smoother theological prose.",
-    "Clarify the Fichte passage to ensure the identification of God with the pure ego is unambiguous."
+    "Correct 'indication' to 'indications' for grammatical agreement",
+    "Revise 'an own life' to idiomatic English phrasing",
+    "Add missing articles and smooth awkward word order in flagged passages"
   ]
 }

@@ -2,16 +2,16 @@
 
 ## Summary
 
-The translation successfully preserves all Greek, Hebrew, Latin, German, and French spans exactly as required, and correctly renders the glossary term 'KENBAARHEID GODS' as 'knowability of God.' The English prose reads as coherent formal theological language maintaining the argument structure. However, several Dutch Scripture abbreviations and citation titles remain untranslated, creating potential confusion for English readers.
+The translation renders the Dutch theological text into generally coherent formal English prose and correctly applies the glossary term 'knowability of God.' However, it fails the preserved-language-integrity requirement by adding Greek accents not present in the source excerpt, and it inconsistently handles Dutch book titles—translating some (Hoekstra, Doedes) while leaving others untranslated (Darwin, Spruyt).
 
 ## Findings
 
-- [medium] scripture-abbreviation: The Dutch abbreviation 'Hd.' (Handelingen = Acts) is preserved in 'Hd. 17:23' and 'Hd. 17:28' but should be rendered as 'Acts' for English readers. Similarly, 'Ef. 2:12' should be 'Eph. 2:12'.
-- [low] bibliographic-citation: Dutch citation titles remain untranslated: 'Afst. des menschen' (Darwin's Descent of Man), 'Proeve van de leer der aangeb. begrippen', 'Des Christens godsvrucht', 'Inl. tot de leer v. God'. The style guide does not explicitly address Dutch, creating ambiguity about whether these should be translated or preserved.
-- [low] minor-inconsistency: The translation uses 'Heb. 1:1' where the source has 'Hebr. 1:1'—a reasonable English standardization, but inconsistent with preserving other Dutch abbreviations like 'Hd.' and 'Ef.'
+- [high] preserved-language-corruption: Greek spans modified with accents not in source: νους → νοῦς, ἀθεος → ἄθεος, ἀντιθεος → ἀντίθεος, κοιναι ἐννοιαι → κοιναὶ ἔννοιαι, φυσικαι ἐννοιαι → φυσικαὶ ἔννοιαι, ἐμφυτοι προληψεις → ἔμφυτοι προλήψεις. Style guide requires exact preservation of Greek spans as they appear in source.
+- [medium] glossary-drift: Dutch book titles left untranslated while others were translated: Darwin's 'Afst. des menschen' (should be 'Descent of Man') and Spruyt's 'Proeve van de leer der aangeb. begrippen' remain in Dutch, but Hoekstra's 'Des Christens godsvrucht' and Doedes' 'Inl. tot de leer v. God' were correctly rendered in English.
+- [low] prose-quality: Subject-verb agreement issue: 'His knowledge and power does not coincide with the world' should read 'do not coincide' for grammatically correct English with plural subject.
 
 ## Recommended Follow-Up
 
-- Standardize Scripture abbreviations to English conventions (Acts, Eph., Heb.) throughout the translation.
-- Clarify style guide policy on Dutch bibliographic titles—whether to translate, preserve, or provide parenthetical English equivalents.
-- Review remaining slices for similar Dutch abbreviation patterns to ensure consistency across the volume.
+- Restore all Greek spans to exact source forms without added accents
+- Translate remaining Dutch book titles to English equivalents (Darwin: 'Descent of Man'; Spruyt: 'Essay on the Doctrine of Innate Concepts' or provide English gloss)
+- Correct subject-verb agreement in 'knowledge and power do not coincide'

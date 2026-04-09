@@ -4,11 +4,12 @@
 
 - `source-identity`: **pass** — Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a.
 - `rubric-present`: **pass** — Rubric path: data/calibration/slices/vol2-god-knowability-acquisita-001/inputs/rubric.yaml
-- `translation-output`: **pass** — Translation output path: data/calibration/runs/vol2-god-knowability-acquisita-001-baseline/outputs/translation.md
-- `preserved-language-integrity`: **fail** — Missing preserved spans: νους
+- `translation-output`: **pass** — Translation output captured successfully for eval export.
+- `preserved-language-integrity`: **pass** — All Greek/Hebrew spans found in translation output.
 - `glossary-adherence`: **fail** — Missing glossary targets: KENBAARHEID GODS -> knowability of God
-- `prose-quality`: **pass** — Formal theological prose maintained throughout; some Dutch-influenced syntax (inverted word order, feminine pronouns for Scripture) but argument structure preserved and readable.
-- `review-flagging`: **pass** — Findings below identify preservation risk and stylistic issues requiring attention.
+- `scripture-reference-normalization`: **pass** — Dutch Scripture references were normalized to standard English forms.
+- `prose-quality`: **pass** — Formal theological prose maintained throughout; Dutch Scripture references correctly rendered; one minor syntactic awkwardness noted but does not constitute failure.
+- `review-flagging`: **pass** — No preservation risks, doctrinal ambiguity, or unresolved quality issues requiring escalation; minor prose issue flagged in findings.
 
 ## Qualitative Findings
 

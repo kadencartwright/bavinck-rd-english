@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-incomprehensibility-001-baseline",
-  "generated_at": "2026-04-09T15:01:45.547682+00:00",
+  "generated_at": "2026-04-09T16:53:18.363481+00:00",
   "slice_id": "vol2-god-incomprehensibility-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -19,7 +19,7 @@
     {
       "id": "translation-output",
       "status": "pass",
-      "details": "Translation output path: data/calibration/evals/vol2-god-incomprehensibility-001-baseline/translation.md"
+      "details": "Translation output captured successfully for eval export."
     },
     {
       "id": "preserved-language-integrity",
@@ -39,12 +39,12 @@
     {
       "id": "prose-quality",
       "status": "fail",
-      "details": "A double negative error in paragraph 1 ('cannot be described and named by no name') inverts the source meaning, and Dutch-influenced syntax ('Insofar it is all mystery', 'Also Greek philosophy has') creates awkwardness."
+      "details": "Dutch word 'adaequaat' left untranslated; German words 'Thatsachen' and 'Rhetorik' embedded in Dutch prose should be translated; awkward English construction present."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "Findings explicitly identify the doctrinal ambiguity caused by the prose error and flag specific syntactic issues relative to the style guide."
+      "details": "Findings explicitly flag untranslated terms and prose quality issues requiring correction."
     }
   ],
   "summary": {
@@ -67,7 +67,7 @@
     "path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation maintains glossary fidelity and correctly preserves Greek, Hebrew, and Latin spans while accurately converting Dutch Scripture references into standard English forms. However, the English prose contains a significant grammatical error in paragraph 1 that inverts the theological meaning regarding God's namelessness, alongside several syntactic calques that compromise formal theological register.",
+  "review_summary": "The translation preserves Greek, Hebrew, Latin, and German spans correctly and renders Dutch Scripture references in standard English forms. Glossary terms are properly applied throughout. However, the Dutch word 'adaequaat' is left untranslated in section 3, and German words 'Thatsachen' and 'Rhetorik' embedded in Dutch prose should be translated to 'facts' and 'rhetoric' for English readers. An awkward English construction also requires revision.",
   "glossary_hits": [
     "dogmatiek -> dogmatics",
     "kennisse Gods -> knowledge of God",

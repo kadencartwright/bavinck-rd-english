@@ -1,0 +1,242 @@
+Run ID: vol2-god-knowability-acquisita-001-baseline
+Slice ID: vol2-god-knowability-acquisita-001
+Slice Title: Volume 2 § 22.1-3 The Knowability of God (Acquisita)
+
+Rubric:
+schema_version: "1.0"
+slice_id: "vol2-god-knowability-acquisita-001"
+criteria:
+  - id: "preserved-language-integrity"
+    requirement: "All Greek and Hebrew spans from the source excerpt remain unchanged in the translation output."
+    status_values: "pass|fail|incomplete"
+  - id: "glossary-adherence"
+    requirement: "Required glossary targets appear where the source excerpt exercises those source terms."
+    status_values: "pass|fail|incomplete"
+  - id: "prose-quality"
+    requirement: "English output reads as coherent formal theological prose without flattening argument structure and renders Dutch Scripture references in standard English forms."
+    status_values: "pass|fail|incomplete"
+  - id: "review-flagging"
+    requirement: "Reviewer findings explicitly call out preservation risks, doctrinal ambiguity, and unresolved quality issues."
+    status_values: "pass|fail|incomplete"
+
+Excerpt-scoped glossary:
+schema_version: "1.0"
+slice_id: "vol2-god-knowability-acquisita-001"
+terms:
+  - source: "KENBAARHEID GODS"
+    target: "knowability of God"
+    notes: "Section-title term for this slice."
+
+Style guide:
+# Style Guide
+
+- Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source excerpt.
+- Retain citation structure, but translate Dutch Scripture references, book names, and abbreviations into standard English forms; keep patristic or scholastic citations intact.
+- Translate into formal but readable English theological prose; do not modernize into colloquial language.
+- Prefer glossary-approved renderings when the glossary lists a source phrase from the excerpt.
+- Flag ambiguous doctrinal phrasing instead of smoothing over uncertainty.
+
+Source excerpt:
+§ 22. DE KENBAARHEID GODS. (Cognitio Dei acquisita.)
+
+
+1. Tusschen de cognitio Dei insita en acquisita moge er geen
+tegenstelling bestaan, er is toch ongetwĳfeld tusschen beide
+onderscheid. Dikwerf wordt dit onderscheid zoo opgevat, dat de eerste
+de kennisse Gods aanduidt, welke den mensch aangeboren is en hem
+toekomt uit zĳn eigen wezen, en de tweede die, welke ter vermeerdering
+en uitbreiding der eerste den mensch ten deele wordt van buiten, uit
+de beschouwing der wereld. Maar duidelĳk en nauwkeurig is het verschil
+tusschen beide daarmede niet aangegeven. Immers, in eigenlĳken zin
+is er geen kennis aangeboren, noch van God noch van de wereld. Alle
+kennis komt van buitenaf in ’s menschen bewustzĳn in. Wat aangeboren
+is, is alleen het vermogen der kennis; maar dit vermogen komt eerst tot
+handeling en daad door de inwerking der wereld in en om ons heen. Het
+zaad der religie ligt wel in den mensch, maar het ontkiemt alleen in
+den akker van heel het menschelĳk leven. Gelĳk het oog door den mensch
+bĳ zĳne geboorte wordt meegebracht maar de voorwerpen eerst ziet bĳ het
+licht der zon, zoo aanschouwt de geloovige God eerst in al de werken
+zĳner handen. Voorts is het in de vorige § ons duidelĳk geworden, dat
+de christelĳke theologie onder het aangeboren en ingeschapen zĳn
+der kennisse Gods nooit heeft verstaan, dat de mensch bĳ de geboorte
+eenige bewuste kennis van God meebracht; maar ze gaf daarmede alleen
+te kennen, dat de kennisse Gods den mensch niet door dwang of geweld,
+en ook niet door logische redeneering of dwingende bewĳzen behoeft
+bĳgebracht te worden, maar dat ze den mensch van nature, spontaan, van
+zelve eigen is. Een mensch, normaal zich ontwikkelend, komt zonder
+dwang of moeite, vanzelf tot eenige kennis van God. Daarom staat dan
+ook de cognitio Dei insita niet in tegenstelling met de acquisita,
+want in ruimeren zin kan ook de eerste acquisita heeten. Aan de
+cognitio Dei, beide insita en acquisita, gaat nl. de openbaring Gods
+vooraf. Hĳ laat zich niet onbetuigd. Hĳ werkt met zĳne eeuwige kracht
+en goddelĳkheid van alle kanten op den mensch in, niet alleen van
+buiten maar ook van binnen; in natuur en menschenwereld, in hart en
+geweten, in voor- en tegenspoed treedt God als het ware den mensch
+tegemoet. En deze ontving als geschapen naar Gods beeld het vermogen,
+om de indrukken daarvan op te vangen en daardoor tot eenig besef en
+tot eenige kennis van het Eeuwige Wezen te komen. De cognitio insita,
+zoodra zĳ cognitio en dus niet alleen potentia maar actus is, is nooit
+anders dan onder inwerking van de openbaring Gods in en buiten den
+mensch ontstaan en is dus in zoover altĳd acquisita. Om deze redenen
+werd het onderscheid tusschen de cognitio Dei insita en acquisita
+vroeger gewoonlĳk anders aangegeven. Het bestond in deze twee dingen.
+Vooreerst daarin, dat de cognitio Dei innata vanzelf, spontaan,
+zonder moeite of dwang werd verkregen, de cognitio Dei acquisita
+daarentegen door redeneering en betoog, door nadenken en bewĳs langs
+de viae causalitatis, eminentiae en negationis werd verworven; gene
+was noetica, deze dianoetica. En ten tweede vloeide daaruit ook dit
+verschil voort, dat de eerste alleen in beginselen bestond en algemeen
+en noodzakelĳk was, maar de tweede was meer uitgewerkt en ontwikkeld,
+leverde meer concrete stellingen en was daarom ook aan allerlei twĳfel
+en bestrĳding onderworpen. Dat er een God is, stond en staat nagenoeg
+voor allen vast. Maar de bewĳzen voor het bestaan Gods zĳn door het
+denken gevonden en zĳn daarom beurtelings geminacht en hooggeschat,
+Moor, Comm. I 41. 44. En daarmede is het onderscheid juist aangegeven.
+Het ligt niet daarin, dat de aangeboren kennisse Gods uit den mensch
+en de verkregene uit de wereld zou opkomen. Ook het moreel bewĳs
+is ontleend aan de zedelĳke bewustheid, die binnen den mensch zich
+bevindt. In beide is het dezelfde en de gansche openbaring Gods, uit
+welke de cognitio Dei indringt in ons bewustzĳn. Maar in de cognitio
+Dei insita werkt die openbaring in op het bewustzĳn van den mensch en
+kweekt daar indrukken en beseffen. In de cognitio Dei acquisita wordt
+die openbaring Gods door den mensch ingedacht; zĳn verstand gaat aan
+den arbeid, zĳne reflectie ontwaakt, en met klare, heldere bewustheid
+zoekt hĳ door redeneering en bewĳs uit de schepselen op te klimmen tot
+God. De mensch heeft nl. op geen gebied van kennis aan indrukken en
+beseffen genoeg. Hĳ is met het bewustzĳn alleen niet tevreden. Het is
+hem niet voldoende, _dat_ hĳ weet. Hĳ wil ook _weten_, dat hĳ weet; hĳ
+tracht het _hoe_ en _waarom_ van zĳn weten te verklaren. En vandaar,
+dat het gewone, alledaagsche, empirische weten altĳd zoekt over te gaan
+in het eigenlĳke, wetenschappelĳke weten; dat het geloof zich verheft
+tot theologie, en de cognitio Dei insita zich voltooit in de cognitio
+Dei acquisita.
+
+
+2. De indeeling in cognitio Dei insita en acquisita wordt gewoonlĳk
+alleen toegepast op de theologia naturalis. En deze wordt dan
+onderscheiden van en dikwerf tegengesteld aan de theologia revelata.
+Reeds vroeger is deze opvatting breedvoerig bestreden, I 219-244. Er
+is geen afzonderlĳke theologia naturalis, die buiten alle openbaring
+om door den mensch uit de denkende beschouwing der wereld zou kunnen
+verkregen worden. Die kennisse Gods, welke in de theologia naturalis
+wordt samengevat, is geen product van de menschelĳke rede. Zĳ
+onderstelt allereerst, dat God zelf zich in de werken zĳner handen
+openbaart; het is niet de mensch, die God, maar God, die den mensch
+zoekt ook door zĳne werken in de natuur heen. Voorts is het niet de
+mensch, die met het natuurlĳke licht der rede deze openbaring Gods
+verstaat en kent; alle godsdiensten der Heidenen zĳn positief; maar er
+is van ’s menschen zĳde een geheiligd verstand en een geopend oog van
+noode, om God, den waarachtigen en levenden God, in zĳne schepselen op
+te merken. En zelfs is dit nog niet genoeg. Ook de geloovige, ook de
+Christen zou Gods openbaring in de natuur niet verstaan en niet zuiver
+kunnen weergeven, indien God zelf niet in zĳn Woord had beschreven,
+hoe en wat Hĳ van zichzelven in heel de wereld openbaart. De cognitio
+Dei naturalis is in de Schrift zelve opgenomen en daarin breedvoerig
+ontvouwd. Daarom is het ook eene gansch verkeerde methode, dat de
+Christen zich bĳ de behandeling der theologia naturalis als het ware
+van de bĳzondere openbaring in de Schrift en van de verlichting des
+H. Geestes ontdoet, zonder eenige christelĳke Voraussetzung haar
+bespreekt, en daarna tot de theologia revelata overgaat. De Christen
+staat ook als dogmaticus van den aanvang af met beide voeten op den
+grondslag der bĳzondere openbaring; niet eerst in den locus de Christo
+maar ook in den locus de Deo is hĳ Christgeloovige. Maar alzoo staande,
+ziet hĳ rondom zich, en gewapend met de bril der H. Schriftuur ziet
+hĳ in heel de wereld eene openbaring van dienzelfden God, dien hĳ in
+Christus als zĳn Vader in de hemelen kent en belĳdt. Dan echter is
+onder de cognitio Dei insita en acquisita niet die kennis te verstaan,
+die wĳ buiten de bĳzondere openbaring om uit de schepping verkrĳgen.
+Van onze prilste jeugd af aan heeft Gods bĳzondere openbaring in
+Christus op ons allen ingewerkt; wĳ zĳn in het verbond der genade
+en dus Christen geboren; allerlei christelĳke invloeden hebben de
+kennisse Gods gevormd, welke thans ons deel is, in veel grooter mate,
+dan de werking, die er van Gods openbaring in de natuur op ons hart is
+uitgegaan; en in het licht dier bĳzondere openbaring hebben wĳ allen
+ook de natuur en de wereld om ons heen leeren beschouwen. Wĳ danken
+allen de kennisse Gods uit de natuur aan Gods bĳzondere openbaring
+in zĳn Woord. De natuur zou ons even verwarde stemmen laten hooren
+als de Heidenen, indien wĳ Gods sprake niet in de werken der genade
+hadden beluisterd en daardoor nu zĳne stem ook in de werken der natuur
+verstonden. Maar nu is die openbaring Gods in de natuur ook van hooge
+waarde. Het is dezelfde God, die in natuur en in genade, in schepping
+en herschepping, in den Logos en in Christus, in den Geest Gods en
+in den Geest van Christus tot ons spreekt. Natuur en genade zĳn geen
+tegenstelling; wĳ hebben éénen God, uit wien en door wien en tot wien
+zĳ beide zĳn.
+
+
+3. Dit geldt beide van de cognitio Dei insita en acquisita; beide
+danken we aan de H. Schrift. Het is waar, dat deze geen moeite
+doet om het bestaan Gods te bewĳzen. Ze gaat van dat bestaan uit en
+onderstelt, dat de mensch God kent en erkent. Zĳ acht den mensch
+nog niet zoo diep gezonken, dat hĳ om te gelooven vooraf een bewĳs
+van noode heeft. Immers is hĳ nog beelddrager Gods, Gods geslacht,
+en begaafd met een νους, om in de schepping Gods eeuwige kracht en
+goddelĳkheid op te merken. De loochening van Gods bestaan is in het
+oog der Schrift een teeken van dwaasheid, van diep zedelĳk verval, Ps.
+14:2. Zulke menschen zĳn uitzondering, geen regel. Doorgaande rekent
+de Schrift op zulken, die het bestaan Gods ongedwongen en krachtens de
+inspraak hunner natuur erkennen. Zĳ appelleert niet aan het redeneerend
+verstand, maar aan het redelĳk en zedelĳk bewustzĳn. Zĳ ontleedt en
+betoogt niet, maar laat God zien in al de werken zĳner handen. Maar
+dat doet ze dan toch. Hemel en aarde mitsgaders alle schepselen, loof
+en gras, regen en droogte, vruchtbare en onvruchtbare jaren, spĳs en
+drank, gezondheid en krankheid, rĳkdom en armoede, en alle dingen
+spreken den vromen van God. Er is geen deel, geen stukske der wereld,
+waarin zĳne kracht en goddelĳkheid niet wordt aanschouwd. Naar hemel en
+aarde, vogelen en mieren, bloemen en leliën wordt de mensch verwezen,
+om God te aanschouwen en te erkennen. De Schrift redeneert niet in het
+afgetrokkene en maakt God niet tot de conclusie van een syllogisme,
+het nu aan ons overlatend, of wĳ dat bewĳs dwingend zullen vinden.
+Maar zĳ spreekt met gezag, zĳ gaat theologisch en religieus van God
+uit, zĳ laat zĳne deugden zien in zĳne werken en zĳ eischt, dat wĳ God
+erkennen zullen. Een os kent zĳn bezitter, en een ezel de kribbe zĳns
+heeren, maar Israel heeft geen kennis, mĳn volk verstaat niet, Jes.
+1:3. Het staat voor haar vast, dat God zich openbaart in de schepselen
+en dat Hĳ zich aan niemand onbetuigd laat, Hd. 14:17, Rom. 1:19. En
+alzoo zich beroepende op de gansche schepping, als een getuigenis en
+openbaring Gods, bevat zĳ alles in kiem, wat later in de bewĳzen breed
+werd uitgewerkt en dialectisch werd ontvouwd. Er ligt waarheid in de
+opmerking van C. J. Nitzsch, Syst. der Chr. Lehre, 6te Aufl. S. 142,
+dat de H. Schrift ons een aanvang en analogie van het aitiologisch
+bewĳs geeft in Rom. 1:20, van het teleologisch in Ps. 8; 19; Hd. 14:17,
+van het moreel in Rom. 2:14 en van het ontologisch in Hand. 17:24,
+Rom. 1:19, 32. Maar zoo sprekende, niet in dialectisch betoog maar in
+de taal der getuigenis, zich niet appelleerende op het redeneerend
+verstand maar een beroep doende op hart en geweten, op heel het
+redelĳk en zedelĳk bewustzĳn van den mensch, is de Schrift nooit zonder
+macht en invloed geweest. Ook in dezen is zĳ een krachtig woord, scherp
+als een tweesnĳdend scherp zwaard, doorgaande tot de verdeeling der
+ziel en des geestes, een oordeelaar van de gedachten en overleggingen
+des harten. Ook zonder logisch betoog en wĳsgeerig bewĳs is de Schrift
+in deze hare getuigenis machtig, omdat zĳ het woord Gods is en steun
+vindt in de redelĳke en zedelĳke natuur van iederen mensch. Het is God
+zelf, die zich aan niemand onbetuigd laat. En het is de mensch zelf,
+die, wĳl hĳ naar Gods beeld werd geschapen, zĳns ondanks aan deze
+getuigenis gehoor en instemming geven moet. In dit licht moeten ook de
+zoogenaamde bewĳzen voor Gods bestaan worden beschouwd. Dat zal beide
+voor overschatting en voor minachting der bewĳzen ons bewaren.
+
+Translation output:
+§ 22. THE KNOWABILITY OF GOD. (Cognitio Dei acquisita.)
+
+1. Between the cognitio Dei insita and acquisita there may be no antithesis, yet undoubtedly there is a distinction between the two. Often this distinction is conceived such that the first indicates the knowledge of God which is innate to man and accrues to him from his own being, and the second that which, for the increase and extension of the first, comes to man partly from without, from the contemplation of the world. But the difference between the two is not thereby indicated clearly and precisely. For in the proper sense there is no knowledge innate, neither of God nor of the world. All knowledge comes from without into man’s consciousness. What is innate is only the capacity for knowledge; but this capacity first comes to action and deed through the operation of the world in and around us. The seed of religion indeed lies in man, but it germinates only in the field of all human life. As the eye is brought along with man at his birth but sees objects only by the light of the sun, so the believer beholds God first in all the works of his hands. Furthermore, it has become clear to us in the previous § that Christian theology has never understood by the innate and inborn character of the knowledge of God that man brought along any conscious knowledge of God at birth; but it thereby indicated only that the knowledge of God need not be brought to man by force or violence, nor also by logical reasoning or compelling proofs, but that it is natural, spontaneous, and proper to man of itself. A person, developing normally, comes without force or effort, spontaneously to some knowledge of God. Therefore the cognitio Dei insita does not stand in antithesis to the acquisita, for in a broader sense the former may also be called acquisita. To the cognitio Dei, both insita and acquisita, the revelation of God precedes, namely. He does not leave himself unwitnessed. He works with his eternal power and divinity from all sides upon man, not only from without but also from within; in nature and human world, in heart and conscience, in prosperity and adversity God as it were meets man. And he received as created according to God’s image the capacity to catch the impressions thereof and thereby to come to some awareness and some knowledge of the Eternal Being. The cognitio insita, as soon as it is cognitio and thus not only potentia but actus, never arises otherwise than under the operation of the revelation of God in and outside man and is thus insofar always acquisita. For these reasons the distinction between the cognitio Dei insita and acquisita was formerly usually indicated otherwise. It consisted in these two things. First, in this: that the cognitio Dei innata was obtained spontaneously, without effort or compulsion, whereas the cognitio Dei acquisita on the other hand was acquired by reasoning and argument, by reflection and proof along the viae causalitatis, eminentiae and negationis; the former was noetica, the latter dianoetica. And secondly, this difference also followed from it: that the first consisted only in principles and was general and necessary, but the second was more elaborated and developed, furnished more concrete propositions and was therefore also subject to all kinds of doubt and dispute. That there is a God, stood and stands fast for nearly all. But the proofs for the existence of God are found by thinking and are therefore alternately despised and highly esteemed, Moor, Comm. I 41. 44. And therewith the distinction is rightly indicated. It lies not therein, that the innate knowledge of God would arise from man and the acquired from the world. Also the moral proof is derived from the moral consciousness, which is found within man. In both it is the same and the entire revelation of God, from which the cognitio Dei penetrates into our consciousness. But in the cognitio Dei insita that revelation works upon the consciousness of man and cultivates there impressions and realizations. In the cognitio Dei acquisita that revelation of God is thought through by man; his understanding goes to work, his reflection awakens, and with clear, lucid consciousness he seeks by reasoning and proof to climb up from the creatures to God. For man has in no domain of knowledge enough of impressions and realizations. He is not satisfied with consciousness alone. It is not sufficient for him _that_ he knows. He wants also _to know_ that he knows; he seeks to explain the _how_ and _why_ of his knowing. And hence, that the ordinary, everyday, empirical knowing always seeks to pass over into the proper, scientific knowing; that faith elevates itself to theology, and the cognitio Dei insita completes itself in the cognitio Dei acquisita.
+
+2. The division into cognitio Dei insita and acquisita is usually applied only to the theologia naturalis. And this is then distinguished from and often opposed to the theologia revelata. Already earlier this view has been extensively contested, I 219–244. There is no separate theologia naturalis, which could be obtained by man outside all revelation from the thinking contemplation of the world. That knowledge of God, which is summarized in the theologia naturalis, is no product of human reason. It presupposes first of all that God himself reveals himself in the works of his hands; it is not man who seeks God, but God who seeks man also through his works in nature. Furthermore, it is not man who understands and knows this revelation of God by the natural light of reason; all religions of the Gentiles are positive; but on man’s side there is need of a sanctified understanding and an opened eye to observe God, the true and living God, in his creatures. And even this is not yet enough. Also the believer, also the Christian would not understand God’s revelation in nature and could not represent it purely, if God himself had not described in his Word how and what He reveals of himself in all the world. The cognitio Dei naturalis is included in Scripture itself and therein extensively unfolded. Therefore it is also a wholly wrong method, that the Christian in treating the theologia naturalis as it were rids himself of the special revelation in Scripture and of the illumination of the Holy Spirit, discusses it without any Christian Voraussetzung, and thereafter proceeds to the theologia revelata. The Christian stands also as dogmatician from the beginning with both feet on the foundation of the special revelation; not first in the locus de Christo but also in the locus de Deo he is a Christian believer. But standing thus, he looks around him, and armed with the spectacles of Holy Scripture he sees in all the world a revelation of that same God, whom he in Christ knows and confesses as his Father in the heavens. Then, however, under the cognitio Dei insita and acquisita is not to be understood that knowledge which we obtain from creation outside the special revelation. From our earliest youth God’s special revelation in Christ has worked upon us all; we are born in the covenant of grace and thus as Christians; all kinds of Christian influences have formed the knowledge of God, which is now our portion, in much greater measure than the operation which has proceeded from God’s revelation in nature upon our heart; and in the light of that special revelation we have all also learned to contemplate nature and the world around us. We all owe the knowledge of God from nature to God’s special revelation in his Word. Nature would let us hear just as confused voices as the Gentiles, if we had not hearkened to God’s speech in the works of grace and thereby now understood his voice also in the works of nature. But now that revelation of God in nature is also of high value. It is the same God, who speaks to us in nature and in grace, in creation and recreation, in the Logos and in Christ, in the Spirit of God and in the Spirit of Christ. Nature and grace are no antithesis; we have one God, from whom and through whom and to whom they both are.
+
+3. This applies to both the cognitio Dei insita and acquisita; we owe both to Holy Scripture. It is true that it takes no trouble to prove the existence of God. It proceeds from that existence and presupposes that man knows and acknowledges God. It considers man not yet so deeply sunken that he has need of a proof beforehand in order to believe. For he is still bearer of God’s image, God’s offspring, and endowed with a νους, to observe in the creation God’s eternal power and divinity. The denial of God’s existence is in the eye of Scripture a sign of foolishness, of deep moral decay, Ps. 14:2. Such people are exception, no rule. Generally Scripture reckons with such as acknowledge the existence of God spontaneously and by virtue of the prompting of their nature. It appeals not to the reasoning understanding, but to the rational and moral consciousness. It analyzes and argues not, but lets God be seen in all the works of his hands. But that it does then indeed. Heaven and earth together with all creatures, leaf and grass, rain and drought, fruitful and unfruitful years, food and drink, health and sickness, riches and poverty, and all things speak to the pious of God. There is no part, no piece of the world, in which his power and divinity is not beheld. To heaven and earth, birds and ants, flowers and lilies is man referred, to behold and acknowledge God. Scripture reasons not in the abstract and makes God not the conclusion of a syllogism, leaving it now to us whether we shall find that proof compelling. But it speaks with authority, it proceeds theologically and religiously from God, it shows his virtues in his works and it demands that we shall acknowledge God. An ox knows its owner, and an ass the crib of its lord, but Israel has no knowledge, my people understands not, Isa. 1:3. It stands fast for her that God reveals himself in the creatures and that He does not leave himself unwitnessed to anyone, Acts 14:17, Rom. 1:19. And thus appealing to all creation, as a testimony and revelation of God, it contains in germ everything which later was broadly elaborated in the proofs and dialectically unfolded. There is truth in the observation of C. J. Nitzsch, Syst. der Chr. Lehre, 6te Aufl. S. 142, that Holy Scripture gives us a beginning and analogy of the aitiological proof in Rom. 1:20, of the teleological in Ps. 8; 19; Acts 14:17, of the moral in Rom. 2:14 and of the ontological in Acts 17:24, Rom. 1:19, 32. But speaking thus, not in dialectical argument but in the language of testimony, not appealing to the reasoning understanding but making appeal to heart and conscience, to all the rational and moral consciousness of man, Scripture has never been without power and influence. Also in this it is a powerful word, sharp as a two-edged sharp sword, piercing to the division of soul and spirit, a judge of the thoughts and intents of the heart. Also without logical argument and philosophical proof is Scripture in this its testimony powerful, because it is the word of God and finds support in the rational and moral nature of every man. It is God himself, who does not leave himself unwitnessed to anyone. And it is man himself, who, although he was created according to God’s image, must against his will give heed and assent to this testimony. In this light must also the so-called proofs for God’s existence be regarded. That will preserve us both from overestimation and from contempt of the proofs.
+
+Review the translation against the source, glossary, style guide, and rubric.
+Return valid JSON with this shape:
+{
+  "summary": "short paragraph",
+  "checks": {
+    "prose-quality": {"status": "pass|fail|incomplete", "details": "reason"},
+    "review-flagging": {"status": "pass|fail|incomplete", "details": "reason"}
+  },
+  "findings": [
+    {"severity": "high|medium|low", "category": "label", "detail": "specific issue"}
+  ],
+  "recommended_follow_up": ["action 1", "action 2"]
+}
+Return only the JSON object. Do not include markdown, code fences, prefaces, or checklists.
+Limit findings to the 3 most important issues.

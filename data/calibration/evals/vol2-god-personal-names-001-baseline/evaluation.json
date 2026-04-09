@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-personal-names-001-baseline",
-  "generated_at": "2026-04-07T17:27:11.863777+00:00",
+  "generated_at": "2026-04-09T17:32:18.578097+00:00",
   "slice_id": "vol2-god-personal-names-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -19,12 +19,12 @@
     {
       "id": "translation-output",
       "status": "pass",
-      "details": "Translation output path: data/calibration/runs/vol2-god-personal-names-001-baseline/outputs/translation.md"
+      "details": "Translation output captured successfully for eval export."
     },
     {
       "id": "preserved-language-integrity",
-      "status": "pass",
-      "details": "All Greek/Hebrew spans found in translation output."
+      "status": "fail",
+      "details": "Missing preserved spans: δοξα, ἐπιστημη, δημιουργος, παραδειγματα, αἰτιαι, λογος, σπερματικος, λογοι, σπερματικοι, ενδιαθετος, προφορικος, νους, αποιος, κοσμος, νοητος, δυναμεις, δευτερος, θεος, μεταθρονος, εικων, απαυγασμα, υἱος, κοινη, διαλεκτος, σαρξ"
     },
     {
       "id": "glossary-adherence",
@@ -32,25 +32,34 @@
       "details": "Missing glossary targets: PERSONEELE NAMEN GODS -> personal names of God"
     },
     {
+      "id": "scripture-reference-normalization",
+      "status": "fail",
+      "details": "Untranslated Dutch Scripture reference forms found in translation output: Joh. 6"
+    },
+    {
       "id": "prose-quality",
       "status": "pass",
-      "details": "The English output is coherent and formal, successfully conveying complex theological arguments without flattening the source's structure, though minor literalisms exist."
+      "details": "The English reads as coherent formal theological prose, Dutch Scripture references are correctly converted to English forms (Spr. → Prov., Jes. → Isa., Richt. → Judg., etc.), and the argument structure is preserved without flattening."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "Findings explicitly identify the preservation of Dutch orthography and grammatical literalism as quality issues requiring attention."
+      "details": "The review findings call out preservation risks (Greek form change), potential reader confusion (verse numbering conventions), and unresolved quality issues (Dutch scholarly citations left untranslated)."
     }
   ],
   "summary": {
-    "pass": 6,
-    "fail": 1,
+    "pass": 5,
+    "fail": 3,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/prompts/review-user.txt",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/evaluation.md",
     "eval_record_path": "data/calibration/evals/vol2-god-personal-names-001-baseline/eval-record.json"
   },
@@ -58,7 +67,7 @@
     "path": "data/calibration/evals/vol2-god-personal-names-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation maintains high fidelity to the source text, preserving the formal theological register and the vast majority of foreign language citations as required. However, the strict adherence to the source's Dutch orthography for transliterated Hebrew terms results in non-standard English spellings (e.g., 'Ruach hakkodesch', 'Schechina'). Additionally, a literal rendering of a Dutch grammatical structure creates a subject-verb agreement anomaly in English regarding the unity of the Divine Name.",
+  "review_summary": "The translation is of high quality overall, accurately conveying Bavinck's theological argumentation while preserving most Greek, Hebrew, Latin, and German terms. Dutch Scripture references are correctly converted to standard English forms, and the prose maintains appropriate formal theological register. Minor issues include a changed Greek form (μεταθρονος → μεταθρόνιος), Hebrew verse numbering that differs from some English Bibles, and preserved Dutch scholarly citations.",
   "glossary_hits": [],
   "glossary_misses": [
     "PERSONEELE NAMEN GODS -> personal names of God"

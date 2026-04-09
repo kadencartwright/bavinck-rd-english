@@ -2,16 +2,16 @@
 
 ## Summary
 
-The translation preserves all Greek, Hebrew, Latin, and German spans intact and correctly applies the glossary term for the section title. The English prose is generally coherent formal theological language, but several passages exhibit awkward syntax from overly literal rendering of Dutch constructions, particularly passive formations and inverted word order. No doctrinal ambiguities or preservation corruptions were detected.
+The translation correctly preserves all Greek, Hebrew, Latin, and German spans and follows the glossary for the section title. Dutch Scripture references are rendered into standard English forms. However, prose quality is compromised by multiple grammatical issues: subject-verb agreement errors, missing articles, unidiomatic phrasing, and awkward word order that impede readability without altering doctrinal content.
 
 ## Findings
 
-- [medium] prose-quality: Awkward passive constructions: 'there is spoken there of the being or nature of God' and 'In the confessions it is also often spoken of God in that manner' mirror Dutch syntax rather than natural English word order.
-- [medium] prose-quality: Inverted word order in 'Against this cold, moralistic concept of God came again reaction from the side of philosophy' and 'Schelling distinguished himself from both thereby, that he reckoned' impedes readability.
-- [low] prose-quality: 'God was equal to him to the pure ego' in the Fichte passage is confusing; clearer rendering would be 'God was for him identical with the pure ego.'
+- [medium] prose-quality: Agreement error: 'The names of God were indication not only of the nomina propria' — 'indication' should be 'indications' to agree with plural 'names.'
+- [medium] prose-quality: Unidiomatic English: 'He would have an own life for and outside the world' — 'an own life' should be 'a life of His own' or 'His own life.'
+- [low] prose-quality: Missing articles and phrasing: 'in univocal sense' needs 'a'; 'His being is no subject' should be 'not a subject'; word order issues in sentences about the Reformed and Schelling.
 
 ## Recommended Follow-Up
 
-- Revise passive constructions to natural English word order where Dutch syntax has been carried over.
-- Restructure sentences with inverted or awkward word order for smoother theological prose.
-- Clarify the Fichte passage to ensure the identification of God with the pure ego is unambiguous.
+- Correct 'indication' to 'indications' for grammatical agreement
+- Revise 'an own life' to idiomatic English phrasing
+- Add missing articles and smooth awkward word order in flagged passages
