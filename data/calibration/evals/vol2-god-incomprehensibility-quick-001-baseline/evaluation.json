@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-incomprehensibility-quick-001-baseline",
+  "generated_at": "2026-04-09T21:51:18.711Z",
+  "slice_id": "vol2-god-incomprehensibility-quick-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "checks": [
+    {
+      "id": "source-identity",
+      "status": "pass",
+      "details": "Current cleaned source matches the stored slice manifest identity."
+    },
+    {
+      "id": "rubric-present",
+      "status": "pass",
+      "details": "Rubric path: data/calibration/slices/vol2-god-incomprehensibility-quick-001/inputs/rubric.yaml"
+    },
+    {
+      "id": "translation-output",
+      "status": "pass",
+      "details": "Translation output captured successfully for eval export."
+    },
+    {
+      "id": "preserved-language-integrity",
+      "status": "pass",
+      "details": "All Greek/Hebrew spans found in translation output."
+    },
+    {
+      "id": "glossary-adherence",
+      "status": "pass",
+      "details": "All required glossary targets were found in the translation output."
+    },
+    {
+      "id": "scripture-reference-normalization",
+      "status": "pass",
+      "details": "Dutch Scripture references were normalized to standard English forms."
+    },
+    {
+      "id": "dutch-residue",
+      "status": "pass",
+      "details": "No tracked Dutch abbreviations or residue remained in the translated output."
+    },
+    {
+      "id": "output-shape",
+      "status": "pass",
+      "details": "Translation output contains only the translated passage with preserved structure."
+    },
+    {
+      "id": "prose-quality",
+      "status": "pass",
+      "details": "Formal theological prose maintained throughout; one minor awkward construction does not obscure meaning or flatten the argument."
+    },
+    {
+      "id": "review-flagging",
+      "status": "pass",
+      "details": "The single quality issue is appropriately flagged; no preservation risks, doctrinal ambiguity, or glossary drift were detected."
+    }
+  ],
+  "summary": {
+    "pass": 10,
+    "fail": 0,
+    "incomplete": 0
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/translation.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/evaluation.md",
+    "evaluation_report_path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/evaluation.json",
+    "eval_record_path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/eval-record.json",
+    "review_structured_path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/prompts/review-user.txt"
+  },
+  "qualitative_findings": {
+    "path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/findings.md",
+    "separate_from_checks": true
+  },
+  "review_summary": "The translation accurately renders the Dutch source into formal theological English, preserving all Greek and Latin spans intact, applying glossary terms consistently, and converting Dutch Scripture references to standard English forms. One minor prose awkwardness was identified but does not affect doctrinal clarity or fidelity to the argument structure.",
+  "glossary_hits": [],
+  "glossary_misses": [],
+  "terminal_status": "reviewed"
+}

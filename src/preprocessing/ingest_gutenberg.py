@@ -7,18 +7,86 @@ import argparse
 import hashlib
 import json
 import re
-import sys
+from dataclasses import dataclass
 from pathlib import Path
 
 
 START_MARKER_RE = re.compile(r"^\*\*\* START OF THE PROJECT GUTENBERG EBOOK .+ \*\*\*$")
 END_MARKER_RE = re.compile(r"^\*\*\* END OF THE PROJECT GUTENBERG EBOOK .+ \*\*\*$")
 
-SRC_ROOT = Path(__file__).resolve().parents[1]
-if str(SRC_ROOT) not in sys.path:
-    sys.path.insert(0, str(SRC_ROOT))
+SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
-from calibration.validation import ValidationError, validate_source_metadata
+
+@dataclass
+class ValidationError(RuntimeError):
+    document_type: str
+    path: str | None
+    errors: list[str]
+
+    def __str__(self) -> str:
+        header = self.document_type if not self.path else f"{self.document_type}: {self.path}"
+        body = "\n".join(f"  - {error}" for error in self.errors)
+        return f"{header}\n{body}" if body else header
+
+
+def validate_source_metadata(payload: dict[str, object], *, path: Path | None = None) -> dict[str, object]:
+    errors: list[str] = []
+
+    def required_string(key: str) -> str | None:
+        value = payload.get(key)
+        if not isinstance(value, str) or not value.strip():
+            errors.append(f"{key}: must be a non-empty string")
+            return None
+        return value
+
+    def optional_string(key: str) -> None:
+        value = payload.get(key)
+        if value is not None and (not isinstance(value, str) or not value.strip()):
+            errors.append(f"{key}: must be a non-empty string when present")
+
+    def required_positive_int(key: str) -> int | None:
+        value = payload.get(key)
+        if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
+            errors.append(f"{key}: must be a positive integer")
+            return None
+        return value
+
+    def required_sha256(key: str) -> str | None:
+        value = required_string(key)
+        if value is not None and not SHA256_RE.match(value):
+            errors.append(f"{key}: must be a SHA-256 hex digest")
+        return value
+
+    source_file = required_string("source_file")
+    source_format = required_string("source_format")
+    title = required_string("title")
+    author = required_string("author")
+    language = required_string("language")
+    ebook_id = required_string("ebook_id")
+    raw_char_count = required_positive_int("raw_char_count")
+    clean_char_count = required_positive_int("clean_char_count")
+    raw_sha256 = required_sha256("raw_sha256")
+    clean_sha256 = required_sha256("clean_sha256")
+    preserves_editor_notes = payload.get("preserves_editor_notes")
+
+    if source_format and source_format != "project_gutenberg_txt":
+        errors.append("source_format: must equal 'project_gutenberg_txt'")
+    if preserves_editor_notes is not True and preserves_editor_notes is not False:
+        errors.append("preserves_editor_notes: must be a boolean")
+
+    for key in ["release_date", "updated_date", "gutenberg_url", "original_publication", "credits"]:
+        optional_string(key)
+
+    if raw_char_count is not None and clean_char_count is not None and raw_char_count < clean_char_count:
+        errors.append("raw_char_count: must be greater than or equal to clean_char_count")
+
+    if source_file is not None and not Path(source_file).exists():
+        errors.append(f"source_file: path does not exist: {source_file}")
+
+    if errors:
+        raise ValidationError("source_metadata", str(path) if path else None, errors)
+
+    return payload
 
 
 def parse_args() -> argparse.Namespace:

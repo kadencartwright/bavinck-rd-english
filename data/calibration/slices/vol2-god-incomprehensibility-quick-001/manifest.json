@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "slice_id": "vol2-god-incomprehensibility-quick-001",
+  "title": "Volume 2 § 20.1 Quick Calibration Paragraph",
+  "rationale": "A one-paragraph calibration slice for fast end-to-end provider and artifact checks before running longer theological excerpts.",
+  "stressors": [
+    "preserved Greek span",
+    "short formal theological prose",
+    "glossary-sensitive doctrinal terminology",
+    "Dutch Scripture reference normalization"
+  ],
+  "source": {
+    "text_path": "data/clean/pg67966.txt",
+    "metadata_path": "data/metadata/pg67966.json",
+    "title": "Gereformeerde dogmatiek. Tweede deel.",
+    "author": "Herman Bavinck",
+    "ebook_id": "67966",
+    "language": "Dutch"
+  },
+  "selection": {
+    "section_number": 20,
+    "section_title": "DE ONBEGRIJPELIJKHEID GODS.",
+    "start_subsection": 1,
+    "end_subsection": 1,
+    "start_line": 103,
+    "end_line": 144
+  },
+  "source_identity": {
+    "clean_sha256": "4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a",
+    "clean_char_count": 1370601
+  },
+  "excerpt": {
+    "path": "data/calibration/slices/vol2-god-incomprehensibility-quick-001/excerpt.txt",
+    "line_count": 42,
+    "word_count": 447,
+    "sha256": "8a10ab5d38b3f18615b849b6ff71614dd9b2aa8d4fe202b68c8cbf69a6d912fd"
+  },
+  "expected_inputs": {
+    "glossary_path": "data/calibration/slices/vol2-god-incomprehensibility-quick-001/inputs/glossary.yaml",
+    "style_guide_path": "data/calibration/slices/vol2-god-incomprehensibility-quick-001/inputs/style-guide.md",
+    "rubric_path": "data/calibration/slices/vol2-god-incomprehensibility-quick-001/inputs/rubric.yaml"
+  },
+  "report_root": "data/calibration/runs/vol2-god-incomprehensibility-quick-001"
+}

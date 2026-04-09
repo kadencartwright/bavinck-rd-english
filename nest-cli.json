@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "monorepo": true,
+  "root": "apps/calibration-cli",
+  "sourceRoot": "apps/calibration-cli/src",
+  "compilerOptions": {
+    "tsConfigPath": "tsconfig.json",
+    "webpack": false,
+    "deleteOutDir": true
+  },
+  "projects": {
+    "calibration-cli": {
+      "type": "application",
+      "root": "apps/calibration-cli",
+      "entryFile": "main",
+      "sourceRoot": "apps/calibration-cli/src",
+      "compilerOptions": {
+        "tsConfigPath": "tsconfig.json"
+      }
+    }
+  }
+}
