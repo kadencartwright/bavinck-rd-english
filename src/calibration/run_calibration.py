@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import shutil
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -78,7 +79,7 @@ DUTCH_SCRIPTURE_REFERENCE_PATTERNS = [
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Create stable run outputs and evaluation reports for a calibration slice."
+        description="Create transient run outputs and a durable commit-safe eval bundle for a calibration slice."
     )
     parser.add_argument(
         "--run-manifest",
@@ -90,13 +91,13 @@ def parse_args() -> argparse.Namespace:
         "--output-root",
         type=Path,
         default=Path("data/calibration/runs"),
-        help="Root directory that will receive stable run outputs.",
+        help="Root directory that will receive transient raw run outputs and retry state.",
     )
     parser.add_argument(
         "--eval-root",
         type=Path,
         default=Path("data/calibration/evals"),
-        help="Root directory that will receive commit-safe eval exports.",
+        help="Root directory that will receive the durable Git-tracked eval bundle.",
     )
     parser.add_argument(
         "--allow-source-drift",
@@ -170,11 +171,12 @@ def main() -> int:
 
     run_id = str(run_manifest["run_id"])
     run_dir = args.output_root / run_id
+    durable_eval_dir = args.eval_root / run_id
     inputs_dir = run_dir / "inputs"
     outputs_dir = run_dir / "outputs"
     review_dir = run_dir / "review"
     reports_dir = run_dir / "reports"
-    _log(f"preparing run directories under {run_dir}")
+    _log(f"preparing transient run directories under {run_dir}")
     for directory in [inputs_dir, outputs_dir, review_dir, reports_dir]:
         directory.mkdir(parents=True, exist_ok=True)
 
@@ -347,7 +349,7 @@ def main() -> int:
         {
             "id": "translation-output",
             "status": "pass" if translation_text.strip() else "incomplete",
-            "details": f"Translation output path: {relative_to_repo(translation_output_path)}",
+            "details": "Translation output captured successfully for eval export.",
         },
         {
             "id": "preserved-language-integrity",
@@ -407,16 +409,16 @@ def main() -> int:
         "checks": checks,
         "summary": summary,
         "artifacts": {
-            "translation_request_path": relative_to_repo(inputs_dir / "translation-request.json"),
-            "translation_response_path": relative_to_repo(outputs_dir / "translation-response.json"),
-            "translation_output_path": relative_to_repo(translation_output_path),
-            "review_request_path": relative_to_repo(review_dir / "review-request.json"),
-            "review_response_path": relative_to_repo(review_dir / "review-response.json"),
-            "review_structured_path": relative_to_repo(review_dir / "review-structured.json"),
-            "findings_path": relative_to_repo(findings_path),
+            "translation_output_path": relative_to_repo(durable_eval_dir / "translation.md"),
+            "review_structured_path": relative_to_repo(durable_eval_dir / "review-structured.json"),
+            "findings_path": relative_to_repo(durable_eval_dir / "findings.md"),
+            "translation_system_prompt_path": relative_to_repo(durable_eval_dir / "prompts/translation-system.txt"),
+            "translation_user_prompt_path": relative_to_repo(durable_eval_dir / "prompts/translation-user.txt"),
+            "review_system_prompt_path": relative_to_repo(durable_eval_dir / "prompts/review-system.txt"),
+            "review_user_prompt_path": relative_to_repo(durable_eval_dir / "prompts/review-user.txt"),
         },
         "qualitative_findings": {
-            "path": relative_to_repo(findings_path),
+            "path": relative_to_repo(durable_eval_dir / "findings.md"),
             "separate_from_checks": True,
         },
         "review_summary": review_payload.get("summary", ""),
@@ -427,7 +429,7 @@ def main() -> int:
     validate_evaluation_report(report)
     write_json(reports_dir / "evaluation.json", report)
     write_markdown_report(reports_dir / "evaluation.md", report)
-    _log("exporting commit-safe eval bundle")
+    _log("exporting durable commit-safe eval bundle")
     eval_dir = export_commit_safe_eval_bundle(
         eval_root=args.eval_root,
         run_manifest_path=run_manifest_path,
@@ -446,11 +448,18 @@ def main() -> int:
         findings_markdown=findings_path.read_text(encoding="utf-8"),
         evaluation_report=report,
     )
+    _log("removing duplicate publishable artifacts from transient run directory")
+    remove_transient_publishable_run_artifacts(
+        translation_output_path=translation_output_path,
+        findings_path=findings_path,
+        evaluation_json_path=reports_dir / "evaluation.json",
+        evaluation_markdown_path=reports_dir / "evaluation.md",
+    )
 
-    _log(f"run complete: {relative_to_repo(run_dir)}")
-    print(f"Materialized run: {relative_to_repo(run_dir)}")
+    _log(f"run complete: transient={relative_to_repo(run_dir)}, durable={relative_to_repo(eval_dir)}")
+    print(f"Transient raw run data: {relative_to_repo(run_dir)}")
     print(f"Commit-safe eval bundle: {relative_to_repo(eval_dir)}")
-    print(f"Evaluation report: {relative_to_repo(reports_dir / 'evaluation.json')}")
+    print(f"Durable evaluation report: {relative_to_repo(eval_dir / 'evaluation.json')}")
     return 0
 
 
@@ -628,86 +637,136 @@ def export_commit_safe_eval_bundle(
 ) -> Path:
     run_id = str(evaluation_report["run_id"])
     eval_dir = eval_root / run_id
-    eval_dir.mkdir(parents=True, exist_ok=True)
+    staging_dir = eval_root / f".{run_id}.tmp"
+    if staging_dir.exists():
+        shutil.rmtree(staging_dir)
+    staging_dir.mkdir(parents=True, exist_ok=True)
 
-    translation_output_path = eval_dir / "translation.md"
-    review_structured_path = eval_dir / "review-structured.json"
-    findings_path = eval_dir / "findings.md"
-    evaluation_json_path = eval_dir / "evaluation.json"
-    evaluation_markdown_path = eval_dir / "evaluation.md"
-    eval_record_path = eval_dir / "eval-record.json"
+    translation_output_path = staging_dir / "translation.md"
+    review_structured_path = staging_dir / "review-structured.json"
+    findings_path = staging_dir / "findings.md"
+    evaluation_json_path = staging_dir / "evaluation.json"
+    evaluation_markdown_path = staging_dir / "evaluation.md"
+    eval_record_path = staging_dir / "eval-record.json"
+    prompts_dir = staging_dir / "prompts"
+    translation_system_prompt_path = prompts_dir / "translation-system.txt"
+    translation_user_prompt_path = prompts_dir / "translation-user.txt"
+    review_system_prompt_path = prompts_dir / "review-system.txt"
+    review_user_prompt_path = prompts_dir / "review-user.txt"
 
-    translation_output_path.write_text(translation_text, encoding="utf-8")
-    write_json(review_structured_path, review_payload)
-    findings_path.write_text(findings_markdown, encoding="utf-8")
+    try:
+        prompts_dir.mkdir(parents=True, exist_ok=True)
+        translation_output_path.write_text(translation_text, encoding="utf-8")
+        write_json(review_structured_path, review_payload)
+        findings_path.write_text(findings_markdown, encoding="utf-8")
+        translation_system_prompt_path.write_text(
+            _get_message_content(translation_request["messages"], 0),
+            encoding="utf-8",
+        )
+        translation_user_prompt_path.write_text(
+            _get_message_content(translation_request["messages"], 1),
+            encoding="utf-8",
+        )
+        review_system_prompt_path.write_text(
+            _get_message_content(review_request["messages"], 0),
+            encoding="utf-8",
+        )
+        review_user_prompt_path.write_text(
+            _get_message_content(review_request["messages"], 1),
+            encoding="utf-8",
+        )
 
-    safe_report = dict(evaluation_report)
-    safe_report["artifacts"] = {
-        "translation_output_path": relative_to_repo(translation_output_path),
-        "review_structured_path": relative_to_repo(review_structured_path),
-        "findings_path": relative_to_repo(findings_path),
-        "evaluation_markdown_path": relative_to_repo(evaluation_markdown_path),
-        "eval_record_path": relative_to_repo(eval_record_path),
-    }
-    safe_report["qualitative_findings"] = {
-        "path": relative_to_repo(findings_path),
-        "separate_from_checks": True,
-    }
-    validate_evaluation_report(safe_report)
-    write_json(evaluation_json_path, safe_report)
-    write_markdown_report(evaluation_markdown_path, safe_report)
+        safe_report = dict(evaluation_report)
+        safe_report["artifacts"] = {
+            "translation_output_path": relative_to_repo(eval_dir / "translation.md"),
+            "review_structured_path": relative_to_repo(eval_dir / "review-structured.json"),
+            "findings_path": relative_to_repo(eval_dir / "findings.md"),
+            "translation_system_prompt_path": relative_to_repo(eval_dir / "prompts/translation-system.txt"),
+            "translation_user_prompt_path": relative_to_repo(eval_dir / "prompts/translation-user.txt"),
+            "review_system_prompt_path": relative_to_repo(eval_dir / "prompts/review-system.txt"),
+            "review_user_prompt_path": relative_to_repo(eval_dir / "prompts/review-user.txt"),
+            "evaluation_markdown_path": relative_to_repo(eval_dir / "evaluation.md"),
+            "eval_record_path": relative_to_repo(eval_dir / "eval-record.json"),
+        }
+        safe_report["qualitative_findings"] = {
+            "path": relative_to_repo(eval_dir / "findings.md"),
+            "separate_from_checks": True,
+        }
+        validate_evaluation_report(safe_report)
+        write_json(evaluation_json_path, safe_report)
+        write_markdown_report(evaluation_markdown_path, safe_report)
 
-    eval_record = {
-        "schema_version": "1.0",
-        "sanitization_version": "1.0",
-        "run_id": run_id,
-        "slice_id": evaluation_report["slice_id"],
-        "prompt_bundle_id": evaluation_report["prompt_bundle_id"],
-        "model_profile_id": evaluation_report["model_profile_id"],
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "source_refs": {
-            "run_manifest_path": relative_to_repo(run_manifest_path),
-            "slice_manifest_path": relative_to_repo(slice_manifest_path),
-            "prompt_bundle_path": relative_to_repo(prompt_bundle_path),
-            "model_profile_path": relative_to_repo(model_profile_path),
-            "glossary_path": relative_to_repo(glossary_path),
-            "style_guide_path": relative_to_repo(style_guide_path),
-            "rubric_path": relative_to_repo(rubric_path),
-        },
-        "stages": {
-            "translation": build_commit_safe_stage_record(
-                request=translation_request,
-                response=translation_response,
-            ),
-            "review": build_commit_safe_stage_record(
-                request=review_request,
-                response=review_response,
-            ),
-        },
-        "artifacts": {
-            "translation_output_path": relative_to_repo(translation_output_path),
-            "review_structured_path": relative_to_repo(review_structured_path),
-            "findings_path": relative_to_repo(findings_path),
-            "evaluation_report_path": relative_to_repo(evaluation_json_path),
-            "evaluation_markdown_path": relative_to_repo(evaluation_markdown_path),
-        },
-        "hashes": {
-            "run_manifest_sha256": sha256_text(run_manifest_path.read_text(encoding="utf-8")),
-            "slice_manifest_sha256": sha256_text(slice_manifest_path.read_text(encoding="utf-8")),
-            "prompt_bundle_metadata_sha256": sha256_text((prompt_bundle_path / "metadata.json").read_text(encoding="utf-8")),
-            "model_profile_sha256": sha256_text(model_profile_path.read_text(encoding="utf-8")),
-            "glossary_sha256": sha256_text(glossary_path.read_text(encoding="utf-8")),
-            "style_guide_sha256": sha256_text(style_guide_path.read_text(encoding="utf-8")),
-            "rubric_sha256": sha256_text(rubric_path.read_text(encoding="utf-8")),
-            "translation_output_sha256": sha256_text(translation_output_path.read_text(encoding="utf-8")),
-            "review_structured_sha256": sha256_text(review_structured_path.read_text(encoding="utf-8")),
-            "findings_sha256": sha256_text(findings_path.read_text(encoding="utf-8")),
-            "evaluation_report_sha256": sha256_text(evaluation_json_path.read_text(encoding="utf-8")),
-            "evaluation_markdown_sha256": sha256_text(evaluation_markdown_path.read_text(encoding="utf-8")),
-        },
-    }
-    validate_commit_safe_eval_record(eval_record, validate_paths=True)
-    write_json(eval_record_path, eval_record)
+        eval_record = {
+            "schema_version": "1.1",
+            "sanitization_version": "1.1",
+            "run_id": run_id,
+            "slice_id": evaluation_report["slice_id"],
+            "prompt_bundle_id": evaluation_report["prompt_bundle_id"],
+            "model_profile_id": evaluation_report["model_profile_id"],
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "source_refs": {
+                "run_manifest_path": relative_to_repo(run_manifest_path),
+                "slice_manifest_path": relative_to_repo(slice_manifest_path),
+                "prompt_bundle_path": relative_to_repo(prompt_bundle_path),
+                "model_profile_path": relative_to_repo(model_profile_path),
+                "glossary_path": relative_to_repo(glossary_path),
+                "style_guide_path": relative_to_repo(style_guide_path),
+                "rubric_path": relative_to_repo(rubric_path),
+            },
+            "stages": {
+                "translation": build_commit_safe_stage_record(
+                    request=translation_request,
+                    response=translation_response,
+                ),
+                "review": build_commit_safe_stage_record(
+                    request=review_request,
+                    response=review_response,
+                ),
+            },
+            "artifacts": {
+                "translation_output_path": relative_to_repo(eval_dir / "translation.md"),
+                "review_structured_path": relative_to_repo(eval_dir / "review-structured.json"),
+                "findings_path": relative_to_repo(eval_dir / "findings.md"),
+                "translation_system_prompt_path": relative_to_repo(eval_dir / "prompts/translation-system.txt"),
+                "translation_user_prompt_path": relative_to_repo(eval_dir / "prompts/translation-user.txt"),
+                "review_system_prompt_path": relative_to_repo(eval_dir / "prompts/review-system.txt"),
+                "review_user_prompt_path": relative_to_repo(eval_dir / "prompts/review-user.txt"),
+                "evaluation_report_path": relative_to_repo(eval_dir / "evaluation.json"),
+                "evaluation_markdown_path": relative_to_repo(eval_dir / "evaluation.md"),
+            },
+            "hashes": {
+                "run_manifest_sha256": sha256_text(run_manifest_path.read_text(encoding="utf-8")),
+                "slice_manifest_sha256": sha256_text(slice_manifest_path.read_text(encoding="utf-8")),
+                "prompt_bundle_metadata_sha256": sha256_text(
+                    (prompt_bundle_path / "metadata.json").read_text(encoding="utf-8")
+                ),
+                "model_profile_sha256": sha256_text(model_profile_path.read_text(encoding="utf-8")),
+                "glossary_sha256": sha256_text(glossary_path.read_text(encoding="utf-8")),
+                "style_guide_sha256": sha256_text(style_guide_path.read_text(encoding="utf-8")),
+                "rubric_sha256": sha256_text(rubric_path.read_text(encoding="utf-8")),
+                "translation_output_sha256": sha256_text(translation_output_path.read_text(encoding="utf-8")),
+                "review_structured_sha256": sha256_text(review_structured_path.read_text(encoding="utf-8")),
+                "findings_sha256": sha256_text(findings_path.read_text(encoding="utf-8")),
+                "evaluation_report_sha256": sha256_text(evaluation_json_path.read_text(encoding="utf-8")),
+                "evaluation_markdown_sha256": sha256_text(evaluation_markdown_path.read_text(encoding="utf-8")),
+                "translation_system_prompt_sha256": sha256_text(
+                    translation_system_prompt_path.read_text(encoding="utf-8")
+                ),
+                "translation_user_prompt_sha256": sha256_text(translation_user_prompt_path.read_text(encoding="utf-8")),
+                "review_system_prompt_sha256": sha256_text(review_system_prompt_path.read_text(encoding="utf-8")),
+                "review_user_prompt_sha256": sha256_text(review_user_prompt_path.read_text(encoding="utf-8")),
+            },
+        }
+        validate_commit_safe_eval_record(eval_record)
+        write_json(eval_record_path, eval_record)
+
+        if eval_dir.exists():
+            shutil.rmtree(eval_dir)
+        staging_dir.replace(eval_dir)
+        validate_commit_safe_eval_record(eval_record, validate_paths=True)
+    except Exception:
+        shutil.rmtree(staging_dir, ignore_errors=True)
+        raise
     return eval_dir
 
 
@@ -726,6 +785,9 @@ def build_commit_safe_stage_record(
         stage_record["max_tokens"] = request["max_tokens"]
     if request.get("timeout_seconds") is not None:
         stage_record["timeout_seconds"] = request["timeout_seconds"]
+    finish_reason = _extract_finish_reason(response)
+    if finish_reason is not None:
+        stage_record["finish_reason"] = finish_reason
 
     usage = response.get("usage")
     if isinstance(usage, dict):
@@ -747,6 +809,43 @@ def build_commit_safe_stage_record(
         if normalized_usage:
             stage_record["usage"] = normalized_usage
     return stage_record
+
+
+def remove_transient_publishable_run_artifacts(
+    *,
+    translation_output_path: Path,
+    findings_path: Path,
+    evaluation_json_path: Path,
+    evaluation_markdown_path: Path,
+) -> None:
+    for path in [translation_output_path, findings_path, evaluation_json_path, evaluation_markdown_path]:
+        if path.exists():
+            path.unlink()
+
+
+def _get_message_content(messages: object, index: int) -> str:
+    if not isinstance(messages, list) or len(messages) <= index:
+        raise RuntimeError(f"Expected prompt message at index {index}")
+    message = messages[index]
+    if not isinstance(message, dict):
+        raise RuntimeError(f"Expected prompt message object at index {index}")
+    content = message.get("content")
+    if not isinstance(content, str) or not content.strip():
+        raise RuntimeError(f"Expected non-empty prompt content at index {index}")
+    return content.strip() + "\n"
+
+
+def _extract_finish_reason(response: dict[str, object]) -> str | None:
+    choices = response.get("choices")
+    if not isinstance(choices, list) or not choices:
+        return None
+    first_choice = choices[0]
+    if not isinstance(first_choice, dict):
+        return None
+    finish_reason = first_choice.get("finish_reason")
+    if not isinstance(finish_reason, str) or not finish_reason.strip():
+        return None
+    return finish_reason
 
 
 def render_findings_markdown(review_payload: dict[str, object]) -> str:

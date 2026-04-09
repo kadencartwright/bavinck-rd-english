@@ -347,6 +347,128 @@ criteria:
         }
         validate_commit_safe_eval_record(payload)
 
+    def test_valid_commit_safe_eval_record_v1_1_passes_with_prompt_artifacts(self) -> None:
+        payload = {
+            "schema_version": "1.1",
+            "sanitization_version": "1.1",
+            "run_id": "run-1",
+            "slice_id": "slice",
+            "prompt_bundle_id": "bundle",
+            "model_profile_id": "profile",
+            "generated_at": "2026-04-07T00:00:00+00:00",
+            "source_refs": {
+                "run_manifest_path": "config/a.json",
+                "slice_manifest_path": "data/b.json",
+                "prompt_bundle_path": "config/prompt-bundles/bundle",
+                "model_profile_path": "config/model-profiles/profile.json",
+                "glossary_path": "data/glossary.yaml",
+                "style_guide_path": "data/style-guide.md",
+                "rubric_path": "data/rubric.yaml",
+            },
+            "stages": {
+                "translation": {
+                    "provider": "moonshot",
+                    "model": "kimi-k2.5",
+                    "temperature": 1.0,
+                    "finish_reason": "stop",
+                    "prompt_files": {"translation_system": "translation-system.txt"},
+                    "usage": {"prompt_tokens": 1, "completion_tokens": 2, "total_tokens": 3},
+                },
+                "review": {
+                    "provider": "z-ai",
+                    "model": "glm-5",
+                    "temperature": 0.1,
+                    "finish_reason": "stop",
+                    "prompt_files": {"review_system": "review-system.txt"},
+                    "usage": {"prompt_tokens": 4, "completion_tokens": 5, "total_tokens": 9},
+                },
+            },
+            "artifacts": {
+                "translation_output_path": "data/calibration/evals/run-1/translation.md",
+                "review_structured_path": "data/calibration/evals/run-1/review-structured.json",
+                "findings_path": "data/calibration/evals/run-1/findings.md",
+                "translation_system_prompt_path": "data/calibration/evals/run-1/prompts/translation-system.txt",
+                "translation_user_prompt_path": "data/calibration/evals/run-1/prompts/translation-user.txt",
+                "review_system_prompt_path": "data/calibration/evals/run-1/prompts/review-system.txt",
+                "review_user_prompt_path": "data/calibration/evals/run-1/prompts/review-user.txt",
+                "evaluation_report_path": "data/calibration/evals/run-1/evaluation.json",
+                "evaluation_markdown_path": "data/calibration/evals/run-1/evaluation.md",
+            },
+            "hashes": {
+                "run_manifest_sha256": "0" * 64,
+                "slice_manifest_sha256": "1" * 64,
+                "prompt_bundle_metadata_sha256": "2" * 64,
+                "model_profile_sha256": "3" * 64,
+                "glossary_sha256": "4" * 64,
+                "style_guide_sha256": "5" * 64,
+                "rubric_sha256": "6" * 64,
+                "translation_output_sha256": "7" * 64,
+                "review_structured_sha256": "8" * 64,
+                "findings_sha256": "9" * 64,
+                "evaluation_report_sha256": "a" * 64,
+                "evaluation_markdown_sha256": "b" * 64,
+            },
+        }
+        validate_commit_safe_eval_record(payload)
+
+    def test_commit_safe_eval_record_v1_1_requires_prompt_artifact_paths(self) -> None:
+        payload = {
+            "schema_version": "1.1",
+            "sanitization_version": "1.1",
+            "run_id": "run-1",
+            "slice_id": "slice",
+            "prompt_bundle_id": "bundle",
+            "model_profile_id": "profile",
+            "generated_at": "2026-04-07T00:00:00+00:00",
+            "source_refs": {
+                "run_manifest_path": "config/a.json",
+                "slice_manifest_path": "data/b.json",
+                "prompt_bundle_path": "config/prompt-bundles/bundle",
+                "model_profile_path": "config/model-profiles/profile.json",
+                "glossary_path": "data/glossary.yaml",
+                "style_guide_path": "data/style-guide.md",
+                "rubric_path": "data/rubric.yaml",
+            },
+            "stages": {
+                "translation": {
+                    "provider": "moonshot",
+                    "model": "kimi-k2.5",
+                    "temperature": 1.0,
+                    "prompt_files": {"translation_system": "translation-system.txt"},
+                },
+                "review": {
+                    "provider": "z-ai",
+                    "model": "glm-5",
+                    "temperature": 0.1,
+                    "prompt_files": {"review_system": "review-system.txt"},
+                },
+            },
+            "artifacts": {
+                "translation_output_path": "data/calibration/evals/run-1/translation.md",
+                "review_structured_path": "data/calibration/evals/run-1/review-structured.json",
+                "findings_path": "data/calibration/evals/run-1/findings.md",
+                "evaluation_report_path": "data/calibration/evals/run-1/evaluation.json",
+                "evaluation_markdown_path": "data/calibration/evals/run-1/evaluation.md",
+            },
+            "hashes": {
+                "run_manifest_sha256": "0" * 64,
+                "slice_manifest_sha256": "1" * 64,
+                "prompt_bundle_metadata_sha256": "2" * 64,
+                "model_profile_sha256": "3" * 64,
+                "glossary_sha256": "4" * 64,
+                "style_guide_sha256": "5" * 64,
+                "rubric_sha256": "6" * 64,
+                "translation_output_sha256": "7" * 64,
+                "review_structured_sha256": "8" * 64,
+                "findings_sha256": "9" * 64,
+                "evaluation_report_sha256": "a" * 64,
+                "evaluation_markdown_sha256": "b" * 64,
+            },
+        }
+        with self.assertRaises(ValidationError) as context:
+            validate_commit_safe_eval_record(payload)
+        self.assertIn("translation_system_prompt_path", str(context.exception))
+
     def test_commit_safe_eval_record_rejects_raw_messages(self) -> None:
         payload = {
             "schema_version": "1.0",
@@ -405,6 +527,22 @@ criteria:
         with self.assertRaises(ValidationError) as context:
             validate_commit_safe_eval_record(payload)
         self.assertIn("messages", str(context.exception))
+
+    def test_evaluation_report_rejects_transient_run_paths(self) -> None:
+        payload = {
+            "schema_version": "1.0",
+            "run_id": "run-1",
+            "slice_id": "slice",
+            "prompt_bundle_id": "bundle",
+            "model_profile_id": "profile",
+            "checks": [{"id": "a", "status": "pass", "details": "ok"}],
+            "summary": {"pass": 1, "fail": 0, "incomplete": 0},
+            "artifacts": {"translation_output_path": "data/calibration/runs/run-1/outputs/translation.md"},
+            "qualitative_findings": {"path": "data/calibration/evals/run-1/findings.md", "separate_from_checks": True},
+        }
+        with self.assertRaises(ValidationError) as context:
+            validate_evaluation_report(payload)
+        self.assertIn("must not reference transient", str(context.exception))
 
     def test_load_and_validate_json_reports_invalid_json_usefully(self) -> None:
         with TemporaryDirectory() as temp_dir:

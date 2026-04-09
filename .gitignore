@@ -1,4 +1,6 @@
 .env
 __pycache__/
 *.pyc
+# Transient raw calibration payloads, retry state, and debug logs live under runs/.
+# The durable Git-tracked calibration artifact surface is data/calibration/evals/.
 data/calibration/runs/

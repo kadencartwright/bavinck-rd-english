@@ -741,11 +741,15 @@ def validate_evaluation_report(
         for key, value in artifacts.items():
             if not isinstance(value, str) or not value.strip():
                 errors.append(f"artifacts.{key}: must be a non-empty string")
+            elif "data/calibration/runs/" in value:
+                errors.append(f"artifacts.{key}: must not reference transient data/calibration/runs/ paths")
     if qualitative_findings is not None:
-        _required_nested_string(qualitative_findings, "qualitative_findings", "path", errors)
+        findings_path = _required_nested_string(qualitative_findings, "qualitative_findings", "path", errors)
         separate = qualitative_findings.get("separate_from_checks")
         if separate is not True:
             errors.append("qualitative_findings.separate_from_checks: must be true")
+        if findings_path and "data/calibration/runs/" in findings_path:
+            errors.append("qualitative_findings.path: must not reference transient data/calibration/runs/ paths")
 
     if errors:
         raise ValidationError(
@@ -778,10 +782,11 @@ def validate_commit_safe_eval_record(
     artifacts = _required_object(payload, "artifacts", errors)
     hashes = _required_object(payload, "hashes", errors)
 
-    if schema_version and schema_version != "1.0":
-        errors.append("schema_version: must equal '1.0'")
-    if sanitization_version and sanitization_version != "1.0":
-        errors.append("sanitization_version: must equal '1.0'")
+    allowed_versions = {"1.0", "1.1"}
+    if schema_version and schema_version not in allowed_versions:
+        errors.append("schema_version: must equal '1.0' or '1.1'")
+    if sanitization_version and sanitization_version not in allowed_versions:
+        errors.append("sanitization_version: must equal '1.0' or '1.1'")
 
     if source_refs is not None:
         for key in [
@@ -806,6 +811,9 @@ def validate_commit_safe_eval_record(
             temperature = _required_nested_number(stage, f"stages.{stage_name}", "temperature", errors)
             _optional_nested_positive_int(stage, f"stages.{stage_name}", "max_tokens", errors)
             _optional_nested_positive_int(stage, f"stages.{stage_name}", "timeout_seconds", errors)
+            finish_reason = stage.get("finish_reason")
+            if finish_reason is not None and (not isinstance(finish_reason, str) or not finish_reason.strip()):
+                errors.append(f"stages.{stage_name}.finish_reason: must be a non-empty string when present")
             prompt_files = stage.get("prompt_files")
             if not isinstance(prompt_files, dict) or not prompt_files:
                 errors.append(f"stages.{stage_name}.prompt_files: must be a non-empty object")
@@ -830,13 +838,23 @@ def validate_commit_safe_eval_record(
                     errors.append(f"stages.{stage_name}.{forbidden_key}: is not allowed in commit-safe eval records")
 
     if artifacts is not None:
-        for key in [
+        required_artifact_keys = [
             "translation_output_path",
             "review_structured_path",
             "findings_path",
             "evaluation_report_path",
             "evaluation_markdown_path",
-        ]:
+        ]
+        if schema_version == "1.1":
+            required_artifact_keys.extend(
+                [
+                    "translation_system_prompt_path",
+                    "translation_user_prompt_path",
+                    "review_system_prompt_path",
+                    "review_user_prompt_path",
+                ]
+            )
+        for key in required_artifact_keys:
             _required_nested_string(artifacts, "artifacts", key, errors)
 
     if hashes is not None:
@@ -867,6 +885,11 @@ def validate_commit_safe_eval_record(
                 resolved = resolve_repo_path(value, repo_root=repo_root)
                 if not resolved.exists():
                     errors.append(f"{obj_name}.{key}: path does not exist: {display_path(resolved, repo_root=repo_root)}")
+
+    if artifacts is not None:
+        for key, value in artifacts.items():
+            if isinstance(value, str) and "data/calibration/runs/" in value:
+                errors.append(f"artifacts.{key}: must not reference transient data/calibration/runs/ paths")
 
     if errors:
         raise ValidationError(

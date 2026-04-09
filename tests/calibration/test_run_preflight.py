@@ -170,18 +170,33 @@ class RunPreflightTests(unittest.TestCase):
                 result = run_calibration.main()
             self.assertEqual(result, 0)
             eval_dir = eval_root / "vol2-god-incomprehensibility-001-baseline"
+            run_dir = run_root / "vol2-god-incomprehensibility-001-baseline"
             eval_record_path = eval_dir / "eval-record.json"
             evaluation_path = eval_dir / "evaluation.json"
+            evaluation_markdown_path = eval_dir / "evaluation.md"
 
             self.assertTrue(eval_record_path.exists())
             self.assertTrue(evaluation_path.exists())
+            self.assertTrue((eval_dir / "prompts" / "translation-system.txt").exists())
+            self.assertTrue((eval_dir / "prompts" / "translation-user.txt").exists())
+            self.assertTrue((eval_dir / "prompts" / "review-system.txt").exists())
+            self.assertTrue((eval_dir / "prompts" / "review-user.txt").exists())
 
             eval_record = json.loads(eval_record_path.read_text(encoding="utf-8"))
             validate_commit_safe_eval_record(eval_record, validate_paths=True)
             self.assertNotIn("messages", json.dumps(eval_record))
             self.assertNotIn("reasoning_content", json.dumps(eval_record))
+            self.assertEqual(eval_record["schema_version"], "1.1")
+            self.assertEqual(eval_record["sanitization_version"], "1.1")
+            self.assertEqual(eval_record["stages"]["translation"]["finish_reason"], "stop")
+            self.assertEqual(eval_record["stages"]["review"]["finish_reason"], "stop")
             self.assertEqual(eval_record["stages"]["translation"]["usage"]["reasoning_tokens"], 7)
             self.assertEqual(eval_record["stages"]["review"]["usage"]["cached_tokens"], 3)
+            self.assertIn("translation_system_prompt_path", eval_record["artifacts"])
+            self.assertIn("translation_user_prompt_path", eval_record["artifacts"])
+            self.assertIn("review_system_prompt_path", eval_record["artifacts"])
+            self.assertIn("review_user_prompt_path", eval_record["artifacts"])
+            self.assertNotIn("data/calibration/runs/", json.dumps(eval_record))
 
             safe_report = json.loads(evaluation_path.read_text(encoding="utf-8"))
             artifact_paths = json.dumps(safe_report["artifacts"])
@@ -190,6 +205,14 @@ class RunPreflightTests(unittest.TestCase):
             self.assertNotIn("translation_request_path", safe_report["artifacts"])
             self.assertNotIn("review_request_path", safe_report["artifacts"])
             self.assertNotIn("data/calibration/runs/", artifact_paths)
+            self.assertNotIn("data/calibration/runs/", evaluation_markdown_path.read_text(encoding="utf-8"))
+
+            self.assertTrue((run_dir / "outputs" / "translation-response.json").exists())
+            self.assertTrue((run_dir / "review" / "review-response.json").exists())
+            self.assertFalse((run_dir / "outputs" / "translation.md").exists())
+            self.assertFalse((run_dir / "review" / "findings.md").exists())
+            self.assertFalse((run_dir / "reports" / "evaluation.json").exists())
+            self.assertFalse((run_dir / "reports" / "evaluation.md").exists())
 
     def test_runner_fails_fast_on_empty_translation_output(self) -> None:
         manifest_path = self.repo_root / "config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json"
