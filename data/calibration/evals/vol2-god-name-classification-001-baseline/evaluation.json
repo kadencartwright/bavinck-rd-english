@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-name-classification-001-baseline",
-  "generated_at": "2026-04-07T17:05:10.498956+00:00",
+  "generated_at": "2026-04-09T17:13:29.593905+00:00",
   "slice_id": "vol2-god-name-classification-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -19,7 +19,7 @@
     {
       "id": "translation-output",
       "status": "pass",
-      "details": "Translation output path: data/calibration/runs/vol2-god-name-classification-001-baseline/outputs/translation.md"
+      "details": "Translation output captured successfully for eval export."
     },
     {
       "id": "preserved-language-integrity",
@@ -32,25 +32,34 @@
       "details": "Missing glossary targets: INDEELING DER NAMEN GODS -> classification of the names of God"
     },
     {
-      "id": "prose-quality",
+      "id": "scripture-reference-normalization",
       "status": "pass",
-      "details": "Formal theological prose maintained throughout; argument structure preserved. Minor syntactic awkwardness noted but does not flatten meaning."
+      "details": "Dutch Scripture references were normalized to standard English forms."
+    },
+    {
+      "id": "prose-quality",
+      "status": "fail",
+      "details": "Multiple grammatical and stylistic defects: agreement errors, missing articles, unidiomatic constructions, and awkward word order."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "Findings below identify specific prose quality issues for follow-up."
+      "details": "Findings identify specific prose quality issues requiring correction."
     }
   ],
   "summary": {
     "pass": 6,
-    "fail": 1,
+    "fail": 2,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/prompts/review-user.txt",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/evaluation.md",
     "eval_record_path": "data/calibration/evals/vol2-god-name-classification-001-baseline/eval-record.json"
   },
@@ -58,7 +67,7 @@
     "path": "data/calibration/evals/vol2-god-name-classification-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation preserves all Greek, Hebrew, Latin, and German spans intact and correctly applies the glossary term for the section title. The English prose is generally coherent formal theological language, but several passages exhibit awkward syntax from overly literal rendering of Dutch constructions, particularly passive formations and inverted word order. No doctrinal ambiguities or preservation corruptions were detected.",
+  "review_summary": "The translation correctly preserves all Greek, Hebrew, Latin, and German spans and follows the glossary for the section title. Dutch Scripture references are rendered into standard English forms. However, prose quality is compromised by multiple grammatical issues: subject-verb agreement errors, missing articles, unidiomatic phrasing, and awkward word order that impede readability without altering doctrinal content.",
   "glossary_hits": [],
   "glossary_misses": [
     "INDEELING DER NAMEN GODS -> classification of the names of God"

@@ -1,29 +1,43 @@
 {
-  "summary": "The translation accurately renders the Dutch source into formal theological English, preserving the extensive Greek, Hebrew, Latin, and German spans as required. Glossary terms are correctly applied. However, the translation introduces a doctrinal error by expanding the ambiguous source abbreviation \"Cor. 2:7\" to \"2 Cor. 2:7\" (likely intended as 1 Cor. 2:7) and preserves a source corruption in the scripture reference \"Isa. 24 vv. 24–27\".",
+  "summary": "The translation successfully preserves Greek, Hebrew, Latin, and German spans and adheres to the glossary term 'counsel of God', while correctly standardizing most Scripture references into English forms. However, the prose quality check fails due to the retention of Dutch abbreviations such as 'd. i.' and 'blz.' which the rubric explicitly treats as defects, and the review flagging identifies these lapses in standardizing non-English abbreviations.",
   "checks": {
-    "prose-quality": {
+    "preserved-language-integrity": {
       "status": "pass",
-      "details": "The English prose is formal, coherent, and maintains the argument structure of the theological text."
+      "details": "All Greek, Hebrew, Latin, and German spans from the source are preserved unchanged in the translation."
+    },
+    "glossary-adherence": {
+      "status": "pass",
+      "details": "The source term 'RAAD GODS' is correctly rendered as 'counsel of God' in the section title and body text."
+    },
+    "prose-quality": {
+      "status": "fail",
+      "details": "Dutch abbreviations 'd. i.' (dat is) and 'blz.' (bladzijde) were left untranslated instead of being converted to standard English forms 'i.e.' and 'p.'/'pp.', violating the requirement to translate Dutch abbreviations."
     },
     "review-flagging": {
       "status": "pass",
-      "details": "Findings explicitly flag the doctrinal ambiguity introduced by the scripture reference expansion and the preserved source corruption."
+      "details": "Findings explicitly identify the untranslated Dutch abbreviations and the inconsistency in rendering them."
     }
   },
   "findings": [
     {
       "severity": "high",
-      "category": "doctrinal-ambiguity",
-      "detail": "The source abbreviation 'Cor. 2:7' in the list of προορισμος references is expanded to '2 Cor. 2:7'. Context and the later correct citation of '1 Cor. 2:7' indicate the source intended 1 Corinthians. 2 Cor. 2:7 is irrelevant to the argument, introducing a doctrinal error."
+      "category": "Untranslated Dutch",
+      "detail": "The Dutch abbreviation 'd. i.' (dat is) is retained in the translation ('opera essentialia ad intra, d. i. the decrees') instead of being rendered as 'i.e.'; note that the translator correctly used 'i.e.' in later instances, indicating inconsistency."
+    },
+    {
+      "severity": "high",
+      "category": "Untranslated Dutch",
+      "detail": "The Dutch abbreviation 'blz.' (bladzijde) for page numbers is retained in the citation 'Kuenen, Volksgodsd. en wereldgodsd. 1882 blz. 40 v.' instead of being translated to 'p.' or 'pp.'."
     },
     {
       "severity": "medium",
-      "category": "quality-issue",
-      "detail": "The source's erroneous scripture reference 'Jes. 24 vs. 24-27' (Isaiah 24 has only 23 verses) is preserved as 'Isa. 24 vv. 24–27'. This leaves a nonsensical reference in the text."
+      "category": "Untranslated Dutch",
+      "detail": "The Dutch abbreviation 'v.' (volgende) for 'following' is retained in the citation 'blz. 40 v.' instead of the standard English 'f.' or 'ff.'."
     }
   ],
   "recommended_follow_up": [
-    "Correct '2 Cor. 2:7' to '1 Cor. 2:7' in the list of προορισμος references.",
-    "Evaluate whether to correct 'Isa. 24 vv. 24–27' to 'Isa. 14:24-27' or to annotate the source error."
+    "Replace the retained 'd. i.' with 'i.e.' to ensure consistency with the rest of the translation.",
+    "Translate 'blz.' to 'p.' and 'v.' to 'f.' or 'ff.' in all bibliographic citations.",
+    "Verify that all Dutch bibliographic titles are handled according to project preferences (translated or kept original with translation in brackets)."
   ]
 }

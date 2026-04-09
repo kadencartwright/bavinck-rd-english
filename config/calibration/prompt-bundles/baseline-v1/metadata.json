@@ -14,6 +14,7 @@
   },
   "notes": [
     "Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source.",
+    "Translate Dutch Scripture references, book names, and abbreviations into standard English forms.",
     "Keep the English register formal and suitable for scholarly theological prose."
   ]
 }

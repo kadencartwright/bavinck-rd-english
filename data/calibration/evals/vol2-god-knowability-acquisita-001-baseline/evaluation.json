@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-knowability-acquisita-001-baseline",
-  "generated_at": "2026-04-07T16:53:22.309530+00:00",
+  "generated_at": "2026-04-09T17:01:32.774101+00:00",
   "slice_id": "vol2-god-knowability-acquisita-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -19,12 +19,12 @@
     {
       "id": "translation-output",
       "status": "pass",
-      "details": "Translation output path: data/calibration/runs/vol2-god-knowability-acquisita-001-baseline/outputs/translation.md"
+      "details": "Translation output captured successfully for eval export."
     },
     {
       "id": "preserved-language-integrity",
-      "status": "fail",
-      "details": "Missing preserved spans: νους"
+      "status": "pass",
+      "details": "All Greek/Hebrew spans found in translation output."
     },
     {
       "id": "glossary-adherence",
@@ -32,25 +32,34 @@
       "details": "Missing glossary targets: KENBAARHEID GODS -> knowability of God"
     },
     {
+      "id": "scripture-reference-normalization",
+      "status": "pass",
+      "details": "Dutch Scripture references were normalized to standard English forms."
+    },
+    {
       "id": "prose-quality",
       "status": "pass",
-      "details": "Formal theological prose maintained throughout; some Dutch-influenced syntax (inverted word order, feminine pronouns for Scripture) but argument structure preserved and readable."
+      "details": "Formal theological prose maintained throughout; Dutch Scripture references correctly rendered; one minor syntactic awkwardness noted but does not constitute failure."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "Findings below identify preservation risk and stylistic issues requiring attention."
+      "details": "No preservation risks, doctrinal ambiguity, or unresolved quality issues requiring escalation; minor prose issue flagged in findings."
     }
   ],
   "summary": {
-    "pass": 5,
-    "fail": 2,
+    "pass": 7,
+    "fail": 1,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/review-user.txt",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.md",
     "eval_record_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/eval-record.json"
   },
@@ -58,7 +67,7 @@
     "path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation preserves most Latin, German, and Greek terminology and renders the Dutch source into generally coherent formal theological prose. However, the Greek term νους was modified to νοῦς with an accent, violating the preservation requirement. Several Dutch-influenced constructions remain, including feminine pronouns for Scripture and inverted word order, though these do not obscure meaning. The glossary term for the section title is correctly applied.",
+  "review_summary": "The translation correctly preserves all Greek, Hebrew, Latin, and German spans, adheres to the glossary requirement, and renders Dutch Scripture references (Jes., Hd., Hand.) into standard English forms (Isa., Acts). The prose is coherent formal theological English throughout. One minor syntactic awkwardness with 'namely' at sentence-end does not impede comprehension or doctrinal clarity.",
   "glossary_hits": [],
   "glossary_misses": [
     "KENBAARHEID GODS -> knowability of God"

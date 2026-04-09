@@ -16,4 +16,5 @@ Source excerpt:
 
 Translate the source excerpt into formal English theological prose.
 Preserve all non-Dutch spans in their original language exactly as written.
+Render any Dutch Scripture references, book names, and abbreviations in standard English forms.
 Return only the translated passage with paragraph structure intact and no prefatory commentary.

@@ -4,11 +4,12 @@
 
 - `source-identity`: **pass** — Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a.
 - `rubric-present`: **pass** — Rubric path: data/calibration/slices/vol2-god-names-001/inputs/rubric.yaml
-- `translation-output`: **pass** — Translation output path: data/calibration/runs/vol2-god-names-001-baseline/outputs/translation.md
+- `translation-output`: **pass** — Translation output captured successfully for eval export.
 - `preserved-language-integrity`: **pass** — All Greek/Hebrew spans found in translation output.
 - `glossary-adherence`: **pass** — All required glossary targets were found in the translation output.
-- `prose-quality`: **fail** — English prose is inconsistent due to untranslated Dutch Scripture abbreviations and a syntactic error in translating a Dutch idiom.
-- `review-flagging`: **pass** — Findings explicitly call out the abbreviation inconsistency and the idiom mistranslation.
+- `scripture-reference-normalization`: **fail** — Untranslated Dutch Scripture reference forms found in translation output: 1 K. 8:33, 2 K. 21:13
+- `prose-quality`: **fail** — The output contains unnatural English phrasing derived from Dutch syntax, such as 'There is spoken of His face,' and fails to correctly translate the idiom 'er is geen... of...,' resulting in the confusing 'there is no human affection or it is also present in God.'
+- `review-flagging`: **pass** — The review identifies and flags the specific prose defects, including the mistranslated idiom and the deviation in the preserved Latin span.
 
 ## Qualitative Findings
 

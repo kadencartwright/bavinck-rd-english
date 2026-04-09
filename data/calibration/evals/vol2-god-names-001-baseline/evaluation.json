@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-names-001-baseline",
-  "generated_at": "2026-04-07T16:58:19.251652+00:00",
+  "generated_at": "2026-04-09T17:05:49.885807+00:00",
   "slice_id": "vol2-god-names-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -19,7 +19,7 @@
     {
       "id": "translation-output",
       "status": "pass",
-      "details": "Translation output path: data/calibration/runs/vol2-god-names-001-baseline/outputs/translation.md"
+      "details": "Translation output captured successfully for eval export."
     },
     {
       "id": "preserved-language-integrity",
@@ -32,25 +32,34 @@
       "details": "All required glossary targets were found in the translation output."
     },
     {
+      "id": "scripture-reference-normalization",
+      "status": "fail",
+      "details": "Untranslated Dutch Scripture reference forms found in translation output: 1 K. 8:33, 2 K. 21:13"
+    },
+    {
       "id": "prose-quality",
       "status": "fail",
-      "details": "English prose is inconsistent due to untranslated Dutch Scripture abbreviations and a syntactic error in translating a Dutch idiom."
+      "details": "The output contains unnatural English phrasing derived from Dutch syntax, such as 'There is spoken of His face,' and fails to correctly translate the idiom 'er is geen... of...,' resulting in the confusing 'there is no human affection or it is also present in God.'"
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "Findings explicitly call out the abbreviation inconsistency and the idiom mistranslation."
+      "details": "The review identifies and flags the specific prose defects, including the mistranslated idiom and the deviation in the preserved Latin span."
     }
   ],
   "summary": {
     "pass": 6,
-    "fail": 1,
+    "fail": 2,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-names-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-names-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-names-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-names-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-names-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-names-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-names-001-baseline/prompts/review-user.txt",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-names-001-baseline/evaluation.md",
     "eval_record_path": "data/calibration/evals/vol2-god-names-001-baseline/eval-record.json"
   },
@@ -58,7 +67,7 @@
     "path": "data/calibration/evals/vol2-god-names-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation successfully preserves Greek and Hebrew spans and adheres to the provided glossary term. However, the prose quality is marred by inconsistent and partially untranslated Scripture abbreviations (retaining Dutch forms like 'Richt.', 'Op.', 'Hd.' alongside English ones) and a mistranslation of a Dutch idiom regarding emotions attributed to God. These issues disrupt the coherence of the formal theological prose.",
+  "review_summary": "The translation successfully preserves Greek and Hebrew terminology and renders Dutch Scripture references into standard English forms, adhering to the glossary requirement. However, the English prose contains significant Dutch-influenced syntax, resulting in unnatural constructions and a mistranslated idiom that obscures the theological meaning.",
   "glossary_hits": [
     "NAMEN GODS -> names of God"
   ],

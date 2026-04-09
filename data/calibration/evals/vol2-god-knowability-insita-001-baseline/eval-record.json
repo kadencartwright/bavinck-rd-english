@@ -1,11 +1,11 @@
 {
-  "schema_version": "1.0",
-  "sanitization_version": "1.0",
+  "schema_version": "1.1",
+  "sanitization_version": "1.1",
   "run_id": "vol2-god-knowability-insita-001-baseline",
   "slice_id": "vol2-god-knowability-insita-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
-  "generated_at": "2026-04-07T16:37:23.868570+00:00",
+  "generated_at": "2026-04-09T16:55:19.046076+00:00",
   "source_refs": {
     "run_manifest_path": "config/calibration/run-manifests/vol2-god-knowability-insita-001-baseline.json",
     "slice_manifest_path": "data/calibration/slices/vol2-god-knowability-insita-001/manifest.json",
@@ -25,7 +25,8 @@
         "translation_user_template": "translation-user-template.txt",
         "review_system": "review-system.txt",
         "review_user_template": "review-user-template.txt"
-      }
+      },
+      "finish_reason": "stop"
     },
     "review": {
       "provider": "z-ai",
@@ -37,12 +38,13 @@
         "review_system": "review-system.txt",
         "review_user_template": "review-user-template.txt"
       },
+      "finish_reason": "stop",
       "usage": {
-        "prompt_tokens": 11635,
-        "completion_tokens": 2560,
-        "total_tokens": 14195,
-        "reasoning_tokens": 1918,
-        "cached_tokens": 0
+        "prompt_tokens": 11669,
+        "completion_tokens": 5914,
+        "total_tokens": 17583,
+        "reasoning_tokens": 5281,
+        "cached_tokens": 128
       }
     }
   },
@@ -50,21 +52,29 @@
     "translation_output_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/prompts/review-user.txt",
     "evaluation_report_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/evaluation.json",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-knowability-insita-001-baseline/evaluation.md"
   },
   "hashes": {
     "run_manifest_sha256": "fb3502435a80c13406a0802aa4ebfe121334f64b951cb8cee8eadefc82159847",
     "slice_manifest_sha256": "2a6b10e670335cb2a2a03dd60f406c0fa168c6722000834f0ae93fcc43ad3b17",
-    "prompt_bundle_metadata_sha256": "42a49de33a345ef40c49f53767447506bcf60355c88dfcd542cb283fad0ae388",
+    "prompt_bundle_metadata_sha256": "3e5e9b6466d0f0bad7b8cd24becb7daad03afca6ef16570f638e5f47f846e7ea",
     "model_profile_sha256": "5ed2a01f09d09db59e1754be316cfaf49c764a0b6a136bb879a158237d6dde9e",
     "glossary_sha256": "254c053d48a2e245c500c1f91d009186cc824eb65ec432fd1aa1b6fa9a17fb62",
-    "style_guide_sha256": "99eb45a09233aa80d5c413c7f109974d21da9cb76cf100c402cbe190f05048c0",
-    "rubric_sha256": "e25e9a4ed0327d2b89684c62f96df361d422081167cffa7ab1a2519d4e416597",
-    "translation_output_sha256": "2d06efdd02a5607edee47990f672bc27c9988dca2b92453e611b639afe7ddf60",
-    "review_structured_sha256": "719102e3180a12eca43f6e2ea11f540793fe1a26c06ec011022b9bcbf98513d8",
-    "findings_sha256": "4fd05703f64979688e45dd7572eecebfd5e158154da98ec56d0c2a689c438473",
-    "evaluation_report_sha256": "f9054caea3393ca838f77d99f45cb9b2760a80a9e6456dd6ba937ba1dc39e868",
-    "evaluation_markdown_sha256": "040afc6bc9d8353878479498e9ebe77f2d341b54cd5826c5000ab7b2afb9600b"
+    "style_guide_sha256": "a1a5c485fa715028d1c43693eca547a0387ed8ad8fa527597339d69b2fb9a38c",
+    "rubric_sha256": "e5142547b255e52567b43a173ad9ebb912a2ccf0cea3d818ecc3a9d1eeabf002",
+    "translation_output_sha256": "7b636e24c41923f124d971b7bac54ab23ab8baa189249585493e76a3abcff674",
+    "review_structured_sha256": "80f416c3060dae579e52b7c1bfb285fa68be13c9cb9100aa1975cfb4badf3d9e",
+    "findings_sha256": "93dc141db084666874154b4704487de030daada58cc351f696c4399e376f4058",
+    "evaluation_report_sha256": "e7ab68e4d68863f6a9ae55fafab42b1ebd3e33ecfb3dca69513e43566eff284c",
+    "evaluation_markdown_sha256": "365ba106b358ff4c57ce1c543f27b874b0c94d4aed266fa6f429b588e80954ec",
+    "translation_system_prompt_sha256": "e88459c2542b810f3c237adfbf3875021954ab378645fd6bd5c6a51b689b3524",
+    "translation_user_prompt_sha256": "a5156371eda5b3208327f71de8909575a5c800fd65df54d436db72236122489e",
+    "review_system_prompt_sha256": "d32ea79f07f205d43763ea59eeda6c6186edadd1de334c6cabc96e38adb24876",
+    "review_user_prompt_sha256": "ef06d8961b447c95f3f3deb8c2ce52b53de58a4ef5e644b67e93ed52a36b7cc3"
   }
 }

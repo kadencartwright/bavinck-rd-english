@@ -1,43 +1,35 @@
 {
-  "summary": "The translation successfully preserves Greek and Hebrew spans and adheres to the provided glossary term. However, the prose quality is marred by inconsistent and partially untranslated Scripture abbreviations (retaining Dutch forms like 'Richt.', 'Op.', 'Hd.' alongside English ones) and a mistranslation of a Dutch idiom regarding emotions attributed to God. These issues disrupt the coherence of the formal theological prose.",
+  "summary": "The translation successfully preserves Greek and Hebrew terminology and renders Dutch Scripture references into standard English forms, adhering to the glossary requirement. However, the English prose contains significant Dutch-influenced syntax, resulting in unnatural constructions and a mistranslated idiom that obscures the theological meaning.",
   "checks": {
-    "preserved-language-integrity": {
-      "status": "pass",
-      "details": "All Greek and Hebrew spans from the source excerpt remain unchanged in the translation output."
-    },
-    "glossary-adherence": {
-      "status": "pass",
-      "details": "The glossary term 'NAMEN GODS' is correctly rendered as 'NAMES OF GOD' in the section title."
-    },
     "prose-quality": {
       "status": "fail",
-      "details": "English prose is inconsistent due to untranslated Dutch Scripture abbreviations and a syntactic error in translating a Dutch idiom."
+      "details": "The output contains unnatural English phrasing derived from Dutch syntax, such as 'There is spoken of His face,' and fails to correctly translate the idiom 'er is geen... of...,' resulting in the confusing 'there is no human affection or it is also present in God.'"
     },
     "review-flagging": {
       "status": "pass",
-      "details": "Findings explicitly call out the abbreviation inconsistency and the idiom mistranslation."
+      "details": "The review identifies and flags the specific prose defects, including the mistranslated idiom and the deviation in the preserved Latin span."
     }
   },
   "findings": [
     {
-      "severity": "medium",
+      "severity": "high",
       "category": "prose-quality",
-      "detail": "Scripture abbreviations are inconsistently handled; many remain in Dutch (e.g., 'Richt.' for Judges, 'Op.' for Revelation, 'Hd.' for Acts, 'Jes.' for Isaiah, 'Spr.' for Proverbs), while others are correctly translated to English (Gen., Ex., Mt.), creating a disjointed reading experience."
+      "detail": "The sentence 'Furthermore there is no human affection or it is also present in God' mistranslates the Dutch idiom 'er is geen... of...' (there is no... but...). It must be rendered as 'There is no human affection that is not also present in God' to convey the correct theological meaning."
     },
     {
       "severity": "medium",
       "category": "prose-quality",
-      "detail": "The sentence 'there is no human emotion or it is also present in God' mistranslates the Dutch idiom 'er is geen...of...' (meaning 'there is no...but...'); it should read 'there is no human emotion but it is also present in God' or 'that is not also present'."
+      "detail": "The literal translation of the Dutch passive construction 'Er wordt gesproken van' as 'There is spoken of' is unnatural in English; it should be rendered as 'His face is spoken of' or 'There is mention of His face'."
     },
     {
       "severity": "low",
-      "category": "prose-quality",
-      "detail": "In the list of human actions transferred to God, 'kennis nemen' (taking notice/investigating) is translated simply as 'knowing', duplicating the translation for 'weten' and losing the distinct nuance of the source."
+      "category": "preserved-language-integrity",
+      "detail": "The Latin span 'subjecta en adjuncta humana' in the source (containing the Dutch conjunction 'en') was altered to 'subjecta et adjuncta humana' in the translation. While grammatically improved, this violates the style guide requirement to preserve spans exactly as they appear."
     }
   ],
   "recommended_follow_up": [
-    "Standardize all Scripture abbreviations to standard English forms (e.g., Judg., Rev., Acts, Isa., Prov.).",
-    "Correct the logical connector in the sentence regarding human emotions in God to reflect the inclusive force of the original idiom.",
-    "Revise the translation of 'kennis nemen' to 'taking notice' or 'inquiring' to distinguish it from 'weten' (knowing)."
+    "Correct the translation of the 'er is geen... of...' construction to ensure logical coherence.",
+    "Revise Dutch passive constructions (e.g., 'Er wordt...') into natural English equivalents.",
+    "Restore the original conjunction in the Latin span or confirm if grammatical correction supersedes strict preservation."
   ]
 }

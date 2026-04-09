@@ -4,11 +4,12 @@
 
 - `source-identity`: **pass** — Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a.
 - `rubric-present`: **pass** — Rubric path: data/calibration/slices/vol2-god-essential-names-001/inputs/rubric.yaml
-- `translation-output`: **pass** — Translation output path: data/calibration/runs/vol2-god-essential-names-001-baseline/outputs/translation.md
-- `preserved-language-integrity`: **pass** — All Greek/Hebrew spans found in translation output.
+- `translation-output`: **pass** — Translation output captured successfully for eval export.
+- `preserved-language-integrity`: **fail** — Missing preserved spans: οὐκ, ἐνι, παραλλαγη, ἢ, τροπης, ἀποσκιασμα, πεπερασμενος, ὁρος, οἰκ, ἀπειρος, אֵין, טוֹף, ἀπειρον, ζων, και, μενων
 - `glossary-adherence`: **fail** — Missing glossary targets: WEZENSNAMEN GODS -> essential names of God
-- `prose-quality`: **fail** — The output contains ungrammatical phrasing such as 'avoided of God' and 'on different manner', which disrupt coherence. Additionally, 'He is from nothing' introduces doctrinal confusion.
-- `review-flagging`: **pass** — Findings clearly identify the preservation failures, grammatical errors, and doctrinal ambiguity.
+- `scripture-reference-normalization`: **pass** — Dutch Scripture references were normalized to standard English forms.
+- `prose-quality`: **fail** — Dutch text remains untranslated in multiple instances, including full sentences ('Aan alle redelĳk schepsel is het...'), phrases ('niet in negatieven maar in positieven zin'), and abbreviations ('enz.', 'bl.', 'bĳ'), failing the requirement for coherent English prose and standard English Scripture references.
+- `review-flagging`: **pass** — Findings explicitly identify the preservation of Dutch text as a defect and flag the specific locations and nature of the untranslated material.
 
 ## Qualitative Findings
 

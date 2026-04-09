@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-incomprehensibility-001-baseline",
+  "generated_at": "2026-04-09T16:53:18.363481+00:00",
+  "slice_id": "vol2-god-incomprehensibility-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "checks": [
+    {
+      "id": "source-identity",
+      "status": "pass",
+      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+    },
+    {
+      "id": "rubric-present",
+      "status": "pass",
+      "details": "Rubric path: data/calibration/slices/vol2-god-incomprehensibility-001/inputs/rubric.yaml"
+    },
+    {
+      "id": "translation-output",
+      "status": "pass",
+      "details": "Translation output captured successfully for eval export."
+    },
+    {
+      "id": "preserved-language-integrity",
+      "status": "pass",
+      "details": "All Greek/Hebrew spans found in translation output."
+    },
+    {
+      "id": "glossary-adherence",
+      "status": "pass",
+      "details": "All required glossary targets were found in the translation output."
+    },
+    {
+      "id": "scripture-reference-normalization",
+      "status": "pass",
+      "details": "Dutch Scripture references were normalized to standard English forms."
+    },
+    {
+      "id": "prose-quality",
+      "status": "fail",
+      "details": "Dutch word 'adaequaat' left untranslated; German words 'Thatsachen' and 'Rhetorik' embedded in Dutch prose should be translated; awkward English construction present."
+    },
+    {
+      "id": "review-flagging",
+      "status": "pass",
+      "details": "Findings explicitly flag untranslated terms and prose quality issues requiring correction."
+    }
+  ],
+  "summary": {
+    "pass": 7,
+    "fail": 1,
+    "incomplete": 0
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/review-user.txt",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/evaluation.md",
+    "eval_record_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/eval-record.json"
+  },
+  "qualitative_findings": {
+    "path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/findings.md",
+    "separate_from_checks": true
+  },
+  "review_summary": "The translation preserves Greek, Hebrew, Latin, and German spans correctly and renders Dutch Scripture references in standard English forms. Glossary terms are properly applied throughout. However, the Dutch word 'adaequaat' is left untranslated in section 3, and German words 'Thatsachen' and 'Rhetorik' embedded in Dutch prose should be translated to 'facts' and 'rhetoric' for English readers. An awkward English construction also requires revision.",
+  "glossary_hits": [
+    "dogmatiek -> dogmatics",
+    "kennisse Gods -> knowledge of God",
+    "Onbegrĳpelĳke -> the Incomprehensible",
+    "openbaring -> revelation",
+    "de zĳnde -> Being"
+  ],
+  "glossary_misses": []
+}

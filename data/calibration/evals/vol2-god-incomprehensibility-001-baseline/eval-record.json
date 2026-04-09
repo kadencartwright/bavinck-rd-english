@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.1",
+  "sanitization_version": "1.1",
+  "run_id": "vol2-god-incomprehensibility-001-baseline",
+  "slice_id": "vol2-god-incomprehensibility-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "generated_at": "2026-04-09T16:53:18.366776+00:00",
+  "source_refs": {
+    "run_manifest_path": "config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json",
+    "slice_manifest_path": "data/calibration/slices/vol2-god-incomprehensibility-001/manifest.json",
+    "prompt_bundle_path": "config/calibration/prompt-bundles/baseline-v1",
+    "model_profile_path": "config/calibration/model-profiles/kimi-k2_5-glm5-baseline.json",
+    "glossary_path": "data/calibration/slices/vol2-god-incomprehensibility-001/inputs/glossary.yaml",
+    "style_guide_path": "data/calibration/slices/vol2-god-incomprehensibility-001/inputs/style-guide.md",
+    "rubric_path": "data/calibration/slices/vol2-god-incomprehensibility-001/inputs/rubric.yaml"
+  },
+  "stages": {
+    "translation": {
+      "provider": "moonshot",
+      "model": "kimi-k2.5",
+      "temperature": 1.0,
+      "prompt_files": {
+        "translation_system": "translation-system.txt",
+        "translation_user_template": "translation-user-template.txt",
+        "review_system": "review-system.txt",
+        "review_user_template": "review-user-template.txt"
+      },
+      "finish_reason": "stop"
+    },
+    "review": {
+      "provider": "z-ai",
+      "model": "glm-5",
+      "temperature": 0.1,
+      "prompt_files": {
+        "translation_system": "translation-system.txt",
+        "translation_user_template": "translation-user-template.txt",
+        "review_system": "review-system.txt",
+        "review_user_template": "review-user-template.txt"
+      },
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 9561,
+        "completion_tokens": 7543,
+        "total_tokens": 17104,
+        "reasoning_tokens": 7075,
+        "cached_tokens": 0
+      }
+    }
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/prompts/review-user.txt",
+    "evaluation_report_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/evaluation.json",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/evaluation.md"
+  },
+  "hashes": {
+    "run_manifest_sha256": "ad116391bb28bc894dec0d7b9285b621d27370199d3c4d5ea5f25df8e797d6a0",
+    "slice_manifest_sha256": "87bb935e72c4e8515f92321491d2ce6e66aee00c7915be946d8047e63b0b85f8",
+    "prompt_bundle_metadata_sha256": "3e5e9b6466d0f0bad7b8cd24becb7daad03afca6ef16570f638e5f47f846e7ea",
+    "model_profile_sha256": "5ed2a01f09d09db59e1754be316cfaf49c764a0b6a136bb879a158237d6dde9e",
+    "glossary_sha256": "c41d83721b6fb04955ff92174f0b8f78e2156d9f7da270999562c4a257ab54b0",
+    "style_guide_sha256": "a1a5c485fa715028d1c43693eca547a0387ed8ad8fa527597339d69b2fb9a38c",
+    "rubric_sha256": "43a32c65efd44eb05e99b25ca521f262f0980d7240b3f94238c512077c715497",
+    "translation_output_sha256": "c6ea92163e21b1191356b5dee527fd7321bfac389278397c411365198d0acf6f",
+    "review_structured_sha256": "61a3327897b8d925995089b0a5eba822e7a43ff45570e54022dedd280467ea31",
+    "findings_sha256": "f8d12696e448f6388585d7595d9b2266b40b65f36911185eadd14a40c61ade90",
+    "evaluation_report_sha256": "fe8ae425a46f1dc5984341b8ccc36d5bde7daf49086e099132e1b2e73facfbe1",
+    "evaluation_markdown_sha256": "bb5e9005b0b34f7b10f2298db5c4e7e3ee6ed3fbc8fcc283cd06e7108340655d",
+    "translation_system_prompt_sha256": "e88459c2542b810f3c237adfbf3875021954ab378645fd6bd5c6a51b689b3524",
+    "translation_user_prompt_sha256": "0f5554576e59bf6ca0a4310803e4c91f43e0dc943dd17b4a82676b14fdbb1b0b",
+    "review_system_prompt_sha256": "d32ea79f07f205d43763ea59eeda6c6186edadd1de334c6cabc96e38adb24876",
+    "review_user_prompt_sha256": "8597fc474c1443caf75048fe2a088b94dbce1ab7ff703c40717551b75d47ce16"
+  }
+}

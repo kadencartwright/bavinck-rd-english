@@ -1,0 +1,165 @@
+Run ID: vol2-creation-001-baseline
+Slice ID: vol2-creation-001
+Slice Title: Volume 2 § 29.1-2 Creation
+
+Rubric:
+schema_version: "1.0"
+slice_id: "vol2-creation-001"
+criteria:
+  - id: "preserved-language-integrity"
+    requirement: "All Greek and Hebrew spans from the source excerpt remain unchanged in the translation output."
+    status_values: "pass|fail|incomplete"
+  - id: "glossary-adherence"
+    requirement: "Required glossary targets appear where the source excerpt exercises those source terms."
+    status_values: "pass|fail|incomplete"
+  - id: "prose-quality"
+    requirement: "English output reads as coherent formal theological prose without flattening argument structure and renders Dutch Scripture references in standard English forms."
+    status_values: "pass|fail|incomplete"
+  - id: "review-flagging"
+    requirement: "Reviewer findings explicitly call out preservation risks, doctrinal ambiguity, and unresolved quality issues."
+    status_values: "pass|fail|incomplete"
+
+Excerpt-scoped glossary:
+schema_version: "1.0"
+slice_id: "vol2-creation-001"
+terms:
+  - source: "SCHEPPING"
+    target: "creation"
+    notes: "Section-title term for this slice."
+
+Style guide:
+# Style Guide
+
+- Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source excerpt.
+- Retain citation structure, but translate Dutch Scripture references, book names, and abbreviations into standard English forms; keep patristic or scholastic citations intact.
+- Translate into formal but readable English theological prose; do not modernize into colloquial language.
+- Prefer glossary-approved renderings when the glossary lists a source phrase from the excerpt.
+- Flag ambiguous doctrinal phrasing instead of smoothing over uncertainty.
+
+Source excerpt:
+§ 29. DE SCHEPPING.
+
+
+1. De uitvoering van den raad Gods begint met de schepping. Deze
+is de aanvang en grondslag van alle openbaring Gods en daarom ook
+het fundament van alle religieuse en ethische leven. Het Oudtest.
+scheppingsverhaal is zoo verheven schoon, dat het nergens zĳne
+wedergade vindt en door allen, ook door natuurvorschers als Cuvier en
+von Humboldt, om strĳd is geprezen. Das erste Blatt der mosaischen
+Urkunde hat mehr Gewicht als alle Folianten der Naturforscher und
+Philosophen (Jean Paul). En daarna treedt die schepping in de
+geschiedenis der openbaring telkens weer op den voorgrond. De ware
+religie onderscheidt zich van het eerste oogenblik af daardoor van alle
+andere godsdiensten, dat zĳ de verhouding van God tot wereld en mensch
+opvat als die van den Schepper tot zĳn schepsel. De gedachte aan een
+zĳn buiten en onafhankelĳk van God komt in de Schrift nergens voor.
+God is de eenige en volstrekte oorzaak van alwat is. Hĳ heeft alles
+geschapen door zĳn Woord en Geest, Gen. 1 vs. 2, 3, Ps. 33:6, 104:29,
+148:5, Job 27:3, 33:4, Jes. 40 vs. 13, 48:13, Zach. 12:1, Joh. 1:3,
+Col. 1:16, Hebr. 1:2 enz. Er stond niets tegen Hem over; geen stof,
+die Hem bindt, geen kracht, die Hem beperkt. Hĳ spreekt en het is,
+Gen. 1:3, Ps. 33:9, Rom. 4:17. Hĳ is de onbeperkte bezitter van hemel
+en aarde, Gen. 14:19, 22, Ps. 24:2, 89:12, 95:4, 5. Er is geen grens
+aan zĳne macht; Hĳ doet alwat Hem behaagt, Jes. 14 vs. 24, 27, 46:10,
+55:10, Ps. 115:3, 135:6. Alle dingen zĳn uit en door en tot Hem, Rom.
+11:36, 1 Cor. 8:6, Hebr. 11 vs. 3. De wereld is het product van zĳn
+wil, Ps. 33:6, Op. 4 vs. 11; zĳ is de openbaring zĳner deugden, Spr.
+8:22v., Job 28 vs. 23v., Ps. 104:1, 136:5v., Jer. 16:12 en heeft haar
+doel in zĳne eere, Jes. 43:17, Spr. 16:4, Rom. 11:36, 1 Cor. 8:6. Deze
+leer der schepping, die in de Schrift zulk eene alles beheerschende
+plaats bekleedt, wordt niet voorgedragen als eene wĳsgeerige
+verklaring van het wereldprobleem. Zĳ geeft zeer zeker ook een antwoord
+op de vraag naar den oorsprong aller dingen; maar zĳ heeft toch bovenal
+eene religieus-ethische beteekenis. Er is geen rechte verhouding tot
+God denkbaar dan op haar grondslag. Zĳ plaatst ons in die relatie
+tot God, waarin wĳ behooren te staan. En daarom is ze van uitnemend
+practische waarde. Zĳ dient, om de grootheid, de almacht, de majesteit
+en tevens de goedheid, de wĳsheid, de liefde Gods te doen uitkomen,
+Ps. 19, Job 37, Jes. 40; en zĳ versterkt daarom het geloof, bevestigt
+het vertrouwen op God, troost in het lĳden, Ps. 33:6 v., 65:6v.,
+89:12, 121:2, 134:5, Jes. 37:16, 40:28v., 42:5 enz.; zĳ wekt op tot
+lof en dank, Ps. 136:3v., 148:5, Op. 14 vs. 7; stemt tot nederigheid
+en ootmoed en doet den mensch zĳne geringheid en nietigheid gevoelen
+tegenover God, Job 38 vs. 4v., Jes. 29:16, 45:9, Jer. 18:6, Rom. 9:20.
+
+
+2. De leer der schepping wordt alleen uit de openbaring gekend; ze
+wordt verstaan door het geloof, Hebr. 11:3. De Roomschen leeren wel,
+dat zĳ ook uit de natuur door de rede kan worden opgespoord, Thomas,
+Sent. II dist. 1 qu. 1 art. 2. S. c. Gent. II 15. 16. Kleutgen,
+Philos. der Vorz. II² 795 f. Scheeben, Dogm. II 5. 6, en het Vaticanum
+verhief dit zelfs tot een dogma, de fide c. 2 can. 2. Maar de historie
+der godsdiensten en der philosophie pleit hier niet voor. Het
+Mohammedanisme leert wel de schepping uit niets maar heeft deze aan
+het Joden- en Christendom ontleend, Zöckler, Gesch. der Beziehungen
+zw. Theol. und Naturw. 1877 I 426 f. De heidensche kosmogonieën zĳn
+alle polytheistisch en tegelĳk theogonie; zĳ nemen alle een Urstof aan,
+hetzĳ deze als een chaos, als een persoonlĳke principe, als een ei of
+soortgelĳk gedacht wordt; en eindelĳk zĳn ze òf meer emanatistisch,
+zoodat de wereld een uitvloeisel Gods is, òf meer evolutionistisch,
+zoodat de wereld zich meer en meer vergoddelĳkt, òf meer dualistisch,
+zoodat de wereld een product is van twee vĳandige beginselen,
+Wuttke, Die Kosmogonien der heidn. Völker vor der Zeit Jesu und der
+Apostel, Haag 1850. Lenormant, Les origines de l’histoire d’après la
+Bible et les traditions des peuples orientaux, Paris 1880. Zöckler
+in Herzog² 13, 631 f. Ook de chaldeeuwsche Genesis, die overigens
+merkwaardige parallelen biedt met die van het O. Test., maakt hierop
+geen uitzondering. Zĳ is tegelĳk theogonie en laat uit de tiamat,
+welke chaotisch alles in zich verbergt, door Bel de wereld vormen,
+Saussaye, Lehrb. der Rel. I 341 f. De grieksche wĳsbegeerte zoekt òf
+materialistisch den oorsprong der dingen in een stoffelĳk element
+(Jonische School, Atomisten), òf pantheistisch in het ééne, eeuwige,
+onveranderlĳke zĳn (Elea) òf in het eeuwige worden (Heraclitus, Stoa).
+Zelfs Anaxagoras, Plato en Aristoteles kwamen boven een dualisme van
+geest en stof niet uit; God is geen schepper, maar hoogstens een
+formeerder der wereld (δημιουργος). De scholastici beweerden wel, dat
+Plato en Aristoteles eene schepping uit niets hebben geleerd, maar dit
+werd door anderen, o. a. door Bonaventura, Sent. II dist. 1 p. 1 art.
+1 qu. 1, terecht bestreden. De Grieken kenden een φυσις (natura) en
+κοσμος (mundus) maar geen κτισις (creatura). Het Christendom behaalde
+op deze heidensche theogonie en kosmogonie de zege in den strĳd tegen
+het gnosticisme, dat ter verklaring der zonde naast den hoogsten
+God een lageren God of eene eeuwige ὑλη aannam. Maar toch kwamen de
+paganistische verklaringen van den oorsprong der dingen telkens ook in
+de christelĳke eeuwen weer boven. Reeds in het boek der Wĳsheid 11:17
+wordt gezegd, dat Gods almachtige hand de wereld geschapen heeft uit
+ἀμορφος ὑλη; en dezelfde uitdrukking komt ook bĳ Justinus Martyr voor,
+Apol. I 10. 59. Maar Justinus hoeft daarbĳ de later zoogenoemde creatio
+secunda op het oog en leert elders uitdrukkelĳk ook de schepping der
+materie, Dial. c. Tr. 5. Coh. ad. Gr. 23, cf. Semisch, Justin der M.
+II 336. Gelĳk in de tweede eeuw het gnosticisme, zoo kwam na Nicea
+vooral het manicheisme op, dat evenzoo ter verklaring der zonde naast
+den goeden God een oorspronkelĳk boos wezen aannam, Augustinus in vele
+geschriften, c. epist. Manich., c. Faustum, c. Fortunatum enz. Flügel,
+Mani, seine Lehre und seine Schriften, Leipzig 1862. Kessler in Herzog²
+9, 233 f. Dit dualisme vond in de Christenheid verre verbreiding, tot
+zelfs bĳ de Priscillianisten in Spanje toe, en trad bĳ vernieuwing in
+de Middeleeuwen in vele secten op, zooals de Bogomilen en Katharen.
+Maar behalve het dualisme kreeg ook het pantheisme zĳne tolken. Onder
+invloed van het neoplatonisme leerde Pseudodionysius, dat de ideeën
+en voorbeelden van alle dingen van eeuwigheid in God bestonden en dat
+zĳne overstroomende goedheid Hem bewoog, om deze ideeën realiteit te
+geven en zich aan zĳne schepselen mee te deelen, de div. nom. c. 4
+
+Translation output:
+§ 29. CREATION.
+
+1. The execution of the counsel of God begins with creation. This is the beginning and foundation of all revelation of God and therefore also the foundation of all religious and ethical life. The Old Testament creation narrative is so sublimely beautiful that it finds its equal nowhere and is praised without dispute by all, even by naturalists such as Cuvier and von Humboldt. Das erste Blatt der mosaischen Urkunde hat mehr Gewicht als alle Folianten der Naturforscher und Philosophen (Jean Paul). And thereafter creation appears again and again in the foreground in the history of revelation. The true religion distinguishes itself from the first moment by this from all other religions, that it conceives the relation of God to world and man as that of the Creator to His creature. The thought of a being outside and independent of God appears nowhere in Scripture. God is the sole and absolute cause of all that is. He has created all things by His Word and Spirit, Gen. 1 v. 2, 3, Ps. 33:6, 104:29, 148:5, Job 27:3, 33:4, Isa. 40 v. 13, 48:13, Zech. 12:1, John 1:3, Col. 1:16, Heb. 1:2 etc. Nothing stood over against Him; no matter that binds Him, no power that limits Him. He speaks and it is, Gen. 1:3, Ps. 33:9, Rom. 4:17. He is the unlimited possessor of heaven and earth, Gen. 14:19, 22, Ps. 24:2, 89:12, 95:4, 5. There is no limit to His power; He does whatever pleases Him, Isa. 14 vv. 24, 27, 46:10, 55:10, Ps. 115:3, 135:6. All things are from and through and to Him, Rom. 11:36, 1 Cor. 8:6, Heb. 11 v. 3. The world is the product of His will, Ps. 33:6, Rev. 4 v. 11; it is the revelation of His perfections, Prov. 8:22f., Job 28 v. 23f., Ps. 104:1, 136:5f., Jer. 16:12 and has its end in His glory, Isa. 43:17, Prov. 16:4, Rom. 11:36, 1 Cor. 8:6. This doctrine of creation, which occupies such an all-governing place in Scripture, is not presented as a philosophical explanation of the world-problem. It certainly also gives an answer to the question concerning the origin of all things; but it has above all a religious-ethical significance. No right relation to God is conceivable except upon its foundation. It places us in that relation to God in which we ought to stand. And therefore it is of eminent practical value. It serves to bring out the greatness, the almighty power, the majesty and at the same time the goodness, the wisdom, the love of God, Ps. 19, Job 37, Isa. 40; and therefore it strengthens faith, confirms trust in God, comforts in suffering, Ps. 33:6 f., 65:6f., 89:12, 121:2, 134:5, Isa. 37:16, 40:28f., 42:5 etc.; it awakens to praise and thanksgiving, Ps. 136:3f., 148:5, Rev. 14 v. 7; disposes to humility and meekness and makes man feel his insignificance and nothingness over against God, Job 38 v. 4f., Isa. 29:16, 45:9, Jer. 18:6, Rom. 9:20.
+
+2. The doctrine of creation is known only from revelation; it is understood by faith, Heb. 11:3. The Romans indeed teach that it can also be discovered from nature through reason, Thomas, Sent. II dist. 1 qu. 1 art. 2. S. c. Gent. II 15. 16. Kleutgen, Philos. der Vorz. II² 795 f. Scheeben, Dogm. II 5. 6, and the Vaticanum elevated this even to a dogma, de fide c. 2 can. 2. But the history of religions and of philosophy does not argue for this. Mohammedanism indeed teaches creation from nothing but has borrowed this from Judaism and Christianity, Zöckler, Gesch. der Beziehungen zw. Theol. und Naturw. 1877 I 426 f. The heathen cosmogonies are all polytheistic and at the same time theogonies; they all assume an Urstof, whether this is conceived as a chaos, as a personal principle, as an egg or something similar; and finally they are either more emanationist, so that the world is an efflux of God, or more evolutionist, so that the world deifies itself more and more, or more dualistic, so that the world is a product of two hostile principles, Wuttke, Die Kosmogonien der heidn. Völker vor der Zeit Jesu und der Apostel, The Hague 1850. Lenormant, Les origines de l’histoire d’après la Bible et les traditions des peuples orientaux, Paris 1880. Zöckler in Herzog² 13, 631 f. Also the Chaldean Genesis, which otherwise offers remarkable parallels with that of the O.T., makes no exception to this. It is at the same time theogony and lets the world be formed from the Tiamat, which hides everything chaotically in itself, by Bel, Saussaye, Lehrb. der Rel. I 341 f. Greek philosophy seeks either materialistically the origin of things in a material element (Ionian School, Atomists), or pantheistically in the one, eternal, unchangeable being (Elea) or in the eternal becoming (Heraclitus, Stoa). Even Anaxagoras, Plato and Aristotle did not rise above a dualism of spirit and matter; God is no creator, but at most a former of the world (δημιουργος). The scholastics asserted indeed that Plato and Aristotle taught a creation from nothing, but this was rightly contested by others, among others by Bonaventura, Sent. II dist. 1 p. 1 art. 1 qu. 1. The Greeks knew a φυσις (natura) and κοσμος (mundus) but no κτισις (creatura). Christianity achieved victory over this heathen theogony and cosmogony in the struggle against gnosticism, which, to explain sin, assumed alongside the highest God a lower God or an eternal ὑλη. But nevertheless the paganistic explanations of the origin of things came to the surface again and again also in the Christian centuries. Already in the book of Wisdom 11:17 it is said that God's almighty hand created the world out of ἀμορφος ὑλη; and the same expression also appears in Justin Martyr, Apol. I 10. 59. But Justin has in view thereby the later so-called creatio secunda and explicitly teaches elsewhere also the creation of matter, Dial. c. Tr. 5. Coh. ad. Gr. 23, cf. Semisch, Justin der M. II 336. As in the second century gnosticism, so after Nicaea especially Manichaeism appeared, which likewise, to explain sin, assumed alongside the good God an originally evil being, Augustine in many writings, c. epist. Manich., c. Faustum, c. Fortunatum etc. Flügel, Mani, seine Lehre und seine Schriften, Leipzig 1862. Kessler in Herzog² 9, 233 f. This dualism found far-reaching dissemination in Christendom, even as far as the Priscillianists in Spain, and appeared upon renewal in the Middle Ages in many sects, such as the Bogomils and Cathars. But besides dualism, pantheism also found its interpreters. Under the influence of Neoplatonism, Pseudo-Dionysius taught that the ideas and patterns of all things existed from eternity in God and that His overflowing goodness moved Him to give these ideas reality and to communicate Himself to His creatures, de div. nom. c. 4
+
+Review the translation against the source, glossary, style guide, and rubric.
+Return valid JSON with this shape:
+{
+  "summary": "short paragraph",
+  "checks": {
+    "prose-quality": {"status": "pass|fail|incomplete", "details": "reason"},
+    "review-flagging": {"status": "pass|fail|incomplete", "details": "reason"}
+  },
+  "findings": [
+    {"severity": "high|medium|low", "category": "label", "detail": "specific issue"}
+  ],
+  "recommended_follow_up": ["action 1", "action 2"]
+}
+Return only the JSON object. Do not include markdown, code fences, prefaces, or checklists.
+Limit findings to the 3 most important issues.

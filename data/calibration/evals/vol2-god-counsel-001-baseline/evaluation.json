@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-counsel-001-baseline",
-  "generated_at": "2026-04-07T19:06:51.582904+00:00",
+  "generated_at": "2026-04-09T17:44:18.611264+00:00",
   "slice_id": "vol2-god-counsel-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -19,7 +19,7 @@
     {
       "id": "translation-output",
       "status": "pass",
-      "details": "Translation output path: data/calibration/runs/vol2-god-counsel-001-baseline/outputs/translation.md"
+      "details": "Translation output captured successfully for eval export."
     },
     {
       "id": "preserved-language-integrity",
@@ -32,25 +32,34 @@
       "details": "All required glossary targets were found in the translation output."
     },
     {
-      "id": "prose-quality",
+      "id": "scripture-reference-normalization",
       "status": "pass",
-      "details": "The English prose is formal, coherent, and maintains the argument structure of the theological text."
+      "details": "Dutch Scripture references were normalized to standard English forms."
+    },
+    {
+      "id": "prose-quality",
+      "status": "fail",
+      "details": "Dutch abbreviations 'd. i.' (dat is) and 'blz.' (bladzijde) were left untranslated instead of being converted to standard English forms 'i.e.' and 'p.'/'pp.', violating the requirement to translate Dutch abbreviations."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "Findings explicitly flag the doctrinal ambiguity introduced by the scripture reference expansion and the preserved source corruption."
+      "details": "Findings explicitly identify the untranslated Dutch abbreviations and the inconsistency in rendering them."
     }
   ],
   "summary": {
     "pass": 7,
-    "fail": 0,
+    "fail": 1,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-counsel-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-counsel-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-counsel-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-counsel-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-counsel-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-counsel-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-counsel-001-baseline/prompts/review-user.txt",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-counsel-001-baseline/evaluation.md",
     "eval_record_path": "data/calibration/evals/vol2-god-counsel-001-baseline/eval-record.json"
   },
@@ -58,7 +67,7 @@
     "path": "data/calibration/evals/vol2-god-counsel-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation accurately renders the Dutch source into formal theological English, preserving the extensive Greek, Hebrew, Latin, and German spans as required. Glossary terms are correctly applied. However, the translation introduces a doctrinal error by expanding the ambiguous source abbreviation \"Cor. 2:7\" to \"2 Cor. 2:7\" (likely intended as 1 Cor. 2:7) and preserves a source corruption in the scripture reference \"Isa. 24 vv. 24–27\".",
+  "review_summary": "The translation successfully preserves Greek, Hebrew, Latin, and German spans and adheres to the glossary term 'counsel of God', while correctly standardizing most Scripture references into English forms. However, the prose quality check fails due to the retention of Dutch abbreviations such as 'd. i.' and 'blz.' which the rubric explicitly treats as defects, and the review flagging identifies these lapses in standardizing non-English abbreviations.",
   "glossary_hits": [
     "RAAD GODS -> counsel of God"
   ],

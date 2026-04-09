@@ -1,11 +1,11 @@
 {
-  "schema_version": "1.0",
-  "sanitization_version": "1.0",
+  "schema_version": "1.1",
+  "sanitization_version": "1.1",
   "run_id": "vol2-god-knowability-acquisita-001-baseline",
   "slice_id": "vol2-god-knowability-acquisita-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
-  "generated_at": "2026-04-07T16:53:22.310601+00:00",
+  "generated_at": "2026-04-09T17:01:32.777426+00:00",
   "source_refs": {
     "run_manifest_path": "config/calibration/run-manifests/vol2-god-knowability-acquisita-001-baseline.json",
     "slice_manifest_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/manifest.json",
@@ -25,7 +25,8 @@
         "translation_user_template": "translation-user-template.txt",
         "review_system": "review-system.txt",
         "review_user_template": "review-user-template.txt"
-      }
+      },
+      "finish_reason": "stop"
     },
     "review": {
       "provider": "z-ai",
@@ -37,11 +38,12 @@
         "review_system": "review-system.txt",
         "review_user_template": "review-user-template.txt"
       },
+      "finish_reason": "stop",
       "usage": {
-        "prompt_tokens": 7056,
-        "completion_tokens": 2412,
-        "total_tokens": 9468,
-        "reasoning_tokens": 1893,
+        "prompt_tokens": 6998,
+        "completion_tokens": 5556,
+        "total_tokens": 12554,
+        "reasoning_tokens": 5267,
         "cached_tokens": 0
       }
     }
@@ -50,21 +52,29 @@
     "translation_output_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/review-user.txt",
     "evaluation_report_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.json",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.md"
   },
   "hashes": {
     "run_manifest_sha256": "d4ebf17dc2ba64ac9e987758bccb2b083b398c624474d0be1ee6c75ed5b000b0",
     "slice_manifest_sha256": "815151c31b580c60ac5b60292aad96d38f60ccfb690aec94d6327e339e2bcb43",
-    "prompt_bundle_metadata_sha256": "42a49de33a345ef40c49f53767447506bcf60355c88dfcd542cb283fad0ae388",
+    "prompt_bundle_metadata_sha256": "3e5e9b6466d0f0bad7b8cd24becb7daad03afca6ef16570f638e5f47f846e7ea",
     "model_profile_sha256": "5ed2a01f09d09db59e1754be316cfaf49c764a0b6a136bb879a158237d6dde9e",
     "glossary_sha256": "19b61e35978c4930f83df5a7b9e0b81bce97d8b7ce2d98754338870e528954ac",
-    "style_guide_sha256": "99eb45a09233aa80d5c413c7f109974d21da9cb76cf100c402cbe190f05048c0",
-    "rubric_sha256": "c38eb785f4a65469b2902a931271a2206cc2196be4404d60be71c56b5b0a15cf",
-    "translation_output_sha256": "5b6d2666c1d844f53277d99acdd4c2039b0dfe5ebae2be54f8ec82ff5f15eb66",
-    "review_structured_sha256": "50b16d34a2091cfdcdeff5f03977e928ba35f2eecd759392718e4a5f355b4a22",
-    "findings_sha256": "dcc8e98c06e8c4a90a0e070556097c9e9e0b3f08084c6d39d99591946d9e24f6",
-    "evaluation_report_sha256": "3a6ec3744e7d44965961734bbb9fce70ea3aeb7de9746c46ddf8cc62ec7041ca",
-    "evaluation_markdown_sha256": "07d176601341214258e55a17686b0762450c48af667cc66d04f074e4a57a5a20"
+    "style_guide_sha256": "a1a5c485fa715028d1c43693eca547a0387ed8ad8fa527597339d69b2fb9a38c",
+    "rubric_sha256": "c2a563ffcb6757a0f9e32face796f091c9459bb91473a9778270132f62140083",
+    "translation_output_sha256": "a08dae81bd109cf15c6b036b5b2673b9e7b0aa481417f9acfd661911c750f9ac",
+    "review_structured_sha256": "2b2b88958777ca27f27031e648444f88c451c354b4f9227f7caf845db599a9ae",
+    "findings_sha256": "bcbecbc03f0566acb9e53dd904c7488ba429aaa900ee545ea84e389465ed7ec2",
+    "evaluation_report_sha256": "a7e79a644177b01a6386263f74b1f59c59fe6c5d2da76b1a9685e75d8e4dbe2a",
+    "evaluation_markdown_sha256": "de164b8ecd34dc1b3bba39714e3d396c2d8f04556d6298974f2df1f52620fe59",
+    "translation_system_prompt_sha256": "e88459c2542b810f3c237adfbf3875021954ab378645fd6bd5c6a51b689b3524",
+    "translation_user_prompt_sha256": "9d723515e37fafbe5c315691632e790a5d3c09649506e7862de1b4b289f7825d",
+    "review_system_prompt_sha256": "d32ea79f07f205d43763ea59eeda6c6186edadd1de334c6cabc96e38adb24876",
+    "review_user_prompt_sha256": "7f83ff91f54cfa5c3718bc7733c83a32faf4807bfd8cbdb2c21a5b3c3817fb20"
   }
 }

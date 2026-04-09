@@ -1,0 +1,359 @@
+Run ID: vol2-god-knowability-insita-001-baseline
+Slice ID: vol2-god-knowability-insita-001
+Slice Title: Volume 2 § 21.1-3 The Knowability of God (Insita)
+
+Rubric:
+schema_version: "1.0"
+slice_id: "vol2-god-knowability-insita-001"
+criteria:
+  - id: "preserved-language-integrity"
+    requirement: "All Greek and Hebrew spans from the source excerpt remain unchanged in the translation output."
+    status_values: "pass|fail|incomplete"
+  - id: "glossary-adherence"
+    requirement: "Required glossary targets appear where the source excerpt exercises those source terms."
+    status_values: "pass|fail|incomplete"
+  - id: "prose-quality"
+    requirement: "English output reads as coherent formal theological prose without flattening argument structure and renders Dutch Scripture references in standard English forms."
+    status_values: "pass|fail|incomplete"
+  - id: "review-flagging"
+    requirement: "Reviewer findings explicitly call out preservation risks, doctrinal ambiguity, and unresolved quality issues."
+    status_values: "pass|fail|incomplete"
+
+Excerpt-scoped glossary:
+schema_version: "1.0"
+slice_id: "vol2-god-knowability-insita-001"
+terms:
+  - source: "KENBAARHEID GODS"
+    target: "knowability of God"
+    notes: "Section-title term for this slice."
+
+Style guide:
+# Style Guide
+
+- Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source excerpt.
+- Retain citation structure, but translate Dutch Scripture references, book names, and abbreviations into standard English forms; keep patristic or scholastic citations intact.
+- Translate into formal but readable English theological prose; do not modernize into colloquial language.
+- Prefer glossary-approved renderings when the glossary lists a source phrase from the excerpt.
+- Flag ambiguous doctrinal phrasing instead of smoothing over uncertainty.
+
+Source excerpt:
+§ 21. DE KENBAARHEID GODS. (Cognitio Dei insita.)
+
+
+1. Evenals vroeger bĳ de religie I 209 v., zoo bleek ook thans bĳ
+de kennisse Gods, dat ze haar oorsprong niet hebben kan dan in
+openbaring. Indien God niet in zĳne schepselen openbaar wordt, dan is
+er ook vanzelf geen kennis van Hem mogelĳk. Maar als Hĳ zĳne deugden
+in de wereld der schepselen ten toon spreidt, dan kan de kenbaarheid
+Gods ook niet meer bestreden worden. Natuurlĳk is daarmede de aard
+en de mate dier kennis niet bepaald. Allen, die de kenbaarheid Gods
+leeren, stemmen gaarne toe, dat die kennis geheel eigensoortig en van
+zeer beperkten omvang is. Immers, al wordt God eenigermate in zĳne
+schepselen openbaar, er blĳft in Hem eene oneindige volheid van kracht
+en leven achter, welke niet aan het licht treedt. Zĳne kennis en macht
+valt niet met de wereld samen en stort daarin niet ten volle zich uit.
+Hĳ kan zelfs aan en in schepselen zich niet volkomen openbaren, want
+het eindige vat het oneindige niet, niemand kent den Vader dan de Zoon,
+Mt. 11:27 cf. Deut. 29:29. Bovendien, datgene, wat God van zichzelven
+in en door schepselen openbaart is reeds zoo rĳk en zoo diep, dat
+het nooit ten volle door eenig mensch kan worden gekend. Wĳ begrĳpen
+in zoo menig opzicht de wereld der geschapene dingen niet en staan
+ieder oogenblik aan alle zĳden voor raadselen en geheimenissen, hoe
+zouden wĳ dan de openbaring Gods in al haar rĳkdom en diepte verstaan?
+Maar daarmede wordt de kenbaarheid Gods toch niet te niet gedaan. De
+onbegrĳpelĳkheid Gods doet deze kenbaarheid zoo weinig te niet, dat zĳ
+haar veeleer onderstelt en bevestigt; de alle kennis te bovengaande
+rĳkdom van het Goddelĳk wezen maakt juist een noodzakelĳk en belangrĳk
+element onzer Godskennis uit. Het blĳft vast staan, dat God op
+diezelfde wĳze en in diezelfde mate voor ons kenbaar is, als Hĳ zich in
+schepselen aan ons openbaart.
+
+Dat er nu eene openbaring Gods in de wereld is, kan eigenlĳk moeilĳk
+worden ontkend. Vooreerst laat de H. Schrift ons dienaangaande geen
+oogenblik in twĳfel. Zĳ richt geen altaar op voor den onbekenden God,
+maar verkondigt dien God, die de wereld gemaakt heeft, Hd. 17:23, wiens
+kracht en goddelĳkheid uit de schepselen door den menschelĳken νους
+kan worden aanschouwd, Rom. 1:19, die bovenal den mensch schiep naar
+zĳn beeld en gelĳkenis, Gen. 1:26, als zĳn geslacht, dat in Hem leeft
+en zich beweegt, Hd. 17:28, door profeten en apostelen, bovenal door
+zĳn Zoon zelf tot hem heeft gesproken, Hebr. 1:1, en nu voortdurend
+door Woord en Geest zich aan en in hem openbaart, Mt. 16:17, Joh. 14:23
+enz. Volgens de H. Schrift is de gansche wereld eene schepping en dus
+ook eene openbaring Gods; er is in absoluten zin niets atheistisch.
+En dit getuigenis der Schrift wordt van alle zĳden bevestigd. Er is
+geen atheistische wereld, er zĳn geen atheistische volken, er zĳn
+ook geen atheistische menschen. De wereld kan niet als ἀθεος worden
+gedacht, wĳl ze dan niet het werk Gods kon zĳn maar de schepping van
+een ἀντιθεος moest wezen. En nu heeft het dualisme, dat in religie
+en philosophie telkens is opgetreden, in de stof wel een daemonisch
+principe aanschouwd, maar in de wereld toch altĳd eene verbinding van
+idee en stof, een strĳd van licht en duisternis erkend. Er is niemand,
+die in volstrekten zin en consequent de kenbaarheid Gods, en dus Zĳne
+openbaring in de wereld geheel en al loochenen kan. Het agnosticisme is
+zelf daarvoor ten bewĳze, evenals het scepticisme zich niet handhaven
+kan dan met behulp van wat het bestrĳdt. En juist daarom, wĳl de
+wereld niet ἀθεος te denken is, daarom zĳn er ook geen atheistische en
+godsdienstlooze volken. Wel is dit door Socinus, Tract. Theol. c. 2,
+de auctor. Script. c. 2, Locke, Essay on human understanding I ch. 4
+§ 8, en door velen in deze eeuw, b. v. Büchner, Kraft u. Stoff¹⁶ 380
+f., Darwin, Afst. des menschen 1884 I 127, beweerd. Maar dit gevoelen
+is genoegzaam weerlegd en thans schier algemeen prĳs gegeven, Moor,
+Comm. I 57. M. Vitringa, Comm. I 16. Flint, Antitheïstic theories,
+3 ed. p. 250-289, 519-532. Peschel, Völkerkunde S 260. Zöckler, Das
+Kreuz Christi 1875 S. 417 f. De bekende uitspraak van Cicero, dat er
+geen volk zoo barbaarsch is of het gelooft aan de goden, is eeuw aan
+eeuw bevestigd. Dit feit is van groote beteekenis. Datgene, waarin
+alle menschen krachtens hunne natuur overeenstemmen, kan niet valsch
+zĳn, Cic. de nat. deor. I 17. Opinionum enim commenta delet dies,
+naturae judicia confirmat, ib. II 2. En zoo zĳn er ten slotte ook geen
+atheistische menschen. Er is niet zoozeer verschil over het bestaan
+als wel over het wezen Gods. Wel is er een practisch atheïsme, een
+leven zonder God in de wereld, Ps. 14:1, 53:2, Ef. 2:12. Maar het
+bewuste theoretische atheisme in absoluten zin is zeldzaam, indien
+het ooit voorkomt. Het woord atheisme is echter dikwerf in relatieven
+zin gebezigd, niet als loochening van de Godheid überhaupt, maar van
+eene bepaalde Godheid. De Grieken klaagden Socrates van atheisme
+aan, Xenophon, Memor. I 1. Cicero rekende Protagoras, Prodicus tot
+de atheisten, wĳl zĳ de volksgoden loochenden, de nat. deor. I 42.
+De Christenen werden daarom menigmaal door de Heidenen van atheisme
+beschuldigd, Suicerus s. v. ἀθεος. En de Christenen bezigden op hunne
+beurt dien naam voor wie den God der openbaring loochenden, ib. De
+Roomschen hebben Luther, Melanchton, Calvĳn soms tot de atheisten
+gerekend, Buddeus, de Atheismo 1747 p. 116 sq. In den nieuweren tĳd
+werd J. G. Fichte openlĳk van atheisme aangeklaagd, wĳl hĳ de zedelĳke
+wereldorde zelve voor God hield. En nog wordt de naam van atheist
+wel gegeven aan hen, die geen andere macht kennen dan de stof, zooals
+Feuerbach, Strauss, Büchner, Haeckel, Czolbe, Dühring, cf. A. Drews,
+Die deutsche Spekulation seit Kant II 235 f. En inderdaad, als de
+materialisten niets anders erkennen dan stof en wisseling der stof, dan
+zĳn ze atheisten en willen daar zelf voor gehouden worden. Maar dit
+komt bĳna nooit voor. In absoluten zin genomen, als loochening van eene
+absolute macht, dan is het atheisme bĳna ondenkbaar. Allen erkennen
+ten slotte weer eene macht, die als God wordt vereerd. Strauss vraagt
+voor zĳn universum eene piëteit, als de geloovige voor zĳn God, Der
+alte u. d. neue Gl². 141 f. Het atheisme en materialisme slaat telkens
+in pantheisme om, Büchner, Kraft u. Stoff¹⁶ 3, 70, 71 f., Haeckel,
+Nat. Schöpfungsgesch. 20, 32, 64 Id. Der Monismus als Band zw. Rel.
+u. Wiss. 1893. Dat komt, omdat de mensch aan de erkenning van eene
+hoogste macht zich niet kan onttrekken. Op hetzelfde oogenblik dat hĳ
+den waren God loochent, versiert hĳ zich een valschen God. De religie
+zit daartoe te diep in ’s menschen natuur en de openbaring Gods spreekt
+te luide. Zelfs als in sommige tĳden het religieuse indifferentisme en
+scepticisme diep en ver om zich heen grĳpt, zooals b. v. in de eeuw
+van Pericles, van keizer Augustus, van de Renaissance, en ook in deze
+eeuw, dan komt toch altĳd de godsdienst weer boven. Veeleer grĳpt de
+mensch het grofste bĳgeloof aan, dan dat hĳ op den duur bĳ het naakte,
+koude ongeloof het uithouden kan. Maar we kunnen zelfs verder gaan.
+Niet alleen komt het atheisme in absoluten zin bĳna nimmer voor, maar
+zelfs in dien zin is het zeldzaam, dat het een persoonlĳk God zou
+loochenen, die aanspraak heeft op onze vereering. Het naturalisme, het
+hylozoïsme, het pantheisme zĳn zonder twĳfel richtingen, die telkens
+zich voordoen. Maar het zĳn richtingen, niet zoozeer op godsdienstig
+als wel op wĳsgeerig gebied. Ze zĳn nooit van zelf, spontaan opgekomen,
+maar danken haar ontstaan aan kritiek op de religieuse voorstellingen
+bĳ anderen. Ze zĳn niet dogmatisch maar kritisch; en ze dienen daarom
+altĳd maar voor een tĳd en in een beperkten kring. Een volk, eene
+maatschappĳ, eene kerk, eene gemeente van zulke naturalisten en
+pantheisten is ondenkbaar en onbestaanbaar; de pantheïsten erkennen
+dit zelf, de godsdienstige voorstelling is voor den minderen man
+noodzakelĳk, maar alleen de wĳsgeer verheft zich tot het zuivere
+begrip. Daaruit volgt, dat het geloof aan een persoonlĳk God natuurlĳk
+en normaal is; het komt overal vanzelf en bĳ alle menschen op. Maar het
+atheisme, zelfs als loochening van een persoonlĳk God, is uitzondering.
+Het is wĳsbegeerte, geen godsdienst. Er ligt waarheid in het scherpe
+woord van Schopenhauer: ein unpersönlicher Gott ist gar kein Gott,
+sondern bloss ein missbrauchtes Wort, ein Unbegriff, eine contradictio
+in adjecto, ein Shiboleth für Philosophieprofessoren, welche, nachdem
+sie die Sache haben aufgeben mussen, mit dem Worte durchzuschleichen
+bemüht sind, Par. u. Parel. I⁵ 123. cf. Welt als Wille u. Vorst.
+II⁶ 398, 406, 739. Daarom is er ook een zekere wil noodig, om niet
+aan een God, aan een persoonlĳk God, te gelooven. Deum non esse non
+credit, nisi cui Deum non esse expedit. Er zĳn geen athei, die vast
+en zeker, tot den marteldood toe, van hun ongeloof overtuigd zĳn. Wĳl
+het abnormaal en onnatuurlĳk is, niet op de onmiddellĳke beseffen
+maar op middellĳke bewĳzen en feilbare redeneeringen steunt, daarom
+is het nooit zeker van zĳne zaak. De bewĳzen voor het bestaan van een
+persoonlĳk God mogen zwak zĳn, ze zĳn altĳd nog sterker dan die voor de
+loochening. Te bewĳzen, dat er geen God is, is zelfs onmogelĳk; daartoe
+zou men alwetend en alomtegenwoordig, d. i. zelf God moeten zĳn, cf.
+Voetius, de atheismo, Disp. I 114-225. G. J. Vossius, de origine et
+progressu idol. I c. 3. Leydecker, Fax Veritatis III controv. 3.
+Turretinus, Theol. El. III qu. 2. Maresius, Syst. Theol. 1673 p. 44.
+Buddeus, Theses theol. de atheismo et superst., ed. Lulofs L. B. 1747.
+Hodge, Syst. Theol. I 198, 242. Flint, Antith. theories³, lecture I,
+Hoekstra, Des Christens godsvrucht bl. 6. Doedes, Inl. tot de leer v.
+God. 57v.
+
+
+2. Deze natuurlĳkheid, algemeenheid en noodzakelĳkheid van religie
+en Godskennis heeft reeds vroeg tot de gedachte geleid, dat deze den
+mensch van nature was ingeschapen en aangeboren. Het feit ligt er toch,
+dat alle menschen van de prilste jeugd af bewustzĳn hebben niet alleen
+van eene physische maar ook van eene psychische, geestelĳke, onzienlĳke
+wereld. Waar en valsch, goed en kwaad, recht en onrecht, schoon en
+leelĳk zĳn wel geen weeg- en meetbare grootheden en kunnen niet
+waargenomen worden met de vĳf zintuigen, maar ze zĳn eene werkelĳkheid,
+die voor ons bewustzĳn nog veel vaster staat dan die van stof en
+van kracht. Het materialisme moge alleen rekenen met zwaartekracht
+en warmte en electriciteit; maar geloof en hoop en liefde zĳn nog
+gansch andere krachten, die de menschheid hebben beheerscht en voor
+het wegzinken in bestialiteit hebben behoed. Augustinus heeft terecht
+gezegd, dat de waarheid der geestelĳke dingen eigenlĳk veel zekerder
+en vaster is dan die van de zienlĳke. Nihil absurdius dici potest,
+quam ea esse quae oculis videmus, ea vero non esse quae intelligentia
+cernimus, cum dubitare dementis sit intelligentiam incomparabiliter
+oculis anteferri, de immort. an. c. 10 n. 17. de civ. XIX c. 18. De
+waarheden der mathesis, der logika, de grondbeginselen van ethiek,
+recht, religie staan voor allen ontwĳfelbaar vast. Zĳ dragen een
+karakter van natuurlĳkheid, algemeenheid en noodzakelĳkheid, dat door
+niemand kan worden ontkend. Zĳ schĳnen als ideae innatae in ’s menschen
+natuur besloten, met zĳne geboorte gegeven te zĳn.
+
+De leer der aangeboren begrippen wortelt reeds in de Grieksche
+philosophie. Daar maakte het een groot probleem voor het denken uit,
+hoe leeren toch mogelĳk is. Want een van beide scheen toch het geval
+te zĳn: òf wĳ weten iets al en dan kunnen wĳ het niet meer leeren, òf
+wĳ weten het niet, maar hoe is het dan te verklaren dat wĳ er naar
+streven, om het te leeren, Zeller, Philos. d. Gr. I⁴ 996, II⁴ 823, III
+189. Plato loste dit probleem op door zĳne leer van de herinnering;
+de ziel had voor hare verbinding met het lichaam de ideeën in al hare
+schoonheid aanschouwd en de beelden daarvan diep in haar geheugen
+bewaard. Hĳ bewees dit vooral met de wiskunde, die wĳ geheel uit onzen
+geest kunnen opbouwen zonder hulp der zinnelĳke waarneming, maar meende
+overigens dat alle leeren de praeexistentie der ziel onderstelde,
+Zeller, ib. II⁴ 639, 643 f. 823 f. Aristoteles achtte wel de zinnelĳke
+waarneming den weg tot kennis, maar oordeelde toch, dat de rede
+potentieel eenige hoogste, algemeene beginselen meebracht, die door
+zichzelve vaststaan, aan alle bewĳzen ten grondslag liggen en door
+allen worden erkend, ib. III 188 f. De Stoicĳnen spraken van κοιναι
+ἐννοιαι, φυσικαι ἐννοιαι, ἐμφυτοι προληψεις, d. i. zulke begrippen,
+welke krachtens de natuur van ons denken door allen uit de waarneming
+worden afgeleid, ib. IV³ 74 f. 389 f. Bĳ al deze wĳsgeeren is er van
+aangeboren ideeën in strikten zin nog geen sprake. Plato beperkt de
+herinnering niet tot enkele aangeboren begrippen maar breidt ze tot
+alle kennis uit; en Aristoteles en anderen spreken wel van algemeene
+beginselen maar leeren uitdrukkelĳk dat deze niet als ideeën met de
+geboorte gegeven zĳn maar bepaaldelĳk door middel van waarneming en
+denken gevonden worden, maar zoo, dat elk normaal mensch ze dan ook
+vinden moet. In eigenlĳken zin komt de leer der aangeboren begrippen
+eerst bĳ Cicero voor. Hĳ spreekt van notiones impressae, cogitationes
+insitae, innatae en neemt een weten aan van allerlei waarheden voor
+alle ervaring en onderzoek. Er zĳn volgens hem semina innata virtutum,
+Tusc. III 1, 2, notitiae parvae rerum maximarum, die de natuur sine
+doctrina in onze ziel plantte, de fin. V 21, 59, een aangeboren
+Godskennis, Deos esse natura opinamur, Tusc. I 16, 36. Nat. D. I 1, 2
+enz. Zeller, IV³ 659 f.
+
+
+3. In de nieuwere philosophie werd de leer der ideae innatae
+voorgedragen door Cartesius, die ook het eerst dezen term gebruikte
+en idee dus in een tot dien tĳd toe ongewonen zin ging bezigen. Bĳ
+Cartesius hing deze leer samen met zĳn dualisme tusschen ziel en
+lichaam. De cognitio intellectualis is niet uit de zinlĳke waarneming
+af te leiden; deze geeft alleen de occasio, waarbĳ onze geest per
+innatam facultatem de voorstellingen en begrippen vormt, Renati
+Descartes, Notae p. 185. De cognitio komt uit een eigen beginsel,
+d. i. uit ideae innatae, voort. Onder die ideae innatae is die van God
+de voornaamste, welke als het ware is eene nota artificis, operi suo
+impressa. Medit. tertia p. 24. Maar het aangeboren zĳn dier ideeën
+vat hĳ zoo op, dat de ziel van nature de kracht, de facultas, de
+dispositio bezit, om ze uit zichzelve voort te brengen. De ideeën zĳn
+dus niet actueel maar potentieel in onzen geest, Object. et Respons.
+p. 102, Notae p. 184, 185. Ook volgens Leibniz komen de noodzakelĳke
+en algemeene waarheden niet van buiten tot ons, maar zĳ komen uit
+onszelven voort, zooals bĳv. die van substantie, duur, verandering,
+oorzaak, de mathematische waarheden en vooral ook de Godsidee.
+Samen vormen deze waarheden het natuurlĳk licht der rede. Maar het
+aangeboren zĳn dier waarheden wordt door Leibniz breedvoeriger en
+duidelĳker verklaard dan door Cartesius. Deze zeide alleen, dat die
+ideeën potentieel in onzen geest waren. Leibniz echter zegt, dat ze
+virtualiter zĳn aangeboren, comme des inclinations, des dispositions,
+des habitudes ou des virtualités naturelles et non pas comme des
+actions. De geest des menschen heeft maar niet de vatbaarheid om ze te
+kennen, want dan kon alle kennis aangeboren heeten, maar hĳ is de bron
+dier waarheden, hĳ kan ze uit zichzelf te voorschĳn brengen, les tirer
+lui-même de son fond. De ideeën liggen dus als ’t ware gepraeformeerd
+in ’s menschen ziel. En dit is mogelĳk, wĳl er een voorstellen en
+denken is zonder bewustheid. Tot bewustheid komen ze, als de zinlĳke
+waarneming er aanleiding toe geeft. Deze brengt de virtueel in ons
+aanwezige ideeën ook actueel in onzen geest, cf. Spruĳt, Proeve van
+de leer der aangeb. begrippen 144, Stöckl, Gesch. d. n. Phil. I 426,
+Malebranche meende het leeren en weten bĳ den mensch niet anders te
+kunnen verklaren dan door de onderstelling, dat wĳ de ideeën in God
+zien en dat God dus als het algemeene en oneindige zĳn in ons verstand
+onmiddellĳk present is. Op zĳn voetspoor leerde het ontologisme van
+Gioberti, Gratry, Ubaghs e. a. dat wĳ God in onzen geest onmiddellĳk
+aanschouwen als het absolute zĳn en dat er dus eene intuitieve kennis
+van God in den mensch aanwezig is, Stöckl, Gesch. d. neuern Philos.
+II 568 f. 620 f. Door Kant werd deze leer der aangeboren begrippen
+belangrĳk gewĳzigd. In aansluiting aan de terminologie van Wolff sprak
+hĳ van kennis apriori en aposteriori, en leerde nu geen aangeboren
+begrippen maar wel aangeboren vormen, nl. vormen der aanschouwing,
+d. i. ruimte en tĳd, vormen des verstands, d. i. kategorieën, en vormen
+der rede, d. i. de ideeën God, deugd en onsterfelĳkheid. Het idealisme
+van Fichte en Hegel dreef deze leer zoo op de spits, dat zĳ niet alleen
+de kennis der noodzakelĳke en algemeene waarheden, maar alle kennis,
+en zelfs alle zĳn, heel de stoffelĳke wereld construeerden uit het
+denken. De gronden, waarop deze leer der ideae innatae voornamelĳk
+steunt, zĳn deze: Het leeren, het kunnen leeren, onderstelt dat
+hetgeen geleerd wordt reeds op eenige wĳze in onzen geest aanwezig is.
+De redeneering en het bewĳs zĳn gebouwd op principia, die per se en
+apriori moeten vaststaan. De ervaring geeft alleen δοξα, toevallige
+waarheden; algemeene en noodzakelĳke waarheden kunnen alleen uit
+den geest des menschen zelf voortkomen. Dat er zulke algemeene en
+noodzakelĳke waarheden zĳn, wordt bewezen door den consensus gentium.
+En bovenal is de tegenstelling tusschen ziel en lichaam van dien
+aard, dat voorstellingen en begrippen niet in de zinlĳke waarneming
+hun oorsprong kunnen hebben; zĳ moeten of uit den geest des menschen
+worden verklaard of uit den Geest Gods, in wien de mensch alle ideeën
+aanschouwt. Daarentegen werd de leer der aangeboren begrippen bestreden
+door de Socinianen, die de natuurlĳke religie verwierpen, Fock, Der
+Socin. 307 f., cf. ook Episcopius, Inst. theol. I c. 3, Locke, Essay
+concerning human understanding I ch. 2-4, Hobbes, de cive c. 14 n. 19
+enz. Zĳ beriepen zich op de volgende overwegingen: De leer der ideae
+innatae is volkomen overbodig, omdat het ontstaan dier ideeën ook langs
+anderen weg zich goed laat verklaren. De geschiedenis leert, dat geen
+enkele voorstelling en geen enkel begrip bĳ alle menschen en volken
+gelĳk is. Zelfs aangeboren zedelĳke beginselen zĳn er niet; over goed
+en kwaad heerscht het grootst mogelĳke verschil; en het Godsbegrip is
+zoo weinig aangeboren, dat er zelfs atheistische menschen en volken
+bestaan. Kinderen, idioten, krankzinnigen weten dan ook van zulke
+aangeboren begrippen niets af. Alle kennis stamt bĳ den mensch uit
+de zinlĳke waarneming; nihil est in intellectu quod non prius fuerit
+in sensu. Deze bestrĳding van de ideae innatae maakte in Engeland en
+Frankrĳk in de vorige eeuw veel opgang. Het materialisme van deze eeuw
+sloot er zich bĳ aan. De leer der aangeboren begrippen is algemeen
+prĳsgegeven en vervangen door de theorie van de overerving der
+eigenschappen, Darwin, Afst. v. d. mensch, hoofdst. 3, 4. Spencer, bĳ
+Spruyt Proeve 342. Büchner, Kraft u. Stoff¹⁶ S. 344 f.
+
+Translation output:
+§ 21. THE KNOWABILITY OF GOD. (Cognitio Dei insita.)
+
+1. As previously with regard to religion I 209 ff., so also now with regard to the knowledge of God, it appeared that it cannot have its origin except in revelation. If God does not reveal Himself in His creatures, then of itself no knowledge of Him is possible either. But if He displays His virtues in the world of creatures, then the knowability of God can no longer be contested either. Naturally, therewith the nature and the measure of that knowledge is not determined. All who teach the knowability of God willingly agree that this knowledge is entirely sui generis and of very limited scope. For even if God is revealed to some extent in His creatures, there remains in Him an infinite fullness of power and life behind, which does not come to light. His knowledge and power does not coincide with the world and does not pour itself out into it fully. He cannot even perfectly reveal Himself to and in creatures, for the finite does not comprehend the infinite, no one knows the Father except the Son, Matt. 11:27 cf. Deut. 29:29. Moreover, that which God reveals of Himself in and through creatures is already so rich and so deep that it can never be fully known by any human. We do not understand in so many respects the world of created things and stand at every moment on all sides before riddles and mysteries; how then should we understand the revelation of God in all its richness and depth? But with that the knowability of God is nevertheless not nullified. The incomprehensibility of God nullifies this knowability so little that it rather presupposes and confirms it; the richness of the Divine being, surpassing all knowledge, constitutes precisely a necessary and important element of our knowledge of God. It remains established that God is knowable to us in the same manner and to the same extent as He reveals Himself to us in creatures.
+
+That there is now a revelation of God in the world can actually hardly be denied. First, Holy Scripture leaves us in no doubt regarding this. It erects no altar to the unknown God, but proclaims that God who made the world, Acts 17:23, whose power and divinity can be beheld from the creatures through the human νοῦς, Rom. 1:19, who above all created man in His image and likeness, Gen. 1:26, as His offspring, who lives and moves in Him, Acts 17:28, has spoken to him through prophets and apostles, above all through His Son Himself, Heb. 1:1, and now continually reveals Himself to and in him through Word and Spirit, Matt. 16:17, John 14:23, etc. According to Holy Scripture the whole world is a creation and thus also a revelation of God; there is in an absolute sense nothing atheistic. And this testimony of Scripture is confirmed from all sides. There is no atheistic world, there are no atheistic peoples, there are also no atheistic human beings. The world cannot be thought as ἄθεος, because it then could not be the work of God but would have to be the creation of an ἀντίθεος. And now, the dualism that has repeatedly appeared in religion and philosophy has indeed regarded a daemonic principle in matter, but in the world has always recognized a connection of idea and matter, a struggle of light and darkness. There is no one who can deny in an absolute sense and consistently the knowability of God, and thus His revelation in the world entirely. Agnosticism itself is proof of this, just as skepticism cannot maintain itself except with the help of what it combats. And precisely therefore, because the world is not to be thought ἄθεος, therefore there are also no atheistic and irreligious peoples. Indeed this has been asserted by Socinus, Tract. Theol. c. 2, de auctor. Script. c. 2, Locke, Essay on human understanding I ch. 4 § 8, and by many in this century, e.g. Büchner, Kraft u. Stoff¹⁶ 380 f., Darwin, Afst. des menschen 1884 I 127. But this sentiment has been sufficiently refuted and now almost generally conceded, Moor, Comm. I 57. M. Vitringa, Comm. I 16. Flint, Antitheistic theories, 3 ed. p. 250-289, 519-532. Peschel, Völkerkunde S 260. Zöckler, Das Kreuz Christi 1875 S. 417 f. The well-known statement of Cicero, that there is no people so barbarous that it does not believe in the gods, has been confirmed from age to age. This fact is of great significance. That in which all human beings agree by virtue of their nature cannot be false, Cic. de nat. deor. I 17. Opinionum enim commenta delet dies, naturae judicia confirmat, ib. II 2. And so there are finally also no atheistic human beings. There is not so much difference regarding the existence as rather regarding the being of God. Indeed there is a practical atheism, a life without God in the world, Ps. 14:1, 53:2, Eph. 2:12. But conscious theoretical atheism in an absolute sense is rare, if it ever occurs. The word atheism, however, is often employed in a relative sense, not as denial of the Deity in general, but of a particular Deity. The Greeks accused Socrates of atheism, Xenophon, Memor. I 1. Cicero counted Protagoras, Prodicus among the atheists, because they denied the popular gods, de nat. deor. I 42. The Christians were therefore often accused of atheism by the Heathens, Suicerus s. v. ἄθεος. And the Christians in turn employed that name for those who denied the God of revelation, ib. The Romans have sometimes counted Luther, Melanchthon, Calvin among the atheists, Buddeus, de Atheismo 1747 p. 116 sq. In more recent times J. G. Fichte was openly accused of atheism, because he held the moral world-order itself to be God. And still the name of atheist is given to those who know no other power than matter, such as Feuerbach, Strauss, Büchner, Haeckel, Czolbe, Dühring, cf. A. Drews, Die deutsche Spekulation seit Kant II 235 f. And indeed, if the materialists recognize nothing other than matter and the changing of matter, then they are atheists and wish themselves to be held as such. But this almost never occurs. Taken in an absolute sense, as denial of an absolute power, then atheism is almost unthinkable. All finally recognize again a power that is worshipped as God. Strauss asks for his universe a piety, as the believer for his God, Der alte u. d. neue Gl². 141 f. Atheism and materialism repeatedly turn into pantheism, Büchner, Kraft u. Stoff¹⁶ 3, 70, 71 f., Haeckel, Nat. Schöpfungsgesch. 20, 32, 64 Id. Der Monismus als Band zw. Rel. u. Wiss. 1893. This occurs because man cannot escape the recognition of a highest power. At the same moment that he denies the true God, he adorns himself with a false God. Religion sits too deep in human nature for that, and the revelation of God speaks too loudly. Even when in some times religious indifferentism and skepticism grasp far and wide, such as e.g. in the age of Pericles, of Emperor Augustus, of the Renaissance, and also in this century, nevertheless religion always comes back up. Rather man seizes upon the grossest superstition than that he can endure in the end with the naked, cold unbelief. But we can go even further. Not only does atheism in an absolute sense almost never occur, but even in the sense that it would deny a personal God who has claim to our worship, it is rare. Naturalism, hylozoism, pantheism are undoubtedly directions that repeatedly present themselves. But they are directions not so much in the religious as rather in the philosophical domain. They have never arisen of themselves, spontaneously, but owe their origin to criticism of the religious representations in others. They are not dogmatic but critical; and therefore they always serve only for a time and in a limited circle. A people, a society, a church, a congregation of such naturalists and pantheists is unthinkable and incapable of existence; the pantheists themselves recognize this, the religious representation is necessary for the common man, but only the philosopher elevates himself to the pure concept. From this follows that the belief in a personal God is natural and normal; it arises everywhere spontaneously and in all human beings. But atheism, even as denial of a personal God, is exception. It is philosophy, not religion. There is truth in the sharp word of Schopenhauer: ein unpersönlicher Gott ist gar kein Gott, sondern bloss ein missbrauchtes Wort, ein Unbegriff, eine contradictio in adjecto, ein Shiboleth für Philosophieprofessoren, welche, nachdem sie die Sache haben aufgeben müssen, mit dem Worte durchzuschleichen bemüht sind, Par. u. Parel. I⁵ 123. cf. Welt als Wille u. Vorst. II⁶ 398, 406, 739. Therefore there is also a certain will necessary in order not to believe in a God, in a personal God. Deum non esse non credit, nisi cui Deum non esse expedit. There are no athei who are firmly and certainly convinced of their unbelief, even to the point of martyrdom. Because it is abnormal and unnatural, resting not on immediate apprehensions but on mediate proofs and fallible reasonings, therefore it is never certain of its case. The proofs for the existence of a personal God may be weak, they are always still stronger than those for the denial. To prove that there is no God is even impossible; for that one would have to be omniscient and omnipresent, that is, God Himself, cf. Voetius, de atheismo, Disp. I 114-225. G. J. Vossius, de origine et progressu idol. I c. 3. Leydecker, Fax Veritatis III controv. 3. Turretinus, Theol. El. III qu. 2. Maresius, Syst. Theol. 1673 p. 44. Buddeus, Theses theol. de atheismo et superst., ed. Lulofs L. B. 1747. Hodge, Syst. Theol. I 198, 242. Flint, Antith. theories³, lecture I, Hoekstra, The Christian's Piety p. 6. Doedes, Introduction to the Doctrine of God, 57 ff.
+
+
+2. This naturalness, universality, and necessity of religion and knowledge of God has already early led to the thought that these were innate and inborn in man by nature. The fact lies there indeed, that all human beings from earliest youth have consciousness not only of a physical but also of a psychical, spiritual, invisible world. True and false, good and evil, right and wrong, beautiful and ugly are indeed no weighable and measurable quantities and cannot be perceived with the five senses, but they are a reality that stands for our consciousness much more firmly than that of matter and of force. Materialism may reckon only with gravity and heat and electricity; but faith and hope and love are yet entirely different forces that have governed humanity and preserved it from sinking into bestiality. Augustinus has rightly said that the truth of spiritual things is actually much more certain and firm than that of visible things. Nihil absurdius dici potest, quam ea esse quae oculis videmus, ea vero non esse quae intelligentia cernimus, cum dubitare dementis sit intelligentiam incomparabiliter oculis anteferri, de immort. an. c. 10 n. 17. de civ. XIX c. 18. The truths of mathesis, of logic, the fundamental principles of ethics, law, religion stand indubitably firm for all. They bear a character of naturalness, universality, and necessity that cannot be denied by anyone. They appear as ideae innatae enclosed in human nature, given with his birth.
+
+The doctrine of innate concepts is already rooted in Greek philosophy. There it made a great problem for thought how learning is possible at all. For one of two things seemed to be the case: either we already know something and then we cannot learn it anymore, or we do not know it, but how then is it to be explained that we strive after it in order to learn it, Zeller, Philos. d. Gr. I⁴ 996, II⁴ 823, III 189. Plato solved this problem through his doctrine of recollection; the soul had beheld the ideas in all their beauty before its connection with the body and preserved the images thereof deep in its memory. He proved this especially with mathematics, which we can construct entirely from our mind without the help of sense perception, but otherwise thought that all learning presupposed the pre-existence of the soul, Zeller, ib. II⁴ 639, 643 f. 823 f. Aristoteles indeed regarded sense perception as the way to knowledge, but judged nevertheless that reason brought along potentially some highest, general principles that stand firm through themselves, lie at the foundation of all proofs, and are recognized by all, ib. III 188 f. The Stoics spoke of κοιναὶ ἔννοιαι, φυσικαὶ ἔννοιαι, ἔμφυτοι προλήψεις, that is, such concepts which by virtue of the nature of our thinking are derived by all from perception, ib. IV³ 74 f. 389 f. With all these philosophers there is as yet no question of innate ideas in the strict sense. Plato limits recollection not to some innate concepts but extends it to all knowledge; and Aristoteles and others indeed speak of general principles but teach expressly that these are not given as ideas with birth but are found specifically through the means of perception and thought, but in such a way that every normal human being must then find them. In the proper sense the doctrine of innate concepts first appears with Cicero. He speaks of notiones impressae, cogitationes insitae, innatae and assumes a knowledge of all kinds of truths prior to all experience and investigation. There are according to him semina innata virtutum, Tusc. III 1, 2, notitiae parvae rerum maximarum, which nature sine doctrina planted in our soul, de fin. V 21, 59, an innate knowledge of God, Deos esse natura opinamur, Tusc. I 16, 36. Nat. D. I 1, 2 etc. Zeller, IV³ 659 f.
+
+
+3. In modern philosophy the doctrine of ideae innatae was advanced by Cartesius, who also first used this term and thus employed idea in a sense unusual until that time. With Cartesius this doctrine was connected with his dualism between soul and body. The cognitio intellectualis is not to be derived from sense perception; this gives only the occasio, by which our mind per innatam facultatem forms the representations and concepts, Renati Descartes, Notae p. 185. The cognitio proceeds from a proper principle, that is, from ideae innatae. Among those ideae innatae that of God is the principal, which is as it were a nota artificis, operi suo impressa. Medit. tertia p. 24. But he conceives the being innate of those ideas in such a way that the soul possesses by nature the power, the facultas, the dispositio to produce them from itself. The ideas are thus not actual but potential in our mind, Object. et Respons. p. 102, Notae p. 184, 185. Also according to Leibniz the necessary and universal truths do not come to us from without, but they proceed from ourselves, such as e.g. those of substance, duration, change, cause, the mathematical truths and especially also the idea of God. Together these truths form the natural light of reason. But the being innate of those truths is explained by Leibniz more extensively and clearly than by Cartesius. The latter said only that those ideas were potential in our mind. Leibniz, however, says that they are innate virtualiter, comme des inclinations, des dispositions, des habitudes ou des virtualités naturelles et non pas comme des actions. The mind of man has not merely the receptivity to know them, for then all knowledge could be called innate, but it is the source of those truths, it can bring them forth from itself, les tirer lui-même de son fond. The ideas thus lie as it were preformed in the human soul. And this is possible because there is a representing and thinking without consciousness. They come to consciousness when sense perception gives occasion to it. This brings the ideas virtually present in us also actually into our mind, cf. Spruijt, Proeve van de leer der aangeb. begrippen 144, Stöckl, Gesch. d. n. Phil. I 426, Malebranche thought that learning and knowing in man could be explained only through the supposition that we see the ideas in God and that God thus as the universal and infinite being is immediately present in our understanding. Following in his footsteps, the ontologism of Gioberti, Gratry, Ubaghs, etc. taught that we immediately behold God in our mind as the absolute being and that thus an intuitive knowledge of God is present in man, Stöckl, Gesch. d. neuern Philos. II 568 f. 620 f. By Kant this doctrine of innate concepts was importantly modified. In connection with the terminology of Wolff he spoke of knowledge apriori and aposteriori, and now taught no innate concepts but rather innate forms, namely forms of intuition, that is, space and time, forms of understanding, that is, categories, and forms of reason, that is, the ideas God, virtue and immortality. The idealism of Fichte and Hegel pushed this doctrine to such a point that they constructed not only the knowledge of necessary and universal truths, but all knowledge, and even all being, the entire material world, from thinking. The grounds on which this doctrine of ideae innatae mainly rests are these: Learning, the capacity to learn, presupposes that what is learned is already present in some manner in our mind. Reasoning and proof are built on principles that must stand firm per se and apriori. Experience gives only δόξα, contingent truths; universal and necessary truths can proceed only from the mind of man itself. That there are such universal and necessary truths is proved by the consensus gentium. And above all, the opposition between soul and body is of such a nature that representations and concepts cannot have their origin in sense perception; they must be explained either from the mind of man or from the Spirit of God, in whom man beholds all ideas. On the other hand, the doctrine of innate concepts was contested by the Socinians, who rejected natural religion, Fock, Der Socin. 307 f., cf. also Episcopius, Inst. theol. I c. 3, Locke, Essay concerning human understanding I ch. 2-4, Hobbes, de cive c. 14 n. 19 etc. They appealed to the following considerations: The doctrine of ideae innatae is completely superfluous, because the origin of those ideas also allows itself to be well explained in another way. History teaches that no single representation and no single concept is the same among all human beings and peoples. Even innate moral principles do not exist; over good and evil the greatest possible difference prevails; and the concept of God is so little innate that even atheistic human beings and peoples exist. Children, idiots, the insane know therefore nothing of such innate concepts. All knowledge in man stems from sense perception; nihil est in intellectu quod non prius fuerit in sensu. This attack on the ideae innatae made much progress in England and France in the last century. The materialism of this century joined itself thereto. The doctrine of innate concepts has been generally abandoned and replaced by the theory of the inheritance of properties, Darwin, Afst. v. d. mensch, ch. 3, 4. Spencer, in Spruyt Proeve 342. Büchner, Kraft u. Stoff¹⁶ S. 344 f.
+
+Review the translation against the source, glossary, style guide, and rubric.
+Return valid JSON with this shape:
+{
+  "summary": "short paragraph",
+  "checks": {
+    "prose-quality": {"status": "pass|fail|incomplete", "details": "reason"},
+    "review-flagging": {"status": "pass|fail|incomplete", "details": "reason"}
+  },
+  "findings": [
+    {"severity": "high|medium|low", "category": "label", "detail": "specific issue"}
+  ],
+  "recommended_follow_up": ["action 1", "action 2"]
+}
+Return only the JSON object. Do not include markdown, code fences, prefaces, or checklists.
+Limit findings to the 3 most important issues.

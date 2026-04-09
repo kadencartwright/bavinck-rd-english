@@ -1,11 +1,11 @@
 {
-  "schema_version": "1.0",
-  "sanitization_version": "1.0",
+  "schema_version": "1.1",
+  "sanitization_version": "1.1",
   "run_id": "vol2-god-names-001-baseline",
   "slice_id": "vol2-god-names-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
-  "generated_at": "2026-04-07T16:58:19.252586+00:00",
+  "generated_at": "2026-04-09T17:05:49.889360+00:00",
   "source_refs": {
     "run_manifest_path": "config/calibration/run-manifests/vol2-god-names-001-baseline.json",
     "slice_manifest_path": "data/calibration/slices/vol2-god-names-001/manifest.json",
@@ -25,7 +25,8 @@
         "translation_user_template": "translation-user-template.txt",
         "review_system": "review-system.txt",
         "review_user_template": "review-user-template.txt"
-      }
+      },
+      "finish_reason": "stop"
     },
     "review": {
       "provider": "z-ai",
@@ -37,11 +38,12 @@
         "review_system": "review-system.txt",
         "review_user_template": "review-user-template.txt"
       },
+      "finish_reason": "stop",
       "usage": {
-        "prompt_tokens": 13217,
-        "completion_tokens": 4519,
-        "total_tokens": 17736,
-        "reasoning_tokens": 3853,
+        "prompt_tokens": 13257,
+        "completion_tokens": 6450,
+        "total_tokens": 19707,
+        "reasoning_tokens": 5896,
         "cached_tokens": 0
       }
     }
@@ -50,21 +52,29 @@
     "translation_output_path": "data/calibration/evals/vol2-god-names-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-names-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-names-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-names-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-names-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-names-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-names-001-baseline/prompts/review-user.txt",
     "evaluation_report_path": "data/calibration/evals/vol2-god-names-001-baseline/evaluation.json",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-names-001-baseline/evaluation.md"
   },
   "hashes": {
     "run_manifest_sha256": "fdce4fb85998bbc6cf117e92c81d5b9dc2a4294115ed34eafd66971e65d8460b",
     "slice_manifest_sha256": "2f88ee352246c3f6f5ea69c9f54c1fdeea7578f5af31477be227fb6ad60554d9",
-    "prompt_bundle_metadata_sha256": "42a49de33a345ef40c49f53767447506bcf60355c88dfcd542cb283fad0ae388",
+    "prompt_bundle_metadata_sha256": "3e5e9b6466d0f0bad7b8cd24becb7daad03afca6ef16570f638e5f47f846e7ea",
     "model_profile_sha256": "5ed2a01f09d09db59e1754be316cfaf49c764a0b6a136bb879a158237d6dde9e",
     "glossary_sha256": "b6b289b816059c5602dd8615ef3e3ee4763870782a065b46fd8d0135c72d2628",
-    "style_guide_sha256": "99eb45a09233aa80d5c413c7f109974d21da9cb76cf100c402cbe190f05048c0",
-    "rubric_sha256": "b7009f50a4e05b2bb5db210aeee9777c7227b312271eae6c507d6b6e47dd9d4c",
-    "translation_output_sha256": "e6122da4893120419ad905a1417da5d7a43fd5babc9788bdac8b328fbcf07386",
-    "review_structured_sha256": "7681f1f847df489faf610ec4e1c7cdb556e87f10ca84072e02fbe3392384082a",
-    "findings_sha256": "ad66b1a93dd2f38b3169d2808840614a6c55e71e2f0aad485b1f28a9c6c6d429",
-    "evaluation_report_sha256": "2f02e4c81c5dc23cb31f0a0a3707e1c9364deb4c8bf5322b1abf8c79e16812eb",
-    "evaluation_markdown_sha256": "8c326a548e64351e7aa420c69de540b6760a4d08722693bfc632d1ab6db22712"
+    "style_guide_sha256": "a1a5c485fa715028d1c43693eca547a0387ed8ad8fa527597339d69b2fb9a38c",
+    "rubric_sha256": "74a3c088eb54bd0c14dea0236d892cb821a1bfa220f792cd900a809960d21914",
+    "translation_output_sha256": "fd4b5f11720d4aed87cb700018528a0a578238cf3f179012975d8730754f4e52",
+    "review_structured_sha256": "9d4d414a39585459a743ddb0cdc483c109b5e4c53aa8c6a3800c4ad9b27f9ab5",
+    "findings_sha256": "75d35fbc86e2617df2201db34950a9419aa0a3688f7c9258426149804b4ddf6a",
+    "evaluation_report_sha256": "57f51b953ca5afb9dc0d8b55c37fae21c622680364987d6530ba552f632fd469",
+    "evaluation_markdown_sha256": "fac0079743b7c3029606a65f18df5b04a6d06ac22e9c4a2b6e0bdd53ddd3e0ba",
+    "translation_system_prompt_sha256": "e88459c2542b810f3c237adfbf3875021954ab378645fd6bd5c6a51b689b3524",
+    "translation_user_prompt_sha256": "b8ae10e1b668449eac4b2c9464518fa29c59552ca76afc2af6d3b0f4ea5a18b8",
+    "review_system_prompt_sha256": "d32ea79f07f205d43763ea59eeda6c6186edadd1de334c6cabc96e38adb24876",
+    "review_user_prompt_sha256": "52a46bb66729b7e033199830c66e68d1eea209ef14b8ece913b84b6a90487205"
   }
 }

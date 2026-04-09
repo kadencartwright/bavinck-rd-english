@@ -1,35 +1,35 @@
 {
-  "summary": "The translation adheres to the glossary and preserves most foreign language spans, but fails to preserve the Latin phrase 'a reali potentiae immensitate' and inconsistently translates Latin names (Cartesius, Hieronymus) while preserving others. The English prose contains grammatical errors ('avoided of God', 'on different manner') and a significant doctrinal ambiguity regarding God's origin ('He is from nothing').",
+  "summary": "The translation successfully applies the glossary term and preserves Greek, Hebrew, and Latin spans, but it critically fails to translate several Dutch phrases and abbreviations, leaving them embedded in the English text. This includes entire clauses and citation markers, which disrupts the prose coherence and violates the instruction to translate Dutch Scripture references and book names into English forms.",
   "checks": {
     "prose-quality": {
       "status": "fail",
-      "details": "The output contains ungrammatical phrasing such as 'avoided of God' and 'on different manner', which disrupt coherence. Additionally, 'He is from nothing' introduces doctrinal confusion."
+      "details": "Dutch text remains untranslated in multiple instances, including full sentences ('Aan alle redelĳk schepsel is het...'), phrases ('niet in negatieven maar in positieven zin'), and abbreviations ('enz.', 'bl.', 'bĳ'), failing the requirement for coherent English prose and standard English Scripture references."
     },
     "review-flagging": {
       "status": "pass",
-      "details": "Findings clearly identify the preservation failures, grammatical errors, and doctrinal ambiguity."
+      "details": "Findings explicitly identify the preservation of Dutch text as a defect and flag the specific locations and nature of the untranslated material."
     }
   },
   "findings": [
     {
       "severity": "high",
-      "category": "preserved-language-integrity",
-      "detail": "The Latin span 'a reali potentiae immensitate' was translated as 'from a real immensity of potency' instead of being preserved exactly as required by the style guide."
+      "category": "untranslated-source-text",
+      "detail": "Dutch sentences and phrases are left untranslated in the output, such as 'Aan alle redelĳk schepsel is het naturaliter et veraciter insitum' and 'niet in negatieven maar in positieven zin', likely due to an error in segmenting preserved Latin spans."
     },
     {
       "severity": "medium",
-      "category": "prose-quality",
-      "detail": "Grammatical error in 'the expression causa sui was avoided of God'; the preposition 'of' incorrectly implies agency, whereas the source 'van God' indicates the subject matter (correct: 'avoided regarding God')."
+      "category": "preserved-language-corruption",
+      "detail": "Dutch abbreviations and connectors are preserved instead of translated: 'enz.' appears repeatedly instead of 'etc.'; 'bl.' (bladzijde) appears instead of 'p.' or 'pp.'; 'bĳ' appears instead of 'in' or 'according to'."
     },
     {
       "severity": "medium",
-      "category": "doctrinal-ambiguity",
-      "detail": "The phrase 'Hij is van niets' was translated as 'He is from nothing', which risks implying creation ex nihilo applies to God; the context of aseitas requires a rendering like 'He is dependent on nothing'."
+      "category": "glossary-drift",
+      "detail": "The Dutch word 'altĳd' (always) is preserved in the phrase 'altĳd ὁ αἰτος' instead of being translated to English, creating a mixed-language defect."
     }
   ],
   "recommended_follow_up": [
-    "Restore the Latin phrase 'a reali potentiae immensitate' and review all Latin names (e.g., Cartesius, Hieronymus) for consistent preservation.",
-    "Correct the grammatical construction 'avoided of God' and the phrase 'on different manner' to standard English formal prose.",
-    "Revise 'He is from nothing' to eliminate the ambiguity regarding God's origin and ensure it reflects His independence."
+    "Translate all remaining Dutch words, abbreviations, and phrases into English, ensuring only Greek, Hebrew, Latin, and German spans are preserved.",
+    "Review the translation logic for sentences containing Latin quotations to ensure the surrounding Dutch context is translated.",
+    "Run a search for 'enz.', 'bĳ', and 'bl.' to replace them with standard English citation forms."
   ]
 }

@@ -1,0 +1,209 @@
+Run ID: vol2-god-name-classification-001-baseline
+Slice ID: vol2-god-name-classification-001
+Slice Title: Volume 2 § 24.1-3 Classification of the Names of God
+
+Selection rationale:
+This slice uses the opening of § 24 to stress taxonomic theological prose and nomenclature classification in a bounded calibration fixture.
+
+Excerpt-scoped glossary:
+schema_version: "1.0"
+slice_id: "vol2-god-name-classification-001"
+terms:
+  - source: "INDEELING DER NAMEN GODS"
+    target: "classification of the names of God"
+    notes: "Section-title term for this slice."
+
+Style guide:
+# Style Guide
+
+- Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source excerpt.
+- Retain citation structure, but translate Dutch Scripture references, book names, and abbreviations into standard English forms; keep patristic or scholastic citations intact.
+- Translate into formal but readable English theological prose; do not modernize into colloquial language.
+- Prefer glossary-approved renderings when the glossary lists a source phrase from the excerpt.
+- Flag ambiguous doctrinal phrasing instead of smoothing over uncertainty.
+
+Source excerpt:
+§ 24. INDEELING DER NAMEN GODS.
+
+
+1. De H. S. noemt God met vele namen, maar gaat nooit van een abstract
+Godsbegrip uit. Nooit verheft zĳ de eene eigenschap Gods ten koste van
+de andere. Wel treedt nu eens de eene, dan weder de andere eigenschap
+meer op den voorgrond, maar er is tusschen alle eigenschappen volkomen
+harmonie. Het is de bedoeling der Schrift alle deugden Gods gelĳkelĳk
+tot hare eere te brengen. Evenals de persoon van Christus niet een
+bepaald eenzĳdig karakter of temperament vertegenwoordigt en toch een
+persoon is vol leven en realiteit, zoo is ook God in zĳne openbaring
+altĳd ontvouwende al zĳne deugden in harmonischen samenhang. Nergens
+is er van het wezen Gods in abstracto sprake. Het Hebr. woord
+‎‏תּוּשִׁיָּה‏‎ a rad. ‎‏יָשָׁה‏‎; bestaan, zĳn, arab. III helpen,
+oprichten, duidt datgene aan, wat bestand heeft, bestendig is, voordeel
+verschaft, in concreto vooral ware wĳsheid en geluk, Job 5:12, 6:13,
+12:16, 26:3 (30:22), Spr. 2:7, 3:21, 8:14 en voorts alleen nog Jes.
+28:29, Mich. 6:9, maar staat in geen dezer plaatsen voor het wezen
+Gods, cf. Delitzsch op Job 5:12. Evenmin kunnen de N. T. woorden
+θεοτης Col. 2:9, θειοτης Rom. 1:29, μορφη θεου Phil. 2:6, θεια φυσις
+2 Petr. 1:4 cf. Gal. 4:8 bewĳzen, dat daar van het wezen of de natuur
+Gods in onderscheiding van zĳne eigenschappen gesproken wordt, gelĳk
+Polanus wil, Synt. theol. p. 135. Gods wezen wordt voor ons in zĳne
+openbaring, d. i. in zĳne namen kenbaar. De namen Gods zĳn benamingen
+van zĳne ἀρεται, 1 Petr. 2:9. Dit spraakgebruik sluit zich aan bĳ Jes.
+42:8, 12. 43:21. 63:5, waar het Hebr. ‎‏תְּהִּלָה‏‎ lof, eer, in de LXX
+door ἀρετη is overgezet, cf. Hab. 3:3. Zach. 6:13. De gemeente heeft
+de roeping, om Gods deugden te verkondigen, d. i. om Hem eere te geven
+voor de δοξα, die in al zĳne werken ten toon gespreid wordt. Van eene
+beschrĳving van Gods wezen, buiten de eigenschappen om, is in de H.
+Schrift nimmer sprake. In den eersten tĳd werd ook in de christelĳke
+theologie iets dergelĳks niet beproefd. Onder de nomina Dei werd
+alles saamgevat, wat men van God te zeggen had. De namen Gods waren
+aanduiding niet alleen van de nomina propria maar ook van de later zoo
+genoemde eigenschappen en zelfs van de personen in het Goddelĳk wezen,
+Clemens Alex. Strom. V 12. Augustinus, de doctr. chr. I 5. Pseudodion.,
+de div. nom. c. 1 sq. Damascenus, de fide orth. I c. 12. Thomas, S.
+Theol. I qu. 13. Catech. Rom. I c. 2 qu. 11. 13. Kleutgen, Theol. der
+Vorzeit I² S. 211 f. Gerhard, Loci Theol. loc. 2. Hyperius, Meth.
+Theol. p. 89 sq. c. 3. Polanus, Synt. Theol. Lib. 2 c. 6. Zanchius, Op.
+II col. 9. 10. Walaeus, Op. I p. 152 sq. Alsted, Theol. did. schol. p.
+61. De eigenschappen werden dan ook terstond in de idee Gods opgenomen;
+zoo bĳv. bĳ Irenaeus, adv. haer. I c. 14. II c. 13., 35 etc. Augustinus
+spreekt wel van Gods essentia, maar hĳ verstaat daaronder de volheid
+van het zĳn Gods en neemt terstond alle eigenschappen, eenvoudigheid,
+eeuwigheid, goedheid, wĳsheid enz. daarin op. In de confessies wordt
+meermalen ook op die wĳze van God gesproken, zonder onderscheiding van
+wezen en eigenschappen, en zonder indeeling der eigenschappen, Conc.
+Lateran. bĳ Denzinger, Enchir. symb. n. 355, Conc. Vatic. de fide c. 1.
+Conf. August. art. 1. Conf. Gall. art. 1. Scot. art. 1. Belg. art. 1.
+Conf. Westm. cap. 2. En ook later nog gaan verscheidene theologen op
+deze distincties niet in en behandelen de eigenschappen, zonder vooraf
+over de natuur Gods te spreken, bĳv. Thomas. S. Theol. I qu. 3 sq.
+Ursinus, Tract. theol. p. 46-70.
+
+
+2. Maar spoedig kwam er toch eene onderscheiding op. Men werd daartoe
+geleid door de vraag, wat de eigenschap was, welke God terstond van
+alle schepselen onderscheidde, wat het hoofdbegrip was en waarvan
+men dus bĳ de leer Gods moest uitgaan. Nu had reeds de platonische
+philosophie dat hoofdbegrip in het zĳn gezocht, en Philo had dit in
+verbinding gebracht met den naam Ihvh, den eenigen naam, die niet eene
+werking of kracht maar het wezen Gods zelf aanduidde, en noemde daarom
+God dikwerf ὁ ὠν of το ὀν, Zeller, Philos. V³ 356. Deze omschrĳving
+van het wezen Gods werd overgenomen in de christelĳke theologie.
+Irenaeus beschrĳft God meermalen als absoluut eenvoudig, adv. haer. II
+c. 13. 28 IV 11 en noemt Hem zelfs inexcogitabilis et insubstantivus,
+I c. 14, maar legt tegen het gnosticisme toch daarop vooral nadruk,
+dat God de schepper is van alle dingen en dat Hĳ zichzelf in zĳne
+werken heeft geopenbaard, Harnack D. G. I 485 f. Daarentegen is bĳ
+Origenes, de princ. I 1 sq. c. Cels. VI 64. VII 42-51, Athanasius, de
+decr. nic. syn. c. 11, Damascenus, de fide orth. I c. 2. 4. 9. enz.
+cf. Harnack D. G. II 119 f. Schwane, Dogm. I 132 II 35, Kattenbusch,
+Vergl. Confessionskunde I 310 f., God het ééne, het zĳnde, ja het
+boven alle zĳn verhevene, ὁ ὠν, ὁ ὠν ¡καθ’ἑαυτον, το ὀν, die het zĳn
+zelf is, die het zĳn heeft uit en door zichzelf. En op voetspoor van
+Philo werd dit alles afgeleid uit of vastgeknoopt aan den naam van
+Ihvh in het O. Test. In het Westen werden deze bepalingen overgenomen.
+Augustinus omschrĳft God telkens als summum esse, summum bonum,
+verum, pulchrum enz. God is eene substantia, want wat geen substantie
+is bestaat niet, Enarr. in Ps. 67. Maar, omdat het woord substantie
+dikwerf gebruikt wordt in tegenstelling met accidentia, die aan de
+substantie zĳn en deze tot drager hebben, bezigt Augustinus van God
+liever het woord essentia, quam Graeci οὐσιαν vocant en waarvoor ook
+wel het woord natura wordt gebruikt, de trin. V 2 VII 5 sq. de civ.
+XII, 2. de doctr. chr. I 6. Bĳ God toch is er geen onderscheid tusschen
+substantie en accidentiën; zĳn zĳn is geen drager der eigenschappen,
+maar deze zĳn met het zĳn zelf identisch. God is het hoogste, beste,
+schoonste, volmaaktste zĳn, quo esse aut cogitari melius nihil possit,
+de lib. arb. II 6. de doctr. chr. I 7. Hĳ is Deus, supra quem nihil,
+extra quem nihil, sine quo nihil est; summa vita, summa veritas, summa
+beatitudo, summa sapientia, summa essentia, de civ. XII 2. Solil. I 1.
+En ook Augustinus beroept zich voor deze omschrĳving Gods op den naam
+Ihvh, de trin. V 2. VII 5. de doctr. chr. I 32. Deze zelfde omschrĳving
+vinden we dan later telkens terug, bĳ Hilarius, de trin. I c. 1 sq.
+Pseudodion., de div. nom. cap. 1. § 6, die echter cap. 4 § 1 uitgaat
+van de idee van het goede en c. 5 § 1 zegt, dat deze nog verder zich
+uitstrekt dan die van het zĳn, Anselmus, Monol. c. 28. Prosl. c. 17 sq.
+Lombardus, Sent. I dist. 8. Thomas, S. Theol. I qu. 2 art. 3 en qu. 3.
+S. c. Gent. I c. 16 sq. Bonaventura, Brevil. I cap. 2. Sent. I dist.
+8. enz. Petavius, Theol. lib. 1 c. 6. Perrone, Prael. theol. II 81-90.
+C. Pesch, Prael. II 46-70. Jansen II p. 26-46. Ofschoon dit nu wel het
+gewone gevoelen werd, waren er toch, die een ander uitgangspunt kozen.
+Zĳ zochten het hoofdbegrip bĳ de idee Gods niet in het absolute zĳn, in
+het esse a se (aseitas), maar in de oneindigheid; en zĳ omschreven het
+wezen Gods daarom liefst als een ens infinitum. Zoo deed Duns Scotus,
+die beweerde, dat het zĳn univoce, in gelĳken zin, aan God en aan het
+schepsel kon worden toegekend, maar dat het onderscheidend kenmerk
+tusschen God en het schepsel daarin gelegen was, dat God was een ens
+infinitum en de schepselen eindig waren, Sent. I dist. 3 qu. 1. en
+dist. 8 qu. 3. Voorts waren er nog enkele Thomisten, die meenden, dat
+het eigenlĳke wezen Gods gelegen was in de intellectueele natuur en
+zĳ omschreven God daarom als ens intelligens, zooals bĳv. Gotti, cf.
+Perrone, Prael. theol. II p. 82. Kleutgen, Theol. der Vorzeit I² 229.
+
+
+3. De Hervorming bracht in deze opvatting geen verandering. Men
+sloot zich bĳ de eene of andere omschrĳving aan. De Gereformeerden
+namen althans in den eersten tĳd meest de omschrĳving van Augustinus
+en Thomas over. Zĳ gingen uit van het begrip der aseitas of der
+independentia en omschreven God dikwerf als een ens independens,
+Zwingli, Op. III 155 sq. IV 81 sq. Hyperius, Meth. Theol. p. 87.
+Martyr, Loci Comm. p. 39b. Polanus Synt. Theol. lib. II c. 5.
+Zanchius, Op. II col. 49 sq. Ursinus, Tract. theol. 1584 p. 46 sq.
+Daarnaast komen ook wel de omschrĳvingen van God voor als spiritus
+increatus, spiritus simplicissimus, spiritus a se ipso existens,
+soms nog aangevuld met de trinitarische formule unus essentia, trinus
+personis, Heppe, Dogm. der ev. ref. K. S. 35 f. Schweizer, Gl. der
+ev. ref. K. I 244 f. De Lutherschen gebruikten de definitie essentia
+spiritualis infinita, ens spirituale a se subsistens, spiritus
+independens, Schmid, Dogm. der ev. luth. K⁶. S. 73-77. Hase, Hutt.
+red. § 54. Daarentegen nam het socinianisme een ander standpunt in.
+Afziende van alle metaphysische vragen, legde het alleen den nadruk
+op den wil Gods. De kennisse Gods bestaat alleen in het weten van zĳn
+wil. De religie verliest alle mystiek en gaat in cultus op. God komt
+hoe langer hoe verder van wereld en menschheid af te staan. In het
+remonstrantisme, rationalisme en Engelsche deisme wordt dit voortgezet,
+cf. boven bl. 15. 16. Tegen dit koude, moralistische Godsbegrip kwam
+wederom reactie van den kant der philosophie. Spinoza greep naar de
+idee des zĳns terug, vatte God op als substantia unica, infinita,
+necessario existens, ens absolute infinitum, absolute causa prima et
+immanens, Eth. I prop. 7 sq. en sprak weder van eene liefde Gods,
+amor Dei intellectualis, welke de hoogste zaligheid schonk, Eth. V
+prop. 15 sq. Wel bleef het rationalisme en deisme ook na Spinoza nog
+heerschen, maar omstreeks het midden der 18de eeuw werd men dit hoe
+langer hoe meer moede. De groote geesten, Goethe, Lessing, Herder
+voelden zich tot Spinoza aangetrokken, en weldra deed zĳn pantheisme
+intocht in de philosophie. Kant ondermĳnde reeds de grondslagen van
+het rationalisme, ofschoon hĳ zich toch nog een deist bleef noemen,
+Drews, Die deutsche Spekul. I 104. Fichte ondernam den strĳd tegen de
+begrippen God en onsterfelĳkheid als producten van het eudaemonisme. In
+zĳn overdreven moralisme was God hem gelĳk met het zuivere ik, met de
+zedelĳke wereldorde; God was geen zĳn, geen substantie maar absolutes
+Thun, Thätigkeit; zoo in zĳne Wissenschaftslehre 1794, Ueber den Grund
+unseres Glaubens an eine göttliche Weltregierung 1798, Appellation
+an das Publikum 1799. Later kwam hĳ hiervan gedeeltelĳk terug en
+sloot zich nauwer bĳ Spinoza aan, Anweisung zum seligen Leben oder
+Religionslehre 1806. Schleiermacher vertoonde nog sterker overeenkomst
+met Spinoza. God en wereld zĳn correlata, Dialektik S. 162. God is
+het Woher unseres empfänglichen und selbsthätigen Daseins, Glaub. I⁵
+S. 20. Schelling onderscheidde zich van beiden daardoor, dat hĳ niet
+alleen rekening hield met het geestelĳke, religie, moraal maar ook
+met de objectieve natuur. Het was zĳn doel, om de natuurwetenschap uit
+den beklagenswaardigen toestand, waarin zĳ verkeerde, op te heffen. En
+zoo vat hĳ dan beide, natuur en geest te zamen; de natuur is zichtbare
+geest, de geest onzichtbare natuur; hĳ ziet in beide eene voortdurende,
+organische openbaring van het Absolute, dat boven alle tegenstellingen
+verheven is, één, eenvoudig, eeuwig, zonder praedikaten, eenheid van
+het oneindige en het eindige, van God en wereld, ἑν και παν, Drews,
+Die deutsche Spekul. I S. 201 f. Eindelĳk werkte Hegel dit stelsel
+tot een logisch idealisme om. Natuur en geschiedenis zĳn eene logisch
+noodwendige zelfontvouwing der idee. Alles is redelĳk, alles is
+belichaamde gedachte. De rede is dus de absolute substantie, zĳ is God
+zelf. Want God is niets anders dan de ééne, levende, tot zelfbewustzĳn
+zich ontwikkelende wereldidee. God is dus bĳ Hegel wel rede, denken,
+geest, subject, maar niet in dien zin, dat Hĳ een eigen leven zou
+hebben voor en buiten de wereld. Ohne Welt ist Gott nicht Gott, de
+wereld is een wezenlĳk moment in het leven Gods, Drews, Die deutsche
+Spekul. I 229 f.
+
+Translate the source excerpt into formal English theological prose.
+Preserve all non-Dutch spans in their original language exactly as written.
+Render any Dutch Scripture references, book names, and abbreviations in standard English forms.
+Return only the translated passage with paragraph structure intact and no prefatory commentary.

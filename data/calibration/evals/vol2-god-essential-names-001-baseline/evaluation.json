@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-essential-names-001-baseline",
-  "generated_at": "2026-04-07T17:26:23.962592+00:00",
+  "generated_at": "2026-04-09T17:33:33.011097+00:00",
   "slice_id": "vol2-god-essential-names-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -19,12 +19,12 @@
     {
       "id": "translation-output",
       "status": "pass",
-      "details": "Translation output path: data/calibration/runs/vol2-god-essential-names-001-baseline/outputs/translation.md"
+      "details": "Translation output captured successfully for eval export."
     },
     {
       "id": "preserved-language-integrity",
-      "status": "pass",
-      "details": "All Greek/Hebrew spans found in translation output."
+      "status": "fail",
+      "details": "Missing preserved spans: οὐκ, ἐνι, παραλλαγη, ἢ, τροπης, ἀποσκιασμα, πεπερασμενος, ὁρος, οἰκ, ἀπειρος, אֵין, טוֹף, ἀπειρον, ζων, και, μενων"
     },
     {
       "id": "glossary-adherence",
@@ -32,25 +32,34 @@
       "details": "Missing glossary targets: WEZENSNAMEN GODS -> essential names of God"
     },
     {
+      "id": "scripture-reference-normalization",
+      "status": "pass",
+      "details": "Dutch Scripture references were normalized to standard English forms."
+    },
+    {
       "id": "prose-quality",
       "status": "fail",
-      "details": "The output contains ungrammatical phrasing such as 'avoided of God' and 'on different manner', which disrupt coherence. Additionally, 'He is from nothing' introduces doctrinal confusion."
+      "details": "Dutch text remains untranslated in multiple instances, including full sentences ('Aan alle redelĳk schepsel is het...'), phrases ('niet in negatieven maar in positieven zin'), and abbreviations ('enz.', 'bl.', 'bĳ'), failing the requirement for coherent English prose and standard English Scripture references."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "Findings clearly identify the preservation failures, grammatical errors, and doctrinal ambiguity."
+      "details": "Findings explicitly identify the preservation of Dutch text as a defect and flag the specific locations and nature of the untranslated material."
     }
   ],
   "summary": {
     "pass": 5,
-    "fail": 2,
+    "fail": 3,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/translation.md",
     "review_structured_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/findings.md",
+    "translation_system_prompt_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/prompts/translation-system.txt",
+    "translation_user_prompt_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/prompts/translation-user.txt",
+    "review_system_prompt_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/prompts/review-system.txt",
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/prompts/review-user.txt",
     "evaluation_markdown_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/evaluation.md",
     "eval_record_path": "data/calibration/evals/vol2-god-essential-names-001-baseline/eval-record.json"
   },
@@ -58,7 +67,7 @@
     "path": "data/calibration/evals/vol2-god-essential-names-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation adheres to the glossary and preserves most foreign language spans, but fails to preserve the Latin phrase 'a reali potentiae immensitate' and inconsistently translates Latin names (Cartesius, Hieronymus) while preserving others. The English prose contains grammatical errors ('avoided of God', 'on different manner') and a significant doctrinal ambiguity regarding God's origin ('He is from nothing').",
+  "review_summary": "The translation successfully applies the glossary term and preserves Greek, Hebrew, and Latin spans, but it critically fails to translate several Dutch phrases and abbreviations, leaving them embedded in the English text. This includes entire clauses and citation markers, which disrupts the prose coherence and violates the instruction to translate Dutch Scripture references and book names into English forms.",
   "glossary_hits": [],
   "glossary_misses": [
     "WEZENSNAMEN GODS -> essential names of God"

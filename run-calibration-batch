@@ -3,6 +3,8 @@ set -eu
 
 manifest_list="config/calibration/run-manifests/vol2-parallel-10.txt"
 max_parallel=2
+retry_failed=0
+run_calibration_bin="${RUN_CALIBRATION_BIN:-./run-calibration}"
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
@@ -22,8 +24,12 @@ while [ "$#" -gt 0 ]; do
       max_parallel="${1#*=}"
       shift
       ;;
+    --retry-failed)
+      retry_failed=1
+      shift
+      ;;
     *)
-      echo "usage: ./run-calibration-batch [--manifest-list PATH] [--max-parallel N]" >&2
+      echo "usage: ./run-calibration-batch [--manifest-list PATH] [--max-parallel N] [--retry-failed]" >&2
       exit 2
       ;;
   esac
@@ -55,8 +61,59 @@ run_one() {
   manifest_path="$1"
   run_name=$(basename "$manifest_path" .json)
   log_path="$log_root/$run_name.log"
+  status_log_path="$log_root/$run_name.status"
   echo "[run-calibration-batch] starting $run_name" >&2
-  ./run-calibration --run-manifest "$manifest_path" >"$log_path" 2>&1
+  if "$run_calibration_bin" --run-manifest "$manifest_path" >"$log_path" 2>&1; then
+    echo "ok" >"$status_log_path"
+    return 0
+  fi
+  classify_failure "$log_path" >"$status_log_path"
+  return 1
+}
+
+classify_failure() {
+  log_path="$1"
+  if rg -q "engine_overloaded|finish_reason 'engine_overloaded'|response ended with finish_reason 'engine_overloaded'" "$log_path"; then
+    echo "engine-overloaded"
+    return
+  fi
+  echo "fail"
+}
+
+should_retry_failed_run() {
+  manifest_path="$1"
+  run_name=$(basename "$manifest_path" .json)
+  status_log_path="$log_root/$run_name.status"
+  translation_response_path="data/calibration/runs/$run_name/outputs/translation-response.json"
+
+  if [ -f "$status_log_path" ] && [ "$(cat "$status_log_path")" = "engine-overloaded" ]; then
+    return 0
+  fi
+
+  if [ -f "$translation_response_path" ]; then
+    if python3 - "$translation_response_path" <<'PY'
+import json
+import pathlib
+import sys
+
+path = pathlib.Path(sys.argv[1])
+try:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    choices = payload.get("choices")
+    if isinstance(choices, list) and choices:
+        first_choice = choices[0]
+        if isinstance(first_choice, dict) and first_choice.get("finish_reason") == "engine_overloaded":
+            raise SystemExit(0)
+except Exception:
+    pass
+raise SystemExit(1)
+PY
+    then
+      return 0
+    fi
+  fi
+
+  return 1
 }
 
 index=0
@@ -64,6 +121,14 @@ active=0
 while IFS= read -r manifest_path || [ -n "$manifest_path" ]; do
   if [ -z "$manifest_path" ]; then
     continue
+  fi
+  if [ "$retry_failed" -eq 1 ]; then
+    run_name=$(basename "$manifest_path" .json)
+    if ! should_retry_failed_run "$manifest_path"; then
+      echo "[run-calibration-batch] skipping $run_name (no prior engine_overloaded failure found)" >&2
+      continue
+    fi
+    echo "[run-calibration-batch] retrying engine_overloaded run $run_name" >&2
   fi
   index=$((index + 1))
   status_path="$tmpdir/$index.status"
@@ -80,6 +145,15 @@ while IFS= read -r manifest_path || [ -n "$manifest_path" ]; do
     active=0
   fi
 done <"$manifest_list"
+
+if [ "$index" -eq 0 ]; then
+  if [ "$retry_failed" -eq 1 ]; then
+    echo "[run-calibration-batch] no engine_overloaded runs matched the manifest list" >&2
+  else
+    echo "[run-calibration-batch] no manifests matched the manifest list" >&2
+  fi
+  exit 0
+fi
 
 wait
 

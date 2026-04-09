@@ -1,0 +1,312 @@
+Run ID: vol2-god-names-001-baseline
+Slice ID: vol2-god-names-001
+Slice Title: Volume 2 § 23.1-3 The Names of God
+
+Selection rationale:
+This slice samples the opening of § 23 to exercise doctrinal naming distinctions and citation-rich exposition in a stable bounded unit.
+
+Excerpt-scoped glossary:
+schema_version: "1.0"
+slice_id: "vol2-god-names-001"
+terms:
+  - source: "NAMEN GODS"
+    target: "names of God"
+    notes: "Section-title term for this slice."
+
+Style guide:
+# Style Guide
+
+- Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source excerpt.
+- Retain citation structure, but translate Dutch Scripture references, book names, and abbreviations into standard English forms; keep patristic or scholastic citations intact.
+- Translate into formal but readable English theological prose; do not modernize into colloquial language.
+- Prefer glossary-approved renderings when the glossary lists a source phrase from the excerpt.
+- Flag ambiguous doctrinal phrasing instead of smoothing over uncertainty.
+
+Source excerpt:
+§ 23. DE NAMEN GODS.
+
+
+1. Al wat van God in zĳne openbaring voor ons kenbaar wordt, wordt
+in de H. Schrift aangeduid met den Naam Gods. De oorspronkelĳke
+beteekenis van het woord ‎‏שֵׁם‏‎ is waarschĳnlĳk die van teeken,
+kenteeken, σημα, signum, evenals het gr. ὀνομα en het lat. nomen van
+den stam gno zĳn afgeleid en dus aanduiden datgene, waaraan iets
+gekend wordt, kenteeken. Een naam is een teeken van dien, die hem
+draagt, eene benoeming naar eene of andere eigenschap, waarin hĳ
+zich openbaart en kenbaar wordt. Er is verband tusschen den naam en
+zĳn drager, en dat verband is niet willekeurig maar in den drager
+zelven gegrond. Zelfs bĳ ons, en thans nog, nu de namen meest tot
+klanken geworden zĳn zonder zin, wordt dat verband nog gevoeld. Een
+naam is iets persoonlĳks en geheel iets anders dan een nummer of
+een exemplaar van zĳn soort. Het doet altĳd min of meer onaangenaam
+aan, als onze naam verkeerd geschreven of gebruikt wordt. Aan den
+naam hangt onze eer, onze waarde, onze persoon en individualiteit.
+Maar veel sterker was dat verband in vroeger tĳd, toen de namen nog
+eene doorzichtige beteekenis hadden en eene openbaring waren van den
+persoon of de zaak, die hem ontving. Zoo is het ook in de Schrift.
+Adam moest den dieren namen geven naar hun aard, Gen. 2:19, 20. Van
+vele namen in de Schrift wordt de beteekenis aangegeven en tevens de
+reden, waarom ze gegeven worden, b. v. Eva, Gen. 3:20, Kain, 4:1,
+Seth, 4:25, Noach, 5:29, Babel, 11:9, Ismael, 16:11, Ezau en Jakob,
+25:25, Mozes, Ex. 2:10, Jezus, Mt. 1:21 enz. Meermalen wordt een naam
+veranderd of een bĳnaam toegevoegd, wanneer een persoon optreedt in
+eene andere qualiteit, Abraham, Gen. 17:5, Sara, 17:15, Israel, 32:28,
+Jozua, Num. 13:16, Jedidjah, 2 Sam. 12:25, Mara, Ruth 1:20, Petrus,
+Mk. 3:16, enz. Na zĳne hemelvaart heeft Christus een naam ontvangen
+boven allen naam, Phil. 2:9, Hebr. 1:4, en aan de geloovigen wordt in
+het nieuwe Jeruzalem een nieuwe naam gegeven, Op. 2:17, 3:12, 22:4.
+Ditzelfde geldt van den naam Gods. Er is een innig verband tusschen
+God en zĳn naam. Ook dit verband is naar de Schrift niet toevallig of
+willekeurig maar door God zelven gelegd. Menschen noemen Hem niet:
+Hĳ geeft zichzelf een naam. Op den voorgrond staat dus de naam als
+openbaring van Gods zĳde, in actieven en objectieven zin, als nomen
+editum. Dan is de naam Gods identisch met de deugden of volmaaktheden,
+welke Hĳ naar buiten openbaart, met zĳne heerlĳkheid, Ps. 8:2, 72:19,
+zĳne eer, Lev. 18:21, Ps. 86:11, 102:16, zĳne verlossende macht, Ex.
+15:3. Jes. 47:4, zĳn dienst, Jes. 56:6, Jer. 23:27, zĳne heiligheid,
+1 Chr. 18:10, Ps. 105:3, 3:21 enz. De naam is God zelf, gelĳk Hĳ zich
+in de eene of andere relatie openbaart. Die naam als openbaring Gods,
+is daarom groot, Ezech. 36:23, heilig, Ezech. 36:20, vreeselĳk, Ps.
+111:9, een hoog vertrek, Ps. 20:2, een sterke toren, Spr. 18:10. Met
+eigen namen, bepaaldelĳk met den naam Ihvh, heeft God zich aan Israel
+bekend gemaakt. Door den Malak, in wiens binnenste zĳn naam is, Ex.
+23:20, heeft Hĳ zich aan Israel geopenbaard. En door Hem heeft Hĳ zĳn
+naam op de kinderen Israels gelegd, Num. 6:27, de gedachtenis zĳns
+naams onder hen gesticht, Ex. 20:24, zĳn naam onder hen gezet en doen
+wonen, Deut. 11:14, 12:5, bĳzonderlĳk in den tempel, die voor zĳnen
+naam is gebouwd, 2 S. 7:13. In dien tempel woont nu zĳn naam, 2 Chr.
+20:9, 33:4. Door dien naam verlost Hĳ, Ps. 54:3 en om dien naam kan
+Hĳ Israel niet verlaten, 1 S. 12:22, Jes. 48:9, 11, Ps. 31:4, 23:3,
+143:11 v. Maar Israel mag dien naam dan ook niet lasteren, ontheiligen
+of ĳdel gebruiken. Ex. 20:7, Lev. 18:21, 24:11. Integendeel, die naam
+moet aangeroepen, verteld, grootgemaakt, gekend, beleden, gevreesd,
+verhoogd, verwacht, gezocht, geheiligd worden, Gen. 4:26, 12:2, Ex.
+9:16, Deut. 28:58, 1 K. 8:33, Ps. 5:12, 34:4, 52:11, 83:17, 122:4, Jes.
+26:8, Mt. 6:9, Joh. 12:28 enz. In het N. Test. is er maar één naam,
+door wien God zaligheid schenkt; het is de naam van Jezus Christus, Hd.
+4:12. Maar in dien éénen naam heeft Hĳ zich ook ten volle geopenbaard;
+daarin is begrepen al wat God voor de zĳnen is en wezen zal; in dien
+naam deelt Hĳ zichzelven, met al zĳne weldaden, aan zĳn volk mede,
+Mt. 28:19, Luk. 24:47, Joh. 20:31, Hd. 2:38, 1 Cor. 6:11, Jak. 5:14.
+En nog rĳker openbaring hebben de geloovigen te wachten in het nieuwe
+Jeruzalem, Op. 3:12, als zĳn naam op aller voorhoofd zal zĳn, Op. 22:4.
+De naam Gods is in de H. Schrift de aanduiding, niet van God, gelĳk Hĳ
+in zichzelf bestaat, maar van God in zĳne openbaring, in zĳne velerlei
+relatiën tot de schepselen. Deze naam is echter niet willekeurig, maar
+God openbaart zich zoo en op die wĳze, omdat Hĳ is, die Hĳ is. Aan
+zĳn naam hangt daarom zĳn eer, zĳn roem, al zĳne deugden, heel zĳne
+openbaring, zĳn eigen Goddelĳk wezen. Maar die naam schenkt daarom
+aan hem, wien hĳ geopenbaard wordt, bĳzondere voorrechten en legt hem
+tevens eigenaardige verplichtingen op. De naam Gods sluit in, dat
+Hĳ, daarin zich openbarende, nu ook door schepselen daarnaar genoemd
+wordt. Het nomen editum gaat over in het nomen inditum. Het εἰναι en
+καλεισθαι zĳn in de H. Schrift twee zĳden van dezelfde zaak. God is
+die Hĳ heet, en Hĳ heet die Hĳ is. Wat Hĳ van zichzelven openbaart,
+wordt in bepaalde namen uitgedrukt en weergegeven. Hĳ schenkt aan zĳne
+schepselen het voorrecht, om op grond van en in overeenstemming met
+zĳne openbaring Hem te noemen en aan te spreken. De ééne naam Gods, als
+het inbegrip van zĳne gansche openbaring beide in natuur en genade,
+valt voor ons in vele, vele namen uiteen. Alleen op die wĳze krĳgen wĳ
+een overzicht van den rĳkdom zĳner openbaring en de diepe beteekenis
+van zĳnen naam. Wĳ noemen Hem en mogen Hem noemen naar al wat van zĳn
+wezen in schepping en herschepping openbaar wordt. Maar al die namen,
+als benoemingen Gods, leggen ons de verplichting op, om ze te heiligen
+en te verheerlĳken. Het is de ééne naam, de volle openbaring, en in
+zooverre het eigen wezen Gods zelf, waarmede wĳ in al die namen te doen
+hebben. God stelt zich door zĳn naam in eene bepaalde relatie tot ons;
+daaraan behooren wĳ in onze relatie tot Hem te beantwoorden, Schultz,
+Altt. Theol.⁴ 513 f. Oehler, Theol. des A. T. § 56. art. Name in
+Herzog². Smend, Lehrb. S. 281 f. Cremer, s. v. ὀνομα.
+
+
+2. De namen, waarmede God door ons genoemd en aangesproken wordt, zĳn
+daarom niet willekeurig; ze zĳn niet door ons naar ons goedvinden
+uitgedacht. Het is God zelf, die in natuur en genade bewust en vrĳ
+zich openbaart, die ons recht schenkt om op grond van deze openbaring
+Hem te noemen, ja die in zĳn Woord zĳn eigen namen op grond van zĳne
+openbaring ons heeft bekend gemaakt. Al deze namen dragen nu zonder
+onderscheid dit karakter, dat zĳ aan de openbaring zĳn ontleend.
+Er is geen enkele naam, die Gods wezen an sich aanduidt. Het nomen
+editum is de grondslag van alle nomina indita. En wĳl de openbaring
+Gods in natuur en Schrift bepaaldelĳk aan menschen is gericht, daarom
+is het eene menschelĳke taal, waarin God van zichzelven tot ons
+spreekt; daarom zĳn het menschelĳke woorden, waarvan Hĳ zich bedient;
+daarom zĳn het menschelĳke gedaanten, waaronder Hĳ verschĳnt. In de
+Schrift komen dus niet hier en daar enkele anthropomorphismen voor;
+de gansche Schrift is anthropomorphistisch. Van de eerste tot de
+laatste bladzĳde getuigt zĳ van een komen Gods tot en een zoeken
+van den mensch. De gansche openbaring Gods concentreert zich in den
+Logos, die σαρξ is geworden, en is als het ware ééne vermenschelĳking,
+ééne menschwording Gods. Als God tot ons sprak op goddelĳke wĳze,
+geen schepsel zou Hem verstaan, maar dit is zĳne genade, welke reeds
+met de schepping een aanvang nam, dat Hĳ tot zĳn schepselen zich
+nederbuigt en tot hen spreekt en aan hen verschĳnt op menschelĳke
+wĳze. Daarom zĳn al de namen, waarmede God zichzelven noemt en door
+ons noemen laat, aan aardsche en menschelĳke verhoudingen ontleend.
+Zoo heet Hĳ in de Schrift El, de Sterke, Elschaddai de Machtige,
+Jahveh, de Zĳnde, voorts Vader, Zoon, Geest, goed, barmhartig, genadig,
+rechtvaardig, heilig enz., altemaal begrippen, die eerst van schepselen
+gelden en dan in eminenten zin op God worden overgedragen. Zelfs de
+zoogenaamde onmededeelbare eigenschappen, zooals onveranderlĳkheid,
+onafhankelĳkheid, eenvoudigheid, eeuwigheid, alomtegenwoordigheid
+worden in de Schrift voorgesteld in vormen en uitdrukkingen, aan het
+eindige ontleend en daarom ook in negatieven zin; de eeuwigheid kan
+niet voorgesteld worden dan als eene negatie van den tĳd. De Schrift
+wendt zelfs geene enkele poging aan, om deze volmaaktheden Gods
+positief, naar haar eigen wezen, afgedacht van hare relatie tot het
+eindige, te omschrĳven. Maar het anthropomorphisme gaat in de Schrift
+nog veel verder. Al wat aan menschen en zelfs aan schepselen eigen is,
+wordt ook aan God toegeschreven, inzonderheid partes hominis, membra
+corporis, sensus, affectus, actiones, subjecta en adjuncta humana. God
+heeft eene ziel, Lev. 26:11, Mt. 12:28, en een Geest, Gen. 1:2 enz.
+Van een lichaam Gods is nooit sprake, ofschoon God in Christus ook
+een waarachtig lichaam aannam, Joh. 1:14, Col. 2:17, en de gemeente
+Christus’ lichaam heet, Ef. 1:22. Maar alle lichamelĳke organen worden
+toch aan God toegekend. Er wordt gesproken van zĳn aangezicht, Ex.
+33:20, 23, Jes. 63:9, Ps. 16:11, Mt. 18:10, Op. 22:4, van zĳne oogen,
+Ps. 11:4, Hebr. 4:13, van zĳne oogleden, Ps. 11:4, van zĳn oogappel,
+Deut. 32:10, Ps. 17:8, Zach. 2:8, van zĳne ooren, Ps. 55:2, van zĳn
+neus, Deut. 33:10, van zĳn mond, Deut. 8:3, van zĳne lippen, Job 11:5,
+van zĳne tong, Jes. 30:27, van zĳn nek, Jer. 18:17, van zĳn arm, Ex.
+15:16, van zĳn hand, Num. 11:23, van zĳne rechterhand, Ex. 15:12, van
+zĳn vinger, Ex. 8:19, van zĳn hart, Gen. 6:6, van zĳne ingewanden, Jes.
+63:15, Jer. 31:20, Luk. 1:78, van zĳn boezem, Ps. 74:4, van zĳn schoot,
+Joh. 1:28, van zĳn voet, Jes. 66:1. Vervolgens is er geene menschelĳke
+aandoening of ze is ook in God aanwezig, zooals vroolĳkheid, Jes. 62:5,
+verheuging, Jes. 65:19, smart, Ps. 78:40, Jes. 63:10, verdriet, Ps.
+95:10, Jer. 7:18, 19, vrees, Deut. 32:27, liefde met al de wĳzigingen
+daarvan zooals barmhartigheid, ontferming, genade, lankmoedigheid
+enz., voorts ĳver en jaloerschheid, Deut. 32:21, berouw, Gen. 6:6,
+haat, Deut. 16:22, toorn, Ps. 2:5, wraak, Deut. 32:35. Verder worden
+ook alle menschelĳke handelingen op God overgedragen, zooals kennis
+nemen, Gen. 18:21, onderzoeken, Ps. 7:10, weten, Gen. 3:5, denken,
+Gen. 50:20, vergeten, 1 Sam. 1:11, zich herinneren, Gen. 8:1, Ex.
+2:24, spreken, Gen. 2:16, roepen, Rom. 4:17, gebieden, Jes. 5:6,
+schelden, ( bestraffen, berispen) Ps. 18:16, 104:7, antwoorden, Ps.
+3:5, getuigen, Mal. 2:14; rusten, Gen. 2:2, werken, Joh. 5:17; zien,
+Gen. 1:10, hooren, Ex. 2:24, rieken, Gen. 8:21, proeven, Ps. 11:4, 5;
+zitten, Ps. 9:8, opstaan, Ps. 68:2, gaan, Ex. 34:9, komen, Ex. 25:22,
+wandelen, Lev. 26:12, nederdalen, Gen. 11:5, ontmoeten, Ex. 3:18,
+bezoeken, Gen. 21:1, voorbĳgaan, Ex. 12:13, verlaten, Richt. 6:13;
+schrĳven, Ex. 34:1, verzegelen, Joh. 6:27, graveeren, Jes. 49:16;
+slaan, Jes. 11:4, kastĳden, Deut. 8:5, straffen, Job 5:17, verbinden,
+Ps. 147:3, genezen, Ps. 103:3, heelen, Deut. 32:39, dooden en levend
+maken, Deut. 32:39; afwisschen, Jes. 25:8, uitwisschen, 2 Kon. 21:13,
+wasschen, Ps. 51:4, reinigen, Ps. 51:4, zalven, Ps. 2:6, versieren,
+Ezech. 16:11, bekleeden, Ps. 132:16, kronen, Ps. 8:6, omgorden, Ps.
+18:33; verdelgen, Gen. 6:7, verwoesten, Lev. 26:31, dooden, Gen. 38:7,
+plagen, Gen. 12:17, richten, Ps. 58:12, verdoemen, Job 10:2 enz. Voorts
+wordt God ook zeer dikwerf aangeduid met namen, die een zeker beroep,
+ambt, betrekking, verhouding onder menschen te kennen geven. Hĳ is
+een bruidegom, Jes. 61:10, een man, Jes. 54:5, een vader, Deut. 32:6,
+een richter, koning, wetgever, Jes. 33:22, een krĳgsman, Ex. 15:3,
+een held, Ps. 78:65, Zef. 3:17, een kunstenaar en bouwmeester, Hebr.
+11:10, een landman, Joh. 15:1, een herder, Ps. 23:1, een heelmeester,
+Ex. 15:26 enz.; terwĳl dan in deze hoedanigheden weder sprake is van
+zĳn zetel, troon, voetbank, roede, scepter, wapens, boog, pĳl, zwaard,
+schild, wagen, banier, boek, zegel, schat, erfenis enz. Ja zelfs
+worden, om uit te drukken wat God voor de zĳnen is, allerlei beelden
+aan de bezielde en onbezielde schepping ontleend. Hĳ wordt vergeleken
+bĳ een leeuw, Jes. 31:4, een arend, Deut. 32:11, een lam, Jes. 53:7,
+eene hen, Mt. 23:37, bĳ de zon, Ps. 84:12, de morgenster, Op. 22:16,
+bĳ een licht, Ps. 27:1, eene kaars, Op. 21:23, een vuur, Hebr. 12:29,
+eene bron of fontein, Ps. 36:10, een sprinkader, Jer. 2:13, bĳ spĳze,
+brood, drank, water, zalf, Jes. 55:1, Joh. 4:10, 6:35, 55, bĳ een
+rotssteen, Deut. 32:4, eene schuilplaats, Ps. 119:114, toren, Spr.
+18:10, een hoog vertrek, Ps. 9:10, eene schaduw, Ps. 91:1, 121:5, een
+schild, Ps. 84:12, een weg, Joh. 14:6, een tempel, Op. 21:22 enz.,
+Polanus, Synt. Theol. II c. 35, Alsted, Theol. schol. 104 sq. Glassius,
+Philol. Sacra 1691 p. 1116-1181.
+
+
+3. De gansche schepping, heel de natuur met al hare rĳken, de
+menschenwereld bovenal worden in de H. Schrift dienstbaar gemaakt aan
+de beschrĳving der kennisse Gods. Aan het anthropomorphisme wordt
+geen grens gesteld. Alle schepselen, levende en levenlooze, bezielde
+en onbezielde, organische en anorganische, bieden namen aan, om de
+grootheid Gods eenigermate tot ons bewustzĳn te brengen. Ofschoon
+ἀνωνυμος in zichzelven, is God toch πολυωνυμος in zĳne openbaring.
+Omnia possunt dici de Deo, et nihil digne dicitur de Deo. Nihil
+latius hac inopia. Quaeris congruum nomen, non invenis; quaeris
+quoquo modo dicere, omnia invenis, August., tract. 13 in Ev. Joh. n.
+5. En ter opheldering, waarom God op zoo velerlei wĳze genoemd kan
+worden, bediende zich Augustinus van een treffend beeld. Ons lichaam
+heeft velerlei behoeften, aan licht en lucht, spĳze en drank, woning
+en kleederen enz., en al deze dingen zĳn verschillend en liggen in
+de schepselen naast elkaar. Ook onze geest heeft vele en velerlei
+behoeften, maar wat daarin voorziet is niet velerlei maar is altĳd het
+eene en zelfde Goddelĳk wezen. In terra aliud est fons, aliud lumen.
+Sitiens quaeris fontem, et ut pervenias ad fontem, quaeris lucem, et si
+dies non est, accendis lucernam, ut ad fontem pervenias. Fons ille ipse
+est lux: sitienti fons est, caeco lux est; aperiantur oculi ut videant
+lucem, aperiantur fauces cordis ut bibant fontem; quod bibis hoc vides,
+hoc audis. Totum sit tibi Deus, quia horum quae diligis totum tibi
+est. Si visibilia attendis, nec panis est Deus, nec aqua est Deus, nec
+lux ista est Deus, nec vestis est Deus, nec domus est Deus. Omnia enim
+haec visibilia sunt et singula sunt; quod est panis non hoc est aqua,
+et quod est vestis, non hoc est domus, et quod sunt ista, non hoc est
+Deus, visibilia enim sunt. Deus tibi totum est; si esuris, panis tibi
+est; si sitis, aqua tibi est; si in tenebris es, lumen tibi est, quia
+incorruptibilis manet; si nudus es, immortalitatis vestis tibi est,
+cum corruptibile hoc induerit incorruptionem et mortale hoc induerit
+immortalitatem, tract. 13 in Ev. Joh. Evenzoo zegt Pseudodionysius, dat
+God ἀνωνυμος is en tegelĳk πολυωνυμος, Hĳ is tegelĳk παντα τα ὀντα και
+οὐδεν των ὀντων, de div. nom. c. I. § 6. 7. Bĳ Thomas lezen wĳ, quod
+Deus in se praehabet omnes perfectiones creaturarum, quasi simpliciter
+et universaliter perfectus, S. Theol. I qu. 13 art. 2. En schooner
+nog bĳ Bonaventura: ut laudibus Deum possimus extollere, atque ad Dei
+cognitionem promoveamur, necessaria nobis sunt translationes ad divina.
+Ratio vel finis translationis duplex est. Una in qua est laus Dei,
+alia manuductio intellectus nostri. Propter laudem Dei necessaria est
+translatio. Et quoniam Deus multum est laudabilis, ne propter inopiam
+vocabulorum contingeret cessari a laude, sacra Scriptura docuit nomina
+creaturarum ad Deum transferri; et hoc in numero indefinito, ut sicut
+omnis creatura laudat Deum, sic Deus laudatur ex omni nomine creaturae,
+et qui non poterit uno nomine laudari, tamquam superexcellens omne
+nomen, laudaretur ex omni nomine. Alia ratio est manuductio intellectus
+nostri. Quia cum per creaturas ad cognoscendum creatorem venimus, ut
+plurimum, fere omnes creaturae habent proprietates nobiles, quae sunt
+ratio intelligendi Deum, ut leo fortitudinem, agnus mansuetudinem,
+petra soliditatem, serpens prudentiam et consimilia; ideo oportuit
+plura nomina transferri ad Deum, Sent. I dist. 34 art. 1 qu. 4. En
+Calvĳn stemde daarmede in, als hĳ zeide: nulla est mundi particula, in
+qua non scintillae saltem aliquae gloriae ipsius emicare cernantur.
+God is immanent in al het geschapene. De reine van hart ziet God
+overal. Alles is vol van God. Fateor pie hoc posse dici, modo a pio
+animo proficiscatur, naturam esse Deum, Inst. I 5, 1. 5. Maar er is
+opklimming in de schepselen. De plaats en de rang, die de schepselen
+innemen, wordt bepaald door hunne verwantschap aan God. Alle schepselen
+noemen een naam van God. Maar onder alle schepselen staat de mensch
+bovenaan. Hĳ alleen draagt den hoogen naam van beeld, zoon, kind Gods.
+Hĳ alleen heet Gods geslacht. En daarom worden de meeste en verhevenste
+namen Gods aan den mensch ontleend. Nooit echter mag de mensch van de
+natuur worden losgemaakt. En nimmer mag eenig creatuur of eenig deel
+der wereld naast of tegenover God worden geplaatst. Er is niets buiten
+en zonder God. Wel is hier telkens tegen gezondigd. Het dualisme van
+Plato, het neoplatonisme, het gnosticisme, het manichaeisme beperkten
+Gods openbaring en stelden eene materie vĳandig tegen Hem over. En in
+allerlei vormen oefende dit invloed en werkte het na in de theologie.
+Als in den nieuweren tĳd onder invloed van Kant en Jacobi de openbaring
+Gods tot het religieuse en ethische beperkt is; als de Schrift alleen
+in haar godsdienstig-zedelĳken inhoud erkend wordt; als de zetel der
+religie alleen gezocht wordt in hart of geweten, in gemoed of wil,
+is er in dit alles een zelfde dualistisch beginsel aan ’t woord. De
+natuur, met hare elementen en krachten, de mensch in zĳn maatschappelĳk
+en staatkundig leven, kunst en wetenschap komen buiten de openbaring
+Gods te staan en worden neutrale, d. i. God-looze terreinen. Natuurlĳk,
+dat dan het O. Test. en een zeer groot deel van het N. Test. niet
+meer kan gewaardeerd worden; dat natuur en wereld niets meer tot den
+geloovige te zeggen hebben; dat de openbaring, dat het Woord Gods
+allen invloed op het openbare leven verliest; dat de religie, tot een
+verborgen schuilhoek van hart en binnenkamer teruggedrongen, alle
+aanspraak op achting verbeurt; dat de dogmatiek, bepaaldelĳk ook de
+locus de Deo, van dag tot dag inkrimpt, en dat de theologie hare plaats
+niet meer weet te handhaven. De theologie weet niet meer van God te
+spreken, omdat zĳ niet uit en door Hem spreekt. Zĳ heeft geen namen
+meer, waarmede zĳ God noemen kan. God wordt de groote Onbekende en de
+wereld wordt eerst ἀθεος, dan ἀντιθεος.
+
+Translate the source excerpt into formal English theological prose.
+Preserve all non-Dutch spans in their original language exactly as written.
+Render any Dutch Scripture references, book names, and abbreviations in standard English forms.
+Return only the translated passage with paragraph structure intact and no prefatory commentary.
