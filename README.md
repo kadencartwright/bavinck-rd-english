@@ -81,4 +81,4 @@ lint(fail && repairRound >= maxRepairRounds) -> finalize_escalated
 
 ## Status
 
-Python calibration files are retained for historical reference during the migration, but the primary and documented runtime is now the TypeScript/NestJS CLI described above.
+The calibration runtime is now TypeScript-only. The legacy Python calibration runner and its Python test suite have been removed from the active workflow.
