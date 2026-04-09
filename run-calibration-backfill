@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-set -eu
-
-exec python3 src/calibration/backfill_eval_bundle.py "$@"

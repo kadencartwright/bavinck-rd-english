@@ -84,30 +84,36 @@ should_retry_failed_run() {
   manifest_path="$1"
   run_name=$(basename "$manifest_path" .json)
   status_log_path="$log_root/$run_name.status"
-  translation_response_path="data/calibration/runs/$run_name/outputs/translation-response.json"
+  translation_response_path="data/calibration/runs/$run_name/outputs/translation-response-round-0.json"
+  legacy_translation_response_path="data/calibration/runs/$run_name/outputs/translation-response.json"
 
   if [ -f "$status_log_path" ] && [ "$(cat "$status_log_path")" = "engine-overloaded" ]; then
     return 0
   fi
 
+  response_probe_path=""
   if [ -f "$translation_response_path" ]; then
-    if python3 - "$translation_response_path" <<'PY'
-import json
-import pathlib
-import sys
+    response_probe_path="$translation_response_path"
+  elif [ -f "$legacy_translation_response_path" ]; then
+    response_probe_path="$legacy_translation_response_path"
+  fi
 
-path = pathlib.Path(sys.argv[1])
-try:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    choices = payload.get("choices")
-    if isinstance(choices, list) and choices:
-        first_choice = choices[0]
-        if isinstance(first_choice, dict) and first_choice.get("finish_reason") == "engine_overloaded":
-            raise SystemExit(0)
-except Exception:
-    pass
-raise SystemExit(1)
-PY
+  if [ -n "$response_probe_path" ]; then
+    if node -e '
+const fs = require("node:fs");
+const path = process.argv[1];
+try {
+  const payload = JSON.parse(fs.readFileSync(path, "utf8"));
+  const choices = payload.choices;
+  if (Array.isArray(choices) && choices.length > 0) {
+    const firstChoice = choices[0];
+    if (firstChoice && typeof firstChoice === "object" && firstChoice.finish_reason === "engine_overloaded") {
+      process.exit(0);
+    }
+  }
+} catch {}
+process.exit(1);
+' "$response_probe_path"
     then
       return 0
     fi

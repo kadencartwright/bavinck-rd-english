@@ -1,0 +1,61 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2022",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": [
+      "node",
+      "jest"
+    ],
+    "paths": {
+      "@calibration-domain": [
+        "libs/calibration-domain/src"
+      ],
+      "@calibration-domain/*": [
+        "libs/calibration-domain/src/*"
+      ],
+      "@calibration-config": [
+        "libs/calibration-config/src"
+      ],
+      "@calibration-config/*": [
+        "libs/calibration-config/src/*"
+      ],
+      "@provider-clients": [
+        "libs/provider-clients/src"
+      ],
+      "@provider-clients/*": [
+        "libs/provider-clients/src/*"
+      ],
+      "@artifact-store": [
+        "libs/artifact-store/src"
+      ],
+      "@artifact-store/*": [
+        "libs/artifact-store/src/*"
+      ],
+      "@deterministic-lint": [
+        "libs/deterministic-lint/src"
+      ],
+      "@deterministic-lint/*": [
+        "libs/deterministic-lint/src/*"
+      ],
+      "@translation-workflow": [
+        "libs/translation-workflow/src"
+      ],
+      "@translation-workflow/*": [
+        "libs/translation-workflow/src/*"
+      ]
+    }
+  }
+}

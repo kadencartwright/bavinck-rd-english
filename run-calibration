@@ -21,17 +21,15 @@ for arg in "$@"; do
 done
 
 echo "[run-calibration] validating manifest: $manifest" >&2
-python3 src/calibration/validate_calibration.py --run-manifest "$manifest"
-
 if [ "$#" -eq 0 ]; then
-  echo "[run-calibration] starting runner with default manifest" >&2
-  exec python3 src/calibration/run_calibration.py --run-manifest "$manifest"
+  echo "[run-calibration] starting NestJS runner with default manifest" >&2
+  exec pnpm run calibration -- --run-manifest "$manifest"
 fi
 
 if [ "$has_manifest" -eq 1 ]; then
-  echo "[run-calibration] starting runner with explicit manifest arguments" >&2
-  exec python3 src/calibration/run_calibration.py "$@"
+  echo "[run-calibration] starting NestJS runner with explicit manifest arguments" >&2
+  exec pnpm run calibration -- "$@"
 fi
 
-echo "[run-calibration] starting runner with default manifest and extra flags" >&2
-exec python3 src/calibration/run_calibration.py --run-manifest "$manifest" "$@"
+echo "[run-calibration] starting NestJS runner with default manifest and extra flags" >&2
+exec pnpm run calibration -- --run-manifest "$manifest" "$@"
