@@ -108,6 +108,68 @@ class OpenAICompatTests(unittest.TestCase):
         mock_sleep.assert_called_once_with(0.0)
         self.assertEqual(response["choices"][0]["message"]["content"], "OK")
 
+    def test_streaming_chat_completion_retries_engine_overloaded_once(self) -> None:
+        overloaded_events = [
+            'data: {"id":"chatcmpl-1","object":"chat.completion.chunk","created":1,"model":"kimi-k2.5","choices":[{"index":0,"delta":{"reasoning_content":"thinking"},"finish_reason":"engine_overloaded"}]}\n',
+            "\n",
+            "data: [DONE]\n",
+            "\n",
+        ]
+        success_events = [
+            'data: {"id":"chatcmpl-2","object":"chat.completion.chunk","created":2,"model":"kimi-k2.5","choices":[{"index":0,"delta":{"content":"Translated"},"finish_reason":"stop"}]}\n',
+            "\n",
+            "data: [DONE]\n",
+            "\n",
+        ]
+
+        with (
+            patch.dict("os.environ", {"MOONSHOT_API_KEY": "test-key"}, clear=False),
+            patch(
+                "calibration.openai_compat.urlopen",
+                side_effect=[FakeStreamingResponse(overloaded_events), FakeStreamingResponse(success_events)],
+            ) as mock_urlopen,
+            patch("calibration.openai_compat.time.sleep") as mock_sleep,
+        ):
+            response = create_chat_completion(
+                provider_name="moonshot",
+                model="kimi-k2.5",
+                messages=[{"role": "user", "content": "Translate"}],
+                temperature=1.0,
+                stream=True,
+                max_retries=1,
+            )
+
+        self.assertEqual(mock_urlopen.call_count, 2)
+        mock_sleep.assert_called_once_with(1.0)
+        self.assertEqual(response["choices"][0]["message"]["content"], "Translated")
+
+    def test_streaming_chat_completion_raises_after_engine_overloaded_retries_exhausted(self) -> None:
+        overloaded_events = [
+            'data: {"id":"chatcmpl-1","object":"chat.completion.chunk","created":1,"model":"kimi-k2.5","choices":[{"index":0,"delta":{"reasoning_content":"thinking"},"finish_reason":"engine_overloaded"}]}\n',
+            "\n",
+            "data: [DONE]\n",
+            "\n",
+        ]
+
+        with (
+            patch.dict("os.environ", {"MOONSHOT_API_KEY": "test-key"}, clear=False),
+            patch(
+                "calibration.openai_compat.urlopen",
+                return_value=FakeStreamingResponse(overloaded_events),
+            ),
+        ):
+            with self.assertRaises(RuntimeError) as context:
+                create_chat_completion(
+                    provider_name="moonshot",
+                    model="kimi-k2.5",
+                    messages=[{"role": "user", "content": "Translate"}],
+                    temperature=1.0,
+                    stream=True,
+                    max_retries=0,
+                )
+
+        self.assertIn("engine_overloaded", str(context.exception))
+
 
 if __name__ == "__main__":
     unittest.main()

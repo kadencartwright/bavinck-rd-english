@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "run_id": "vol2-god-incomprehensibility-001-baseline",
+  "generated_at": "2026-04-09T15:01:45.547682+00:00",
+  "slice_id": "vol2-god-incomprehensibility-001",
+  "prompt_bundle_id": "baseline-v1",
+  "model_profile_id": "kimi-k2_5-glm5-baseline",
+  "checks": [
+    {
+      "id": "source-identity",
+      "status": "pass",
+      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+    },
+    {
+      "id": "rubric-present",
+      "status": "pass",
+      "details": "Rubric path: data/calibration/slices/vol2-god-incomprehensibility-001/inputs/rubric.yaml"
+    },
+    {
+      "id": "translation-output",
+      "status": "pass",
+      "details": "Translation output path: data/calibration/runs/vol2-god-incomprehensibility-001-baseline/outputs/translation.md"
+    },
+    {
+      "id": "preserved-language-integrity",
+      "status": "pass",
+      "details": "All Greek/Hebrew spans found in translation output."
+    },
+    {
+      "id": "glossary-adherence",
+      "status": "pass",
+      "details": "All required glossary targets were found in the translation output."
+    },
+    {
+      "id": "scripture-reference-normalization",
+      "status": "pass",
+      "details": "Dutch Scripture references were normalized to standard English forms."
+    },
+    {
+      "id": "prose-quality",
+      "status": "fail",
+      "details": "A double negative error in paragraph 1 ('cannot be described and named by no name') inverts the source meaning, and Dutch-influenced syntax ('Insofar it is all mystery', 'Also Greek philosophy has') creates awkwardness."
+    },
+    {
+      "id": "review-flagging",
+      "status": "pass",
+      "details": "Findings explicitly identify the doctrinal ambiguity caused by the prose error and flag specific syntactic issues relative to the style guide."
+    }
+  ],
+  "summary": {
+    "pass": 7,
+    "fail": 1,
+    "incomplete": 0
+  },
+  "artifacts": {
+    "translation_output_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/translation.md",
+    "review_structured_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/review-structured.json",
+    "findings_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/findings.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/evaluation.md",
+    "eval_record_path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/eval-record.json"
+  },
+  "qualitative_findings": {
+    "path": "data/calibration/evals/vol2-god-incomprehensibility-001-baseline/findings.md",
+    "separate_from_checks": true
+  },
+  "review_summary": "The translation maintains glossary fidelity and correctly preserves Greek, Hebrew, and Latin spans while accurately converting Dutch Scripture references into standard English forms. However, the English prose contains a significant grammatical error in paragraph 1 that inverts the theological meaning regarding God's namelessness, alongside several syntactic calques that compromise formal theological register.",
+  "glossary_hits": [
+    "dogmatiek -> dogmatics",
+    "kennisse Gods -> knowledge of God",
+    "Onbegrĳpelĳke -> the Incomprehensible",
+    "openbaring -> revelation",
+    "de zĳnde -> Being"
+  ],
+  "glossary_misses": []
+}

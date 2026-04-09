@@ -88,8 +88,19 @@ def create_chat_completion(
                 response_context = urlopen(request, timeout=timeout_seconds)
             with response_context as response:
                 if stream:
-                    return _read_streaming_chat_completion(response, on_stream_delta=on_stream_delta)
-                return json.loads(response.read().decode("utf-8"))
+                    payload = _read_streaming_chat_completion(response, on_stream_delta=on_stream_delta)
+                else:
+                    payload = json.loads(response.read().decode("utf-8"))
+                if _is_engine_overloaded_response(payload):
+                    if attempt < max_retries:
+                        time.sleep(float(2**attempt))
+                        attempt += 1
+                        continue
+                    raise RuntimeError(
+                        f"{provider_name} response ended with finish_reason 'engine_overloaded' "
+                        "before returning final content."
+                    )
+                return payload
         except HTTPError as exc:
             body = exc.read().decode("utf-8", errors="replace")
             if exc.code == 429 and attempt < max_retries:
@@ -237,3 +248,13 @@ def _retry_delay_seconds(exc: HTTPError, attempt: int) -> float:
         except ValueError:
             pass
     return float(2 ** attempt)
+
+
+def _is_engine_overloaded_response(response: dict[str, object]) -> bool:
+    choices = response.get("choices")
+    if not isinstance(choices, list) or not choices:
+        return False
+    first_choice = choices[0]
+    if not isinstance(first_choice, dict):
+        return False
+    return first_choice.get("finish_reason") == "engine_overloaded"

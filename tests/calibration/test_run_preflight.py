@@ -72,6 +72,13 @@ class RunPreflightTests(unittest.TestCase):
         self.assertIn("stage 'review'", str(context.exception))
         self.assertIn("z-ai/glm-5", str(context.exception))
 
+    def test_detects_untranslated_dutch_scripture_references(self) -> None:
+        matches = run_calibration.find_untranslated_dutch_scripture_references(
+            "Acts 17:23, but also Hd. 17:28, Jes. 40:28, and Op. 22:4 remain."
+        )
+
+        self.assertEqual(matches, ["Hd. 17:28", "Jes. 40:28", "Op. 22:4"])
+
     def test_wrapper_supports_smoke_test_only_with_default_manifest(self) -> None:
         result = subprocess.run(
             ["./run-calibration", "--smoke-test-only"],
@@ -232,6 +239,80 @@ class RunPreflightTests(unittest.TestCase):
             self.assertFalse(
                 (run_root / "vol2-god-incomprehensibility-001-baseline" / "review" / "review-request.json").exists()
             )
+
+    def test_runner_flags_untranslated_dutch_scripture_references_in_evaluation(self) -> None:
+        manifest_path = self.repo_root / "config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json"
+        translation_response = {
+            "id": "chatcmpl-translation",
+            "created": 1,
+            "model": "kimi-k2.5",
+            "choices": [
+                {
+                    "index": 0,
+                    "message": {
+                        "role": "assistant",
+                        "content": "God reveals himself in Hd. 17:23 and Jes. 40:28.\n",
+                    },
+                    "finish_reason": "stop",
+                }
+            ],
+        }
+        review_response = {
+            "id": "chatcmpl-review",
+            "created": 2,
+            "model": "glm-5",
+            "choices": [
+                {
+                    "index": 0,
+                    "message": {
+                        "role": "assistant",
+                        "content": json.dumps(
+                            {
+                                "summary": "Review completed.",
+                                "checks": {
+                                    "prose-quality": {"status": "pass", "details": "Readable."},
+                                    "review-flagging": {"status": "pass", "details": "Issues called out."},
+                                },
+                                "findings": [{"severity": "low", "category": "style", "detail": "Minor issue."}],
+                                "recommended_follow_up": ["Keep comparing runs."],
+                            }
+                        ),
+                    },
+                    "finish_reason": "stop",
+                }
+            ],
+        }
+
+        with TemporaryDirectory(dir=self.repo_root) as temp_dir:
+            run_root = Path(temp_dir) / "runs"
+            eval_root = Path(temp_dir) / "evals"
+            argv = [
+                "run_calibration.py",
+                "--run-manifest",
+                str(manifest_path),
+                "--output-root",
+                str(run_root),
+                "--eval-root",
+                str(eval_root),
+                "--skip-provider-smoke-test",
+            ]
+            with (
+                patch.object(sys, "argv", argv),
+                patch(
+                    "calibration.run_calibration.create_chat_completion",
+                    side_effect=[translation_response, review_response],
+                ),
+            ):
+                result = run_calibration.main()
+
+            self.assertEqual(result, 0)
+            evaluation_path = eval_root / "vol2-god-incomprehensibility-001-baseline" / "evaluation.json"
+            evaluation = json.loads(evaluation_path.read_text(encoding="utf-8"))
+            check = next(item for item in evaluation["checks"] if item["id"] == "scripture-reference-normalization")
+
+            self.assertEqual(check["status"], "fail")
+            self.assertIn("Hd. 17:23", check["details"])
+            self.assertIn("Jes. 40:28", check["details"])
 
 
 if __name__ == "__main__":

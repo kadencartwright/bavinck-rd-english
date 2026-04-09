@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -40,6 +41,39 @@ from calibration.validation import (
     validate_slice_manifest,
     validate_translation_request_record,
 )
+
+
+SCRIPTURE_REFERENCE_SUFFIX = r"\s*\d+(?:(?::|\s+vs?\.\s+|\s+vv?\.\s+)\d+(?:[-–]\d+)?)?"
+DUTCH_SCRIPTURE_REFERENCE_FORMS = [
+    r"\bHd\.",
+    r"\bHand\.",
+    r"\bJes\.",
+    r"\bJesaia\b",
+    r"\bEf\.",
+    r"\bHebr\.",
+    r"\bRicht\.",
+    r"\bOp\.",
+    r"\bOpenb\.",
+    r"\bSpr\.",
+    r"\bPred\.",
+    r"\bEzech\.",
+    r"\bJoz\.",
+    r"\bJak\.",
+    r"\bJoh\.",
+    r"\bLuk\.",
+    r"\bMatth\.",
+    r"\b1\s*Petr\.",
+    r"\b2\s*Petr\.",
+    r"\b1\s*Kon\.",
+    r"\b2\s*Kon\.",
+    r"\b1\s*S\.",
+    r"\b2\s*S\.",
+    r"\b1\s*K\.",
+    r"\b2\s*K\.",
+]
+DUTCH_SCRIPTURE_REFERENCE_PATTERNS = [
+    re.compile(rf"{form}{SCRIPTURE_REFERENCE_SUFFIX}") for form in DUTCH_SCRIPTURE_REFERENCE_FORMS
+]
 
 
 def parse_args() -> argparse.Namespace:
@@ -295,6 +329,8 @@ def main() -> int:
         else:
             glossary_misses.append(f"{source_term} -> {target_term}")
 
+    untranslated_dutch_scripture_references = find_untranslated_dutch_scripture_references(translation_text)
+
     checks = [
         {
             "id": "source-identity",
@@ -329,6 +365,16 @@ def main() -> int:
                 "All required glossary targets were found in the translation output."
                 if not glossary_misses
                 else "Missing glossary targets: " + "; ".join(glossary_misses)
+            ),
+        },
+        {
+            "id": "scripture-reference-normalization",
+            "status": "fail" if untranslated_dutch_scripture_references else "pass",
+            "details": (
+                "Dutch Scripture references were normalized to standard English forms."
+                if not untranslated_dutch_scripture_references
+                else "Untranslated Dutch Scripture reference forms found in translation output: "
+                + ", ".join(untranslated_dutch_scripture_references)
             ),
         },
     ]
@@ -464,6 +510,21 @@ def build_translation_request(
             "prompt_files": prompt_bundle_metadata.get("prompt_files"),
         },
     }
+
+
+def find_untranslated_dutch_scripture_references(text: str, *, limit: int = 8) -> list[str]:
+    matches: list[str] = []
+    seen: set[str] = set()
+    for pattern in DUTCH_SCRIPTURE_REFERENCE_PATTERNS:
+        for match in pattern.finditer(text):
+            snippet = match.group(0).strip()
+            if snippet in seen:
+                continue
+            seen.add(snippet)
+            matches.append(snippet)
+            if len(matches) >= limit:
+                return matches
+    return matches
 
 
 def build_review_request(

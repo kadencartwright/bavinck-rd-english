@@ -1,0 +1,172 @@
+#!/usr/bin/env sh
+set -eu
+
+repo_root=$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)
+cd "$repo_root"
+
+force_env_copy=0
+skip_env_copy=0
+skip_dependency_install=0
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --force)
+      force_env_copy=1
+      ;;
+    --skip-env)
+      skip_env_copy=1
+      ;;
+    --skip-deps)
+      skip_dependency_install=1
+      ;;
+    --help)
+      cat <<'EOF'
+usage: ./scripts/setup-worktree [--force] [--skip-env] [--skip-deps]
+
+Copies .env from the primary worktree into the current worktree when available,
+then installs dependencies for any detected package manifests.
+EOF
+      exit 0
+      ;;
+    *)
+      echo "[setup-worktree] unknown argument: $1" >&2
+      exit 1
+      ;;
+  esac
+  shift
+done
+
+log() {
+  echo "[setup-worktree] $*" >&2
+}
+
+primary_worktree_root() {
+  git worktree list --porcelain | awk '
+    /^worktree / {
+      print substr($0, 10)
+      exit
+    }
+  '
+}
+
+copy_env_from_primary_worktree() {
+  if [ "$skip_env_copy" -eq 1 ]; then
+    log "skipping .env copy"
+    return
+  fi
+
+  source_root=$(primary_worktree_root)
+  target_env="$repo_root/.env"
+
+  if [ -z "$source_root" ]; then
+    log "unable to determine primary worktree root; skipping .env copy"
+    return
+  fi
+
+  source_env="$source_root/.env"
+
+  if [ ! -f "$source_env" ]; then
+    log "no .env found in primary worktree ($source_root); skipping copy"
+    return
+  fi
+
+  if [ "$source_env" = "$target_env" ]; then
+    log "current worktree is the primary worktree; .env copy not needed"
+    return
+  fi
+
+  if [ -f "$target_env" ] && [ "$force_env_copy" -ne 1 ]; then
+    log ".env already exists in current worktree; use --force to overwrite"
+    return
+  fi
+
+  cp "$source_env" "$target_env"
+  log "copied .env from $source_root"
+}
+
+install_python_dependencies() {
+  python_bin=${PYTHON_BIN:-python3}
+
+  if [ -f requirements.txt ]; then
+    log "installing Python dependencies from requirements.txt"
+    "$python_bin" -m pip install -r requirements.txt
+    return 0
+  fi
+
+  if [ -f requirements-dev.txt ]; then
+    log "installing Python dependencies from requirements-dev.txt"
+    "$python_bin" -m pip install -r requirements-dev.txt
+    return 0
+  fi
+
+  if [ -f pyproject.toml ]; then
+    if [ -f uv.lock ] && command -v uv >/dev/null 2>&1; then
+      log "installing Python dependencies with uv sync"
+      uv sync
+      return 0
+    fi
+
+    log "installing Python package in editable mode from pyproject.toml"
+    "$python_bin" -m pip install -e .
+    return 0
+  fi
+
+  return 1
+}
+
+install_node_dependencies() {
+  if [ ! -f package.json ]; then
+    return 1
+  fi
+
+  if [ -f pnpm-lock.yaml ] && command -v pnpm >/dev/null 2>&1; then
+    log "installing Node dependencies with pnpm"
+    pnpm install --frozen-lockfile
+    return 0
+  fi
+
+  if [ -f package-lock.json ] && command -v npm >/dev/null 2>&1; then
+    log "installing Node dependencies with npm ci"
+    npm ci
+    return 0
+  fi
+
+  if [ -f yarn.lock ] && command -v yarn >/dev/null 2>&1; then
+    log "installing Node dependencies with yarn"
+    yarn install --frozen-lockfile
+    return 0
+  fi
+
+  if command -v npm >/dev/null 2>&1; then
+    log "installing Node dependencies with npm install"
+    npm install
+    return 0
+  fi
+
+  log "package.json found but no supported Node package manager is available"
+  return 1
+}
+
+install_dependencies() {
+  if [ "$skip_dependency_install" -eq 1 ]; then
+    log "skipping dependency installation"
+    return
+  fi
+
+  installed_any=1
+
+  if install_python_dependencies; then
+    installed_any=0
+  fi
+
+  if install_node_dependencies; then
+    installed_any=0
+  fi
+
+  if [ "$installed_any" -ne 0 ]; then
+    log "no dependency manifest detected; nothing to install"
+  fi
+}
+
+copy_env_from_primary_worktree
+install_dependencies
