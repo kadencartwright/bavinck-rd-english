@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-incomprehensibility-quick-001-baseline",
-  "generated_at": "2026-04-09T21:51:18.711Z",
+  "generated_at": "2026-04-10T22:04:04.658Z",
   "slice_id": "vol2-god-incomprehensibility-quick-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -49,12 +49,12 @@
     {
       "id": "prose-quality",
       "status": "pass",
-      "details": "Formal theological prose maintained throughout; one minor awkward construction does not obscure meaning or flatten the argument."
+      "details": "The output is coherent formal theological prose; the identified issues are localized and do not disrupt the overall argument structure."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "The single quality issue is appropriately flagged; no preservation risks, doctrinal ambiguity, or glossary drift were detected."
+      "details": "The review identifies the specific inconsistency in book title translation and the potential doctrinal ambiguity regarding 'scientific' sense."
     }
   ],
   "summary": {
@@ -78,7 +78,7 @@
     "path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation accurately renders the Dutch source into formal theological English, preserving all Greek and Latin spans intact, applying glossary terms consistently, and converting Dutch Scripture references to standard English forms. One minor prose awkwardness was identified but does not affect doctrinal clarity or fidelity to the argument structure.",
+  "review_summary": "The translation faithfully preserves Greek, Latin, and German spans while adhering to glossary requirements for key theological terms, and it correctly translates Dutch Scripture references into standard English forms. However, the translation inconsistently renders the Dutch book title 'Institutie' into Latin ('Institutio') rather than the standard English 'Institutes', and uses 'scientific' where 'scholarly' might better avoid modern empirical connotations, alongside a minor syntactic calque in the opening sentence.",
   "glossary_hits": [],
   "glossary_misses": [],
   "terminal_status": "reviewed"

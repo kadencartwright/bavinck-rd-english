@@ -20,6 +20,8 @@ export interface TranslationExecutionInput {
   excerptText: string;
   glossaryText: string;
   styleGuideText: string;
+  stream?: boolean;
+  onStreamDelta?: (fieldName: "content" | "reasoning_content", text: string) => void;
 }
 
 @Injectable()
@@ -44,12 +46,14 @@ export class TranslationService {
     const stage = input.modelProfile.stages.translation;
     const response = await this.providerClient.createChatCompletion({
       providerName: stage.provider,
+      stageName: "translation",
       model: stage.model,
       messages: built.messages,
       temperature: stage.temperature,
       maxTokens: stage.max_tokens,
       timeoutSeconds: stage.timeout_seconds,
-      stream: false
+      stream: input.stream ?? false,
+      onStreamDelta: input.onStreamDelta
     });
     const text = `${this.providerClient.extractMessageText(response).trim()}\n`;
     if (!text.trim()) {
@@ -79,7 +83,7 @@ export class TranslationService {
   }
 
   async smokeTest(modelProfile: ModelProfile): Promise<void> {
-    await this.providerClient.smokeTestStage("translation", modelProfile.stages.translation);
+      await this.providerClient.smokeTestStage("translation", modelProfile.stages.translation);
     await this.providerClient.smokeTestStage("review", modelProfile.stages.review);
   }
 

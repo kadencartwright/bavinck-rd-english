@@ -19,11 +19,14 @@ export interface ResolvedCalibrationCliOptions {
   skipProviderSmokeTest: boolean;
   smokeTestOnly: boolean;
   maxRepairRounds: number;
+  streamTranslation: boolean;
 }
+
+export type CalibrationCliOptionsInput = Partial<ResolvedCalibrationCliOptions>;
 
 @Injectable()
 export class CalibrationConfigService {
-  resolveCliOptions(options: Partial<ResolvedCalibrationCliOptions>): ResolvedCalibrationCliOptions {
+  resolveCliOptions(options: CalibrationCliOptionsInput): ResolvedCalibrationCliOptions {
     return {
       runManifest: options.runManifest ?? DEFAULT_RUN_MANIFEST,
       outputRoot: options.outputRoot ?? DEFAULT_OUTPUT_ROOT,
@@ -32,7 +35,8 @@ export class CalibrationConfigService {
       dotenvPath: options.dotenvPath ?? DEFAULT_DOTENV_PATH,
       skipProviderSmokeTest: options.skipProviderSmokeTest ?? false,
       smokeTestOnly: options.smokeTestOnly ?? false,
-      maxRepairRounds: options.maxRepairRounds ?? DEFAULT_MAX_REPAIR_ROUNDS
+      maxRepairRounds: options.maxRepairRounds ?? DEFAULT_MAX_REPAIR_ROUNDS,
+      streamTranslation: options.streamTranslation ?? false
     };
   }
 

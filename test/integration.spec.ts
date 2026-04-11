@@ -64,7 +64,8 @@ describe("translation workflow integration", () => {
         dotenvPath: ".env",
         skipProviderSmokeTest: true,
         smokeTestOnly: false,
-        maxRepairRounds: 2
+        maxRepairRounds: 2,
+        streamTranslation: false
       });
 
       await expect(access(path.join(result.evalDir, "review-structured.json"))).resolves.toBeUndefined();
@@ -75,6 +76,9 @@ describe("translation workflow integration", () => {
       expect(JSON.stringify(evaluation)).not.toContain(process.cwd());
       expect(evalRecord.stages.review.finish_reason).toBe("stop");
       expect(evalRecord.stages.review.usage.total_tokens).toBeGreaterThan(0);
+      expect(evaluation.token_usage.totals.total_tokens).toBeGreaterThan(0);
+      expect(evaluation.token_usage.totals.billable_tokens).toBeGreaterThan(0);
+      expect(evalRecord.token_usage.totals.total_tokens).toBe(evaluation.token_usage.totals.total_tokens);
     } finally {
       await close();
       await cleanupTempRoot(roots.root);
@@ -100,7 +104,8 @@ describe("translation workflow integration", () => {
         dotenvPath: ".env",
         skipProviderSmokeTest: true,
         smokeTestOnly: false,
-        maxRepairRounds: 2
+        maxRepairRounds: 2,
+        streamTranslation: false
       });
 
       await expect(access(path.join(result.runDir, "outputs", "translation-round-0.md"))).resolves.toBeUndefined();
@@ -132,7 +137,8 @@ describe("translation workflow integration", () => {
         dotenvPath: ".env",
         skipProviderSmokeTest: true,
         smokeTestOnly: false,
-        maxRepairRounds: 2
+        maxRepairRounds: 2,
+        streamTranslation: false
       });
 
       await expect(access(path.join(result.evalDir, "unresolved-defects.json"))).resolves.toBeUndefined();

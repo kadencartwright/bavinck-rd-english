@@ -24,6 +24,16 @@ interface StageRecordInput {
   usage?: Record<string, number>;
 }
 
+interface TokenUsageSummary {
+  prompt_tokens: number;
+  completion_tokens: number;
+  total_tokens: number;
+  cached_tokens: number;
+  uncached_prompt_tokens: number;
+  billable_tokens: number;
+  reasoning_tokens: number;
+}
+
 interface ExportEvalBundleInput {
   evalRoot: string;
   runId: string;
@@ -77,6 +87,17 @@ export class EvalExportService {
     const lines = [`# Calibration Report: ${report.run_id}`, "", "## Pass-Fail Checks", ""];
     for (const check of report.checks) {
       lines.push(`- \`${check.id}\`: **${check.status}** - ${check.details}`);
+    }
+    if (report.token_usage) {
+      lines.push("", "## Token Usage", "");
+      lines.push(
+        `- Totals: prompt=${report.token_usage.totals.prompt_tokens}, completion=${report.token_usage.totals.completion_tokens}, total=${report.token_usage.totals.total_tokens}, cached=${report.token_usage.totals.cached_tokens}, uncached-prompt=${report.token_usage.totals.uncached_prompt_tokens}, billable=${report.token_usage.totals.billable_tokens}, reasoning=${report.token_usage.totals.reasoning_tokens}`
+      );
+      for (const [stage, usage] of Object.entries(report.token_usage.by_stage)) {
+        lines.push(
+          `- Stage \`${stage}\`: prompt=${usage.prompt_tokens}, completion=${usage.completion_tokens}, total=${usage.total_tokens}, cached=${usage.cached_tokens}, uncached-prompt=${usage.uncached_prompt_tokens}, billable=${usage.billable_tokens}, reasoning=${usage.reasoning_tokens}`
+        );
+      }
     }
     lines.push("", "## Qualitative Findings", "");
     lines.push(`See \`${report.qualitative_findings.path}\` for reviewer commentary kept separate from the checks.`, "");
@@ -165,7 +186,8 @@ export class EvalExportService {
             ? this.pathService.relativeToRepo(path.join(evalDir, "findings.md"))
             : this.pathService.relativeToRepo(path.join(evalDir, "unresolved-defects.json")),
         separate_from_checks: true
-      }
+      },
+      ...(report.token_usage ? { token_usage: report.token_usage } : {})
     };
   }
 
@@ -225,6 +247,7 @@ export class EvalExportService {
         style_guide_path: this.pathService.relativeToRepo(input.styleGuidePath),
         rubric_path: this.pathService.relativeToRepo(input.rubricPath)
       },
+      token_usage: this.summarizeTokenUsage(input.stageRecords),
       stages: Object.fromEntries(
         Object.entries(input.stageRecords).map(([key, value]) => [
           key,
@@ -242,6 +265,58 @@ export class EvalExportService {
       ),
       artifacts: this.buildSafeEvaluationReport(evalDir, input.evaluationReport).artifacts,
       hashes
+    };
+  }
+
+  summarizeTokenUsage(stageRecords: Record<string, StageRecordInput>): {
+    totals: TokenUsageSummary;
+    by_stage: Record<string, TokenUsageSummary>;
+  } {
+    const byStage = Object.fromEntries(
+      Object.entries(stageRecords).map(([stage, record]) => [stage, this.normalizeUsage(record.usage)])
+    );
+    const totals = Object.values(byStage).reduce<TokenUsageSummary>(
+      (acc, usage) => ({
+        prompt_tokens: acc.prompt_tokens + usage.prompt_tokens,
+        completion_tokens: acc.completion_tokens + usage.completion_tokens,
+        total_tokens: acc.total_tokens + usage.total_tokens,
+        cached_tokens: acc.cached_tokens + usage.cached_tokens,
+        uncached_prompt_tokens: acc.uncached_prompt_tokens + usage.uncached_prompt_tokens,
+        billable_tokens: acc.billable_tokens + usage.billable_tokens,
+        reasoning_tokens: acc.reasoning_tokens + usage.reasoning_tokens
+      }),
+      this.emptyUsage()
+    );
+    return { totals, by_stage: byStage };
+  }
+
+  private normalizeUsage(usage?: Record<string, number>): TokenUsageSummary {
+    const promptTokens = usage?.prompt_tokens ?? 0;
+    const completionTokens = usage?.completion_tokens ?? 0;
+    const totalTokens = usage?.total_tokens ?? promptTokens + completionTokens;
+    const cachedTokens = usage?.cached_tokens ?? 0;
+    const reasoningTokens = usage?.reasoning_tokens ?? 0;
+    const uncachedPromptTokens = Math.max(promptTokens - cachedTokens, 0);
+    return {
+      prompt_tokens: promptTokens,
+      completion_tokens: completionTokens,
+      total_tokens: totalTokens,
+      cached_tokens: cachedTokens,
+      uncached_prompt_tokens: uncachedPromptTokens,
+      billable_tokens: uncachedPromptTokens + completionTokens,
+      reasoning_tokens: reasoningTokens
+    };
+  }
+
+  private emptyUsage(): TokenUsageSummary {
+    return {
+      prompt_tokens: 0,
+      completion_tokens: 0,
+      total_tokens: 0,
+      cached_tokens: 0,
+      uncached_prompt_tokens: 0,
+      billable_tokens: 0,
+      reasoning_tokens: 0
     };
   }
 }

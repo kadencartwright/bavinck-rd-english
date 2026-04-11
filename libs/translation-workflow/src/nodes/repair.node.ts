@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 
 import { ArtifactWriterService } from "@artifact-store";
 
@@ -7,6 +7,8 @@ import { RepairService } from "../services/repair.service";
 
 @Injectable()
 export class RepairNode {
+  private readonly logger = new Logger(RepairNode.name);
+
   constructor(
     private readonly repairService: RepairService,
     private readonly artifactWriter: ArtifactWriterService
@@ -18,6 +20,9 @@ export class RepairNode {
     }
     const hardDefects = state.lintResults.at(-1)?.hardDefects ?? [];
     const nextRepairRound = state.repairRound + 1;
+    this.logger.log(
+      `Starting repair round ${nextRepairRound} for run ${state.runId}; hard defects=${hardDefects.length}`
+    );
     const result = await this.repairService.execute({
       runId: state.runId,
       sliceId: state.runManifest?.slice_id ?? state.runId,
@@ -29,6 +34,7 @@ export class RepairNode {
     });
     await this.artifactWriter.writeRepairRequest(state.runDirectories, nextRepairRound, result.requestRecord);
     await this.artifactWriter.writeTranslationRound(state.runDirectories, nextRepairRound, result.text, result.response);
+    this.logger.log(`Repair round ${nextRepairRound} complete for run ${state.runId}; chars=${result.text.length}`);
     return {
       repairRound: nextRepairRound,
       currentDraft: result.text,

@@ -1,6 +1,6 @@
 import path from "node:path";
 
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 
 import { ArtifactWriterService, EvalExportService } from "@artifact-store";
 import { PathService } from "@calibration-config";
@@ -10,6 +10,8 @@ import { CalibrationRuntimeState } from "../graph/graph-state";
 
 @Injectable()
 export class FinalizeNode {
+  private readonly logger = new Logger(FinalizeNode.name);
+
   constructor(
     private readonly artifactWriter: ArtifactWriterService,
     private readonly evalExportService: EvalExportService,
@@ -36,6 +38,7 @@ export class FinalizeNode {
       throw new Error("Finalize reviewed node is missing required run artifacts.");
     }
 
+    this.logger.log(`Finalizing reviewed run ${state.runId}`);
     const findingsMarkdown = this.evalExportService.renderFindingsMarkdown(state.reviewPayload);
     const report = this.buildEvaluationReport(state, "reviewed");
     await this.evalExportService.writeTransientEvaluationArtifacts(state.runDirectories, report, findingsMarkdown);
@@ -64,6 +67,7 @@ export class FinalizeNode {
       stageRecords: state.stageRecords
     });
     await this.artifactWriter.removeTransientPublishableArtifacts(state.runDirectories);
+    this.logger.log(`Reviewed run ${state.runId} exported to ${durableEvalDir}`);
     return {
       terminalStatus: "reviewed",
       terminalReason: null,
@@ -87,6 +91,7 @@ export class FinalizeNode {
     ) {
       throw new Error("Finalize escalated node is missing required run artifacts.");
     }
+    this.logger.warn(`Finalizing escalated run ${state.runId}`);
     const unresolvedDefects = state.lintResults.at(-1)?.hardDefects ?? [];
     await this.artifactWriter.writeUnresolvedDefects(state.runDirectories, unresolvedDefects);
 
@@ -112,6 +117,9 @@ export class FinalizeNode {
       stageRecords: state.stageRecords
     });
     await this.artifactWriter.removeTransientPublishableArtifacts(state.runDirectories);
+    this.logger.warn(
+      `Escalated run ${state.runId} exported to ${durableEvalDir}; unresolved defects=${unresolvedDefects.length}`
+    );
     return {
       terminalStatus: "escalated",
       terminalReason:
@@ -237,6 +245,7 @@ export class FinalizeNode {
             : `data/calibration/evals/${state.runId}/unresolved-defects.json`,
         separate_from_checks: true
       },
+      token_usage: this.evalExportService.summarizeTokenUsage(state.stageRecords),
       review_summary: terminalStatus === "reviewed" ? state.reviewPayload?.summary ?? "" : "",
       glossary_hits: [],
       glossary_misses: latestLint.hardDefects

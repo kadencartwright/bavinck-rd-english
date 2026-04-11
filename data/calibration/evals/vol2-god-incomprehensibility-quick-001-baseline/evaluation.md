@@ -10,8 +10,8 @@
 - `scripture-reference-normalization`: **pass** - Dutch Scripture references were normalized to standard English forms.
 - `dutch-residue`: **pass** - No tracked Dutch abbreviations or residue remained in the translated output.
 - `output-shape`: **pass** - Translation output contains only the translated passage with preserved structure.
-- `prose-quality`: **pass** - Formal theological prose maintained throughout; one minor awkward construction does not obscure meaning or flatten the argument.
-- `review-flagging`: **pass** - The single quality issue is appropriately flagged; no preservation risks, doctrinal ambiguity, or glossary drift were detected.
+- `prose-quality`: **pass** - The output is coherent formal theological prose; the identified issues are localized and do not disrupt the overall argument structure.
+- `review-flagging`: **pass** - The review identifies the specific inconsistency in book title translation and the potential doctrinal ambiguity regarding 'scientific' sense.
 
 ## Qualitative Findings
 

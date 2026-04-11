@@ -71,6 +71,7 @@ export interface CalibrationRuntimeState
   reviewPromptUser: string | null;
   stageRecords: Record<string, StageRecord>;
   durableEvalDir: string | null;
+  streamTranslation: boolean;
 }
 
 export const CalibrationRuntimeStateAnnotation = Annotation.Root({
@@ -118,5 +119,6 @@ export const CalibrationRuntimeStateAnnotation = Annotation.Root({
   reviewPromptSystem: replaceField<string | null>(() => null),
   reviewPromptUser: replaceField<string | null>(() => null),
   stageRecords: replaceField<Record<string, StageRecord>>(() => ({})),
-  durableEvalDir: replaceField<string | null>(() => null)
+  durableEvalDir: replaceField<string | null>(() => null),
+  streamTranslation: replaceField(() => false)
 });

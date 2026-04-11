@@ -11,7 +11,8 @@ describe("run calibration command", () => {
         dotenvPath: ".env",
         skipProviderSmokeTest: true,
         smokeTestOnly: true,
-        maxRepairRounds: 2
+        maxRepairRounds: 2,
+        streamTranslation: false
       }),
       loadDotenv: jest.fn().mockResolvedValue(undefined)
     };

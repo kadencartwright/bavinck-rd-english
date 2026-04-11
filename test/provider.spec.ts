@@ -73,4 +73,43 @@ describe("OpenAI-compatible client", () => {
     expect(fetchMock).toHaveBeenCalledTimes(2);
     expect(client.extractMessageText(response)).toBe("Translated");
   });
+
+  it("streams content deltas to the callback", async () => {
+    process.env.MOONSHOT_API_KEY = "test-key";
+    const chunks = [
+      'data: {"id":"abc","created":1,"model":"kimi-k2.5","choices":[{"delta":{"role":"assistant","content":"Hel"},"finish_reason":null}]}\n\n',
+      'data: {"choices":[{"delta":{"content":"lo"},"finish_reason":"stop"}],"usage":{"total_tokens":5}}\n\n',
+      "data: [DONE]\n\n"
+    ];
+    const encoder = new TextEncoder();
+    const stream = new ReadableStream({
+      start(controller) {
+        for (const chunk of chunks) {
+          controller.enqueue(encoder.encode(chunk));
+        }
+        controller.close();
+      }
+    });
+    const fetchMock = jest.fn().mockResolvedValue(
+      new Response(stream, {
+        status: 200,
+        headers: { "Content-Type": "text/event-stream" }
+      })
+    );
+    global.fetch = fetchMock as typeof global.fetch;
+    const seen: string[] = [];
+
+    const response = await client.createChatCompletion({
+      providerName: "moonshot",
+      stageName: "translation",
+      model: "kimi-k2.5",
+      messages: [{ role: "user", content: "Translate" }],
+      temperature: 1,
+      stream: true,
+      onStreamDelta: (_fieldName, text) => seen.push(text)
+    });
+
+    expect(client.extractMessageText(response)).toBe("Hello");
+    expect(seen.join("")).toBe("Hello");
+  });
 });

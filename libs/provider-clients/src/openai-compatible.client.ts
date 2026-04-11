@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 
 export interface ProviderAdapter {
   name: "moonshot" | "z-ai";
@@ -13,6 +13,7 @@ export interface ChatCompletionMessage {
 
 export interface CreateChatCompletionParams {
   providerName: ProviderAdapter["name"];
+  stageName?: string;
   model: string;
   messages: ChatCompletionMessage[];
   temperature: number;
@@ -31,6 +32,8 @@ type ChatCompletionResponse = Record<string, unknown> & {
 
 @Injectable()
 export class OpenAiCompatibleClient {
+  private readonly logger = new Logger(OpenAiCompatibleClient.name);
+
   private readonly providers: Record<ProviderAdapter["name"], ProviderAdapter> = {
     moonshot: {
       name: "moonshot",
@@ -59,6 +62,8 @@ export class OpenAiCompatibleClient {
 
     const baseUrlEnv = `${provider.name.toUpperCase().replaceAll("-", "_")}_BASE_URL`;
     const baseUrl = (process.env[baseUrlEnv] ?? provider.defaultBaseUrl).replace(/\/+$/u, "");
+    const requestUrl = `${baseUrl}/chat/completions`;
+    const stageLabel = params.stageName ?? "unspecified";
     const payload: Record<string, unknown> = {
       model: params.model,
       messages: params.messages,
@@ -80,7 +85,11 @@ export class OpenAiCompatibleClient {
           ? setTimeout(() => controller.abort(), params.timeoutSeconds * 1000)
           : undefined;
       try {
-        const response = await fetch(`${baseUrl}/chat/completions`, {
+        this.logger.log(
+          `stage=${stageLabel} provider=${provider.name} model=${params.model} attempt=${attempt + 1}/${maxRetries + 1} url=${requestUrl} stream=${params.stream ? "true" : "false"}`
+        );
+
+        const response = await fetch(requestUrl, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${apiKey}`,
@@ -91,13 +100,18 @@ export class OpenAiCompatibleClient {
         });
 
         if (response.status === 429 && attempt < maxRetries) {
-          await this.sleep(this.retryDelaySeconds(response, attempt) * 1000);
+          const retryDelaySeconds = this.retryDelaySeconds(response, attempt);
+          this.logger.warn(
+            `stage=${stageLabel} provider=${provider.name} model=${params.model} received HTTP 429; retrying in ${retryDelaySeconds}s`
+          );
+          await this.sleep(retryDelaySeconds * 1000);
           attempt += 1;
           continue;
         }
         if (!response.ok) {
+          const responseText = await response.text();
           throw new Error(
-            `${provider.name} API request failed with HTTP ${response.status}: ${await response.text()}`
+            `stage=${stageLabel} provider=${provider.name} model=${params.model} API request failed with HTTP ${response.status} from ${requestUrl}: ${responseText}`
           );
         }
 
@@ -107,6 +121,9 @@ export class OpenAiCompatibleClient {
 
         if (this.isEngineOverloadedResponse(parsed)) {
           if (attempt < maxRetries) {
+            this.logger.warn(
+              `stage=${stageLabel} provider=${provider.name} model=${params.model} received engine_overloaded; retrying in ${2 ** attempt}s`
+            );
             await this.sleep(2 ** attempt * 1000);
             attempt += 1;
             continue;
@@ -118,9 +135,20 @@ export class OpenAiCompatibleClient {
 
         return parsed;
       } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
         if ((error as Error).name === "AbortError") {
-          throw new Error(`${provider.name} API request timed out.`);
+          throw new Error(
+            `stage=${stageLabel} provider=${provider.name} model=${params.model} API request to ${requestUrl} timed out.`
+          );
         }
+        if (error instanceof TypeError) {
+          throw new Error(
+            `stage=${stageLabel} provider=${provider.name} model=${params.model} API request failed before receiving a response from ${requestUrl}: ${message}`
+          );
+        }
+        this.logger.error(
+          `stage=${stageLabel} provider=${provider.name} model=${params.model} request failed: ${message}`
+        );
         throw error;
       } finally {
         if (timeoutHandle !== undefined) {
@@ -163,6 +191,7 @@ export class OpenAiCompatibleClient {
     try {
       await this.createChatCompletion({
         providerName: stage.provider,
+        stageName: stageName,
         model: stage.model,
         messages: [{ role: "user", content: `Reply with OK for ${stageName}.` }],
         temperature: stage.temperature,

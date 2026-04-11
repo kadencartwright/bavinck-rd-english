@@ -2,12 +2,16 @@
 
 ## Summary
 
-The translation accurately renders the Dutch source into formal theological English, preserving all Greek and Latin spans intact, applying glossary terms consistently, and converting Dutch Scripture references to standard English forms. One minor prose awkwardness was identified but does not affect doctrinal clarity or fidelity to the argument structure.
+The translation faithfully preserves Greek, Latin, and German spans while adhering to glossary requirements for key theological terms, and it correctly translates Dutch Scripture references into standard English forms. However, the translation inconsistently renders the Dutch book title 'Institutie' into Latin ('Institutio') rather than the standard English 'Institutes', and uses 'scientific' where 'scholarly' might better avoid modern empirical connotations, alongside a minor syntactic calque in the opening sentence.
 
 ## Findings
 
-- [low] prose-quality: 'Immediately as it makes a beginning' (Dutch: 'Reeds terstond als ze een aanvang maakt') is awkward English; smoother alternatives include 'From the very outset, as it begins' or 'Right from the start, as it begins.'
+- [medium] consistency: The source 'Institutie' (Dutch) is rendered as 'Institutio' (Latin), whereas the style guide requires translating Dutch book names into standard English forms (e.g., 'Institutes'), creating inconsistency with the correctly translated 'Catechism of Geneva'.
+- [low] doctrinal-ambiguity: Translating 'wetenschappelĳken zin' as 'scientific sense' risks misleading modern readers toward empirical connotations; 'scholarly' or 'systematic' would better preserve the author's theological intent.
+- [low] prose-quality: The phrase 'Immediately as it makes a beginning' is a syntactic calque of the Dutch 'Reeds terstond als ze een aanvang maakt'; a smoother English rendering would be 'From the very outset'.
 
 ## Recommended Follow-Up
 
-- Consider revising the opening clause for more natural English rhythm while preserving the emphatic force of 'Reeds terstond.'
+- Correct 'Institutio' to 'Institutes' to align with the style guide for Dutch book names.
+- Evaluate replacing 'scientific sense' with 'scholarly sense' to prevent doctrinal misunderstanding.
+- Refine the opening sentence syntax for improved English flow.

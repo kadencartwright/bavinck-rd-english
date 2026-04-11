@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 
 import { ArtifactWriterService, EvalExportService } from "@artifact-store";
 import { PathService } from "@calibration-config";
@@ -8,6 +8,8 @@ import { ReviewService } from "../services/review.service";
 
 @Injectable()
 export class ReviewNode {
+  private readonly logger = new Logger(ReviewNode.name);
+
   constructor(
     private readonly reviewService: ReviewService,
     private readonly artifactWriter: ArtifactWriterService,
@@ -28,6 +30,7 @@ export class ReviewNode {
     ) {
       throw new Error("Review node is missing loaded calibration inputs.");
     }
+    this.logger.log(`Starting review for run ${state.runId}`);
     const glossaryText = await this.pathService.readText(state.glossaryPath);
     const result = await this.reviewService.execute({
       runId: state.runId,
@@ -49,6 +52,9 @@ export class ReviewNode {
     await this.artifactWriter.writeText(
       `${state.runDirectories.reviewDir}/findings.md`,
       this.evalExportService.renderFindingsMarkdown(result.reviewPayload)
+    );
+    this.logger.log(
+      `Review complete for run ${state.runId}; findings=${result.reviewPayload.findings.length} follow_up=${result.reviewPayload.recommended_follow_up.length}`
     );
 
     return {

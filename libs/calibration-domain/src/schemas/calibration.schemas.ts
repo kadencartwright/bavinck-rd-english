@@ -322,6 +322,16 @@ const evaluationCheckSchema = z.object({
   details: nonEmptyString
 });
 
+const tokenUsageSummarySchema = z.object({
+  prompt_tokens: z.number().int().nonnegative(),
+  completion_tokens: z.number().int().nonnegative(),
+  total_tokens: z.number().int().nonnegative(),
+  cached_tokens: z.number().int().nonnegative(),
+  uncached_prompt_tokens: z.number().int().nonnegative(),
+  billable_tokens: z.number().int().nonnegative(),
+  reasoning_tokens: z.number().int().nonnegative()
+});
+
 export const evaluationReportSchema = z
   .object({
     schema_version: z.literal("1.0"),
@@ -341,6 +351,12 @@ export const evaluationReportSchema = z
       path: nonEmptyString,
       separate_from_checks: z.literal(true)
     }),
+    token_usage: z
+      .object({
+        totals: tokenUsageSummarySchema,
+        by_stage: z.record(nonEmptyString, tokenUsageSummarySchema)
+      })
+      .optional(),
     review_summary: z.string(),
     glossary_hits: z.array(nonEmptyString),
     glossary_misses: z.array(nonEmptyString),
@@ -430,6 +446,12 @@ export const commitSafeEvalRecordSchema = z.object({
   model_profile_id: nonEmptyString,
   generated_at: nonEmptyString,
   source_refs: z.record(nonEmptyString, nonEmptyString),
+  token_usage: z
+    .object({
+      totals: tokenUsageSummarySchema,
+      by_stage: z.record(nonEmptyString, tokenUsageSummarySchema)
+    })
+    .optional(),
   stages: z.record(
     nonEmptyString,
     z.object({
