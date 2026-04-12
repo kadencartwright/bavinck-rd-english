@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-knowability-acquisita-001-baseline",
-  "generated_at": "2026-04-09T17:01:32.774101+00:00",
+  "generated_at": "2026-04-11T02:28:00.732Z",
   "slice_id": "vol2-god-knowability-acquisita-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -9,7 +9,7 @@
     {
       "id": "source-identity",
       "status": "pass",
-      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+      "details": "Current cleaned source matches the stored slice manifest identity."
     },
     {
       "id": "rubric-present",
@@ -28,8 +28,8 @@
     },
     {
       "id": "glossary-adherence",
-      "status": "fail",
-      "details": "Missing glossary targets: KENBAARHEID GODS -> knowability of God"
+      "status": "pass",
+      "details": "All required glossary targets were found in the translation output."
     },
     {
       "id": "scripture-reference-normalization",
@@ -37,39 +37,80 @@
       "details": "Dutch Scripture references were normalized to standard English forms."
     },
     {
+      "id": "dutch-residue",
+      "status": "pass",
+      "details": "No tracked Dutch abbreviations or residue remained in the translated output."
+    },
+    {
+      "id": "output-shape",
+      "status": "pass",
+      "details": "Translation output contains only the translated passage with preserved structure."
+    },
+    {
       "id": "prose-quality",
       "status": "pass",
-      "details": "Formal theological prose maintained throughout; Dutch Scripture references correctly rendered; one minor syntactic awkwardness noted but does not constitute failure."
+      "details": "Formal theological prose maintained throughout; Dutch Scripture references correctly translated to English forms; no untranslated Dutch book names or abbreviations remain."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "No preservation risks, doctrinal ambiguity, or unresolved quality issues requiring escalation; minor prose issue flagged in findings."
+      "details": "Findings identify the Latin phrase modification and awkward phrasing; no doctrinal ambiguity or preservation risks detected."
     }
   ],
   "summary": {
-    "pass": 7,
-    "fail": 1,
+    "pass": 10,
+    "fail": 0,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/translation.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.md",
+    "evaluation_report_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.json",
+    "eval_record_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/eval-record.json",
     "review_structured_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/findings.md",
     "translation_system_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/translation-system.txt",
     "translation_user_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/translation-user.txt",
     "review_system_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/review-system.txt",
-    "review_user_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/review-user.txt",
-    "evaluation_markdown_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.md",
-    "eval_record_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/eval-record.json"
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/review-user.txt"
   },
   "qualitative_findings": {
     "path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation correctly preserves all Greek, Hebrew, Latin, and German spans, adheres to the glossary requirement, and renders Dutch Scripture references (Jes., Hd., Hand.) into standard English forms (Isa., Acts). The prose is coherent formal theological English throughout. One minor syntactic awkwardness with 'namely' at sentence-end does not impede comprehension or doctrinal clarity.",
+  "token_usage": {
+    "totals": {
+      "prompt_tokens": 11676,
+      "completion_tokens": 17883,
+      "total_tokens": 29559,
+      "cached_tokens": 0,
+      "uncached_prompt_tokens": 11676,
+      "billable_tokens": 29559,
+      "reasoning_tokens": 5337
+    },
+    "by_stage": {
+      "translation": {
+        "prompt_tokens": 4681,
+        "completion_tokens": 12143,
+        "total_tokens": 16824,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 4681,
+        "billable_tokens": 16824,
+        "reasoning_tokens": 0
+      },
+      "review": {
+        "prompt_tokens": 6995,
+        "completion_tokens": 5740,
+        "total_tokens": 12735,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 6995,
+        "billable_tokens": 12735,
+        "reasoning_tokens": 5337
+      }
+    }
+  },
+  "review_summary": "The translation accurately renders the Dutch source into formal theological English, properly converting Dutch Scripture references (Jes. → Isa., Hd./Hand. → Acts) to standard English forms while preserving Greek (νους), Latin, and German spans. The glossary term is correctly applied. Minor issues include an editorial change of Dutch 'en' to Latin 'et' within a Latin phrase and some awkward English phrasing that could be smoothed.",
   "glossary_hits": [],
-  "glossary_misses": [
-    "KENBAARHEID GODS -> knowability of God"
-  ]
+  "glossary_misses": [],
+  "terminal_status": "reviewed"
 }

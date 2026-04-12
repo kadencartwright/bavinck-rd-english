@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-creation-001-baseline",
-  "generated_at": "2026-04-09T17:39:11.535663+00:00",
+  "generated_at": "2026-04-11T02:44:23.690Z",
   "slice_id": "vol2-creation-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -9,7 +9,7 @@
     {
       "id": "source-identity",
       "status": "pass",
-      "details": "Expected source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a; current cleaned source SHA 4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a."
+      "details": "Current cleaned source matches the stored slice manifest identity."
     },
     {
       "id": "rubric-present",
@@ -37,39 +37,80 @@
       "details": "Dutch Scripture references were normalized to standard English forms."
     },
     {
+      "id": "dutch-residue",
+      "status": "pass",
+      "details": "No tracked Dutch abbreviations or residue remained in the translated output."
+    },
+    {
+      "id": "output-shape",
+      "status": "pass",
+      "details": "Translation output contains only the translated passage with preserved structure."
+    },
+    {
       "id": "prose-quality",
       "status": "fail",
-      "details": "The rendering 'The Romans' for 'De Roomschen' creates confusion with ancient Romans; 'Urstof' is retained as a Dutch spelling of a German concept; syntax in the first paragraph is awkward."
+      "details": "Ungrammatical syntax in the Justin Martyr sentence and mistranslation of the idiom 'om strijd' compromise readability and accuracy."
     },
     {
       "id": "review-flagging",
-      "status": "fail",
-      "details": "The translation fails to flag the ambiguity in 'De Roomschen' and smooths over the term with a misleading translation, violating the requirement to flag ambiguous doctrinal phrasing."
+      "status": "pass",
+      "details": "Findings clearly identify the specific prose and semantic defects."
     }
   ],
   "summary": {
-    "pass": 6,
-    "fail": 2,
+    "pass": 9,
+    "fail": 1,
     "incomplete": 0
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-creation-001-baseline/translation.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-creation-001-baseline/evaluation.md",
+    "evaluation_report_path": "data/calibration/evals/vol2-creation-001-baseline/evaluation.json",
+    "eval_record_path": "data/calibration/evals/vol2-creation-001-baseline/eval-record.json",
     "review_structured_path": "data/calibration/evals/vol2-creation-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-creation-001-baseline/findings.md",
     "translation_system_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/translation-system.txt",
     "translation_user_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/translation-user.txt",
     "review_system_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/review-system.txt",
-    "review_user_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/review-user.txt",
-    "evaluation_markdown_path": "data/calibration/evals/vol2-creation-001-baseline/evaluation.md",
-    "eval_record_path": "data/calibration/evals/vol2-creation-001-baseline/eval-record.json"
+    "review_user_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/review-user.txt"
   },
   "qualitative_findings": {
     "path": "data/calibration/evals/vol2-creation-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation successfully preserves Greek, Latin, and German citations and adheres to the glossary for the term 'creation,' but it introduces a significant doctrinal ambiguity by rendering 'De Roomschen' as 'The Romans' instead of 'Roman Catholics.' Prose quality is further compromised by Dutch syntactic interference and the retention of the non-standard loanword 'Urstof'.",
-  "glossary_hits": [
-    "SCHEPPING -> creation"
-  ],
-  "glossary_misses": []
+  "token_usage": {
+    "totals": {
+      "prompt_tokens": 8066,
+      "completion_tokens": 16222,
+      "total_tokens": 24288,
+      "cached_tokens": 0,
+      "uncached_prompt_tokens": 8066,
+      "billable_tokens": 24288,
+      "reasoning_tokens": 7478
+    },
+    "by_stage": {
+      "translation": {
+        "prompt_tokens": 3031,
+        "completion_tokens": 8305,
+        "total_tokens": 11336,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 3031,
+        "billable_tokens": 11336,
+        "reasoning_tokens": 0
+      },
+      "review": {
+        "prompt_tokens": 5035,
+        "completion_tokens": 7917,
+        "total_tokens": 12952,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 5035,
+        "billable_tokens": 12952,
+        "reasoning_tokens": 7478
+      }
+    }
+  },
+  "review_summary": "The translation successfully preserves required foreign language spans and glossary terms but fails to render idiomatic Dutch into natural English in two key instances, resulting in awkward syntax and semantic drift. Scripture references are correctly anglicized, though citation abbreviations for 'following verse' are consistently expanded to 'following verses'.",
+  "glossary_hits": [],
+  "glossary_misses": [],
+  "terminal_status": "reviewed"
 }

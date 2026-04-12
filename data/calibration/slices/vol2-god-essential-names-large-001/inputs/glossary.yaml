@@ -1,0 +1,6 @@
+schema_version: "1.0"
+slice_id: "vol2-god-essential-names-large-001"
+terms:
+  - source: "WEZENSNAMEN GODS"
+    target: "essential names of God"
+    notes: "Section-title term for this slice."

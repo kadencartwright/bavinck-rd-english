@@ -5,7 +5,7 @@
   "slice_id": "vol2-creation-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
-  "generated_at": "2026-04-09T17:39:11.538766+00:00",
+  "generated_at": "2026-04-11T02:44:23.695Z",
   "source_refs": {
     "run_manifest_path": "config/calibration/run-manifests/vol2-creation-001-baseline.json",
     "slice_manifest_path": "data/calibration/slices/vol2-creation-001/manifest.json",
@@ -15,18 +15,54 @@
     "style_guide_path": "data/calibration/slices/vol2-creation-001/inputs/style-guide.md",
     "rubric_path": "data/calibration/slices/vol2-creation-001/inputs/rubric.yaml"
   },
+  "token_usage": {
+    "totals": {
+      "prompt_tokens": 8066,
+      "completion_tokens": 16222,
+      "total_tokens": 24288,
+      "cached_tokens": 0,
+      "uncached_prompt_tokens": 8066,
+      "billable_tokens": 24288,
+      "reasoning_tokens": 7478
+    },
+    "by_stage": {
+      "translation": {
+        "prompt_tokens": 3031,
+        "completion_tokens": 8305,
+        "total_tokens": 11336,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 3031,
+        "billable_tokens": 11336,
+        "reasoning_tokens": 0
+      },
+      "review": {
+        "prompt_tokens": 5035,
+        "completion_tokens": 7917,
+        "total_tokens": 12952,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 5035,
+        "billable_tokens": 12952,
+        "reasoning_tokens": 7478
+      }
+    }
+  },
   "stages": {
     "translation": {
       "provider": "moonshot",
       "model": "kimi-k2.5",
-      "temperature": 1.0,
+      "temperature": 1,
       "prompt_files": {
         "translation_system": "translation-system.txt",
         "translation_user_template": "translation-user-template.txt",
         "review_system": "review-system.txt",
         "review_user_template": "review-user-template.txt"
       },
-      "finish_reason": "stop"
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 3031,
+        "completion_tokens": 8305,
+        "total_tokens": 11336
+      }
     },
     "review": {
       "provider": "z-ai",
@@ -40,24 +76,25 @@
       },
       "finish_reason": "stop",
       "usage": {
-        "prompt_tokens": 5059,
-        "completion_tokens": 4810,
-        "total_tokens": 9869,
-        "reasoning_tokens": 4299,
+        "prompt_tokens": 5035,
+        "completion_tokens": 7917,
+        "total_tokens": 12952,
+        "reasoning_tokens": 7478,
         "cached_tokens": 0
       }
     }
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-creation-001-baseline/translation.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-creation-001-baseline/evaluation.md",
+    "evaluation_report_path": "data/calibration/evals/vol2-creation-001-baseline/evaluation.json",
+    "eval_record_path": "data/calibration/evals/vol2-creation-001-baseline/eval-record.json",
     "review_structured_path": "data/calibration/evals/vol2-creation-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-creation-001-baseline/findings.md",
     "translation_system_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/translation-system.txt",
     "translation_user_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/translation-user.txt",
     "review_system_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/review-system.txt",
-    "review_user_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/review-user.txt",
-    "evaluation_report_path": "data/calibration/evals/vol2-creation-001-baseline/evaluation.json",
-    "evaluation_markdown_path": "data/calibration/evals/vol2-creation-001-baseline/evaluation.md"
+    "review_user_prompt_path": "data/calibration/evals/vol2-creation-001-baseline/prompts/review-user.txt"
   },
   "hashes": {
     "run_manifest_sha256": "0993bec3fda5e49ff8141b4d7e4fc94352e676d0f45a7ffe0f2da2126dfee532",
@@ -67,14 +104,14 @@
     "glossary_sha256": "41580cc7eef04abc2140dec6e1c5017a0598cb2223322648da503d1639151c5d",
     "style_guide_sha256": "a1a5c485fa715028d1c43693eca547a0387ed8ad8fa527597339d69b2fb9a38c",
     "rubric_sha256": "da7fea70c6a2c7f39935dabdad8557888c662b49fa3a0b529cb59171830efd39",
-    "translation_output_sha256": "f1c74c77b0ae62c4be896cc77f9b76d57b78db71adbdfacedbf82681fc18aeae",
-    "review_structured_sha256": "ca4f96a5d0b25e66a76dc81af859a88c0659f8c0ab8433ebd76f962b48740742",
-    "findings_sha256": "ac51268d84920e93b5500041b94af936a354cc5fdf83355b8f058c1a21b0d648",
-    "evaluation_report_sha256": "ee4c5231c88d29b35b5290394c7a5811576f70ea319614517589a74a63feb5d8",
-    "evaluation_markdown_sha256": "0281b84e4c8f164c30d6531e329d4a56903b174fbfa38ee53e706f9e6f259cd3",
+    "translation_output_sha256": "af3ac019bd95b75dcd2fedf1b43511cbfe328ef72fbff9d9b7243e63d4a5a6d9",
+    "evaluation_report_sha256": "d676d9de84e444836665ba3a66b101384b08062ae98119962afad24efb8288eb",
+    "evaluation_markdown_sha256": "053d03711c0a4ffe9d4f1625125d7255ecbc6f66100160356125215695c055e7",
     "translation_system_prompt_sha256": "e88459c2542b810f3c237adfbf3875021954ab378645fd6bd5c6a51b689b3524",
     "translation_user_prompt_sha256": "a7be11544649c3a9d798423beea75bd7122a6836545fd4cdb5da81eb6ef44d9d",
+    "review_structured_sha256": "06229a25e0357110044d3f35e3997f1068e679edd5dcbd765a49b6c0e645ce51",
+    "findings_sha256": "b134783384474239cd20f0bddef78cc81352486c4fc58b260b33a5b6ecf88060",
     "review_system_prompt_sha256": "d32ea79f07f205d43763ea59eeda6c6186edadd1de334c6cabc96e38adb24876",
-    "review_user_prompt_sha256": "a543b75118519de49183ccaae92e376591b281dd346f7e2cd692749048adbfb0"
+    "review_user_prompt_sha256": "4ff08026544aa4fa7f2e16d3729d1f85c7e1677ecaec79cbf41d2ccfd68d35aa"
   }
 }

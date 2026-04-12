@@ -2,16 +2,16 @@
 
 ## Summary
 
-The translation successfully preserves Greek, Latin, and German citations and adheres to the glossary for the term 'creation,' but it introduces a significant doctrinal ambiguity by rendering 'De Roomschen' as 'The Romans' instead of 'Roman Catholics.' Prose quality is further compromised by Dutch syntactic interference and the retention of the non-standard loanword 'Urstof'.
+The translation successfully preserves required foreign language spans and glossary terms but fails to render idiomatic Dutch into natural English in two key instances, resulting in awkward syntax and semantic drift. Scripture references are correctly anglicized, though citation abbreviations for 'following verse' are consistently expanded to 'following verses'.
 
 ## Findings
 
-- [high] doctrinal-ambiguity: Source 'De Roomschen' (Roman Catholics) is translated as 'The Romans,' misleadingly suggesting a reference to the ancient inhabitants of Rome or the Epistle to the Romans rather than the Roman Catholic Church.
-- [medium] prose-quality: The term 'Urstof' is preserved directly from the Dutch source; standard English theological prose would prefer 'Urstoff' (standard German) or 'primal matter' to avoid confusion.
-- [low] prose-quality: The sentence structure 'distinguishes itself... by this from all other religions, that it conceives' mirrors the Dutch syntax ('daardoor... dat') too closely, resulting in unnatural English rhythm.
+- [medium] prose-quality: The phrase 'Justin need thereby have in view' is ungrammatical; the Dutch 'hoeft... op het oog' means 'need only have in view' or 'may simply have in view'.
+- [medium] translation-accuracy: The idiom 'om strijd is geprezen' is rendered 'praised without controversy,' missing the sense of 'extolled emulously' or 'universally acclaimed' with competitive zeal.
+- [low] citation-style: The Dutch abbreviation 'v.' (following verse) is consistently rendered as 'ff.' (following verses), potentially broadening the citation scope beyond the source.
 
 ## Recommended Follow-Up
 
-- Correct 'The Romans' to 'Roman Catholics' or 'Roman Catholic theologians'.
-- Normalize 'Urstof' to 'Urstoff' or translate as 'primal matter'.
-- Refactor the syntax in the sentence regarding 'true religion' to 'distinguishes itself... in that it conceives'.
+- Correct the Justin Martyr sentence syntax to 'Justin need only have in view'.
+- Revise 'praised without controversy' to reflect the 'om strijd' idiom, such as 'extolled by all'.
+- Verify citation ranges for 'v.' versus 'ff.' consistency.
