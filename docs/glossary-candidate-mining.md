@@ -56,8 +56,8 @@ The initial deterministic rule set is `dutch-ngram-core-v1`:
 
 The default filters are:
 
-- `min_occurrences = 3`
-- `min_bucket_count = 3`
+- `min_occurrences = 5`
+- `min_bucket_count = 5`
 - `bucket_line_span = 40`
 
 ## How To Use The Artifacts

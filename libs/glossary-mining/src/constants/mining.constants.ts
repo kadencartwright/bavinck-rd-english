@@ -171,8 +171,8 @@ export const DEFAULT_GLOSSARY_MINING_CONFIG: GlossaryMiningConfig = {
     bucket_line_span: 40
   },
   filters: {
-    min_occurrences: 3,
-    min_bucket_count: 3,
+    min_occurrences: 5,
+    min_bucket_count: 5,
     emit_excluded_candidates: false
   }
 };
