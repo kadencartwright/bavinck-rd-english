@@ -25,7 +25,9 @@ const config: Config = {
     "^@deterministic-lint$": "<rootDir>/libs/deterministic-lint/src",
     "^@deterministic-lint/(.*)$": "<rootDir>/libs/deterministic-lint/src/$1",
     "^@translation-workflow$": "<rootDir>/libs/translation-workflow/src",
-    "^@translation-workflow/(.*)$": "<rootDir>/libs/translation-workflow/src/$1"
+    "^@translation-workflow/(.*)$": "<rootDir>/libs/translation-workflow/src/$1",
+    "^@glossary-mining$": "<rootDir>/libs/glossary-mining/src",
+    "^@glossary-mining/(.*)$": "<rootDir>/libs/glossary-mining/src/$1"
   }
 };
 

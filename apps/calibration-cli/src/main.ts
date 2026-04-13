@@ -3,6 +3,7 @@ import "reflect-metadata";
 import { NestFactory } from "@nestjs/core";
 
 import { AppModule } from "./app.module";
+import { MineGlossaryCandidatesCommand } from "./commands/mine-glossary-candidates.command";
 import { RunCalibrationCommand } from "./commands/run-calibration.command";
 
 async function bootstrap(): Promise<void> {
@@ -12,13 +13,19 @@ async function bootstrap(): Promise<void> {
 
   try {
     const argv = process.argv.slice(2);
-    const [command] = argv;
-    if (command !== "run") {
-      throw new Error("Expected command 'run'.");
-    }
+    const [command, ...commandArgv] = argv;
 
-    const runner = app.get(RunCalibrationCommand);
-    const exitCode = await runner.execute(argv.slice(1));
+    let exitCode: number;
+    switch (command) {
+      case "run":
+        exitCode = await app.get(RunCalibrationCommand).execute(commandArgv);
+        break;
+      case "mine-glossary-candidates":
+        exitCode = await app.get(MineGlossaryCandidatesCommand).execute(commandArgv);
+        break;
+      default:
+        throw new Error("Expected command 'run' or 'mine-glossary-candidates'.");
+    }
     process.exitCode = exitCode;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

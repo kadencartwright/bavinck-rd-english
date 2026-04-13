@@ -55,6 +55,12 @@
       ],
       "@translation-workflow/*": [
         "libs/translation-workflow/src/*"
+      ],
+      "@glossary-mining": [
+        "libs/glossary-mining/src"
+      ],
+      "@glossary-mining/*": [
+        "libs/glossary-mining/src/*"
       ]
     }
   }
