@@ -3,6 +3,7 @@ export const DEFAULT_RUN_MANIFEST =
 
 export const DEFAULT_OUTPUT_ROOT = "data/calibration/runs";
 export const DEFAULT_EVAL_ROOT = "data/calibration/evals";
+export const DEFAULT_GLOSSARY_MINING_ROOT = "data/calibration/glossary-candidates";
 export const DEFAULT_DOTENV_PATH = ".env";
 export const DEFAULT_MAX_REPAIR_ROUNDS = 2;
 

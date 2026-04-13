@@ -1,23 +1,35 @@
 {
-  "summary": "The translation correctly preserves all Greek, Hebrew, Latin, and German spans, adheres to the glossary requirement, and renders Dutch Scripture references (Jes., Hd., Hand.) into standard English forms (Isa., Acts). The prose is coherent formal theological English throughout. One minor syntactic awkwardness with 'namely' at sentence-end does not impede comprehension or doctrinal clarity.",
+  "summary": "The translation accurately renders the Dutch source into formal theological English, properly converting Dutch Scripture references (Jes. → Isa., Hd./Hand. → Acts) to standard English forms while preserving Greek (νους), Latin, and German spans. The glossary term is correctly applied. Minor issues include an editorial change of Dutch 'en' to Latin 'et' within a Latin phrase and some awkward English phrasing that could be smoothed.",
   "checks": {
     "prose-quality": {
       "status": "pass",
-      "details": "Formal theological prose maintained throughout; Dutch Scripture references correctly rendered; one minor syntactic awkwardness noted but does not constitute failure."
+      "details": "Formal theological prose maintained throughout; Dutch Scripture references correctly translated to English forms; no untranslated Dutch book names or abbreviations remain."
     },
     "review-flagging": {
       "status": "pass",
-      "details": "No preservation risks, doctrinal ambiguity, or unresolved quality issues requiring escalation; minor prose issue flagged in findings."
+      "details": "Findings identify the Latin phrase modification and awkward phrasing; no doctrinal ambiguity or preservation risks detected."
     }
   },
   "findings": [
     {
       "severity": "low",
+      "category": "style-guide",
+      "detail": "Dutch 'en' changed to Latin 'et' in 'viae causalitatis, eminentiae et negationis'—editorial decision to make Latin grammatically consistent, but technically modifies the source span."
+    },
+    {
+      "severity": "low",
       "category": "prose-quality",
-      "detail": "The sentence 'To the cognitio Dei, both insita and acquisita, the revelation of God precedes, namely.' has awkward syntax with 'namely' stranded at sentence-end; consider restructuring for better English flow."
+      "detail": "'He does not let himself go unwitnessed' (appears twice) is awkward English; 'He does not leave himself without witness' would be more natural."
+    },
+    {
+      "severity": "low",
+      "category": "prose-quality",
+      "detail": "'And this one, created after God's image' uses awkward pronoun 'this one'; 'And he' or 'And man' would be clearer."
     }
   ],
   "recommended_follow_up": [
-    "Consider restructuring the sentence with 'namely' for improved English syntax."
+    "Confirm whether 'en' → 'et' change aligns with project standards for mixed-language phrases.",
+    "Consider smoothing awkward phrasing in editorial pass.",
+    "No major issues; proceed to final review."
   ]
 }

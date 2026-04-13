@@ -11,6 +11,7 @@ export interface RunCalibrationCliOptions {
   dotenvPath?: string;
   skipProviderSmokeTest?: boolean;
   smokeTestOnly?: boolean;
+  streamTranslation?: boolean;
 }
 
 @Injectable()
@@ -24,12 +25,18 @@ export class RunCalibrationCommand {
   async execute(argv: string[] = process.argv.slice(3)): Promise<number> {
     const options = this.parseArgs(argv);
     const resolved = this.configService.resolveCliOptions(options);
+    console.log(`loading environment from ${resolved.dotenvPath}`);
     await this.configService.loadDotenv(resolved.dotenvPath);
 
     const bundle = await this.manifestLoader.loadRunManifestBundle(resolved.runManifest);
     console.log(`validated run manifest bundle: ${bundle.runManifestPath.replace(`${process.cwd()}/`, "")}`);
+    console.log(
+      `run id: ${bundle.runManifest.run_id} | slice: ${bundle.runManifest.slice_id} | output: ${resolved.outputRoot} | eval: ${resolved.evalRoot}`
+    );
+    console.log(`translation streaming: ${resolved.streamTranslation ? "enabled" : "disabled"}`);
 
     if (!resolved.skipProviderSmokeTest) {
+      console.log("running provider smoke tests");
       await this.translationWorkflowService.smokeTest(bundle.modelProfile);
       if (resolved.smokeTestOnly) {
         console.log("Provider smoke tests passed.");
@@ -40,6 +47,7 @@ export class RunCalibrationCommand {
       return 0;
     }
 
+    console.log(`starting calibration workflow with maxRepairRounds=${resolved.maxRepairRounds}`);
     const result = await this.translationWorkflowService.runCalibration(resolved);
     console.log(`Transient raw run data: ${result.runDir}`);
     console.log(`Commit-safe eval bundle: ${result.evalDir}`);
@@ -76,6 +84,9 @@ export class RunCalibrationCommand {
         case "--smoke-test-only":
           options.smokeTestOnly = true;
           break;
+        case "--stream-translation":
+          options.streamTranslation = true;
+          break;
         default:
           if (arg.startsWith("--run-manifest=")) {
             options.runManifest = arg.slice("--run-manifest=".length);
@@ -91,6 +102,10 @@ export class RunCalibrationCommand {
           }
           if (arg.startsWith("--dotenv-path=")) {
             options.dotenvPath = arg.slice("--dotenv-path=".length);
+            break;
+          }
+          if (arg === "--stream-translation=true") {
+            options.streamTranslation = true;
             break;
           }
           throw new Error(`Unknown argument '${arg}'.`);

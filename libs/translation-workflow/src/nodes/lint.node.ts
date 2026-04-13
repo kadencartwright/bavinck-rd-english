@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 
 import { ArtifactWriterService } from "@artifact-store";
 import { LintRunnerService } from "@deterministic-lint";
@@ -7,6 +7,8 @@ import { CalibrationRuntimeState } from "../graph/graph-state";
 
 @Injectable()
 export class LintNode {
+  private readonly logger = new Logger(LintNode.name);
+
   constructor(
     private readonly lintRunner: LintRunnerService,
     private readonly artifactWriter: ArtifactWriterService
@@ -23,6 +25,9 @@ export class LintNode {
     });
     const round = state.lintResults.length;
     await this.artifactWriter.writeLintRound(state.runDirectories, round, lintResult);
+    this.logger.log(
+      `Lint round ${round} for run ${state.runId}: pass=${lintResult.pass ? "yes" : "no"} hard=${lintResult.hardDefects.length} soft=${lintResult.softDefects.length}`
+    );
     return {
       lintResults: [...state.lintResults, lintResult]
     };

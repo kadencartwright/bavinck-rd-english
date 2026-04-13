@@ -6,6 +6,7 @@ const slugRegex = /^[a-z0-9][a-z0-9._-]*$/;
 const sha256Regex = /^[0-9a-f]{64}$/;
 
 const nonEmptyString = z.string().trim().min(1);
+const optionalNullableString = nonEmptyString.nullish();
 const slugString = nonEmptyString.regex(slugRegex, "must be filesystem-safe slug characters");
 const sha256String = nonEmptyString.regex(sha256Regex, "must be a SHA-256 hex digest");
 const messageSchema = z.object({
@@ -26,11 +27,11 @@ export const sourceMetadataSchema = z
     raw_sha256: sha256String,
     clean_sha256: sha256String,
     preserves_editor_notes: z.boolean(),
-    release_date: nonEmptyString.optional(),
-    updated_date: nonEmptyString.optional(),
-    gutenberg_url: nonEmptyString.optional(),
-    original_publication: nonEmptyString.optional(),
-    credits: nonEmptyString.optional()
+    release_date: optionalNullableString,
+    updated_date: optionalNullableString,
+    gutenberg_url: optionalNullableString,
+    original_publication: optionalNullableString,
+    credits: optionalNullableString
   })
   .superRefine((value, ctx) => {
     if (value.raw_char_count < value.clean_char_count) {
@@ -322,6 +323,16 @@ const evaluationCheckSchema = z.object({
   details: nonEmptyString
 });
 
+const tokenUsageSummarySchema = z.object({
+  prompt_tokens: z.number().int().nonnegative(),
+  completion_tokens: z.number().int().nonnegative(),
+  total_tokens: z.number().int().nonnegative(),
+  cached_tokens: z.number().int().nonnegative(),
+  uncached_prompt_tokens: z.number().int().nonnegative(),
+  billable_tokens: z.number().int().nonnegative(),
+  reasoning_tokens: z.number().int().nonnegative()
+});
+
 export const evaluationReportSchema = z
   .object({
     schema_version: z.literal("1.0"),
@@ -341,6 +352,12 @@ export const evaluationReportSchema = z
       path: nonEmptyString,
       separate_from_checks: z.literal(true)
     }),
+    token_usage: z
+      .object({
+        totals: tokenUsageSummarySchema,
+        by_stage: z.record(nonEmptyString, tokenUsageSummarySchema)
+      })
+      .optional(),
     review_summary: z.string(),
     glossary_hits: z.array(nonEmptyString),
     glossary_misses: z.array(nonEmptyString),
@@ -421,6 +438,142 @@ export const calibrationGraphStateSchema = z.object({
   terminalReason: z.string().nullable()
 });
 
+const glossaryMiningSourceSchema = z.object({
+  source_id: slugString,
+  text_path: nonEmptyString,
+  metadata_path: nonEmptyString.optional(),
+  title: nonEmptyString.optional(),
+  author: nonEmptyString.optional(),
+  ebook_id: nonEmptyString.optional(),
+  clean_sha256: sha256String,
+  clean_char_count: z.number().int().positive()
+});
+
+export const glossaryMiningConfigSchema = z.object({
+  schema_version: z.literal("1.0"),
+  candidate_rules: z.object({
+    rule_set: z.literal("dutch-ngram-core-v1"),
+    max_ngram: z.number().int().min(1).max(3),
+    min_unigram_length: z.number().int().positive(),
+    min_ngram_boundary_length: z.number().int().positive(),
+    require_boundary_non_stopwords: z.literal(true),
+    stopword_set: z.literal("dutch-core-v1"),
+    preserved_span_filter: z.literal("obvious-preserved-v1")
+  }),
+  location_model: z.object({
+    line_numbers: z.literal("1-based"),
+    columns: z.literal("1-based"),
+    offsets: z.literal("utf16-code-unit"),
+    bucket_index: z.literal("1-based"),
+    bucket_line_span: z.number().int().positive()
+  }),
+  filters: z.object({
+    min_occurrences: z.number().int().positive(),
+    min_bucket_count: z.number().int().positive(),
+    emit_excluded_candidates: z.boolean()
+  })
+});
+
+const glossaryCandidateLocationSchema = z
+  .object({
+    line: z.number().int().positive(),
+    column_start: z.number().int().positive(),
+    column_end: z.number().int().positive(),
+    absolute_start_offset: z.number().int().nonnegative(),
+    absolute_end_offset: z.number().int().positive(),
+    bucket_index: z.number().int().positive()
+  })
+  .superRefine((value, ctx) => {
+    if (value.column_end < value.column_start) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["column_end"],
+        message: "must be greater than or equal to column_start"
+      });
+    }
+    if (value.absolute_end_offset < value.absolute_start_offset) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["absolute_end_offset"],
+        message: "must be greater than or equal to absolute_start_offset"
+      });
+    }
+  });
+
+const glossaryCandidateSurfaceFormSchema = z.object({
+  form: nonEmptyString,
+  occurrences: z.number().int().positive()
+});
+
+const glossaryCandidateTermSchema = z.object({
+  candidate_id: slugString,
+  term: nonEmptyString,
+  normalized_term: nonEmptyString,
+  token_count: z.number().int().positive(),
+  extraction_rule: z.enum(["unigram", "ngram"]),
+  first_seen: glossaryCandidateLocationSchema,
+  surface_forms: z.array(glossaryCandidateSurfaceFormSchema).min(1)
+});
+
+export const glossaryCandidateTermsArtifactSchema = z.object({
+  schema_version: z.literal("1.0"),
+  artifact_type: z.literal("glossary_candidate_terms"),
+  source: glossaryMiningSourceSchema,
+  mining_config: glossaryMiningConfigSchema,
+  candidate_count: z.number().int().nonnegative(),
+  candidates: z.array(glossaryCandidateTermSchema)
+});
+
+export const glossaryCandidateUsageSchema = z.object({
+  candidate_id: slugString,
+  normalized_term: nonEmptyString,
+  term: nonEmptyString,
+  occurrence_index: z.number().int().positive(),
+  location: glossaryCandidateLocationSchema,
+  line_excerpt: nonEmptyString
+});
+
+export const glossaryCandidateUsagesArtifactSchema = z.object({
+  schema_version: z.literal("1.0"),
+  artifact_type: z.literal("glossary_candidate_usages"),
+  source: glossaryMiningSourceSchema,
+  mining_config: glossaryMiningConfigSchema,
+  usage_count: z.number().int().nonnegative(),
+  usages: z.array(glossaryCandidateUsageSchema)
+});
+
+export const glossaryCandidateMetadataEntrySchema = z.object({
+  candidate_id: slugString,
+  normalized_term: nonEmptyString,
+  term: nonEmptyString,
+  token_count: z.number().int().positive(),
+  occurrence_count: z.number().int().positive(),
+  line_count: z.number().int().positive(),
+  bucket_count: z.number().int().positive(),
+  spread_ratio: z.number().min(0).max(1),
+  first_seen: glossaryCandidateLocationSchema,
+  last_seen: glossaryCandidateLocationSchema,
+  retained: z.boolean(),
+  exclusion_reasons: z.array(z.enum(["min_occurrences", "min_bucket_count"]))
+});
+
+export const glossaryCandidateMetadataOverviewSchema = z.object({
+  schema_version: z.literal("1.0"),
+  artifact_type: z.literal("glossary_candidate_metadata_overview"),
+  source: glossaryMiningSourceSchema,
+  mining_config: glossaryMiningConfigSchema,
+  summary: z.object({
+    candidate_count: z.number().int().nonnegative(),
+    emitted_candidate_count: z.number().int().nonnegative(),
+    retained_count: z.number().int().nonnegative(),
+    excluded_count: z.number().int().nonnegative(),
+    total_occurrences: z.number().int().nonnegative(),
+    emitted_occurrence_count: z.number().int().nonnegative(),
+    total_bucket_count: z.number().int().positive()
+  }),
+  candidates: z.array(glossaryCandidateMetadataEntrySchema)
+});
+
 export const commitSafeEvalRecordSchema = z.object({
   schema_version: z.enum(["1.0", "1.1"]),
   sanitization_version: z.enum(["1.0", "1.1"]),
@@ -430,6 +583,12 @@ export const commitSafeEvalRecordSchema = z.object({
   model_profile_id: nonEmptyString,
   generated_at: nonEmptyString,
   source_refs: z.record(nonEmptyString, nonEmptyString),
+  token_usage: z
+    .object({
+      totals: tokenUsageSummarySchema,
+      by_stage: z.record(nonEmptyString, tokenUsageSummarySchema)
+    })
+    .optional(),
   stages: z.record(
     nonEmptyString,
     z.object({
@@ -461,5 +620,12 @@ export type EvaluationReport = z.infer<typeof evaluationReportSchema>;
 export type LintDefect = z.infer<typeof lintDefectSchema>;
 export type LintResult = z.infer<typeof lintResultSchema>;
 export type CalibrationGraphState = z.infer<typeof calibrationGraphStateSchema>;
+export type GlossaryMiningSource = z.infer<typeof glossaryMiningSourceSchema>;
+export type GlossaryMiningConfig = z.infer<typeof glossaryMiningConfigSchema>;
+export type GlossaryCandidateTermsArtifact = z.infer<typeof glossaryCandidateTermsArtifactSchema>;
+export type GlossaryCandidateUsage = z.infer<typeof glossaryCandidateUsageSchema>;
+export type GlossaryCandidateUsagesArtifact = z.infer<typeof glossaryCandidateUsagesArtifactSchema>;
+export type GlossaryCandidateMetadataEntry = z.infer<typeof glossaryCandidateMetadataEntrySchema>;
+export type GlossaryCandidateMetadataOverview = z.infer<typeof glossaryCandidateMetadataOverviewSchema>;
 export type CommitSafeEvalRecord = z.infer<typeof commitSafeEvalRecordSchema>;
 export type CalibrationMessage = z.infer<typeof messageSchema>;

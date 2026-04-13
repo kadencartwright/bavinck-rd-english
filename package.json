@@ -5,6 +5,7 @@
   "scripts": {
     "build": "nest build calibration-cli",
     "calibration": "nest start calibration-cli -- run",
+    "glossary:candidates:mine": "nest start calibration-cli -- mine-glossary-candidates",
     "lint": "tsc --noEmit -p tsconfig.json",
     "nest": "nest",
     "test": "jest --runInBand",

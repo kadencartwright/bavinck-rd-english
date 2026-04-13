@@ -50,6 +50,7 @@ export class ReviewService {
     const stage = input.modelProfile.stages.review;
     const response = await this.providerClient.createChatCompletion({
       providerName: stage.provider,
+      stageName: "review",
       model: stage.model,
       messages: built.messages,
       temperature: stage.temperature,
@@ -124,6 +125,7 @@ export class ReviewService {
     } catch {
       const repairResponse = await this.providerClient.createChatCompletion({
         providerName,
+        stageName: "review-json-repair",
         model,
         temperature: 0,
         maxTokens: 2000,

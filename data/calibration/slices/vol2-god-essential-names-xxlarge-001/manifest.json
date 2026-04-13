@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "slice_id": "vol2-god-essential-names-xxlarge-001",
+  "title": "Volume 2 \u00a7 26.1-12 The Essential Names of God",
+  "rationale": "This slice carries \u00a7 26 through subsection 12 as an explicit stress test for output length, section-scale coherence, and eval durability on very large passages.",
+  "stressors": [
+    "metaphysical terminology",
+    "doctrinal precision",
+    "glossary-sensitive terminology",
+    "long-form coherence",
+    "cross-subsection continuity",
+    "output-length pressure"
+  ],
+  "source": {
+    "text_path": "data/clean/pg67966.txt",
+    "metadata_path": "data/metadata/pg67966.json",
+    "title": "Gereformeerde dogmatiek. Tweede deel.",
+    "author": "Herman Bavinck",
+    "ebook_id": "67966",
+    "language": "Dutch"
+  },
+  "selection": {
+    "section_number": 26,
+    "section_title": "DE WEZENSNAMEN GODS.",
+    "start_subsection": 1,
+    "end_subsection": 12,
+    "start_line": 4175,
+    "end_line": 6643
+  },
+  "source_identity": {
+    "clean_sha256": "4f00d83d178a2892e0becc8fac5c8dc50305399b7740f678f07b91c94c884b0a",
+    "clean_char_count": 1370601
+  },
+  "excerpt": {
+    "path": "data/calibration/slices/vol2-god-essential-names-xxlarge-001/excerpt.txt",
+    "line_count": 2469,
+    "word_count": 28342,
+    "sha256": "bb96c64c5eb8f32c3b319cbd008be36e6487c3444bb75c97b05780bf13ae924c"
+  },
+  "expected_inputs": {
+    "glossary_path": "data/calibration/slices/vol2-god-essential-names-xxlarge-001/inputs/glossary.yaml",
+    "style_guide_path": "data/calibration/slices/vol2-god-essential-names-xxlarge-001/inputs/style-guide.md",
+    "rubric_path": "data/calibration/slices/vol2-god-essential-names-xxlarge-001/inputs/rubric.yaml"
+  },
+  "report_root": "data/calibration/runs/vol2-god-essential-names-xxlarge-001"
+}

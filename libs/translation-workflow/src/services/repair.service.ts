@@ -58,6 +58,7 @@ export class RepairService {
     };
     const response = await this.providerClient.createChatCompletion({
       providerName: stage.provider,
+      stageName: "repair",
       model: stage.model,
       messages,
       temperature: stage.temperature,

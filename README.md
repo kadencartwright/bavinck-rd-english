@@ -65,6 +65,24 @@ To target a specific manifest:
 ./run-calibration --run-manifest config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json
 ```
 
+## Mining Glossary Candidates
+
+The repository also includes a deterministic glossary candidate miner over cleaned source texts.
+
+To mine one cleaned source volume with the default rules and thresholds:
+
+```bash
+pnpm glossary:candidates:mine -- --source-text data/clean/pg51052.txt
+```
+
+Artifacts are written under `data/calibration/glossary-candidates/<source_id>/`:
+
+- `candidate-terms.json`: unique mined candidates with stable candidate ids, first-seen location, and observed surface forms
+- `usage-locations.json`: one row for every emitted candidate occurrence with line, column, absolute offsets, and line excerpt
+- `metadata-overview.json`: per-candidate frequency/spread summary for emitted candidates plus counts for retained and excluded candidates
+
+Operator guidance for mining and glossary triage lives in [docs/glossary-candidate-mining.md](docs/glossary-candidate-mining.md).
+
 ## License
 
 Code in this repository is licensed under the terms in [LICENSE](LICENSE).

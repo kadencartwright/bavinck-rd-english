@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 
 import { ArtifactWriterService } from "@artifact-store";
 import { ManifestLoaderService } from "@calibration-config";
@@ -7,12 +7,15 @@ import { CalibrationRuntimeState } from "../graph/graph-state";
 
 @Injectable()
 export class LoadInputsNode {
+  private readonly logger = new Logger(LoadInputsNode.name);
+
   constructor(
     private readonly manifestLoader: ManifestLoaderService,
     private readonly artifactWriter: ArtifactWriterService
   ) {}
 
   async execute(state: CalibrationRuntimeState): Promise<Partial<CalibrationRuntimeState>> {
+    this.logger.log(`Loading inputs from manifest ${state.runManifestPath}`);
     const bundle = await this.manifestLoader.loadRunManifestBundle(state.runManifestPath);
     const drift = await this.manifestLoader.assertSourceDrift(bundle, state.allowSourceDrift);
     const runDirectories = await this.artifactWriter.prepareRunDirectories(bundle.runManifest.run_id, state.outputRoot);
@@ -30,6 +33,10 @@ export class LoadInputsNode {
       sourceTextPath: bundle.sourceTextPath,
       sourceMetadataPath: bundle.sourceMetadataPath
     });
+
+    this.logger.log(
+      `Prepared run ${bundle.runManifest.run_id} for slice ${bundle.runManifest.slice_id}; drift=${drift.drifted ? "yes" : "no"}`
+    );
 
     return {
       runId: bundle.runManifest.run_id,

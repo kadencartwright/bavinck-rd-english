@@ -5,7 +5,7 @@
   "slice_id": "vol2-god-knowability-acquisita-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
-  "generated_at": "2026-04-09T17:01:32.777426+00:00",
+  "generated_at": "2026-04-11T02:28:00.738Z",
   "source_refs": {
     "run_manifest_path": "config/calibration/run-manifests/vol2-god-knowability-acquisita-001-baseline.json",
     "slice_manifest_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/manifest.json",
@@ -15,18 +15,54 @@
     "style_guide_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/inputs/style-guide.md",
     "rubric_path": "data/calibration/slices/vol2-god-knowability-acquisita-001/inputs/rubric.yaml"
   },
+  "token_usage": {
+    "totals": {
+      "prompt_tokens": 11676,
+      "completion_tokens": 17883,
+      "total_tokens": 29559,
+      "cached_tokens": 0,
+      "uncached_prompt_tokens": 11676,
+      "billable_tokens": 29559,
+      "reasoning_tokens": 5337
+    },
+    "by_stage": {
+      "translation": {
+        "prompt_tokens": 4681,
+        "completion_tokens": 12143,
+        "total_tokens": 16824,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 4681,
+        "billable_tokens": 16824,
+        "reasoning_tokens": 0
+      },
+      "review": {
+        "prompt_tokens": 6995,
+        "completion_tokens": 5740,
+        "total_tokens": 12735,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 6995,
+        "billable_tokens": 12735,
+        "reasoning_tokens": 5337
+      }
+    }
+  },
   "stages": {
     "translation": {
       "provider": "moonshot",
       "model": "kimi-k2.5",
-      "temperature": 1.0,
+      "temperature": 1,
       "prompt_files": {
         "translation_system": "translation-system.txt",
         "translation_user_template": "translation-user-template.txt",
         "review_system": "review-system.txt",
         "review_user_template": "review-user-template.txt"
       },
-      "finish_reason": "stop"
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 4681,
+        "completion_tokens": 12143,
+        "total_tokens": 16824
+      }
     },
     "review": {
       "provider": "z-ai",
@@ -40,24 +76,25 @@
       },
       "finish_reason": "stop",
       "usage": {
-        "prompt_tokens": 6998,
-        "completion_tokens": 5556,
-        "total_tokens": 12554,
-        "reasoning_tokens": 5267,
+        "prompt_tokens": 6995,
+        "completion_tokens": 5740,
+        "total_tokens": 12735,
+        "reasoning_tokens": 5337,
         "cached_tokens": 0
       }
     }
   },
   "artifacts": {
     "translation_output_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/translation.md",
+    "evaluation_markdown_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.md",
+    "evaluation_report_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.json",
+    "eval_record_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/eval-record.json",
     "review_structured_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/review-structured.json",
     "findings_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/findings.md",
     "translation_system_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/translation-system.txt",
     "translation_user_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/translation-user.txt",
     "review_system_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/review-system.txt",
-    "review_user_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/review-user.txt",
-    "evaluation_report_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.json",
-    "evaluation_markdown_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/evaluation.md"
+    "review_user_prompt_path": "data/calibration/evals/vol2-god-knowability-acquisita-001-baseline/prompts/review-user.txt"
   },
   "hashes": {
     "run_manifest_sha256": "d4ebf17dc2ba64ac9e987758bccb2b083b398c624474d0be1ee6c75ed5b000b0",
@@ -67,14 +104,14 @@
     "glossary_sha256": "19b61e35978c4930f83df5a7b9e0b81bce97d8b7ce2d98754338870e528954ac",
     "style_guide_sha256": "a1a5c485fa715028d1c43693eca547a0387ed8ad8fa527597339d69b2fb9a38c",
     "rubric_sha256": "c2a563ffcb6757a0f9e32face796f091c9459bb91473a9778270132f62140083",
-    "translation_output_sha256": "a08dae81bd109cf15c6b036b5b2673b9e7b0aa481417f9acfd661911c750f9ac",
-    "review_structured_sha256": "2b2b88958777ca27f27031e648444f88c451c354b4f9227f7caf845db599a9ae",
-    "findings_sha256": "bcbecbc03f0566acb9e53dd904c7488ba429aaa900ee545ea84e389465ed7ec2",
-    "evaluation_report_sha256": "a7e79a644177b01a6386263f74b1f59c59fe6c5d2da76b1a9685e75d8e4dbe2a",
-    "evaluation_markdown_sha256": "de164b8ecd34dc1b3bba39714e3d396c2d8f04556d6298974f2df1f52620fe59",
+    "translation_output_sha256": "b191a070f0d8e79f03a473e346356b2015788a31837f295ae0ff7d00aa5f5f5f",
+    "evaluation_report_sha256": "115708d9d0866e73d76e134f6ddf219ed969b25f618d432f64680deb79268a2f",
+    "evaluation_markdown_sha256": "9703a59039a8ae5d29d38debe984ec425cf930da3f39f53bed97d29b80e0e1fc",
     "translation_system_prompt_sha256": "e88459c2542b810f3c237adfbf3875021954ab378645fd6bd5c6a51b689b3524",
     "translation_user_prompt_sha256": "9d723515e37fafbe5c315691632e790a5d3c09649506e7862de1b4b289f7825d",
+    "review_structured_sha256": "80191e9111d6b490776715cb3fb994028468f9a386aa092e3c370bc2c05afc60",
+    "findings_sha256": "977bb346b79c3ebf4fb5b68f9ed056a557c32dd58082bf5412f9a14b4e1b57bd",
     "review_system_prompt_sha256": "d32ea79f07f205d43763ea59eeda6c6186edadd1de334c6cabc96e38adb24876",
-    "review_user_prompt_sha256": "7f83ff91f54cfa5c3718bc7733c83a32faf4807bfd8cbdb2c21a5b3c3817fb20"
+    "review_user_prompt_sha256": "9419be7ceecefd1c3706961edbda5e5f8dac7d54c87691b6d541bd83ab0b3bc0"
   }
 }
