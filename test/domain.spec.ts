@@ -10,12 +10,8 @@ import {
   runManifestSchema,
   sliceManifestSchema
 } from "@calibration-domain";
-import { PathService, PromptBundleService } from "@calibration-config";
 
 describe("domain contracts", () => {
-  const pathService = new PathService();
-  const promptBundleService = new PromptBundleService(pathService);
-
   it("parses the existing manifest and metadata fixtures with Zod", async () => {
     const runManifest = JSON.parse(await readFile("config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json", "utf8"));
     const promptBundleMetadata = JSON.parse(await readFile("config/calibration/prompt-bundles/baseline-v1/metadata.json", "utf8"));
@@ -36,36 +32,14 @@ describe("domain contracts", () => {
     expect(rubricDocSchema.parse(rubricDoc).criteria.length).toBeGreaterThan(0);
   });
 
-  it("renders translation prompts with the expected placeholders substituted", async () => {
-    const metadata = promptBundleMetadataSchema.parse(
-      JSON.parse(await readFile("config/calibration/prompt-bundles/baseline-v1/metadata.json", "utf8"))
-    );
-    const promptBundle = await promptBundleService.load("config/calibration/prompt-bundles/baseline-v1", metadata);
-    const modelProfile = modelProfileSchema.parse(
-      JSON.parse(await readFile("config/calibration/model-profiles/kimi-k2_5-glm5-baseline.json", "utf8"))
-    );
-    const runManifest = runManifestSchema.parse(
-      JSON.parse(await readFile("config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json", "utf8"))
-    );
-    const sliceManifest = sliceManifestSchema.parse(
-      JSON.parse(await readFile("data/calibration/slices/vol2-god-incomprehensibility-001/manifest.json", "utf8"))
-    );
+  it("keeps BAML calibration prompts and generator config in repo-backed sources", async () => {
+    const generatorConfig = await readFile("baml_src/generators.baml", "utf8");
+    const calibrationPrompt = await readFile("baml_src/calibration.baml", "utf8");
 
-    const built = promptBundleService.buildTranslationRequestRecord({
-      runId: runManifest.run_id,
-      runManifest,
-      sliceManifest,
-      promptBundle,
-      modelProfile,
-      excerptText: "Excerpt text.",
-      glossaryText: "terms:\n- source: dogmatiek\n  target: dogmatics",
-      styleGuideText: "Use formal English."
-    });
-
-    expect(built.messages[1].content).toContain(runManifest.run_id);
-    expect(built.messages[1].content).toContain(sliceManifest.title);
-    expect(built.messages[1].content).toContain("Excerpt text.");
-    expect(built.messages[1].content).toContain("dogmatiek");
-    expect(built.requestRecord.prompt_files.translation_system).toBe("translation-system.txt");
+    expect(generatorConfig).toContain('output_type "typescript"');
+    expect(generatorConfig).toContain('module_format "cjs"');
+    expect(calibrationPrompt).toContain("function TranslateCalibrationSlice");
+    expect(calibrationPrompt).toContain("function ReviewCalibrationSlice");
+    expect(calibrationPrompt).toContain("function RepairCalibrationDraft");
   });
 });

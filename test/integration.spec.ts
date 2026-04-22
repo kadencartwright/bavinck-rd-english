@@ -4,30 +4,77 @@ import path from "node:path";
 import { Test } from "@nestjs/testing";
 
 import { TranslationWorkflowModule, TranslationWorkflowService } from "@translation-workflow";
-import { OpenAiCompatibleClient } from "@provider-clients";
+import { BamlCalibrationClient } from "@provider-clients";
 
 import {
   ACTUAL_MANIFEST_PATH,
   buildBrokenTranslation,
   buildCleanTranslation,
-  buildReviewResponse,
+  buildReviewResult,
+  buildStageUsage,
   cleanupTempRoot,
   makeTempCalibrationRoots
 } from "./helpers/calibration-fixture";
 
 describe("translation workflow integration", () => {
-  async function createService(mockResponses: Array<Record<string, unknown>>) {
+  async function createService(mockResults: {
+    translations: string[];
+    repairs?: string[];
+    review?: ReturnType<typeof buildReviewResult>;
+  }) {
     const mockClient = {
-      createChatCompletion: jest.fn().mockImplementation(async () => {
-        const response = mockResponses.shift();
-        if (!response) {
-          throw new Error("No mock response left.");
+      translate: jest.fn().mockImplementation(async () => {
+        const next = mockResults.translations.shift();
+        if (!next) {
+          throw new Error("No translation mock left.");
         }
-        return response;
+        return {
+          value: next.trimEnd(),
+          messages: [
+            { role: "system", content: "translation system" },
+            { role: "user", content: "translation user" }
+          ],
+          prompt: { system: "translation system", user: "translation user" },
+          promptFiles: { baml_bundle: "baseline-v1", baml_function: "TranslateCalibrationSlice" },
+          response: { raw_llm_response: next, usage: buildStageUsage() },
+          finishReason: "stop",
+          usage: buildStageUsage()
+        };
       }),
-      extractMessageText: jest.fn((response: Record<string, unknown>) => {
-        const choices = response.choices as Array<{ message: { content: string } }>;
-        return choices[0].message.content;
+      repair: jest.fn().mockImplementation(async () => {
+        const next = mockResults.repairs?.shift();
+        if (!next) {
+          throw new Error("No repair mock left.");
+        }
+        return {
+          value: next.trimEnd(),
+          messages: [
+            { role: "system", content: "repair system" },
+            { role: "user", content: "repair user" }
+          ],
+          prompt: { system: "repair system", user: "repair user" },
+          promptFiles: { baml_bundle: "baseline-v1", baml_function: "RepairCalibrationDraft" },
+          response: { raw_llm_response: next, usage: buildStageUsage() },
+          finishReason: "stop",
+          usage: buildStageUsage()
+        };
+      }),
+      review: jest.fn().mockImplementation(async () => {
+        if (!mockResults.review) {
+          throw new Error("No review mock configured.");
+        }
+        return {
+          value: mockResults.review,
+          messages: [
+            { role: "system", content: "review system" },
+            { role: "user", content: "review user" }
+          ],
+          prompt: { system: "review system", user: "review user" },
+          promptFiles: { baml_bundle: "baseline-v1", baml_function: "ReviewCalibrationSlice" },
+          response: { raw_llm_response: JSON.stringify(mockResults.review), usage: buildStageUsage() },
+          finishReason: "stop",
+          usage: buildStageUsage()
+        };
       }),
       smokeTestStage: jest.fn()
     };
@@ -35,7 +82,7 @@ describe("translation workflow integration", () => {
     const moduleRef = await Test.createTestingModule({
       imports: [TranslationWorkflowModule]
     })
-      .overrideProvider(OpenAiCompatibleClient)
+      .overrideProvider(BamlCalibrationClient)
       .useValue(mockClient)
       .compile();
 
@@ -50,10 +97,10 @@ describe("translation workflow integration", () => {
     const excerptText = await readFile("data/calibration/slices/vol2-god-incomprehensibility-001/excerpt.txt", "utf8");
     const glossaryText = await readFile("data/calibration/slices/vol2-god-incomprehensibility-001/inputs/glossary.yaml", "utf8");
     const roots = await makeTempCalibrationRoots();
-    const { service, close } = await createService([
-      { choices: [{ message: { content: buildCleanTranslation(excerptText, glossaryText) }, finish_reason: "stop" }] },
-      buildReviewResponse()
-    ]);
+    const { service, close } = await createService({
+      translations: [buildCleanTranslation(excerptText, glossaryText)],
+      review: buildReviewResult()
+    });
 
     try {
       const result = await service.runCalibration({
@@ -65,7 +112,8 @@ describe("translation workflow integration", () => {
         skipProviderSmokeTest: true,
         smokeTestOnly: false,
         maxRepairRounds: 2,
-        streamTranslation: false
+        streamTranslation: false,
+        streamLlm: false
       });
 
       await expect(access(path.join(result.evalDir, "review-structured.json"))).resolves.toBeUndefined();
@@ -89,11 +137,11 @@ describe("translation workflow integration", () => {
     const excerptText = await readFile("data/calibration/slices/vol2-god-incomprehensibility-001/excerpt.txt", "utf8");
     const glossaryText = await readFile("data/calibration/slices/vol2-god-incomprehensibility-001/inputs/glossary.yaml", "utf8");
     const roots = await makeTempCalibrationRoots();
-    const { service, close } = await createService([
-      { choices: [{ message: { content: buildBrokenTranslation(excerptText) }, finish_reason: "stop" }] },
-      { choices: [{ message: { content: buildCleanTranslation(excerptText, glossaryText) }, finish_reason: "stop" }] },
-      buildReviewResponse("Review completed after repair.")
-    ]);
+    const { service, close } = await createService({
+      translations: [buildBrokenTranslation(excerptText)],
+      repairs: [buildCleanTranslation(excerptText, glossaryText)],
+      review: buildReviewResult("Review completed after repair.")
+    });
 
     try {
       const result = await service.runCalibration({
@@ -105,7 +153,8 @@ describe("translation workflow integration", () => {
         skipProviderSmokeTest: true,
         smokeTestOnly: false,
         maxRepairRounds: 2,
-        streamTranslation: false
+        streamTranslation: false,
+        streamLlm: false
       });
 
       await expect(access(path.join(result.runDir, "outputs", "translation-round-0.md"))).resolves.toBeUndefined();
@@ -122,11 +171,10 @@ describe("translation workflow integration", () => {
   it("routes to escalation after exhausting repair rounds", async () => {
     const excerptText = await readFile("data/calibration/slices/vol2-god-incomprehensibility-001/excerpt.txt", "utf8");
     const roots = await makeTempCalibrationRoots();
-    const { service, close } = await createService([
-      { choices: [{ message: { content: buildBrokenTranslation(excerptText) }, finish_reason: "stop" }] },
-      { choices: [{ message: { content: buildBrokenTranslation(excerptText) }, finish_reason: "stop" }] },
-      { choices: [{ message: { content: buildBrokenTranslation(excerptText) }, finish_reason: "stop" }] }
-    ]);
+    const { service, close } = await createService({
+      translations: [buildBrokenTranslation(excerptText)],
+      repairs: [buildBrokenTranslation(excerptText), buildBrokenTranslation(excerptText)]
+    });
 
     try {
       const result = await service.runCalibration({
@@ -138,7 +186,8 @@ describe("translation workflow integration", () => {
         skipProviderSmokeTest: true,
         smokeTestOnly: false,
         maxRepairRounds: 2,
-        streamTranslation: false
+        streamTranslation: false,
+        streamLlm: false
       });
 
       await expect(access(path.join(result.evalDir, "unresolved-defects.json"))).resolves.toBeUndefined();

@@ -61,30 +61,24 @@ export function buildBrokenTranslation(excerptText: string): string {
   );
 }
 
-export function buildReviewResponse(summary = "Review completed.") {
+export function buildStageUsage() {
   return {
-    usage: {
-      prompt_tokens: 44,
-      completion_tokens: 55,
-      total_tokens: 99,
-      completion_tokens_details: { reasoning_tokens: 7 },
-      prompt_tokens_details: { cached_tokens: 3 }
+    prompt_tokens: 44,
+    completion_tokens: 55,
+    total_tokens: 99,
+    reasoning_tokens: 7,
+    cached_tokens: 3
+  };
+}
+
+export function buildReviewResult(summary = "Review completed.") {
+  return {
+    summary,
+    checks: {
+      proseQuality: { status: "pass" as const, details: "Readable formal prose." },
+      reviewFlagging: { status: "pass" as const, details: "Risks called out appropriately." }
     },
-    choices: [
-      {
-        message: {
-          content: JSON.stringify({
-            summary,
-            checks: {
-              "prose-quality": { status: "pass", details: "Readable formal prose." },
-              "review-flagging": { status: "pass", details: "Risks called out appropriately." }
-            },
-            findings: [{ severity: "low", category: "style", detail: "Minor note." }],
-            recommended_follow_up: ["Keep comparing runs."]
-          })
-        },
-        finish_reason: "stop"
-      }
-    ]
+    findings: [{ severity: "low" as const, category: "style", detail: "Minor note." }],
+    recommendedFollowUp: ["Keep comparing runs."]
   };
 }

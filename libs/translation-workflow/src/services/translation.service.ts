@@ -7,14 +7,12 @@ import {
   SliceManifest,
   translationRequestRecordSchema
 } from "@calibration-domain";
-import { PromptBundleLoadResult, PromptBundleService } from "@calibration-config";
-import { OpenAiCompatibleClient } from "@provider-clients";
+import { BamlCalibrationClient } from "@provider-clients";
 
 export interface TranslationExecutionInput {
   runId: string;
   runManifest: RunManifest;
   sliceManifest: SliceManifest;
-  promptBundle: PromptBundleLoadResult;
   promptBundleMetadata: PromptBundleMetadata;
   modelProfile: ModelProfile;
   excerptText: string;
@@ -26,100 +24,64 @@ export interface TranslationExecutionInput {
 
 @Injectable()
 export class TranslationService {
-  constructor(
-    private readonly promptBundleService: PromptBundleService,
-    private readonly providerClient: OpenAiCompatibleClient
-  ) {}
+  constructor(private readonly providerClient: BamlCalibrationClient) {}
 
   async execute(input: TranslationExecutionInput) {
-    const built = this.promptBundleService.buildTranslationRequestRecord({
-      runId: input.runId,
-      runManifest: input.runManifest,
-      sliceManifest: input.sliceManifest,
-      promptBundle: input.promptBundle,
-      modelProfile: input.modelProfile,
-      excerptText: input.excerptText,
-      glossaryText: input.glossaryText,
-      styleGuideText: input.styleGuideText
-    });
-    const requestRecord = translationRequestRecordSchema.parse(built.requestRecord);
     const stage = input.modelProfile.stages.translation;
-    const response = await this.providerClient.createChatCompletion({
-      providerName: stage.provider,
-      stageName: "translation",
-      model: stage.model,
-      messages: built.messages,
-      temperature: stage.temperature,
-      maxTokens: stage.max_tokens,
-      timeoutSeconds: stage.timeout_seconds,
+    const result = await this.providerClient.translate({
+      promptBundleId: input.promptBundleMetadata.prompt_bundle_id,
+      stage,
+      runId: input.runId,
+      sliceId: input.runManifest.slice_id,
+      sliceTitle: input.sliceManifest.title,
+      selectionRationale: input.sliceManifest.rationale,
+      sourceExcerpt: input.excerptText,
+      glossaryTerms: input.glossaryText,
+      styleGuide: input.styleGuideText,
       stream: input.stream ?? false,
       onStreamDelta: input.onStreamDelta
     });
-    const text = `${this.providerClient.extractMessageText(response).trim()}\n`;
+
+    const text = `${result.value.trim()}\n`;
     if (!text.trim()) {
       throw new Error(
         `Translation provider returned empty output. Aborting run before review for ${stage.provider}/${stage.model}.`
       );
     }
+
+    const requestRecord = translationRequestRecordSchema.parse({
+      run_id: input.runId,
+      slice_id: input.runManifest.slice_id,
+      prompt_bundle_id: input.runManifest.prompt_bundle_id,
+      model_profile_id: input.runManifest.model_profile_id,
+      stage: "translation",
+      provider: stage.provider,
+      model: stage.model,
+      temperature: stage.temperature,
+      messages: result.messages,
+      prompt_files: result.promptFiles
+    });
+
     return {
       requestRecord,
-      response,
+      response: result.response,
       text,
-      prompt: {
-        system: built.messages[0].content,
-        user: built.messages[1].content
-      },
+      prompt: result.prompt,
       stageRecord: {
         provider: stage.provider,
         model: stage.model,
         temperature: stage.temperature,
-        promptFiles: input.promptBundleMetadata.prompt_files,
-        finishReason: this.extractFinishReason(response),
+        promptFiles: result.promptFiles,
+        finishReason: result.finishReason,
         maxTokens: stage.max_tokens,
         timeoutSeconds: stage.timeout_seconds,
-        usage: this.extractUsage(response)
+        usage: result.usage
       }
     };
   }
 
   async smokeTest(modelProfile: ModelProfile): Promise<void> {
-      await this.providerClient.smokeTestStage("translation", modelProfile.stages.translation);
+    await this.providerClient.smokeTestStage("translation", modelProfile.stages.translation);
     await this.providerClient.smokeTestStage("review", modelProfile.stages.review);
-  }
-
-  private extractFinishReason(response: Record<string, unknown>): string | undefined {
-    const firstChoice = Array.isArray(response.choices) ? response.choices[0] : undefined;
-    return firstChoice && typeof firstChoice === "object" && typeof firstChoice.finish_reason === "string"
-      ? firstChoice.finish_reason
-      : undefined;
-  }
-
-  private extractUsage(response: Record<string, unknown>): Record<string, number> | undefined {
-    const usage = response.usage;
-    if (!usage || typeof usage !== "object") {
-      return undefined;
-    }
-    const normalized: Record<string, number> = {};
-    for (const key of ["prompt_tokens", "completion_tokens", "total_tokens"] as const) {
-      const value = (usage as Record<string, unknown>)[key];
-      if (typeof value === "number") {
-        normalized[key] = value;
-      }
-    }
-    const completionDetails = (usage as Record<string, unknown>).completion_tokens_details;
-    if (completionDetails && typeof completionDetails === "object") {
-      const reasoningTokens = (completionDetails as Record<string, unknown>).reasoning_tokens;
-      if (typeof reasoningTokens === "number") {
-        normalized.reasoning_tokens = reasoningTokens;
-      }
-    }
-    const promptDetails = (usage as Record<string, unknown>).prompt_tokens_details;
-    if (promptDetails && typeof promptDetails === "object") {
-      const cachedTokens = (promptDetails as Record<string, unknown>).cached_tokens;
-      if (typeof cachedTokens === "number") {
-        normalized.cached_tokens = cachedTokens;
-      }
-    }
-    return Object.keys(normalized).length > 0 ? normalized : undefined;
   }
 }

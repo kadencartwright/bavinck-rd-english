@@ -10,8 +10,14 @@
 - `scripture-reference-normalization`: **pass** - Dutch Scripture references were normalized to standard English forms.
 - `dutch-residue`: **pass** - No tracked Dutch abbreviations or residue remained in the translated output.
 - `output-shape`: **pass** - Translation output contains only the translated passage with preserved structure.
-- `prose-quality`: **pass** - The output is coherent formal theological prose; the identified issues are localized and do not disrupt the overall argument structure.
-- `review-flagging`: **pass** - The review identifies the specific inconsistency in book title translation and the potential doctrinal ambiguity regarding 'scientific' sense.
+- `prose-quality`: **fail** - The output fails to render the embedded German phrases correctly, producing the hybrid 'Theology der Thatsachen' instead of preserving the source span or translating it fully. Additionally, 'Immediately as soon as' is tautological prose.
+- `review-flagging`: **pass** - Findings explicitly identify the preservation corruption and the prose quality issue.
+
+## Token Usage
+
+- Totals: prompt=2259, completion=3531, total=5790, cached=0, uncached-prompt=2259, billable=5790, reasoning=0
+- Stage `translation`: prompt=0, completion=0, total=0, cached=0, uncached-prompt=0, billable=0, reasoning=0
+- Stage `review`: prompt=2259, completion=3531, total=5790, cached=0, uncached-prompt=2259, billable=5790, reasoning=0
 
 ## Qualitative Findings
 

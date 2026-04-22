@@ -27,6 +27,7 @@ At the moment, it contains tooling for:
 - fetching Project Gutenberg source files for the four Dutch volumes
 - extracting clean source text and metadata
 - defining calibration slices and run manifests
+- defining BAML-backed translation, repair, and review prompts under `baml_src/`
 - executing translation and review runs with model-backed prompts
 - storing commit-safe evaluation bundles under `data/calibration/evals/`
 
@@ -52,6 +53,8 @@ At the moment, it contains tooling for:
 ## Running Calibration
 
 Provider keys are read from `.env`. Start from `.env.example`.
+
+The calibration runtime now uses BAML-generated TypeScript clients for translation, repair, and review stages. Generated client code is built from `baml_src/` and the repo scripts run `pnpm baml:generate` automatically before `build`, `test`, and `typecheck`.
 
 The default runner entrypoint is:
 

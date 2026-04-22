@@ -1,11 +1,9 @@
 import { Module } from "@nestjs/common";
 
-import { MoonshotClient } from "./moonshot.client";
-import { OpenAiCompatibleClient } from "./openai-compatible.client";
-import { ZaiClient } from "./zai.client";
+import { BamlCalibrationClient } from "./baml-calibration.client";
 
 @Module({
-  providers: [OpenAiCompatibleClient, MoonshotClient, ZaiClient],
-  exports: [OpenAiCompatibleClient, MoonshotClient, ZaiClient]
+  providers: [BamlCalibrationClient],
+  exports: [BamlCalibrationClient]
 })
 export class ProviderModule {}

@@ -22,7 +22,6 @@ export class ReviewNode {
       !state.currentDraft ||
       !state.runManifest ||
       !state.sliceManifest ||
-      !state.promptBundle ||
       !state.promptBundleMetadata ||
       !state.modelProfile ||
       !state.glossaryPath ||
@@ -31,20 +30,35 @@ export class ReviewNode {
       throw new Error("Review node is missing loaded calibration inputs.");
     }
     this.logger.log(`Starting review for run ${state.runId}`);
+    if (state.streamLlm) {
+      process.stdout.write("\n[review stream start]\n");
+    }
     const glossaryText = await this.pathService.readText(state.glossaryPath);
     const result = await this.reviewService.execute({
       runId: state.runId,
       runManifest: state.runManifest,
       sliceManifest: state.sliceManifest,
-      promptBundle: state.promptBundle,
       promptBundleMetadata: state.promptBundleMetadata,
       modelProfile: state.modelProfile,
       excerptText: state.excerptText,
       translationText: state.currentDraft,
       glossaryText,
       styleGuideText: state.styleGuideText,
-      rubricText: state.rubricText
+      rubricText: state.rubricText,
+      stream: state.streamLlm,
+      onStreamDelta: state.streamLlm
+        ? (fieldName, text) => {
+            if (fieldName === "reasoning_content") {
+              process.stdout.write(`\n[review reasoning] ${text}`);
+            } else {
+              process.stdout.write(text);
+            }
+          }
+        : undefined
     });
+    if (state.streamLlm) {
+      process.stdout.write("\n[review stream end]\n");
+    }
 
     await this.artifactWriter.writeReviewRequest(state.runDirectories, result.requestRecord);
     await this.artifactWriter.writeReviewResponse(state.runDirectories, result.response);

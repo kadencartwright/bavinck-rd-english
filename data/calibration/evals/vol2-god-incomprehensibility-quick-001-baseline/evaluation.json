@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "run_id": "vol2-god-incomprehensibility-quick-001-baseline",
-  "generated_at": "2026-04-10T22:04:04.658Z",
+  "generated_at": "2026-04-22T20:00:17.556Z",
   "slice_id": "vol2-god-incomprehensibility-quick-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
@@ -48,18 +48,18 @@
     },
     {
       "id": "prose-quality",
-      "status": "pass",
-      "details": "The output is coherent formal theological prose; the identified issues are localized and do not disrupt the overall argument structure."
+      "status": "fail",
+      "details": "The output fails to render the embedded German phrases correctly, producing the hybrid 'Theology der Thatsachen' instead of preserving the source span or translating it fully. Additionally, 'Immediately as soon as' is tautological prose."
     },
     {
       "id": "review-flagging",
       "status": "pass",
-      "details": "The review identifies the specific inconsistency in book title translation and the potential doctrinal ambiguity regarding 'scientific' sense."
+      "details": "Findings explicitly identify the preservation corruption and the prose quality issue."
     }
   ],
   "summary": {
-    "pass": 10,
-    "fail": 0,
+    "pass": 9,
+    "fail": 1,
     "incomplete": 0
   },
   "artifacts": {
@@ -78,7 +78,38 @@
     "path": "data/calibration/evals/vol2-god-incomprehensibility-quick-001-baseline/findings.md",
     "separate_from_checks": true
   },
-  "review_summary": "The translation faithfully preserves Greek, Latin, and German spans while adhering to glossary requirements for key theological terms, and it correctly translates Dutch Scripture references into standard English forms. However, the translation inconsistently renders the Dutch book title 'Institutie' into Latin ('Institutio') rather than the standard English 'Institutes', and uses 'scientific' where 'scholarly' might better avoid modern empirical connotations, alongside a minor syntactic calque in the opening sentence.",
+  "token_usage": {
+    "totals": {
+      "prompt_tokens": 2259,
+      "completion_tokens": 3531,
+      "total_tokens": 5790,
+      "cached_tokens": 0,
+      "uncached_prompt_tokens": 2259,
+      "billable_tokens": 5790,
+      "reasoning_tokens": 0
+    },
+    "by_stage": {
+      "translation": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 0,
+        "billable_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "review": {
+        "prompt_tokens": 2259,
+        "completion_tokens": 3531,
+        "total_tokens": 5790,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 2259,
+        "billable_tokens": 5790,
+        "reasoning_tokens": 0
+      }
+    }
+  },
+  "review_summary": "The translation demonstrates strong adherence to the glossary and correctly translates Dutch Scripture references into standard English forms, but it critically fails to preserve the embedded German phrases exactly, resulting in a macaronic hybrid (\"Theology der Thatsachen\") that violates the preservation rule. While the formal theological tone is largely achieved, the prose contains minor tautological phrasing such as \"Immediately as soon as.\"",
   "glossary_hits": [],
   "glossary_misses": [],
   "terminal_status": "reviewed"
