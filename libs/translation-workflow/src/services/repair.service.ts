@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 
 import { LintDefect, ModelProfile, PromptBundleMetadata } from "@calibration-domain";
 import { BamlCalibrationClient } from "@provider-clients";
+import type { RepairDefect } from "@provider-clients";
 
 export interface RepairExecutionInput {
   runId: string;
@@ -22,13 +23,12 @@ export class RepairService {
   async execute(input: RepairExecutionInput) {
     const stage = input.modelProfile.stages.translation;
     const result = await this.providerClient.repair({
-      promptBundleId: input.promptBundleMetadata.prompt_bundle_id,
       stage,
       runId: input.runId,
       sliceId: input.sliceId,
       repairRound: input.repairRound,
       currentDraft: input.currentDraft,
-      hardDefectsJson: JSON.stringify(input.hardDefects, null, 2),
+      hardDefects: input.hardDefects.map((defect) => this.toRepairDefect(defect)),
       stream: input.stream ?? false,
       onStreamDelta: input.onStreamDelta
     });
@@ -66,6 +66,19 @@ export class RepairService {
         timeoutSeconds: stage.timeout_seconds,
         usage: result.usage
       }
+    };
+  }
+
+  private toRepairDefect(defect: LintDefect): RepairDefect {
+    return {
+      code: defect.code,
+      severity: defect.severity,
+      message: defect.message,
+      evidence: defect.evidence,
+      ...(defect.sourceSpan ? { sourceSpan: defect.sourceSpan } : {}),
+      ...(defect.foundSpan ? { foundSpan: defect.foundSpan } : {}),
+      ...(defect.locationHint ? { locationHint: defect.locationHint } : {}),
+      ...(defect.suggestedFix ? { suggestedFix: defect.suggestedFix } : {})
     };
   }
 }

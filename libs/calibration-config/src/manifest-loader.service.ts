@@ -22,7 +22,6 @@ import {
 } from "@calibration-domain";
 
 import { PathService } from "./path.service";
-import { PromptBundleLoadResult, PromptBundleService } from "./prompt-bundle.service";
 
 export class CalibrationValidationError extends Error {
   constructor(
@@ -45,7 +44,6 @@ export interface RunManifestBundle {
   sliceManifest: SliceManifest;
   promptBundlePath: string;
   promptBundleMetadata: PromptBundleMetadata;
-  promptBundle: PromptBundleLoadResult;
   modelProfilePath: string;
   modelProfile: ModelProfile;
   sourceMetadata: SourceMetadata;
@@ -64,10 +62,7 @@ export interface RunManifestBundle {
 
 @Injectable()
 export class ManifestLoaderService {
-  constructor(
-    private readonly pathService: PathService,
-    private readonly promptBundleService: PromptBundleService
-  ) {}
+  constructor(private readonly pathService: PathService) {}
 
   async loadRunManifestBundle(runManifestPathInput: string): Promise<RunManifestBundle> {
     const runManifestPath = this.pathService.resolveRepoPath(runManifestPathInput);
@@ -124,9 +119,6 @@ export class ManifestLoaderService {
       ]);
     }
 
-    await this.assertPromptBundleFiles(promptBundlePath, promptBundleMetadata);
-    const promptBundle = await this.promptBundleService.load(promptBundlePath, promptBundleMetadata);
-
     const modelProfilePath = this.pathService.resolveRepoPath(runManifest.model_profile_path);
     const modelProfile = await this.loadJson(modelProfilePath, modelProfileSchema, "model_profile");
     if (modelProfile.model_profile_id !== runManifest.model_profile_id) {
@@ -168,7 +160,6 @@ export class ManifestLoaderService {
       sliceManifest,
       promptBundlePath,
       promptBundleMetadata,
-      promptBundle,
       modelProfilePath,
       modelProfile,
       sourceMetadata,
@@ -231,52 +222,6 @@ export class ManifestLoaderService {
       throw this.toValidationError(documentType, targetPath, result.error);
     }
     return result.data;
-  }
-
-  private async assertPromptBundleFiles(bundlePath: string, metadata: PromptBundleMetadata): Promise<void> {
-    const requiredPlaceholders: Record<string, string[]> = {
-      translation_user_template: [
-        "{{run_id}}",
-        "{{slice_id}}",
-        "{{slice_title}}",
-        "{{selection_rationale}}",
-        "{{glossary_terms}}",
-        "{{style_guide}}",
-        "{{source_excerpt}}"
-      ],
-      review_user_template: [
-        "{{run_id}}",
-        "{{slice_id}}",
-        "{{slice_title}}",
-        "{{source_excerpt}}",
-        "{{translation_output}}",
-        "{{glossary_terms}}",
-        "{{style_guide}}",
-        "{{rubric}}"
-      ]
-    };
-
-    for (const [key, relativePath] of Object.entries(metadata.prompt_files)) {
-      const resolved = this.pathService.resolveRepoPath(`${bundlePath}/${relativePath}`);
-      if (!(await this.pathService.exists(resolved))) {
-        throw new CalibrationValidationError("prompt_bundle_metadata", this.pathService.relativeToRepo(bundlePath), [
-          `prompt_files.${key}: path does not exist: ${this.pathService.relativeToRepo(resolved)}`
-        ]);
-      }
-    }
-
-    for (const [key, placeholders] of Object.entries(requiredPlaceholders)) {
-      const resolved = this.pathService.resolveRepoPath(
-        `${bundlePath}/${metadata.prompt_files[key as keyof typeof metadata.prompt_files]}`
-      );
-      const content = await this.pathService.readText(resolved);
-      const missing = placeholders.filter((placeholder) => !content.includes(placeholder));
-      if (missing.length > 0) {
-        throw new CalibrationValidationError("prompt_bundle_metadata", this.pathService.relativeToRepo(resolved), [
-          ...missing.map((placeholder) => `prompt_files.${key}: missing placeholder ${placeholder}`)
-        ]);
-      }
-    }
   }
 
   private assertExpectedInputPath(

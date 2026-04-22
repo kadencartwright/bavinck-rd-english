@@ -54,7 +54,15 @@ At the moment, it contains tooling for:
 
 Provider keys are read from `.env`. Start from `.env.example`.
 
-The calibration runtime now uses BAML-generated TypeScript clients for translation, repair, and review stages. Generated client code is built from `baml_src/` and the repo scripts run `pnpm baml:generate` automatically before `build`, `test`, and `typecheck`.
+The calibration runtime now uses BAML-generated TypeScript clients for translation, repair, and review stages. Prompt source-of-truth lives in `baml_src/`; the prompt-bundle directory now carries bundle metadata only. Generated client code is built from `baml_src/`, and the repo scripts run `pnpm baml:generate` automatically before `build`, `test`, and `typecheck`.
+
+Prompt-level BAML tests live beside the functions in `baml_src/calibration.baml`. Run them directly with:
+
+```bash
+pnpm baml:test
+```
+
+`pnpm test` now runs both `pnpm baml:test` and the Jest suite. The default BAML test client uses the Moonshot-compatible `MOONSHOT_API_KEY`, so prompt tests need that key present in `.env`.
 
 The default runner entrypoint is:
 

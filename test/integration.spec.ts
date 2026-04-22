@@ -35,7 +35,11 @@ describe("translation workflow integration", () => {
             { role: "user", content: "translation user" }
           ],
           prompt: { system: "translation system", user: "translation user" },
-          promptFiles: { baml_bundle: "baseline-v1", baml_function: "TranslateCalibrationSlice" },
+          promptFiles: {
+            baml_clients: "baml_src/clients.baml",
+            baml_function_source: "baml_src/calibration.baml",
+            baml_function: "TranslateCalibrationSlice"
+          },
           response: { raw_llm_response: next, usage: buildStageUsage() },
           finishReason: "stop",
           usage: buildStageUsage()
@@ -53,7 +57,11 @@ describe("translation workflow integration", () => {
             { role: "user", content: "repair user" }
           ],
           prompt: { system: "repair system", user: "repair user" },
-          promptFiles: { baml_bundle: "baseline-v1", baml_function: "RepairCalibrationDraft" },
+          promptFiles: {
+            baml_clients: "baml_src/clients.baml",
+            baml_function_source: "baml_src/calibration.baml",
+            baml_function: "RepairCalibrationDraft"
+          },
           response: { raw_llm_response: next, usage: buildStageUsage() },
           finishReason: "stop",
           usage: buildStageUsage()
@@ -70,7 +78,11 @@ describe("translation workflow integration", () => {
             { role: "user", content: "review user" }
           ],
           prompt: { system: "review system", user: "review user" },
-          promptFiles: { baml_bundle: "baseline-v1", baml_function: "ReviewCalibrationSlice" },
+          promptFiles: {
+            baml_clients: "baml_src/clients.baml",
+            baml_function_source: "baml_src/calibration.baml",
+            baml_function: "ReviewCalibrationSlice"
+          },
           response: { raw_llm_response: JSON.stringify(mockResults.review), usage: buildStageUsage() },
           finishReason: "stop",
           usage: buildStageUsage()

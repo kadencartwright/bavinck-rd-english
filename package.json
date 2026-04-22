@@ -4,12 +4,13 @@
   "packageManager": "pnpm@10.28.1",
   "scripts": {
     "baml:generate": "baml-cli generate --from baml_src",
+    "baml:test": "baml-cli test --from baml_src",
     "build": "pnpm baml:generate && nest build calibration-cli",
     "calibration": "nest start calibration-cli -- run",
     "glossary:candidates:mine": "nest start calibration-cli -- mine-glossary-candidates",
     "lint": "pnpm baml:generate && tsc --noEmit -p tsconfig.json",
     "nest": "nest",
-    "test": "pnpm baml:generate && jest --runInBand",
+    "test": "pnpm baml:generate && pnpm baml:test && jest --runInBand",
     "test:watch": "pnpm baml:generate && jest --watch",
     "typecheck": "pnpm baml:generate && tsc --noEmit -p tsconfig.json"
   },

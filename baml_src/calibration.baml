@@ -9,7 +9,7 @@ class ReviewChecks {
 }
 
 class ReviewFinding {
-  severity "high" | "medium" | "low" | "info"
+  severity "high" | "medium" | "low"
   category string
   detail string
 }
@@ -20,6 +20,39 @@ class CalibrationReview {
   findings ReviewFinding[]
   recommendedFollowUp string[] @alias("recommended_follow_up")
 }
+
+class RepairDefect {
+  code "preserved_span_missing" | "preserved_span_changed" | "untranslated_dutch_scripture_reference" | "untranslated_dutch_abbreviation" | "glossary_target_missing" | "output_shape_violation" | "dutch_residue" | "suspicious_calque"
+  severity "hard" | "soft"
+  message string
+  evidence string[]
+  sourceSpan string?
+  foundSpan string?
+  locationHint string?
+  suggestedFix string?
+}
+
+template_string CalibrationHeader(runId: string, sliceId: string, sliceTitle: string) #"
+Run ID: {{ runId }}
+Slice ID: {{ sliceId }}
+Slice Title: {{ sliceTitle }}
+"#
+
+template_string SharedReferenceContext(glossaryTerms: string, styleGuide: string, sourceExcerpt: string) #"
+Excerpt-scoped glossary:
+{{ glossaryTerms }}
+
+Style guide:
+{{ styleGuide }}
+
+Source excerpt:
+{{ sourceExcerpt }}
+"#
+
+template_string RepairDefectContext(hardDefects: RepairDefect[]) #"
+Hard defects:
+{{ hardDefects|format(type="yaml") }}
+"#
 
 function SmokeTestCalibrationStage(stageName: string) -> string {
   client RuntimePrimary
@@ -49,21 +82,12 @@ function TranslateCalibrationSlice(
     Do not add explanations, headings, or notes outside the translated passage.
 
     {{ _.role("user") }}
-    Run ID: {{ runId }}
-    Slice ID: {{ sliceId }}
-    Slice Title: {{ sliceTitle }}
+    {{ CalibrationHeader(runId, sliceId, sliceTitle) }}
 
     Selection rationale:
     {{ selectionRationale }}
 
-    Excerpt-scoped glossary:
-    {{ glossaryTerms }}
-
-    Style guide:
-    {{ styleGuide }}
-
-    Source excerpt:
-    {{ sourceExcerpt }}
+    {{ SharedReferenceContext(glossaryTerms, styleGuide, sourceExcerpt) }}
 
     Translate the source excerpt into formal English theological prose.
     Preserve all non-Dutch spans in their original language exactly as written.
@@ -77,7 +101,7 @@ function RepairCalibrationDraft(
   sliceId: string,
   repairRound: int,
   currentDraft: string,
-  hardDefectsJson: string
+  hardDefects: RepairDefect[]
 ) -> string {
   client RuntimePrimary
   prompt #"
@@ -94,8 +118,7 @@ function RepairCalibrationDraft(
     Current draft:
     {{ currentDraft }}
 
-    Hard defects:
-    {{ hardDefectsJson }}
+    {{ RepairDefectContext(hardDefects) }}
   "#
 }
 
@@ -119,26 +142,73 @@ function ReviewCalibrationSlice(
     Keep the response concise: one summary paragraph, at most 3 findings, and at most 3 follow-up actions.
 
     {{ _.role("user") }}
-    Run ID: {{ runId }}
-    Slice ID: {{ sliceId }}
-    Slice Title: {{ sliceTitle }}
+    {{ CalibrationHeader(runId, sliceId, sliceTitle) }}
 
     Rubric:
     {{ rubric }}
 
-    Excerpt-scoped glossary:
-    {{ glossaryTerms }}
-
-    Style guide:
-    {{ styleGuide }}
-
-    Source excerpt:
-    {{ sourceExcerpt }}
+    {{ SharedReferenceContext(glossaryTerms, styleGuide, sourceExcerpt) }}
 
     Translation output:
     {{ translationOutput }}
 
     Review the translation against the source, glossary, style guide, and rubric.
+    Return exactly one structured response and no extra commentary.
     {{ ctx.output_format }}
   "#
+}
+
+test TranslateCalibrationSliceSmoke {
+  functions [TranslateCalibrationSlice]
+  args {
+    runId "test-run"
+    sliceId "slice-1"
+    sliceTitle "Tiny theological sentence"
+    selectionRationale "Smoke-test prompt behavior on a compact excerpt."
+    sourceExcerpt #"In den beginne was het Woord, en ἐν Hem was leven."#
+    glossaryTerms #"- Woord -> Word"#
+    styleGuide #"- Keep the register formal and suitable for theological prose."#
+  }
+  @@assert( {{ this|length > 0 }} )
+  @@assert( {{ "ἐν" in this }} )
+}
+
+test RepairCalibrationDraftSmoke {
+  functions [RepairCalibrationDraft]
+  args {
+    runId "test-run"
+    sliceId "slice-1"
+    repairRound 1
+    currentDraft #"In den beginne was het Woord. Hd. 17:28 blijft staan."#
+    hardDefects [
+      {
+        code "untranslated_dutch_scripture_reference"
+        severity "hard"
+        message "Dutch Scripture abbreviation should be normalized to standard English."
+        evidence ["Hd. 17:28", "Acts 17:28"]
+        foundSpan "Hd. 17:28"
+        suggestedFix "Acts 17:28"
+      }
+    ]
+  }
+  @@assert( {{ this|length > 0 }} )
+  @@assert( {{ "Hd. 17:28" not in this }} )
+}
+
+test ReviewCalibrationSliceSmoke {
+  functions [ReviewCalibrationSlice]
+  args {
+    runId "test-run"
+    sliceId "slice-1"
+    sliceTitle "Tiny theological sentence"
+    sourceExcerpt #"In den beginne was het Woord."#
+    translationOutput #"In the beginning was the Word. Hd. 17:28 remains untranslated."#
+    glossaryTerms #"- Woord -> Word"#
+    styleGuide #"- Keep the register formal and suitable for theological prose."#
+    rubric #"- prose-quality: pass|fail|incomplete
+- review-flagging: pass|fail|incomplete"#
+  }
+  @@assert( {{ this.summary|length > 0 }} )
+  @@assert( {{ this.findings|length <= 3 }} )
+  @@assert( {{ this.recommendedFollowUp|length <= 3 }} )
 }

@@ -33,7 +33,6 @@ export class ReviewService {
   async execute(input: ReviewExecutionInput) {
     const stage = input.modelProfile.stages.review;
     const result = await this.providerClient.review({
-      promptBundleId: input.promptBundleMetadata.prompt_bundle_id,
       stage,
       runId: input.runId,
       sliceId: input.runManifest.slice_id,
@@ -86,7 +85,7 @@ export class ReviewService {
       proseQuality: { status: "pass" | "fail" | "incomplete"; details: string };
       reviewFlagging: { status: "pass" | "fail" | "incomplete"; details: string };
     };
-    findings: Array<{ severity: "high" | "medium" | "low" | "info"; category: string; detail: string }>;
+    findings: Array<{ severity: "high" | "medium" | "low"; category: string; detail: string }>;
     recommendedFollowUp: string[];
   }): ReviewPayload {
     return {
@@ -95,10 +94,7 @@ export class ReviewService {
         "prose-quality": payload.checks.proseQuality,
         "review-flagging": payload.checks.reviewFlagging
       },
-      findings: payload.findings.map((finding) => ({
-        ...finding,
-        severity: finding.severity === "info" ? "low" : finding.severity
-      })),
+      findings: payload.findings,
       recommended_follow_up: payload.recommendedFollowUp
     };
   }

@@ -54,7 +54,6 @@ export class LoadInputsNode {
       sourceDrift: drift.drifted,
       currentSourceSha: drift.currentSha,
       promptBundleMetadata: bundle.promptBundleMetadata,
-      promptBundle: bundle.promptBundle,
       modelProfile: bundle.modelProfile,
       glossaryDoc: bundle.glossaryDoc,
       rubricDoc: bundle.rubricDoc,

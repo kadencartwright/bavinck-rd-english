@@ -12,8 +12,8 @@ client<llm> RuntimePrimary {
   provider openai-generic
   retry_policy CalibrationNetworkRetry
   options {
-    base_url "https://api.openai.com/v1"
-    model "gpt-4o-mini"
-    api_key env.OPENAI_API_KEY
+    base_url "https://api.moonshot.ai/v1"
+    model "kimi-k2.5"
+    api_key env.MOONSHOT_API_KEY
   }
 }

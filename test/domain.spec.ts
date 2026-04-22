@@ -26,6 +26,7 @@ describe("domain contracts", () => {
 
     expect(runManifestSchema.parse(runManifest).run_id).toBe("vol2-god-incomprehensibility-001-baseline");
     expect(promptBundleMetadataSchema.parse(promptBundleMetadata).prompt_bundle_id).toBe("baseline-v1");
+    expect(promptBundleMetadataSchema.parse(promptBundleMetadata).baml_files.calibration).toBe("baml_src/calibration.baml");
     expect(modelProfileSchema.parse(modelProfile).model_profile_id).toBe("kimi-k2_5-glm5-baseline");
     expect(sliceManifestSchema.parse(sliceManifest).slice_id).toBe("vol2-god-incomprehensibility-001");
     expect(glossaryDocSchema.parse(glossaryDoc).terms.length).toBeGreaterThan(0);
@@ -41,5 +42,7 @@ describe("domain contracts", () => {
     expect(calibrationPrompt).toContain("function TranslateCalibrationSlice");
     expect(calibrationPrompt).toContain("function ReviewCalibrationSlice");
     expect(calibrationPrompt).toContain("function RepairCalibrationDraft");
+    expect(calibrationPrompt).toContain("template_string SharedReferenceContext");
+    expect(calibrationPrompt).toContain("test TranslateCalibrationSliceSmoke");
   });
 });

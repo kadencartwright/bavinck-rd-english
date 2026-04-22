@@ -29,7 +29,6 @@ export class TranslationService {
   async execute(input: TranslationExecutionInput) {
     const stage = input.modelProfile.stages.translation;
     const result = await this.providerClient.translate({
-      promptBundleId: input.promptBundleMetadata.prompt_bundle_id,
       stage,
       runId: input.runId,
       sliceId: input.runManifest.slice_id,

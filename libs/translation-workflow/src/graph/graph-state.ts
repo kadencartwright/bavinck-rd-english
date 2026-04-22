@@ -13,7 +13,6 @@ import {
   SliceManifest,
   TranslationRequestRecord
 } from "@calibration-domain";
-import { PromptBundleLoadResult } from "@calibration-config";
 import { RunDirectorySet } from "@artifact-store";
 
 type StageRecord = {
@@ -45,7 +44,6 @@ export interface CalibrationRuntimeState
   sourceDrift: boolean;
   currentSourceSha: string | null;
   promptBundleMetadata: PromptBundleMetadata | null;
-  promptBundle: PromptBundleLoadResult | null;
   modelProfile: ModelProfile | null;
   glossaryDoc: GlossaryDoc | null;
   rubricDoc: RubricDoc | null;
@@ -95,7 +93,6 @@ export const CalibrationRuntimeStateAnnotation = Annotation.Root({
   sourceDrift: replaceField(() => false),
   currentSourceSha: replaceField<string | null>(() => null),
   promptBundleMetadata: replaceField<PromptBundleMetadata | null>(() => null),
-  promptBundle: replaceField<PromptBundleLoadResult | null>(() => null),
   modelProfile: replaceField<ModelProfile | null>(() => null),
   glossaryDoc: replaceField<GlossaryDoc | null>(() => null),
   rubricDoc: replaceField<RubricDoc | null>(() => null),

@@ -13,7 +13,7 @@ import {
 
 import { ModelProfile } from "@calibration-domain";
 
-import { b, type CalibrationReview } from "./baml_client";
+import { b, type CalibrationReview, type RepairDefect } from "./baml_client";
 
 type StageProfile = ModelProfile["stages"]["translation"];
 type PromptMessage = { role: "system" | "user" | "assistant"; content: string };
@@ -35,7 +35,6 @@ interface BaseExecutionResult<TValue> {
 }
 
 export interface TranslateExecutionInput {
-  promptBundleId: string;
   stage: StageProfile;
   runId: string;
   sliceId: string;
@@ -49,19 +48,17 @@ export interface TranslateExecutionInput {
 }
 
 export interface RepairExecutionInput {
-  promptBundleId: string;
   stage: StageProfile;
   runId: string;
   sliceId: string;
   repairRound: number;
   currentDraft: string;
-  hardDefectsJson: string;
+  hardDefects: RepairDefect[];
   stream?: boolean;
   onStreamDelta?: (fieldName: "content" | "reasoning_content", text: string) => void;
 }
 
 export interface ReviewExecutionInput {
-  promptBundleId: string;
   stage: StageProfile;
   runId: string;
   sliceId: string;
@@ -106,7 +103,6 @@ export class BamlCalibrationClient {
   }
 
   async translate(input: TranslateExecutionInput): Promise<BaseExecutionResult<string>> {
-    this.assertPromptBundleSupported(input.promptBundleId);
     const options = this.buildRuntimeOptions("translation", input.stage);
     const request = input.stream
       ? await b.streamRequest.TranslateCalibrationSlice(
@@ -146,21 +142,19 @@ export class BamlCalibrationClient {
     return this.buildExecutionResult({
       log: options.collector.last,
       request,
-      promptBundleId: input.promptBundleId,
       functionName: "TranslateCalibrationSlice",
       value
     });
   }
 
   async repair(input: RepairExecutionInput): Promise<BaseExecutionResult<string>> {
-    this.assertPromptBundleSupported(input.promptBundleId);
     const options = this.buildRuntimeOptions("repair", input.stage);
     const request = await b.request.RepairCalibrationDraft(
       input.runId,
       input.sliceId,
       input.repairRound,
       input.currentDraft,
-      input.hardDefectsJson,
+      input.hardDefects,
       options
     );
     const value = await b.RepairCalibrationDraft(
@@ -168,21 +162,19 @@ export class BamlCalibrationClient {
       input.sliceId,
       input.repairRound,
       input.currentDraft,
-      input.hardDefectsJson,
+      input.hardDefects,
       input.stream ? { ...options, onTick: this.createStreamTickHandler(input.onStreamDelta) } : options
     );
 
     return this.buildExecutionResult({
       log: options.collector.last,
       request,
-      promptBundleId: input.promptBundleId,
       functionName: "RepairCalibrationDraft",
       value
     });
   }
 
   async review(input: ReviewExecutionInput): Promise<BaseExecutionResult<CalibrationReview>> {
-    this.assertPromptBundleSupported(input.promptBundleId);
     const options = this.buildRuntimeOptions("review", input.stage);
     const request = await b.request.ReviewCalibrationSlice(
       input.runId,
@@ -210,7 +202,6 @@ export class BamlCalibrationClient {
     return this.buildExecutionResult({
       log: options.collector.last,
       request,
-      promptBundleId: input.promptBundleId,
       functionName: "ReviewCalibrationSlice",
       value
     });
@@ -247,9 +238,7 @@ export class BamlCalibrationClient {
     }
 
     if (stage.timeout_seconds !== undefined) {
-      options.http = {
-        request_timeout_ms: stage.timeout_seconds * 1000
-      };
+      options.http = this.buildHttpTimeouts(stage.timeout_seconds);
     }
 
     const clientRegistry = new ClientRegistry();
@@ -265,7 +254,6 @@ export class BamlCalibrationClient {
   private buildExecutionResult<TValue>(input: {
     log: FunctionLog | null;
     request: HTTPRequest;
-    promptBundleId: string;
     functionName: string;
     value: TValue;
   }): BaseExecutionResult<TValue> {
@@ -275,8 +263,8 @@ export class BamlCalibrationClient {
       messages,
       prompt: this.extractPrompt(messages),
       promptFiles: {
-        baml_bundle: input.promptBundleId,
         baml_clients: "baml_src/clients.baml",
+        baml_generators: "baml_src/generators.baml",
         baml_function_source: "baml_src/calibration.baml",
         baml_function: input.functionName
       },
@@ -286,10 +274,14 @@ export class BamlCalibrationClient {
     };
   }
 
-  private assertPromptBundleSupported(promptBundleId: string): void {
-    if (promptBundleId !== "baseline-v1") {
-      throw new Error(`Unsupported BAML prompt bundle '${promptBundleId}'. Only 'baseline-v1' is configured.`);
-    }
+  private buildHttpTimeouts(timeoutSeconds: number): Record<string, number> {
+    const requestTimeoutMs = timeoutSeconds * 1000;
+    return {
+      connect_timeout_ms: Math.min(requestTimeoutMs, 10_000),
+      time_to_first_token_timeout_ms: Math.min(requestTimeoutMs, 30_000),
+      idle_timeout_ms: Math.min(requestTimeoutMs, 5_000),
+      request_timeout_ms: requestTimeoutMs
+    };
   }
 
   private createStreamTickHandler(
