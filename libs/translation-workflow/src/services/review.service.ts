@@ -9,14 +9,12 @@ import {
   reviewPayloadSchema,
   reviewRequestRecordSchema
 } from "@calibration-domain";
-import { PromptBundleLoadResult, PromptBundleService } from "@calibration-config";
-import { OpenAiCompatibleClient } from "@provider-clients";
+import { BamlCalibrationClient } from "@provider-clients";
 
 export interface ReviewExecutionInput {
   runId: string;
   runManifest: RunManifest;
   sliceManifest: SliceManifest;
-  promptBundle: PromptBundleLoadResult;
   promptBundleMetadata: PromptBundleMetadata;
   modelProfile: ModelProfile;
   excerptText: string;
@@ -24,186 +22,80 @@ export interface ReviewExecutionInput {
   glossaryText: string;
   styleGuideText: string;
   rubricText: string;
+  stream?: boolean;
+  onStreamDelta?: (fieldName: "content" | "reasoning_content", text: string) => void;
 }
 
 @Injectable()
 export class ReviewService {
-  constructor(
-    private readonly promptBundleService: PromptBundleService,
-    private readonly providerClient: OpenAiCompatibleClient
-  ) {}
+  constructor(private readonly providerClient: BamlCalibrationClient) {}
 
   async execute(input: ReviewExecutionInput) {
-    const built = this.promptBundleService.buildReviewRequestRecord({
-      runId: input.runId,
-      runManifest: input.runManifest,
-      sliceManifest: input.sliceManifest,
-      promptBundle: input.promptBundle,
-      modelProfile: input.modelProfile,
-      excerptText: input.excerptText,
-      glossaryText: input.glossaryText,
-      styleGuideText: input.styleGuideText,
-      rubricText: input.rubricText,
-      translationOutput: input.translationText
-    });
-    const requestRecord = reviewRequestRecordSchema.parse(built.requestRecord);
     const stage = input.modelProfile.stages.review;
-    const response = await this.providerClient.createChatCompletion({
-      providerName: stage.provider,
-      stageName: "review",
-      model: stage.model,
-      messages: built.messages,
-      temperature: stage.temperature,
-      maxTokens: stage.max_tokens,
-      timeoutSeconds: stage.timeout_seconds,
-      stream: false
+    const result = await this.providerClient.review({
+      stage,
+      runId: input.runId,
+      sliceId: input.runManifest.slice_id,
+      sliceTitle: input.sliceManifest.title,
+      sourceExcerpt: input.excerptText,
+      translationOutput: input.translationText,
+      glossaryTerms: input.glossaryText,
+      styleGuide: input.styleGuideText,
+      rubric: input.rubricText,
+      stream: input.stream ?? false,
+      onStreamDelta: input.onStreamDelta
     });
-    const rawText = this.providerClient.extractMessageText(response);
-    const rawPayload = await this.extractReviewPayload(stage.provider, stage.model, rawText);
-    const normalized = this.normalizeReviewPayload(rawPayload);
-    const reviewPayload = reviewPayloadSchema.parse(normalized);
+
+    const requestRecord = reviewRequestRecordSchema.parse({
+      run_id: input.runId,
+      slice_id: input.runManifest.slice_id,
+      prompt_bundle_id: input.runManifest.prompt_bundle_id,
+      model_profile_id: input.runManifest.model_profile_id,
+      stage: "review",
+      provider: stage.provider,
+      model: stage.model,
+      temperature: stage.temperature,
+      messages: result.messages,
+      prompt_files: result.promptFiles
+    });
+
+    const reviewPayload = reviewPayloadSchema.parse(this.normalizeReviewPayload(result.value));
+
     return {
       requestRecord,
-      response,
+      response: result.response,
       reviewPayload,
-      prompt: {
-        system: built.messages[0].content,
-        user: built.messages[1].content
-      },
+      prompt: result.prompt,
       stageRecord: {
         provider: stage.provider,
         model: stage.model,
         temperature: stage.temperature,
-        promptFiles: input.promptBundleMetadata.prompt_files,
-        finishReason: this.extractFinishReason(response),
+        promptFiles: result.promptFiles,
+        finishReason: result.finishReason,
         maxTokens: stage.max_tokens,
         timeoutSeconds: stage.timeout_seconds,
-        usage: this.extractUsage(response)
+        usage: result.usage
       }
     };
   }
 
-  private extractFinishReason(response: Record<string, unknown>): string | undefined {
-    const firstChoice = Array.isArray(response.choices) ? response.choices[0] : undefined;
-    return firstChoice && typeof firstChoice === "object" && typeof firstChoice.finish_reason === "string"
-      ? firstChoice.finish_reason
-      : undefined;
-  }
-
-  private extractUsage(response: Record<string, unknown>): Record<string, number> | undefined {
-    const usage = response.usage;
-    if (!usage || typeof usage !== "object") {
-      return undefined;
-    }
-    const normalized: Record<string, number> = {};
-    for (const key of ["prompt_tokens", "completion_tokens", "total_tokens"] as const) {
-      const value = (usage as Record<string, unknown>)[key];
-      if (typeof value === "number") {
-        normalized[key] = value;
-      }
-    }
-    const completionDetails = (usage as Record<string, unknown>).completion_tokens_details;
-    if (completionDetails && typeof completionDetails === "object") {
-      const reasoningTokens = (completionDetails as Record<string, unknown>).reasoning_tokens;
-      if (typeof reasoningTokens === "number") {
-        normalized.reasoning_tokens = reasoningTokens;
-      }
-    }
-    const promptDetails = (usage as Record<string, unknown>).prompt_tokens_details;
-    if (promptDetails && typeof promptDetails === "object") {
-      const cachedTokens = (promptDetails as Record<string, unknown>).cached_tokens;
-      if (typeof cachedTokens === "number") {
-        normalized.cached_tokens = cachedTokens;
-      }
-    }
-    return Object.keys(normalized).length > 0 ? normalized : undefined;
-  }
-
-  private async extractReviewPayload(providerName: "moonshot" | "z-ai", model: string, reviewText: string): Promise<Record<string, unknown>> {
-    try {
-      return this.extractJsonObject(reviewText);
-    } catch {
-      const repairResponse = await this.providerClient.createChatCompletion({
-        providerName,
-        stageName: "review-json-repair",
-        model,
-        temperature: 0,
-        maxTokens: 2000,
-        timeoutSeconds: 120,
-        messages: [
-          {
-            role: "system",
-            content:
-              "You repair malformed review outputs. Return exactly one valid JSON object matching the review schema. " +
-              "Do not include markdown, code fences, or commentary. Use severity values high, medium, low, or info."
-          },
-          {
-            role: "user",
-            content:
-              "Reformat the following review output into valid JSON with keys summary, checks, findings, and recommended_follow_up.\n\n" +
-              reviewText
-          }
-        ]
-      });
-      return this.extractJsonObject(this.providerClient.extractMessageText(repairResponse));
-    }
-  }
-
-  private extractJsonObject(text: string): Record<string, unknown> {
-    const stripped = text.trim().replace(/^```(?:json)?\s*/iu, "").replace(/\s*```$/u, "");
-    try {
-      return JSON.parse(stripped) as Record<string, unknown>;
-    } catch {
-      const start = stripped.indexOf("{");
-      if (start === -1) {
-        throw new Error("Could not locate JSON object in review output.");
-      }
-      let depth = 0;
-      let inString = false;
-      let escape = false;
-      for (let index = start; index < stripped.length; index += 1) {
-        const char = stripped[index];
-        if (inString) {
-          if (escape) {
-            escape = false;
-          } else if (char === "\\") {
-            escape = true;
-          } else if (char === "\"") {
-            inString = false;
-          }
-          continue;
-        }
-        if (char === "\"") {
-          inString = true;
-          continue;
-        }
-        if (char === "{") {
-          depth += 1;
-        }
-        if (char === "}") {
-          depth -= 1;
-          if (depth === 0) {
-            return JSON.parse(stripped.slice(start, index + 1)) as Record<string, unknown>;
-          }
-        }
-      }
-      throw new Error("Could not parse review JSON output.");
-    }
-  }
-
-  private normalizeReviewPayload(payload: Record<string, unknown>): ReviewPayload {
-    if (Array.isArray(payload.findings)) {
-      for (const finding of payload.findings) {
-        if (
-          finding &&
-          typeof finding === "object" &&
-          typeof (finding as Record<string, unknown>).severity === "string" &&
-          ((finding as Record<string, unknown>).severity as string).toLowerCase() === "info"
-        ) {
-          (finding as Record<string, unknown>).severity = "low";
-        }
-      }
-    }
-    return payload as unknown as ReviewPayload;
+  private normalizeReviewPayload(payload: {
+    summary: string;
+    checks: {
+      proseQuality: { status: "pass" | "fail" | "incomplete"; details: string };
+      reviewFlagging: { status: "pass" | "fail" | "incomplete"; details: string };
+    };
+    findings: Array<{ severity: "high" | "medium" | "low"; category: string; detail: string }>;
+    recommendedFollowUp: string[];
+  }): ReviewPayload {
+    return {
+      summary: payload.summary,
+      checks: {
+        "prose-quality": payload.checks.proseQuality,
+        "review-flagging": payload.checks.reviewFlagging
+      },
+      findings: payload.findings,
+      recommended_follow_up: payload.recommendedFollowUp
+    };
   }
 }

@@ -20,6 +20,7 @@ export interface ResolvedCalibrationCliOptions {
   smokeTestOnly: boolean;
   maxRepairRounds: number;
   streamTranslation: boolean;
+  streamLlm: boolean;
 }
 
 export type CalibrationCliOptionsInput = Partial<ResolvedCalibrationCliOptions>;
@@ -36,7 +37,8 @@ export class CalibrationConfigService {
       skipProviderSmokeTest: options.skipProviderSmokeTest ?? false,
       smokeTestOnly: options.smokeTestOnly ?? false,
       maxRepairRounds: options.maxRepairRounds ?? DEFAULT_MAX_REPAIR_ROUNDS,
-      streamTranslation: options.streamTranslation ?? false
+      streamTranslation: options.streamTranslation ?? false,
+      streamLlm: options.streamLlm ?? false
     };
   }
 

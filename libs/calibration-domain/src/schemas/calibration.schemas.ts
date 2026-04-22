@@ -127,11 +127,9 @@ export const promptBundleMetadataSchema = z.object({
   prompt_bundle_id: slugString,
   description: nonEmptyString,
   stages: z.tuple([z.literal("translation"), z.literal("review")]),
-  prompt_files: z.object({
-    translation_system: nonEmptyString,
-    translation_user_template: nonEmptyString,
-    review_system: nonEmptyString,
-    review_user_template: nonEmptyString
+  baml_files: z.object({
+    clients: nonEmptyString,
+    calibration: nonEmptyString
   }),
   notes: z.array(nonEmptyString).optional()
 });

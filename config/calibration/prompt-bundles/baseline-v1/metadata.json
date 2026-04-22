@@ -6,13 +6,12 @@
     "translation",
     "review"
   ],
-  "prompt_files": {
-    "translation_system": "translation-system.txt",
-    "translation_user_template": "translation-user-template.txt",
-    "review_system": "review-system.txt",
-    "review_user_template": "review-user-template.txt"
+  "baml_files": {
+    "clients": "baml_src/clients.baml",
+    "calibration": "baml_src/calibration.baml"
   },
   "notes": [
+    "Prompt text source of truth lives in baml_src rather than bundle-local template files.",
     "Preserve all Greek, Hebrew, Latin, and German spans exactly as they appear in the source.",
     "Translate Dutch Scripture references, book names, and abbreviations into standard English forms.",
     "Keep the English register formal and suitable for scholarly theological prose."

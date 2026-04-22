@@ -69,13 +69,24 @@ export class ArtifactWriterService {
       [input.runManifestPath, path.join(input.directories.inputsDir, "run-manifest.json")],
       [input.sliceManifestPath, path.join(input.directories.inputsDir, "slice-manifest.json")],
       [input.modelProfilePath, path.join(input.directories.inputsDir, "model-profile.json")],
-      [path.join(input.promptBundlePath, "metadata.json"), path.join(input.directories.inputsDir, "prompt-bundle-metadata.json")],
-      [path.join(input.promptBundlePath, "translation-system.txt"), path.join(input.directories.inputsDir, "translation-system.txt")],
-      [path.join(input.promptBundlePath, "translation-user-template.txt"), path.join(input.directories.inputsDir, "translation-user-template.txt")],
-      [path.join(input.promptBundlePath, "review-system.txt"), path.join(input.directories.inputsDir, "review-system.txt")],
-      [path.join(input.promptBundlePath, "review-user-template.txt"), path.join(input.directories.inputsDir, "review-user-template.txt")]
+      [path.join(input.promptBundlePath, "metadata.json"), path.join(input.directories.inputsDir, "prompt-bundle-metadata.json")]
     ];
     await Promise.all(copies.map(([source, destination]) => this.copyFile(source, destination)));
+
+    const bamlSourceDir = this.pathService.resolveRepoPath("baml_src");
+    if (await this.pathService.exists(bamlSourceDir)) {
+      const entries = await fs.readdir(bamlSourceDir, { withFileTypes: true });
+      await Promise.all(
+        entries
+          .filter((entry) => entry.isFile() && entry.name.endsWith(".baml"))
+          .map((entry) =>
+            this.copyFile(
+              path.join(bamlSourceDir, entry.name),
+              path.join(input.directories.inputsDir, "baml_src", entry.name)
+            )
+          )
+      );
+    }
   }
 
   async writeTranslationRound(directories: RunDirectorySet, round: number, translation: string, response?: unknown): Promise<void> {

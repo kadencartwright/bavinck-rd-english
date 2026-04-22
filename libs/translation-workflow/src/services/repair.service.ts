@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
 
 import { LintDefect, ModelProfile, PromptBundleMetadata } from "@calibration-domain";
-import { OpenAiCompatibleClient } from "@provider-clients";
+import { BamlCalibrationClient } from "@provider-clients";
+import type { RepairDefect } from "@provider-clients";
 
 export interface RepairExecutionInput {
   runId: string;
@@ -11,36 +12,32 @@ export interface RepairExecutionInput {
   hardDefects: LintDefect[];
   modelProfile: ModelProfile;
   promptBundleMetadata: PromptBundleMetadata;
+  stream?: boolean;
+  onStreamDelta?: (fieldName: "content" | "reasoning_content", text: string) => void;
 }
 
 @Injectable()
 export class RepairService {
-  constructor(private readonly providerClient: OpenAiCompatibleClient) {}
+  constructor(private readonly providerClient: BamlCalibrationClient) {}
 
   async execute(input: RepairExecutionInput) {
     const stage = input.modelProfile.stages.translation;
-    const messages = [
-      {
-        role: "system" as const,
-        content:
-          "You repair an English translation draft. Apply the smallest possible edits that fix the listed hard defects. " +
-          "Return only the corrected translated passage with the original paragraph structure preserved."
-      },
-      {
-        role: "user" as const,
-        content: [
-          `Run ID: ${input.runId}`,
-          `Slice ID: ${input.sliceId}`,
-          `Repair round: ${input.repairRound}`,
-          "",
-          "Current draft:",
-          input.currentDraft.trim(),
-          "",
-          "Hard defects:",
-          JSON.stringify(input.hardDefects, null, 2)
-        ].join("\n")
-      }
-    ];
+    const result = await this.providerClient.repair({
+      stage,
+      runId: input.runId,
+      sliceId: input.sliceId,
+      repairRound: input.repairRound,
+      currentDraft: input.currentDraft,
+      hardDefects: input.hardDefects.map((defect) => this.toRepairDefect(defect)),
+      stream: input.stream ?? false,
+      onStreamDelta: input.onStreamDelta
+    });
+
+    const text = `${result.value.trim()}\n`;
+    if (!text.trim()) {
+      throw new Error("Repair provider returned empty output.");
+    }
+
     const requestRecord = {
       run_id: input.runId,
       slice_id: input.sliceId,
@@ -50,40 +47,38 @@ export class RepairService {
       provider: stage.provider,
       model: stage.model,
       temperature: stage.temperature,
-      messages,
-      prompt_files: {
-        ...input.promptBundleMetadata.prompt_files,
-        repair_prompt: "inline"
-      }
+      messages: result.messages,
+      prompt_files: result.promptFiles
     };
-    const response = await this.providerClient.createChatCompletion({
-      providerName: stage.provider,
-      stageName: "repair",
-      model: stage.model,
-      messages,
-      temperature: stage.temperature,
-      maxTokens: stage.max_tokens,
-      timeoutSeconds: stage.timeout_seconds,
-      stream: false
-    });
-    const text = `${this.providerClient.extractMessageText(response).trim()}\n`;
-    if (!text.trim()) {
-      throw new Error("Repair provider returned empty output.");
-    }
+
     return {
       requestRecord,
-      response,
+      response: result.response,
       text,
-      prompt: {
-        system: messages[0].content,
-        user: messages[1].content
-      },
+      prompt: result.prompt,
       stageRecord: {
         provider: stage.provider,
         model: stage.model,
         temperature: stage.temperature,
-        promptFiles: requestRecord.prompt_files
+        promptFiles: result.promptFiles,
+        finishReason: result.finishReason,
+        maxTokens: stage.max_tokens,
+        timeoutSeconds: stage.timeout_seconds,
+        usage: result.usage
       }
+    };
+  }
+
+  private toRepairDefect(defect: LintDefect): RepairDefect {
+    return {
+      code: defect.code,
+      severity: defect.severity,
+      message: defect.message,
+      evidence: defect.evidence,
+      ...(defect.sourceSpan ? { sourceSpan: defect.sourceSpan } : {}),
+      ...(defect.foundSpan ? { foundSpan: defect.foundSpan } : {}),
+      ...(defect.locationHint ? { locationHint: defect.locationHint } : {}),
+      ...(defect.suggestedFix ? { suggestedFix: defect.suggestedFix } : {})
     };
   }
 }

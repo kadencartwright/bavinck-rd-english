@@ -5,7 +5,7 @@
   "slice_id": "vol2-god-incomprehensibility-quick-001",
   "prompt_bundle_id": "baseline-v1",
   "model_profile_id": "kimi-k2_5-glm5-baseline",
-  "generated_at": "2026-04-10T22:04:04.663Z",
+  "generated_at": "2026-04-22T20:00:17.574Z",
   "source_refs": {
     "run_manifest_path": "config/calibration/run-manifests/vol2-god-incomprehensibility-quick-001-baseline.json",
     "slice_manifest_path": "data/calibration/slices/vol2-god-incomprehensibility-quick-001/manifest.json",
@@ -15,35 +15,63 @@
     "style_guide_path": "data/calibration/slices/vol2-god-incomprehensibility-quick-001/inputs/style-guide.md",
     "rubric_path": "data/calibration/slices/vol2-god-incomprehensibility-quick-001/inputs/rubric.yaml"
   },
+  "token_usage": {
+    "totals": {
+      "prompt_tokens": 2259,
+      "completion_tokens": 3531,
+      "total_tokens": 5790,
+      "cached_tokens": 0,
+      "uncached_prompt_tokens": 2259,
+      "billable_tokens": 5790,
+      "reasoning_tokens": 0
+    },
+    "by_stage": {
+      "translation": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 0,
+        "billable_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "review": {
+        "prompt_tokens": 2259,
+        "completion_tokens": 3531,
+        "total_tokens": 5790,
+        "cached_tokens": 0,
+        "uncached_prompt_tokens": 2259,
+        "billable_tokens": 5790,
+        "reasoning_tokens": 0
+      }
+    }
+  },
   "stages": {
     "translation": {
       "provider": "moonshot",
       "model": "kimi-k2.5",
       "temperature": 1,
       "prompt_files": {
-        "translation_system": "translation-system.txt",
-        "translation_user_template": "translation-user-template.txt",
-        "review_system": "review-system.txt",
-        "review_user_template": "review-user-template.txt"
-      },
-      "finish_reason": "stop"
+        "baml_bundle": "baseline-v1",
+        "baml_clients": "baml_src/clients.baml",
+        "baml_function_source": "baml_src/calibration.baml",
+        "baml_function": "TranslateCalibrationSlice"
+      }
     },
     "review": {
       "provider": "z-ai",
       "model": "glm-5",
       "temperature": 0.1,
       "prompt_files": {
-        "translation_system": "translation-system.txt",
-        "translation_user_template": "translation-user-template.txt",
-        "review_system": "review-system.txt",
-        "review_user_template": "review-user-template.txt"
+        "baml_bundle": "baseline-v1",
+        "baml_clients": "baml_src/clients.baml",
+        "baml_function_source": "baml_src/calibration.baml",
+        "baml_function": "ReviewCalibrationSlice"
       },
-      "finish_reason": "stop",
       "usage": {
-        "prompt_tokens": 2345,
-        "completion_tokens": 6195,
-        "total_tokens": 8540,
-        "reasoning_tokens": 5687,
+        "prompt_tokens": 2259,
+        "completion_tokens": 3531,
+        "total_tokens": 5790,
         "cached_tokens": 0
       }
     }
@@ -68,14 +96,14 @@
     "glossary_sha256": "642090ce15e2228743ad2be1b279658b88dacaa44c5c9ed7dc3bed8caf43be81",
     "style_guide_sha256": "a1a5c485fa715028d1c43693eca547a0387ed8ad8fa527597339d69b2fb9a38c",
     "rubric_sha256": "12020a39a3dc5cd0bb2985dc2bb714de74f66c180528b8c608f2721b174e56e0",
-    "translation_output_sha256": "2503fc041890f20817d2ab0855e1930b4f4513c5e01fdeacc107f77ecb482be9",
-    "evaluation_report_sha256": "af7f6312f21080461cb3721492952b3796aacb7e57847c1b3655c5a4bfb00795",
-    "evaluation_markdown_sha256": "6e65d9ee49a4b775ac878336b9990dcb151f0ea62fb9ad981369d75efe043882",
+    "translation_output_sha256": "88779b6832aceb8577872ed02d55f885e20cc73d513548d9bc9f2394d32fd8c8",
+    "evaluation_report_sha256": "c86c788a2d56e937b463dacf5f97c03ae4fe7ab63e2f819706cfb365563389ab",
+    "evaluation_markdown_sha256": "9d68cb6b520f541c174ca88393bd60f0687bdf998e351efaa373978a695bfb98",
     "translation_system_prompt_sha256": "e88459c2542b810f3c237adfbf3875021954ab378645fd6bd5c6a51b689b3524",
-    "translation_user_prompt_sha256": "03cdb2c61a384962ec090edd18dfe3763a8ea32a6ec331e4e035c232235312b6",
-    "review_structured_sha256": "498e7d8d031212273bed60d4f6fd6e589616033aa91260dd8eecffb35ebf0b57",
-    "findings_sha256": "20711deb09b5107710dee5ea7350bacd1809cf82793a2a5d8613c3e5702ac088",
-    "review_system_prompt_sha256": "d32ea79f07f205d43763ea59eeda6c6186edadd1de334c6cabc96e38adb24876",
-    "review_user_prompt_sha256": "057f4ef4ebfed0eabe818a99f1387cc951247e5e64fb5f47f392f1c3b5efdae1"
+    "translation_user_prompt_sha256": "ac3af4cf1e8f8ffe6146b28584b2d4dd47d24e033f874ed9bde6e8b94ec6aca4",
+    "review_structured_sha256": "c983714fff0c26c8e627d1a471b530adecc3654cb9e7d2c84f55956c5a9d2d7f",
+    "findings_sha256": "d41f77adbc1d97cac368887b0a7b5e9888f3906512e3238a651e2ad36679a86d",
+    "review_system_prompt_sha256": "f564d313a80f9ad8158326b57101cb75332b4fa8f8c1bce8afc8d3700f3cd711",
+    "review_user_prompt_sha256": "d2db23ee39ba47793de318b7b86c8b90c623cb9a5b925085f65d5cb5223762ec"
   }
 }

@@ -17,12 +17,12 @@ export class TranslateNode {
   ) {}
 
   async execute(state: CalibrationRuntimeState): Promise<Partial<CalibrationRuntimeState>> {
-    if (!state.runManifest || !state.sliceManifest || !state.promptBundle || !state.promptBundleMetadata || !state.modelProfile || !state.runDirectories || !state.glossaryPath) {
+    if (!state.runManifest || !state.sliceManifest || !state.promptBundleMetadata || !state.modelProfile || !state.runDirectories || !state.glossaryPath) {
       throw new Error("Translate node is missing loaded calibration inputs.");
     }
 
     this.logger.log(`Starting translation for run ${state.runId}`);
-    if (state.streamTranslation) {
+    if (state.streamTranslation || state.streamLlm) {
       this.logger.log(`Streaming translation output for run ${state.runId}`);
       process.stdout.write("\n[translation stream start]\n");
     }
@@ -31,22 +31,23 @@ export class TranslateNode {
       runId: state.runId,
       runManifest: state.runManifest,
       sliceManifest: state.sliceManifest,
-      promptBundle: state.promptBundle,
       promptBundleMetadata: state.promptBundleMetadata,
       modelProfile: state.modelProfile,
       excerptText: state.excerptText,
       glossaryText,
       styleGuideText: state.styleGuideText,
-      stream: state.streamTranslation,
-      onStreamDelta: state.streamTranslation
+      stream: state.streamTranslation || state.streamLlm,
+      onStreamDelta: state.streamTranslation || state.streamLlm
         ? (fieldName, text) => {
-            if (fieldName === "content") {
+            if (fieldName === "reasoning_content") {
+              process.stdout.write(`\n[translation reasoning] ${text}`);
+            } else if (fieldName === "content") {
               process.stdout.write(text);
             }
           }
         : undefined
     });
-    if (state.streamTranslation) {
+    if (state.streamTranslation || state.streamLlm) {
       process.stdout.write("\n[translation stream end]\n");
     }
 

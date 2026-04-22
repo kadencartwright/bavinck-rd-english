@@ -3,16 +3,19 @@
   "private": true,
   "packageManager": "pnpm@10.28.1",
   "scripts": {
-    "build": "nest build calibration-cli",
+    "baml:generate": "baml-cli generate --from baml_src",
+    "baml:test": "baml-cli test --from baml_src",
+    "build": "pnpm baml:generate && nest build calibration-cli",
     "calibration": "nest start calibration-cli -- run",
     "glossary:candidates:mine": "nest start calibration-cli -- mine-glossary-candidates",
-    "lint": "tsc --noEmit -p tsconfig.json",
+    "lint": "pnpm baml:generate && tsc --noEmit -p tsconfig.json",
     "nest": "nest",
-    "test": "jest --runInBand",
-    "test:watch": "jest --watch",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "test": "pnpm baml:generate && pnpm baml:test && jest --runInBand",
+    "test:watch": "pnpm baml:generate && jest --watch",
+    "typecheck": "pnpm baml:generate && tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@boundaryml/baml": "^0.221.0",
     "@langchain/langgraph": "^1.2.8",
     "@nestjs/common": "^11.1.6",
     "@nestjs/config": "^4.0.2",

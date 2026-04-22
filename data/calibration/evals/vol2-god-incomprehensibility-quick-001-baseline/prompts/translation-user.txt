@@ -25,6 +25,7 @@ terms:
     target: "Being"
     notes: "Use as a metaphysical divine title rather than an ordinary common noun."
 
+
 Style guide:
 # Style Guide
 
@@ -33,6 +34,7 @@ Style guide:
 - Translate into formal but readable English theological prose; do not modernize into colloquial language.
 - Prefer glossary-approved renderings when the glossary lists a source phrase from the excerpt.
 - Flag ambiguous doctrinal phrasing instead of smoothing over uncertainty.
+
 
 Source excerpt:
 § 20. DE ONBEGRIJPELIJKHEID GODS.
@@ -77,6 +79,7 @@ van ons zelven. En daarom gaf de Catechismus van Genève op de eerste
 vraag: quis humanae vitae praecipuus est finis? ten antwoord: ut Deum,
 a quo conditi sunt homines, ipsi noverint, cf. ook den Catech. van
 Westminster.
+
 
 Translate the source excerpt into formal English theological prose.
 Preserve all non-Dutch spans in their original language exactly as written.

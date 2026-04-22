@@ -5,13 +5,11 @@
     "schema_version",
     "prompt_bundle_id",
     "description",
-    "prompt_files",
+    "baml_files",
     "stages"
   ],
-  "prompt_files_required": [
-    "translation_system",
-    "translation_user_template",
-    "review_system",
-    "review_user_template"
+  "baml_files_required": [
+    "clients",
+    "calibration"
   ]
 }
