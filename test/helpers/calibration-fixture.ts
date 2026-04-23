@@ -21,7 +21,7 @@ export async function cleanupTempRoot(root: string): Promise<void> {
   await rm(root, { recursive: true, force: true });
 }
 
-export function extractPreservedSpans(text: string): string[] {
+function extractPreservedSpans(text: string): string[] {
   return [...new Set(text.match(/[\u0370-\u03ff\u1f00-\u1fff\u0590-\u05ff]+/gu) ?? [])];
 }
 

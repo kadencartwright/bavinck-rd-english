@@ -3,7 +3,7 @@ import { Injectable } from "@nestjs/common";
 import { CalibrationConfigService, ManifestLoaderService } from "@calibration-config";
 import { TranslationWorkflowService } from "@translation-workflow";
 
-export interface RunCalibrationCliOptions {
+interface RunCalibrationCliOptions {
   runManifest?: string;
   outputRoot?: string;
   evalRoot?: string;

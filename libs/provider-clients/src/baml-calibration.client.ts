@@ -34,7 +34,7 @@ interface BaseExecutionResult<TValue> {
   usage?: Record<string, number>;
 }
 
-export interface TranslateExecutionInput {
+interface TranslateExecutionInput {
   stage: StageProfile;
   runId: string;
   sliceId: string;
@@ -47,7 +47,7 @@ export interface TranslateExecutionInput {
   onStreamDelta?: (fieldName: "content" | "reasoning_content", text: string) => void;
 }
 
-export interface RepairExecutionInput {
+interface RepairExecutionInput {
   stage: StageProfile;
   runId: string;
   sliceId: string;
@@ -58,7 +58,7 @@ export interface RepairExecutionInput {
   onStreamDelta?: (fieldName: "content" | "reasoning_content", text: string) => void;
 }
 
-export interface ReviewExecutionInput {
+interface ReviewExecutionInput {
   stage: StageProfile;
   runId: string;
   sliceId: string;

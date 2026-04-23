@@ -9,7 +9,7 @@ import {
 } from "@calibration-domain";
 import { BamlCalibrationClient } from "@provider-clients";
 
-export interface TranslationExecutionInput {
+interface TranslationExecutionInput {
   runId: string;
   runManifest: RunManifest;
   sliceManifest: SliceManifest;
