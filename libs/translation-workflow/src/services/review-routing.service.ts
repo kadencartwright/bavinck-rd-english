@@ -42,6 +42,17 @@ export class ReviewRoutingService {
       });
     }
 
+    const reReviewFindings = findings.filter((finding) => finding.disposition === "re_review");
+    if (reReviewFindings.length > 0) {
+      return routeDecisionSchema.parse({
+        decision: "re_review",
+        reasons: reReviewFindings.map((finding) => `${finding.category}: ${finding.detail}`),
+        findingIds: reReviewFindings.map((finding) => finding.id),
+        repairTasks: [],
+        followUpReviewRequired: true
+      });
+    }
+
     return routeDecisionSchema.parse({
       decision: "accept",
       reasons: ["Review returned no actionable repair or escalation findings."],

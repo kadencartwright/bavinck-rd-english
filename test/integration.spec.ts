@@ -258,6 +258,7 @@ describe("translation workflow integration", () => {
       await expect(access(path.join(result.runDir, "review", "route-decision.json"))).resolves.toBeUndefined();
       expect(evaluation.routing_summary.auto_repair_task_ids.length).toBeGreaterThan(0);
       expect(evaluation.routing_summary.decisions).toContain("repair");
+      expect(evaluation.routing_summary.judge_detected.length).toBe(2);
     } finally {
       await close();
       await cleanupTempRoot(roots.root);

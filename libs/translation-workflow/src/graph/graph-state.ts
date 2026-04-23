@@ -38,11 +38,12 @@ function replaceField<T>(defaultFactory: () => T) {
 export interface CalibrationRuntimeState
   extends Omit<
     CalibrationGraphState,
-    "runManifest" | "sliceManifest" | "reviewPayload" | "routeDecision" | "repairTasks" | "routingHistory" | "repairTaskHistory"
+    "runManifest" | "sliceManifest" | "reviewPayload" | "reviewFindingHistory" | "routeDecision" | "repairTasks" | "routingHistory" | "repairTaskHistory"
   > {
   runManifest: RunManifest | null;
   sliceManifest: SliceManifest | null;
   reviewPayload: ReviewPayload | null;
+  reviewFindingHistory: ReviewPayload["findings"];
   routeDecision: RouteDecision | null;
   repairTasks: RepairTask[];
   routingHistory: RouteDecision[];
@@ -94,6 +95,7 @@ export const CalibrationRuntimeStateAnnotation = Annotation.Root({
   repairRound: replaceField(() => 0),
   maxRepairRounds: replaceField(() => 2),
   reviewPayload: replaceField<ReviewPayload | null>(() => null),
+  reviewFindingHistory: replaceField<ReviewPayload["findings"]>(() => []),
   routeDecision: replaceField<RouteDecision | null>(() => null),
   repairTasks: replaceField<RepairTask[]>(() => []),
   routingHistory: replaceField<RouteDecision[]>(() => []),

@@ -63,6 +63,12 @@ describe("deterministic lint", () => {
     expect(result.defects[0]?.severity).toBe("hard");
   });
 
+  it("detects an odd number of double quotes", () => {
+    const result = unbalancedDelimiterRule.run('Formal text with one unmatched " quote.');
+    expect(result.passed).toBe(false);
+    expect(result.defects[0]?.code).toBe("unbalanced_delimiter");
+  });
+
   it("detects repeated paragraphs as soft prose findings", () => {
     const result = repeatedTextRule.run("Same paragraph.\n\nSame paragraph.");
     expect(result.passed).toBe(false);

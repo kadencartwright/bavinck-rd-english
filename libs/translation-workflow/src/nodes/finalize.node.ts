@@ -268,7 +268,7 @@ export class FinalizeNode {
         .map((defect) => defect.evidence.join(" -> ")),
       routing_summary: {
         lint_detected: state.lintResults.flatMap((result) => [...result.hardDefects, ...result.softDefects]).map((defect) => defect.id),
-        judge_detected: state.reviewPayload?.findings.map((finding) => finding.id) ?? [],
+        judge_detected: state.reviewFindingHistory.map((finding) => finding.id),
         auto_repair_task_ids: state.repairTaskHistory.map((task) => task.taskId),
         decisions: state.routingHistory.map((entry) => entry.decision),
         escalated: terminalStatus === "escalated"

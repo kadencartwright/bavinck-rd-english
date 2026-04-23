@@ -492,6 +492,7 @@ export const calibrationGraphStateSchema = z.object({
   repairRound: z.number().int().nonnegative(),
   maxRepairRounds: z.number().int().nonnegative(),
   reviewPayload: reviewPayloadSchema.nullable(),
+  reviewFindingHistory: z.array(reviewFindingSchema),
   routeDecision: routeDecisionSchema.nullable(),
   repairTasks: z.array(repairTaskSchema),
   routingHistory: z.array(routeDecisionSchema),

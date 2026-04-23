@@ -16,6 +16,30 @@ export class UnbalancedDelimiterRule {
     const defects: LintDefect[] = [];
 
     DELIMITER_PAIRS.forEach((pair, index) => {
+      if (pair.open === pair.close) {
+        const count = draft.split(pair.open).length - 1;
+        if (count % 2 === 0) {
+          return;
+        }
+
+        defects.push(
+          createLintDefect({
+            id: createLintId("unbalanced-delimiter", index),
+            code: "unbalanced_delimiter",
+            category: "structure",
+            severity: "hard",
+            repairability: "auto",
+            routingTarget: "repair",
+            scope: "document",
+            message: `Draft contains an unmatched ${pair.label} delimiter.`,
+            evidence: [`count=${count}`],
+            confidence: 0.99,
+            suggestedFix: `Balance ${pair.label} without changing translation meaning.`
+          })
+        );
+        return;
+      }
+
       const openCount = draft.split(pair.open).length - 1;
       const closeCount = draft.split(pair.close).length - 1;
       if (openCount === closeCount) {

@@ -73,6 +73,7 @@ export class ReviewNode {
 
     return {
       reviewPayload: result.reviewPayload,
+      reviewFindingHistory: [...state.reviewFindingHistory, ...result.reviewPayload.findings],
       reviewRequestRecord: result.requestRecord,
       reviewResponse: result.response,
       reviewPromptSystem: result.prompt.system,

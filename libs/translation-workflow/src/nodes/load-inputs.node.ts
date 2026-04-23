@@ -49,6 +49,7 @@ export class LoadInputsNode {
       lintResults: [],
       repairRound: 0,
       reviewPayload: null,
+      reviewFindingHistory: [],
       routeDecision: null,
       repairTasks: [],
       routingHistory: [],
