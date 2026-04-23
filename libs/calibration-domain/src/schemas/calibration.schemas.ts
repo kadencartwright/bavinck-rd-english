@@ -410,7 +410,7 @@ export const evaluationReportSchema = z
     }
   });
 
-export const lintDefectSchema = z.object({
+const lintDefectSchema = z.object({
   id: nonEmptyString,
   code: z.enum([
     "preserved_span_missing",
@@ -439,7 +439,7 @@ export const lintDefectSchema = z.object({
   suggestedFix: nonEmptyString.optional()
 });
 
-export const lintResultSchema = z.object({
+const lintResultSchema = z.object({
   pass: z.boolean(),
   hardDefects: z.array(lintDefectSchema),
   softDefects: z.array(lintDefectSchema),
@@ -458,7 +458,7 @@ export const lintResultSchema = z.object({
   })
 });
 
-export const repairTaskSchema = z.object({
+const repairTaskSchema = z.object({
   taskId: nonEmptyString,
   originStage: z.enum(["lint", "review"]),
   findingIds: z.array(nonEmptyString).min(1),
@@ -480,7 +480,7 @@ export const routeDecisionSchema = z.object({
   followUpReviewRequired: z.boolean()
 });
 
-export const calibrationGraphStateSchema = z.object({
+const calibrationGraphStateSchema = z.object({
   runId: slugString,
   runManifestPath: nonEmptyString,
   runManifest: runManifestSchema,
@@ -512,7 +512,7 @@ const glossaryMiningSourceSchema = z.object({
   clean_char_count: z.number().int().positive()
 });
 
-export const glossaryMiningConfigSchema = z.object({
+const glossaryMiningConfigSchema = z.object({
   schema_version: z.literal("1.0"),
   candidate_rules: z.object({
     rule_set: z.literal("dutch-ngram-core-v1"),
@@ -587,7 +587,7 @@ export const glossaryCandidateTermsArtifactSchema = z.object({
   candidates: z.array(glossaryCandidateTermSchema)
 });
 
-export const glossaryCandidateUsageSchema = z.object({
+const glossaryCandidateUsageSchema = z.object({
   candidate_id: slugString,
   normalized_term: nonEmptyString,
   term: nonEmptyString,
@@ -605,7 +605,7 @@ export const glossaryCandidateUsagesArtifactSchema = z.object({
   usages: z.array(glossaryCandidateUsageSchema)
 });
 
-export const glossaryCandidateMetadataEntrySchema = z.object({
+const glossaryCandidateMetadataEntrySchema = z.object({
   candidate_id: slugString,
   normalized_term: nonEmptyString,
   term: nonEmptyString,
@@ -698,9 +698,9 @@ export type CalibrationGraphState = z.infer<typeof calibrationGraphStateSchema>;
 export type GlossaryMiningSource = z.infer<typeof glossaryMiningSourceSchema>;
 export type GlossaryMiningConfig = z.infer<typeof glossaryMiningConfigSchema>;
 export type GlossaryCandidateTermsArtifact = z.infer<typeof glossaryCandidateTermsArtifactSchema>;
-export type GlossaryCandidateUsage = z.infer<typeof glossaryCandidateUsageSchema>;
+type GlossaryCandidateUsage = z.infer<typeof glossaryCandidateUsageSchema>;
 export type GlossaryCandidateUsagesArtifact = z.infer<typeof glossaryCandidateUsagesArtifactSchema>;
-export type GlossaryCandidateMetadataEntry = z.infer<typeof glossaryCandidateMetadataEntrySchema>;
+type GlossaryCandidateMetadataEntry = z.infer<typeof glossaryCandidateMetadataEntrySchema>;
 export type GlossaryCandidateMetadataOverview = z.infer<typeof glossaryCandidateMetadataOverviewSchema>;
 export type CommitSafeEvalRecord = z.infer<typeof commitSafeEvalRecordSchema>;
-export type CalibrationMessage = z.infer<typeof messageSchema>;
+type CalibrationMessage = z.infer<typeof messageSchema>;

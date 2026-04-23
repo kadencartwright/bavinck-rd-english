@@ -23,7 +23,7 @@ import {
 
 import { PathService } from "./path.service";
 
-export class CalibrationValidationError extends Error {
+class CalibrationValidationError extends Error {
   constructor(
     readonly documentType: string,
     readonly documentPath: string | null,
@@ -37,7 +37,7 @@ export class CalibrationValidationError extends Error {
   }
 }
 
-export interface RunManifestBundle {
+interface RunManifestBundle {
   runManifestPath: string;
   runManifest: RunManifest;
   sliceManifestPath: string;

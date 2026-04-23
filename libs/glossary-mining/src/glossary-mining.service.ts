@@ -45,14 +45,14 @@ interface CandidateAccumulator {
   surfaceForms: Map<string, number>;
 }
 
-export interface GlossaryMiningRequest {
+interface GlossaryMiningRequest {
   sourceTextPath: string;
   metadataPath?: string;
   outputRoot: string;
   configOverrides?: Partial<GlossaryMiningConfig>;
 }
 
-export interface GlossaryMiningResult {
+interface GlossaryMiningResult {
   source: GlossaryMiningSource;
   outputDir: string;
   candidateTermsPath: string;

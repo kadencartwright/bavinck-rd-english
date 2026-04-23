@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "entry": ["apps/calibration-cli/src/main.ts", "test/**/*.spec.ts"],
+  "ignorePatterns": ["libs/provider-clients/src/baml_client/**/*"],
+  "ignoreDependencies": ["rxjs"],
+  "rules": {
+    "unused-class-members": "off"
+  }
+}

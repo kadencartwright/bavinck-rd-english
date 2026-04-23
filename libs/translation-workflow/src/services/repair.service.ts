@@ -4,7 +4,7 @@ import { ModelProfile, PromptBundleMetadata, RepairTask } from "@calibration-dom
 import { BamlCalibrationClient } from "@provider-clients";
 import type { RepairTask as ProviderRepairTask } from "@provider-clients";
 
-export interface RepairExecutionInput {
+interface RepairExecutionInput {
   runId: string;
   sliceId: string;
   repairRound: number;

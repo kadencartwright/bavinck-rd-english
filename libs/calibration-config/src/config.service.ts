@@ -23,7 +23,7 @@ export interface ResolvedCalibrationCliOptions {
   streamLlm: boolean;
 }
 
-export type CalibrationCliOptionsInput = Partial<ResolvedCalibrationCliOptions>;
+type CalibrationCliOptionsInput = Partial<ResolvedCalibrationCliOptions>;
 
 @Injectable()
 export class CalibrationConfigService {

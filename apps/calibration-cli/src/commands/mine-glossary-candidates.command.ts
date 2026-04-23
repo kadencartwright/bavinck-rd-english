@@ -6,7 +6,7 @@ import {
 } from "@calibration-domain";
 import { DEFAULT_GLOSSARY_MINING_CONFIG, GlossaryMiningService } from "@glossary-mining";
 
-export interface MineGlossaryCandidatesCliOptions {
+interface MineGlossaryCandidatesCliOptions {
   sourceText?: string;
   metadata?: string;
   outputRoot?: string;

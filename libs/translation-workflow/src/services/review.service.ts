@@ -12,7 +12,7 @@ import {
 import { BamlCalibrationClient } from "@provider-clients";
 import type { CalibrationReview } from "@provider-clients";
 
-export interface ReviewExecutionInput {
+interface ReviewExecutionInput {
   runId: string;
   runManifest: RunManifest;
   sliceManifest: SliceManifest;
