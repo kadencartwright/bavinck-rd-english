@@ -10,6 +10,7 @@ import {
   reviewRequestRecordSchema
 } from "@calibration-domain";
 import { BamlCalibrationClient } from "@provider-clients";
+import type { CalibrationReview } from "@provider-clients";
 
 export interface ReviewExecutionInput {
   runId: string;
@@ -79,29 +80,7 @@ export class ReviewService {
     };
   }
 
-  private normalizeReviewPayload(payload: {
-    summary: string;
-    checks: {
-      semanticFaithfulness: { status: "pass" | "fail" | "incomplete"; details: string };
-      doctrinalAmbiguity: { status: "pass" | "fail" | "incomplete"; details: string };
-      reviewCoverage: { status: "pass" | "fail" | "incomplete"; details: string };
-    };
-    findings: Array<{
-      id: string;
-      severity: "high" | "medium" | "low" | "info";
-      category: string;
-      detail: string;
-      evidence: string[];
-      repairability: "auto" | "needs_judge" | "manual";
-      disposition: "accept" | "repair" | "re_review" | "escalate";
-      scope: "document" | "paragraph" | "sentence" | "span";
-      confidence: number;
-      locationHint?: string;
-      draftSpan?: string;
-      repairInstruction?: string;
-    }>;
-    recommendedFollowUp: string[];
-  }): ReviewPayload {
+  private normalizeReviewPayload(payload: CalibrationReview): ReviewPayload {
     return {
       summary: payload.summary,
       checks: {
@@ -109,7 +88,26 @@ export class ReviewService {
         "doctrinal-ambiguity": payload.checks.doctrinalAmbiguity,
         "review-coverage": payload.checks.reviewCoverage
       },
-      findings: payload.findings,
+      findings: payload.findings.map((finding) => {
+        const normalized = {
+          id: finding.id,
+          severity: finding.severity,
+          category: finding.category,
+          detail: finding.detail,
+          evidence: finding.evidence,
+          repairability: finding.repairability,
+          disposition: finding.disposition,
+          scope: finding.scope,
+          confidence: finding.confidence
+        };
+
+        return {
+          ...normalized,
+          ...(finding.locationHint ? { locationHint: finding.locationHint } : {}),
+          ...(finding.draftSpan ? { draftSpan: finding.draftSpan } : {}),
+          ...(finding.repairInstruction ? { repairInstruction: finding.repairInstruction } : {})
+        };
+      }),
       recommended_follow_up: payload.recommendedFollowUp
     };
   }

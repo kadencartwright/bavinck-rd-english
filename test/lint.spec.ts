@@ -57,7 +57,7 @@ describe("deterministic lint", () => {
   });
 
   it("detects unbalanced delimiters as hard prose-structure defects", () => {
-    const result = unbalancedDelimiterRule.run('Formal text with an unmatched " quote.');
+    const result = unbalancedDelimiterRule.run("Formal text with an unmatched ( delimiter.");
     expect(result.passed).toBe(false);
     expect(result.defects[0]?.code).toBe("unbalanced_delimiter");
     expect(result.defects[0]?.severity).toBe("hard");

@@ -3,6 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 import yaml from "js-yaml";
+import type { CalibrationReview } from "@provider-clients";
 
 export const ACTUAL_MANIFEST_PATH =
   "config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json";
@@ -71,7 +72,7 @@ export function buildStageUsage() {
   };
 }
 
-export function buildReviewResult(summary = "Review completed.") {
+export function buildReviewResult(summary = "Review completed."): CalibrationReview {
   return {
     summary,
     checks: {
