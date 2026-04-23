@@ -51,6 +51,7 @@ interface ExportEvalBundleInput {
   evaluationReport: EvaluationReport;
   findingsMarkdown?: string;
   unresolvedDefects?: unknown;
+  routingSummary?: EvaluationReport["routing_summary"];
   stageRecords: Record<string, StageRecordInput>;
 }
 
@@ -69,7 +70,9 @@ export class EvalExportService {
     if (reviewPayload.findings.length > 0) {
       lines.push("## Findings", "");
       for (const finding of reviewPayload.findings) {
-        lines.push(`- [${finding.severity}] ${finding.category}: ${finding.detail}`);
+        lines.push(
+          `- [${finding.severity}] ${finding.id} ${finding.category} -> ${finding.disposition}: ${finding.detail}`
+        );
       }
       lines.push("");
     }
@@ -99,6 +102,14 @@ export class EvalExportService {
         );
       }
     }
+    if (report.routing_summary) {
+      lines.push("", "## Routing Summary", "");
+      lines.push(`- Lint-detected findings: ${report.routing_summary.lint_detected.length}`);
+      lines.push(`- Judge-detected findings: ${report.routing_summary.judge_detected.length}`);
+      lines.push(`- Auto-repair tasks: ${report.routing_summary.auto_repair_task_ids.length}`);
+      lines.push(`- Decisions: ${report.routing_summary.decisions.join(", ") || "none"}`);
+      lines.push(`- Escalated: ${report.routing_summary.escalated ? "yes" : "no"}`);
+    }
     lines.push("", "## Qualitative Findings", "");
     lines.push(`See \`${report.qualitative_findings.path}\` for reviewer commentary kept separate from the checks.`, "");
     return `${lines.join("\n").trimEnd()}\n`;
@@ -121,6 +132,10 @@ export class EvalExportService {
     if (input.reviewPayload) {
       await this.artifactWriter.writeJson(path.join(evalDir, "review-structured.json"), input.reviewPayload);
       await this.artifactWriter.writeText(path.join(evalDir, "findings.md"), input.findingsMarkdown ?? this.renderFindingsMarkdown(input.reviewPayload));
+    }
+
+    if (input.routingSummary) {
+      await this.artifactWriter.writeJson(path.join(evalDir, "routing-summary.json"), input.routingSummary);
     }
 
     if (input.unresolvedDefects !== undefined) {
@@ -148,6 +163,9 @@ export class EvalExportService {
   ): Promise<void> {
     await this.artifactWriter.writeJson(path.join(directories.reportsDir, "evaluation.json"), report);
     await this.artifactWriter.writeText(path.join(directories.reportsDir, "evaluation.md"), this.renderEvaluationMarkdown(report));
+    if (report.routing_summary) {
+      await this.artifactWriter.writeJson(path.join(directories.reportsDir, "routing-summary.json"), report.routing_summary);
+    }
     if (findingsMarkdown !== undefined) {
       await this.artifactWriter.writeText(path.join(directories.reviewDir, "findings.md"), findingsMarkdown);
     }
@@ -172,6 +190,9 @@ export class EvalExportService {
       safeArtifacts.translation_system_prompt_path = this.pathService.relativeToRepo(path.join(evalDir, "prompts/translation-system.txt"));
       safeArtifacts.translation_user_prompt_path = this.pathService.relativeToRepo(path.join(evalDir, "prompts/translation-user.txt"));
     }
+    if (report.routing_summary) {
+      safeArtifacts.routing_summary_path = this.pathService.relativeToRepo(path.join(evalDir, "routing-summary.json"));
+    }
 
     return {
       ...report,
@@ -187,6 +208,7 @@ export class EvalExportService {
             : this.pathService.relativeToRepo(path.join(evalDir, "unresolved-defects.json")),
         separate_from_checks: true
       },
+      ...(report.routing_summary ? { routing_summary: report.routing_summary } : {}),
       ...(report.token_usage ? { token_usage: report.token_usage } : {})
     };
   }
@@ -229,6 +251,9 @@ export class EvalExportService {
       hashes.review_system_prompt_sha256 = this.pathService.sha256Text(input.reviewPrompt.system.trimEnd() + "\n");
       hashes.review_user_prompt_sha256 = this.pathService.sha256Text(input.reviewPrompt.user.trimEnd() + "\n");
     }
+    if (input.routingSummary) {
+      hashes.routing_summary_sha256 = this.pathService.sha256Text(JSON.stringify(input.routingSummary, null, 2) + "\n");
+    }
 
     return {
       schema_version: "1.1",
@@ -248,6 +273,7 @@ export class EvalExportService {
         rubric_path: this.pathService.relativeToRepo(input.rubricPath)
       },
       token_usage: this.summarizeTokenUsage(input.stageRecords),
+      ...(input.routingSummary ? { routing_summary: input.routingSummary } : {}),
       stages: Object.fromEntries(
         Object.entries(input.stageRecords).map(([key, value]) => [
           key,

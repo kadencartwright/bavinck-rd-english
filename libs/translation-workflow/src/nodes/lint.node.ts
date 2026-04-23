@@ -26,7 +26,7 @@ export class LintNode {
     const round = state.lintResults.length;
     await this.artifactWriter.writeLintRound(state.runDirectories, round, lintResult);
     this.logger.log(
-      `Lint round ${round} for run ${state.runId}: pass=${lintResult.pass ? "yes" : "no"} hard=${lintResult.hardDefects.length} soft=${lintResult.softDefects.length}`
+      `Lint round ${round} for run ${state.runId}: pass=${lintResult.pass ? "yes" : "no"} hard=${lintResult.hardDefects.length} soft=${lintResult.softDefects.length} repair=${lintResult.routingSummary.autoRepair} review=${lintResult.routingSummary.judgeReview} log=${lintResult.routingSummary.logOnly}`
     );
     return {
       lintResults: [...state.lintResults, lintResult]

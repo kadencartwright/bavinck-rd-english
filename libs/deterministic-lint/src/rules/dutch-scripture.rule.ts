@@ -6,6 +6,8 @@ import {
   LintDefect
 } from "@calibration-domain";
 
+import { createLintDefect, createLintId } from "./rule-helpers";
+
 @Injectable()
 export class DutchScriptureRule {
   private readonly patterns = DUTCH_SCRIPTURE_REFERENCE_FORMS.map(
@@ -22,14 +24,20 @@ export class DutchScriptureRule {
           continue;
         }
         seen.add(snippet);
-        defects.push({
+        defects.push(createLintDefect({
+          id: createLintId("dutch-scripture", defects.length),
           code: "untranslated_dutch_scripture_reference",
+          category: "citation",
           severity: "hard",
+          repairability: "auto",
+          routingTarget: "repair",
+          scope: "span",
           message: `Untranslated Dutch Scripture reference '${snippet}' remains in translation output.`,
           evidence: [snippet],
+          confidence: 0.99,
           foundSpan: snippet,
           suggestedFix: "Normalize Dutch Scripture references into standard English forms."
-        });
+        }));
       }
     }
     return { defects, passed: defects.length === 0 };

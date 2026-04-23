@@ -8,6 +8,7 @@ import { FinalizeNode } from "../nodes/finalize.node";
 import { LintNode } from "../nodes/lint.node";
 import { LoadInputsNode } from "../nodes/load-inputs.node";
 import { RepairNode } from "../nodes/repair.node";
+import { RouteReviewNode } from "../nodes/route-review.node";
 import { ReviewNode } from "../nodes/review.node";
 import { TranslateNode } from "../nodes/translate.node";
 
@@ -19,6 +20,7 @@ export class CalibrationGraphService {
     private readonly lintNode: LintNode,
     private readonly repairNode: RepairNode,
     private readonly reviewNode: ReviewNode,
+    private readonly routeReviewNode: RouteReviewNode,
     private readonly finalizeNode: FinalizeNode
   ) {}
 
@@ -29,6 +31,7 @@ export class CalibrationGraphService {
       .addNode("lint", (state) => this.lintNode.execute(state))
       .addNode("repair", (state) => this.repairNode.execute(state))
       .addNode("review", (state) => this.reviewNode.execute(state))
+      .addNode("route_review", (state) => this.routeReviewNode.execute(state))
       .addNode("finalize_reviewed", (state) => this.finalizeNode.finalizeReviewed(state))
       .addNode("finalize_escalated", (state) => this.finalizeNode.finalizeEscalated(state))
       .addEdge(START, "load_inputs")
@@ -45,7 +48,19 @@ export class CalibrationGraphService {
         return "finalize_escalated";
       })
       .addEdge("repair", "lint")
-      .addEdge("review", "finalize_reviewed")
+      .addEdge("review", "route_review")
+      .addConditionalEdges("route_review", (state) => {
+        if (state.routeDecision?.decision === "repair") {
+          return "repair";
+        }
+        if (state.routeDecision?.decision === "re_review") {
+          return "review";
+        }
+        if (state.routeDecision?.decision === "escalate") {
+          return "finalize_escalated";
+        }
+        return "finalize_reviewed";
+      })
       .addEdge("finalize_reviewed", END)
       .addEdge("finalize_escalated", END)
       .compile();

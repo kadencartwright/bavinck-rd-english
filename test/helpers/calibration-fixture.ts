@@ -3,6 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 import yaml from "js-yaml";
+import type { CalibrationReview } from "@provider-clients";
 
 export const ACTUAL_MANIFEST_PATH =
   "config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json";
@@ -71,14 +72,28 @@ export function buildStageUsage() {
   };
 }
 
-export function buildReviewResult(summary = "Review completed.") {
+export function buildReviewResult(summary = "Review completed."): CalibrationReview {
   return {
     summary,
     checks: {
-      proseQuality: { status: "pass" as const, details: "Readable formal prose." },
-      reviewFlagging: { status: "pass" as const, details: "Risks called out appropriately." }
+      semanticFaithfulness: { status: "pass" as const, details: "Meaning tracks the source." },
+      doctrinalAmbiguity: { status: "pass" as const, details: "No unresolved doctrinal ambiguity detected." },
+      reviewCoverage: { status: "pass" as const, details: "Findings include routing metadata when needed." }
     },
-    findings: [{ severity: "low" as const, category: "style", detail: "Minor note." }],
+    findings: [
+      {
+        id: "review-1",
+        severity: "info" as const,
+        category: "style",
+        detail: "Minor note.",
+        evidence: ["Readability is acceptable."],
+        repairability: "auto" as const,
+        disposition: "accept" as const,
+        scope: "sentence" as const,
+        confidence: 0.8,
+        repairInstruction: "No repair required."
+      }
+    ],
     recommendedFollowUp: ["Keep comparing runs."]
   };
 }

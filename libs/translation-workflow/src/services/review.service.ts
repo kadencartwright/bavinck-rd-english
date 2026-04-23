@@ -10,6 +10,7 @@ import {
   reviewRequestRecordSchema
 } from "@calibration-domain";
 import { BamlCalibrationClient } from "@provider-clients";
+import type { CalibrationReview } from "@provider-clients";
 
 export interface ReviewExecutionInput {
   runId: string;
@@ -79,22 +80,34 @@ export class ReviewService {
     };
   }
 
-  private normalizeReviewPayload(payload: {
-    summary: string;
-    checks: {
-      proseQuality: { status: "pass" | "fail" | "incomplete"; details: string };
-      reviewFlagging: { status: "pass" | "fail" | "incomplete"; details: string };
-    };
-    findings: Array<{ severity: "high" | "medium" | "low"; category: string; detail: string }>;
-    recommendedFollowUp: string[];
-  }): ReviewPayload {
+  private normalizeReviewPayload(payload: CalibrationReview): ReviewPayload {
     return {
       summary: payload.summary,
       checks: {
-        "prose-quality": payload.checks.proseQuality,
-        "review-flagging": payload.checks.reviewFlagging
+        "semantic-faithfulness": payload.checks.semanticFaithfulness,
+        "doctrinal-ambiguity": payload.checks.doctrinalAmbiguity,
+        "review-coverage": payload.checks.reviewCoverage
       },
-      findings: payload.findings,
+      findings: payload.findings.map((finding) => {
+        const normalized = {
+          id: finding.id,
+          severity: finding.severity,
+          category: finding.category,
+          detail: finding.detail,
+          evidence: finding.evidence,
+          repairability: finding.repairability,
+          disposition: finding.disposition,
+          scope: finding.scope,
+          confidence: finding.confidence
+        };
+
+        return {
+          ...normalized,
+          ...(finding.locationHint ? { locationHint: finding.locationHint } : {}),
+          ...(finding.draftSpan ? { draftSpan: finding.draftSpan } : {}),
+          ...(finding.repairInstruction ? { repairInstruction: finding.repairInstruction } : {})
+        };
+      }),
       recommended_follow_up: payload.recommendedFollowUp
     };
   }

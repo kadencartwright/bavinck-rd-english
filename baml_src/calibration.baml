@@ -4,14 +4,24 @@ class ReviewCheck {
 }
 
 class ReviewChecks {
-  proseQuality ReviewCheck @alias("prose-quality")
-  reviewFlagging ReviewCheck @alias("review-flagging")
+  semanticFaithfulness ReviewCheck @alias("semantic-faithfulness")
+  doctrinalAmbiguity ReviewCheck @alias("doctrinal-ambiguity")
+  reviewCoverage ReviewCheck @alias("review-coverage")
 }
 
 class ReviewFinding {
-  severity "high" | "medium" | "low"
+  id string
+  severity "high" | "medium" | "low" | "info"
   category string
   detail string
+  evidence string[]
+  repairability "auto" | "needs_judge" | "manual"
+  disposition "accept" | "repair" | "re_review" | "escalate"
+  scope "document" | "paragraph" | "sentence" | "span"
+  confidence float
+  locationHint string?
+  draftSpan string?
+  repairInstruction string?
 }
 
 class CalibrationReview {
@@ -21,15 +31,18 @@ class CalibrationReview {
   recommendedFollowUp string[] @alias("recommended_follow_up")
 }
 
-class RepairDefect {
-  code "preserved_span_missing" | "preserved_span_changed" | "untranslated_dutch_scripture_reference" | "untranslated_dutch_abbreviation" | "glossary_target_missing" | "output_shape_violation" | "dutch_residue" | "suspicious_calque"
-  severity "hard" | "soft"
-  message string
+class RepairTask {
+  taskId string
+  originStage "lint" | "review"
+  findingIds string[]
+  handler string
+  scope "document" | "paragraph" | "sentence" | "span"
+  repairability "auto" | "needs_judge" | "manual"
+  instructions string[]
   evidence string[]
   sourceSpan string?
-  foundSpan string?
+  draftSpan string?
   locationHint string?
-  suggestedFix string?
 }
 
 template_string CalibrationHeader(runId: string, sliceId: string, sliceTitle: string) #"
@@ -49,9 +62,9 @@ Source excerpt:
 {{ sourceExcerpt }}
 "#
 
-template_string RepairDefectContext(hardDefects: RepairDefect[]) #"
-Hard defects:
-{{ hardDefects|format(type="yaml") }}
+template_string RepairTaskContext(repairTasks: RepairTask[]) #"
+Repair tasks:
+{{ repairTasks|format(type="yaml") }}
 "#
 
 function SmokeTestCalibrationStage(stageName: string) -> string {
@@ -101,13 +114,13 @@ function RepairCalibrationDraft(
   sliceId: string,
   repairRound: int,
   currentDraft: string,
-  hardDefects: RepairDefect[]
+  repairTasks: RepairTask[]
 ) -> string {
   client RuntimePrimary
   prompt #"
     {{ _.role("system") }}
     You repair an English translation draft.
-    Apply the smallest possible edits that fix the listed hard defects.
+    Apply the smallest possible edits that fix the listed repair tasks.
     Return only the corrected translated passage with the original paragraph structure preserved.
 
     {{ _.role("user") }}
@@ -118,7 +131,7 @@ function RepairCalibrationDraft(
     Current draft:
     {{ currentDraft }}
 
-    {{ RepairDefectContext(hardDefects) }}
+    {{ RepairTaskContext(repairTasks) }}
   "#
 }
 
@@ -136,9 +149,9 @@ function ReviewCalibrationSlice(
   prompt #"
     {{ _.role("system") }}
     Review the generated translation against the source excerpt, glossary, and style guide.
-    Separate pass-fail checks from narrative findings.
-    Flag preserved-language corruption, glossary drift, doctrinal ambiguity, and unnatural English prose.
-    Treat Dutch Scripture references, book names, and abbreviations left untranslated in the English output as defects.
+    Focus on semantic faithfulness, doctrinal ambiguity, and residual prose concerns that deterministic lint may miss.
+    Do not spend findings on simple mechanical issues unless they create a meaning-level problem.
+    Every finding must include evidence, repairability, confidence, scope, and a routing disposition.
     Keep the response concise: one summary paragraph, at most 3 findings, and at most 3 follow-up actions.
 
     {{ _.role("user") }}
@@ -153,6 +166,9 @@ function ReviewCalibrationSlice(
     {{ translationOutput }}
 
     Review the translation against the source, glossary, style guide, and rubric.
+    Use `repair` only for bounded issues safe for automated remediation.
+    Use `escalate` for unresolved doctrinal ambiguity or low-confidence meaning concerns.
+    Use `accept` only when a finding is informational and does not require further action.
     Return exactly one structured response and no extra commentary.
     {{ ctx.output_format }}
   "#
@@ -180,14 +196,17 @@ test RepairCalibrationDraftSmoke {
     sliceId "slice-1"
     repairRound 1
     currentDraft #"In den beginne was het Woord. Hd. 17:28 blijft staan."#
-    hardDefects [
+    repairTasks [
       {
-        code "untranslated_dutch_scripture_reference"
-        severity "hard"
-        message "Dutch Scripture abbreviation should be normalized to standard English."
+        taskId "task-1"
+        originStage "lint"
+        findingIds ["lint-1"]
+        handler "mechanical-repair"
+        scope "span"
+        repairability "auto"
+        instructions ["Normalize 'Hd. 17:28' to standard English Scripture form."]
         evidence ["Hd. 17:28", "Acts 17:28"]
-        foundSpan "Hd. 17:28"
-        suggestedFix "Acts 17:28"
+        draftSpan "Hd. 17:28"
       }
     ]
   }
@@ -205,10 +224,12 @@ test ReviewCalibrationSliceSmoke {
     translationOutput #"In the beginning was the Word. Hd. 17:28 remains untranslated."#
     glossaryTerms #"- Woord -> Word"#
     styleGuide #"- Keep the register formal and suitable for theological prose."#
-    rubric #"- prose-quality: pass|fail|incomplete
-- review-flagging: pass|fail|incomplete"#
+    rubric #"- semantic-faithfulness: pass|fail|incomplete
+- doctrinal-ambiguity: pass|fail|incomplete
+- review-coverage: pass|fail|incomplete"#
   }
   @@assert( {{ this.summary|length > 0 }} )
   @@assert( {{ this.findings|length <= 3 }} )
   @@assert( {{ this.recommendedFollowUp|length <= 3 }} )
+  @@assert( {{ this.checks.semanticFaithfulness.status in ["pass", "fail", "incomplete"] }} )
 }

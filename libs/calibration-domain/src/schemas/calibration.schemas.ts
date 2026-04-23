@@ -9,6 +9,11 @@ const nonEmptyString = z.string().trim().min(1);
 const optionalNullableString = nonEmptyString.nullish();
 const slugString = nonEmptyString.regex(slugRegex, "must be filesystem-safe slug characters");
 const sha256String = nonEmptyString.regex(sha256Regex, "must be a SHA-256 hex digest");
+const unitIntervalNumber = z.number().min(0).max(1);
+const findingScopeSchema = z.enum(["document", "paragraph", "sentence", "span"]);
+const repairabilitySchema = z.enum(["auto", "needs_judge", "manual"]);
+const routingTargetSchema = z.enum(["repair", "review", "log"]);
+const routeDecisionValueSchema = z.enum(["accept", "repair", "re_review", "escalate"]);
 const messageSchema = z.object({
   role: z.enum(["system", "user", "assistant"]),
   content: nonEmptyString
@@ -293,25 +298,34 @@ export const reviewRequestRecordSchema = requestRecordSchema.extend({
   stage: z.literal("review")
 });
 
+const reviewCheckSchema = z.object({
+  status: z.enum(["pass", "fail", "incomplete"]),
+  details: nonEmptyString
+});
+
+const reviewFindingSchema = z.object({
+  id: nonEmptyString,
+  severity: z.enum(["high", "medium", "low", "info"]),
+  category: nonEmptyString,
+  detail: nonEmptyString,
+  evidence: z.array(nonEmptyString).min(1),
+  repairability: repairabilitySchema,
+  disposition: routeDecisionValueSchema,
+  scope: findingScopeSchema,
+  confidence: unitIntervalNumber,
+  locationHint: nonEmptyString.optional(),
+  draftSpan: nonEmptyString.optional(),
+  repairInstruction: nonEmptyString.optional()
+});
+
 export const reviewPayloadSchema = z.object({
   summary: nonEmptyString,
   checks: z.object({
-    "prose-quality": z.object({
-      status: z.enum(["pass", "fail", "incomplete"]),
-      details: nonEmptyString
-    }),
-    "review-flagging": z.object({
-      status: z.enum(["pass", "fail", "incomplete"]),
-      details: nonEmptyString
-    })
+    "semantic-faithfulness": reviewCheckSchema,
+    "doctrinal-ambiguity": reviewCheckSchema,
+    "review-coverage": reviewCheckSchema
   }),
-  findings: z.array(
-    z.object({
-      severity: z.enum(["high", "medium", "low", "info"]),
-      category: nonEmptyString,
-      detail: nonEmptyString
-    })
-  ),
+  findings: z.array(reviewFindingSchema),
   recommended_follow_up: z.array(nonEmptyString)
 });
 
@@ -359,6 +373,15 @@ export const evaluationReportSchema = z
     review_summary: z.string(),
     glossary_hits: z.array(nonEmptyString),
     glossary_misses: z.array(nonEmptyString),
+    routing_summary: z
+      .object({
+        lint_detected: z.array(nonEmptyString),
+        judge_detected: z.array(nonEmptyString),
+        auto_repair_task_ids: z.array(nonEmptyString),
+        decisions: z.array(routeDecisionValueSchema),
+        escalated: z.boolean()
+      })
+      .optional(),
     terminal_status: z.enum(["reviewed", "escalated", "failed"]).optional()
   })
   .superRefine((value, ctx) => {
@@ -388,6 +411,7 @@ export const evaluationReportSchema = z
   });
 
 export const lintDefectSchema = z.object({
+  id: nonEmptyString,
   code: z.enum([
     "preserved_span_missing",
     "preserved_span_changed",
@@ -396,11 +420,19 @@ export const lintDefectSchema = z.object({
     "glossary_target_missing",
     "output_shape_violation",
     "dutch_residue",
-    "suspicious_calque"
+    "suspicious_calque",
+    "unbalanced_delimiter",
+    "repeated_text",
+    "citation_shape_damage"
   ]),
+  category: nonEmptyString,
   severity: z.enum(["hard", "soft"]),
+  repairability: repairabilitySchema,
+  routingTarget: routingTargetSchema,
+  scope: findingScopeSchema,
   message: nonEmptyString,
   evidence: z.array(nonEmptyString),
+  confidence: unitIntervalNumber.optional(),
   sourceSpan: nonEmptyString.optional(),
   foundSpan: nonEmptyString.optional(),
   locationHint: nonEmptyString.optional(),
@@ -411,13 +443,41 @@ export const lintResultSchema = z.object({
   pass: z.boolean(),
   hardDefects: z.array(lintDefectSchema),
   softDefects: z.array(lintDefectSchema),
+  routingSummary: z.object({
+    autoRepair: z.number().int().nonnegative(),
+    judgeReview: z.number().int().nonnegative(),
+    logOnly: z.number().int().nonnegative()
+  }),
   checks: z.object({
     preservedLanguageIntegrity: z.enum(["pass", "fail"]),
     glossaryAdherence: z.enum(["pass", "fail"]),
     scriptureReferenceNormalization: z.enum(["pass", "fail"]),
     dutchResidue: z.enum(["pass", "fail"]),
-    outputShape: z.enum(["pass", "fail"])
+    outputShape: z.enum(["pass", "fail"]),
+    proseStructure: z.enum(["pass", "fail", "incomplete"])
   })
+});
+
+export const repairTaskSchema = z.object({
+  taskId: nonEmptyString,
+  originStage: z.enum(["lint", "review"]),
+  findingIds: z.array(nonEmptyString).min(1),
+  handler: nonEmptyString,
+  scope: findingScopeSchema,
+  repairability: repairabilitySchema,
+  instructions: z.array(nonEmptyString).min(1),
+  evidence: z.array(nonEmptyString),
+  locationHint: nonEmptyString.optional(),
+  sourceSpan: nonEmptyString.optional(),
+  draftSpan: nonEmptyString.optional()
+});
+
+export const routeDecisionSchema = z.object({
+  decision: routeDecisionValueSchema,
+  reasons: z.array(nonEmptyString).min(1),
+  findingIds: z.array(nonEmptyString),
+  repairTasks: z.array(repairTaskSchema),
+  followUpReviewRequired: z.boolean()
 });
 
 export const calibrationGraphStateSchema = z.object({
@@ -432,6 +492,11 @@ export const calibrationGraphStateSchema = z.object({
   repairRound: z.number().int().nonnegative(),
   maxRepairRounds: z.number().int().nonnegative(),
   reviewPayload: reviewPayloadSchema.nullable(),
+  reviewFindingHistory: z.array(reviewFindingSchema),
+  routeDecision: routeDecisionSchema.nullable(),
+  repairTasks: z.array(repairTaskSchema),
+  routingHistory: z.array(routeDecisionSchema),
+  repairTaskHistory: z.array(repairTaskSchema),
   terminalStatus: z.enum(["pending", "reviewed", "escalated", "failed"]),
   terminalReason: z.string().nullable()
 });
@@ -587,6 +652,15 @@ export const commitSafeEvalRecordSchema = z.object({
       by_stage: z.record(nonEmptyString, tokenUsageSummarySchema)
     })
     .optional(),
+  routing_summary: z
+    .object({
+      lint_detected: z.array(nonEmptyString),
+      judge_detected: z.array(nonEmptyString),
+      auto_repair_task_ids: z.array(nonEmptyString),
+      decisions: z.array(routeDecisionValueSchema),
+      escalated: z.boolean()
+    })
+    .optional(),
   stages: z.record(
     nonEmptyString,
     z.object({
@@ -614,9 +688,12 @@ export type RubricDoc = z.infer<typeof rubricDocSchema>;
 export type TranslationRequestRecord = z.infer<typeof translationRequestRecordSchema>;
 export type ReviewRequestRecord = z.infer<typeof reviewRequestRecordSchema>;
 export type ReviewPayload = z.infer<typeof reviewPayloadSchema>;
+export type ReviewFinding = z.infer<typeof reviewFindingSchema>;
 export type EvaluationReport = z.infer<typeof evaluationReportSchema>;
 export type LintDefect = z.infer<typeof lintDefectSchema>;
 export type LintResult = z.infer<typeof lintResultSchema>;
+export type RepairTask = z.infer<typeof repairTaskSchema>;
+export type RouteDecision = z.infer<typeof routeDecisionSchema>;
 export type CalibrationGraphState = z.infer<typeof calibrationGraphStateSchema>;
 export type GlossaryMiningSource = z.infer<typeof glossaryMiningSourceSchema>;
 export type GlossaryMiningConfig = z.infer<typeof glossaryMiningConfigSchema>;
