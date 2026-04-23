@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { Injectable } from "@nestjs/common";
 
-import { LintDefect, LintResult, ReviewPayload } from "@calibration-domain";
+import { LintDefect, LintResult, RepairTask, ReviewPayload, RouteDecision } from "@calibration-domain";
 import { PathService } from "@calibration-config";
 
 export interface RunDirectorySet {
@@ -108,6 +108,10 @@ export class ArtifactWriterService {
     await this.writeJson(path.join(directories.outputsDir, `repair-request-round-${round}.json`), payload);
   }
 
+  async writeRepairTasks(directories: RunDirectorySet, round: number, payload: RepairTask[]): Promise<void> {
+    await this.writeJson(path.join(directories.outputsDir, `repair-tasks-round-${round}.json`), payload);
+  }
+
   async writeReviewRequest(directories: RunDirectorySet, payload: unknown): Promise<void> {
     await this.writeJson(path.join(directories.reviewDir, "review-request.json"), payload);
   }
@@ -118,6 +122,10 @@ export class ArtifactWriterService {
 
   async writeReviewPayload(directories: RunDirectorySet, payload: ReviewPayload): Promise<void> {
     await this.writeJson(path.join(directories.reviewDir, "review-structured.json"), payload);
+  }
+
+  async writeRoutingDecision(directories: RunDirectorySet, payload: RouteDecision): Promise<void> {
+    await this.writeJson(path.join(directories.reviewDir, "route-decision.json"), payload);
   }
 
   async writeUnresolvedDefects(directories: RunDirectorySet, defects: LintDefect[]): Promise<void> {

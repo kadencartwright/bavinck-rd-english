@@ -5,6 +5,9 @@ import { DutchScriptureRule } from "@deterministic-lint/rules/dutch-scripture.ru
 import { GlossaryRule } from "@deterministic-lint/rules/glossary.rule";
 import { OutputShapeRule } from "@deterministic-lint/rules/output-shape.rule";
 import { PreservedSpansRule } from "@deterministic-lint/rules/preserved-spans.rule";
+import { RepeatedTextRule } from "@deterministic-lint/rules/repeated-text.rule";
+import { CitationShapeRule } from "@deterministic-lint/rules/citation-shape.rule";
+import { UnbalancedDelimiterRule } from "@deterministic-lint/rules/unbalanced-delimiter.rule";
 
 describe("deterministic lint", () => {
   const preservedRule = new PreservedSpansRule();
@@ -12,12 +15,18 @@ describe("deterministic lint", () => {
   const residueRule = new DutchResidueRule();
   const glossaryRule = new GlossaryRule();
   const outputShapeRule = new OutputShapeRule();
+  const unbalancedDelimiterRule = new UnbalancedDelimiterRule();
+  const repeatedTextRule = new RepeatedTextRule();
+  const citationShapeRule = new CitationShapeRule();
   const runner = new LintRunnerService(
     preservedRule,
     scriptureRule,
     residueRule,
     glossaryRule,
-    outputShapeRule
+    outputShapeRule,
+    unbalancedDelimiterRule,
+    repeatedTextRule,
+    citationShapeRule
   );
 
   it("detects exact preserved-span changes", () => {
@@ -47,6 +56,26 @@ describe("deterministic lint", () => {
     expect(result.defects.some((defect) => defect.code === "output_shape_violation")).toBe(true);
   });
 
+  it("detects unbalanced delimiters as hard prose-structure defects", () => {
+    const result = unbalancedDelimiterRule.run('Formal text with an unmatched " quote.');
+    expect(result.passed).toBe(false);
+    expect(result.defects[0]?.code).toBe("unbalanced_delimiter");
+    expect(result.defects[0]?.severity).toBe("hard");
+  });
+
+  it("detects repeated paragraphs as soft prose findings", () => {
+    const result = repeatedTextRule.run("Same paragraph.\n\nSame paragraph.");
+    expect(result.passed).toBe(false);
+    expect(result.defects[0]?.code).toBe("repeated_text");
+    expect(result.defects[0]?.severity).toBe("soft");
+  });
+
+  it("detects malformed citation shape", () => {
+    const result = citationShapeRule.run("Formal prose with Acts.17:28 still malformed.");
+    expect(result.passed).toBe(false);
+    expect(result.defects[0]?.code).toBe("citation_shape_damage");
+  });
+
   it("serializes lint results with hard defects", () => {
     const glossary = glossaryDocSchema.parse({
       schema_version: "1.0",
@@ -61,5 +90,6 @@ describe("deterministic lint", () => {
     const serialized = JSON.parse(JSON.stringify(result));
     expect(serialized.pass).toBe(false);
     expect(serialized.hardDefects.length).toBeGreaterThan(0);
+    expect(serialized.routingSummary.autoRepair).toBeGreaterThan(0);
   });
 });

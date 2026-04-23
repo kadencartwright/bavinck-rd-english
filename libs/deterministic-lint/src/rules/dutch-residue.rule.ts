@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 
 import { DUTCH_ABBREVIATION_PATTERNS, LintDefect } from "@calibration-domain";
 
+import { createLintDefect, createLintId } from "./rule-helpers";
+
 @Injectable()
 export class DutchResidueRule {
   private readonly abbreviationPatterns = DUTCH_ABBREVIATION_PATTERNS.map((pattern) => new RegExp(pattern, "giu"));
@@ -17,14 +19,20 @@ export class DutchResidueRule {
           continue;
         }
         seen.add(snippet);
-        defects.push({
+        defects.push(createLintDefect({
+          id: createLintId("dutch-residue", defects.length),
           code: "untranslated_dutch_abbreviation",
+          category: "residue",
           severity: "hard",
+          repairability: "auto",
+          routingTarget: "repair",
+          scope: "span",
           message: `Dutch abbreviation '${snippet}' remains in translation output.`,
           evidence: [snippet],
+          confidence: 0.99,
           foundSpan: snippet,
           suggestedFix: "Translate or normalize the Dutch abbreviation into English prose."
-        });
+        }));
       }
     }
 

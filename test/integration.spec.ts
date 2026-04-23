@@ -21,6 +21,7 @@ describe("translation workflow integration", () => {
     translations: string[];
     repairs?: string[];
     review?: ReturnType<typeof buildReviewResult>;
+    reviews?: Array<ReturnType<typeof buildReviewResult>>;
   }) {
     const mockClient = {
       translate: jest.fn().mockImplementation(async () => {
@@ -68,11 +69,12 @@ describe("translation workflow integration", () => {
         };
       }),
       review: jest.fn().mockImplementation(async () => {
-        if (!mockResults.review) {
+        const nextReview = mockResults.reviews?.shift() ?? mockResults.review;
+        if (!nextReview) {
           throw new Error("No review mock configured.");
         }
         return {
-          value: mockResults.review,
+          value: nextReview,
           messages: [
             { role: "system", content: "review system" },
             { role: "user", content: "review user" }
@@ -83,7 +85,7 @@ describe("translation workflow integration", () => {
             baml_function_source: "baml_src/calibration.baml",
             baml_function: "ReviewCalibrationSlice"
           },
-          response: { raw_llm_response: JSON.stringify(mockResults.review), usage: buildStageUsage() },
+          response: { raw_llm_response: JSON.stringify(nextReview), usage: buildStageUsage() },
           finishReason: "stop",
           usage: buildStageUsage()
         };
@@ -205,6 +207,57 @@ describe("translation workflow integration", () => {
       await expect(access(path.join(result.evalDir, "unresolved-defects.json"))).resolves.toBeUndefined();
       await expect(access(path.join(result.evalDir, "review-structured.json"))).rejects.toThrow();
       await expect(access(path.join(result.evalDir, "findings.md"))).rejects.toThrow();
+    } finally {
+      await close();
+      await cleanupTempRoot(roots.root);
+    }
+  });
+
+  it("routes review-directed repair through follow-up lint and review before acceptance", async () => {
+    const excerptText = await readFile("data/calibration/slices/vol2-god-incomprehensibility-001/excerpt.txt", "utf8");
+    const glossaryText = await readFile("data/calibration/slices/vol2-god-incomprehensibility-001/inputs/glossary.yaml", "utf8");
+    const roots = await makeTempCalibrationRoots();
+    const firstReview = buildReviewResult("Repair requested after review.");
+    firstReview.findings = [
+      {
+        id: "review-1",
+        severity: "medium",
+        category: "semantic-faithfulness",
+        detail: "One sentence flattens the original distinction.",
+        evidence: ["The translated sentence compresses two source claims into one."],
+        repairability: "auto",
+        disposition: "repair",
+        scope: "sentence",
+        confidence: 0.9,
+        draftSpan: "Flattened sentence.",
+        repairInstruction: "Restore the distinction without changing nearby sentences."
+      }
+    ];
+
+    const { service, close } = await createService({
+      translations: [buildCleanTranslation(excerptText, glossaryText)],
+      repairs: [buildCleanTranslation(excerptText, glossaryText)],
+      reviews: [firstReview, buildReviewResult("Follow-up review passed.")]
+    });
+
+    try {
+      const result = await service.runCalibration({
+        runManifest: ACTUAL_MANIFEST_PATH,
+        outputRoot: roots.runs,
+        evalRoot: roots.evals,
+        allowSourceDrift: false,
+        dotenvPath: ".env",
+        skipProviderSmokeTest: true,
+        smokeTestOnly: false,
+        maxRepairRounds: 2,
+        streamTranslation: false,
+        streamLlm: false
+      });
+
+      const evaluation = JSON.parse(await readFile(path.join(result.evalDir, "evaluation.json"), "utf8"));
+      await expect(access(path.join(result.runDir, "review", "route-decision.json"))).resolves.toBeUndefined();
+      expect(evaluation.routing_summary.auto_repair_task_ids.length).toBeGreaterThan(0);
+      expect(evaluation.routing_summary.decisions).toContain("repair");
     } finally {
       await close();
       await cleanupTempRoot(roots.root);

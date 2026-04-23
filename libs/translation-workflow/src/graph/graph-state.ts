@@ -6,8 +6,10 @@ import {
   LintResult,
   ModelProfile,
   PromptBundleMetadata,
+  RepairTask,
   ReviewPayload,
   ReviewRequestRecord,
+  RouteDecision,
   RubricDoc,
   RunManifest,
   SliceManifest,
@@ -34,10 +36,17 @@ function replaceField<T>(defaultFactory: () => T) {
 }
 
 export interface CalibrationRuntimeState
-  extends Omit<CalibrationGraphState, "runManifest" | "sliceManifest" | "reviewPayload"> {
+  extends Omit<
+    CalibrationGraphState,
+    "runManifest" | "sliceManifest" | "reviewPayload" | "routeDecision" | "repairTasks" | "routingHistory" | "repairTaskHistory"
+  > {
   runManifest: RunManifest | null;
   sliceManifest: SliceManifest | null;
   reviewPayload: ReviewPayload | null;
+  routeDecision: RouteDecision | null;
+  repairTasks: RepairTask[];
+  routingHistory: RouteDecision[];
+  repairTaskHistory: RepairTask[];
   outputRoot: string;
   evalRoot: string;
   allowSourceDrift: boolean;
@@ -85,6 +94,10 @@ export const CalibrationRuntimeStateAnnotation = Annotation.Root({
   repairRound: replaceField(() => 0),
   maxRepairRounds: replaceField(() => 2),
   reviewPayload: replaceField<ReviewPayload | null>(() => null),
+  routeDecision: replaceField<RouteDecision | null>(() => null),
+  repairTasks: replaceField<RepairTask[]>(() => []),
+  routingHistory: replaceField<RouteDecision[]>(() => []),
+  repairTaskHistory: replaceField<RepairTask[]>(() => []),
   terminalStatus: replaceField<CalibrationGraphState["terminalStatus"]>(() => "pending"),
   terminalReason: replaceField<string | null>(() => null),
   outputRoot: replaceField(() => "data/calibration/runs"),

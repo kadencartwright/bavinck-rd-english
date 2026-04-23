@@ -13,7 +13,7 @@ import {
 
 import { ModelProfile } from "@calibration-domain";
 
-import { b, type CalibrationReview, type RepairDefect } from "./baml_client";
+import { b, type CalibrationReview, type RepairTask } from "./baml_client";
 
 type StageProfile = ModelProfile["stages"]["translation"];
 type PromptMessage = { role: "system" | "user" | "assistant"; content: string };
@@ -53,7 +53,7 @@ export interface RepairExecutionInput {
   sliceId: string;
   repairRound: number;
   currentDraft: string;
-  hardDefects: RepairDefect[];
+  repairTasks: RepairTask[];
   stream?: boolean;
   onStreamDelta?: (fieldName: "content" | "reasoning_content", text: string) => void;
 }
@@ -154,7 +154,7 @@ export class BamlCalibrationClient {
       input.sliceId,
       input.repairRound,
       input.currentDraft,
-      input.hardDefects,
+      input.repairTasks,
       options
     );
     const value = await b.RepairCalibrationDraft(
@@ -162,7 +162,7 @@ export class BamlCalibrationClient {
       input.sliceId,
       input.repairRound,
       input.currentDraft,
-      input.hardDefects,
+      input.repairTasks,
       input.stream ? { ...options, onTick: this.createStreamTickHandler(input.onStreamDelta) } : options
     );
 

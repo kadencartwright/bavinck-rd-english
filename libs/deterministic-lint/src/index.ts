@@ -5,3 +5,6 @@ export * from "./rules/dutch-scripture.rule";
 export * from "./rules/glossary.rule";
 export * from "./rules/output-shape.rule";
 export * from "./rules/preserved-spans.rule";
+export * from "./rules/repeated-text.rule";
+export * from "./rules/citation-shape.rule";
+export * from "./rules/unbalanced-delimiter.rule";

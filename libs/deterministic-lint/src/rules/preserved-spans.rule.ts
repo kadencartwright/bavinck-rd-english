@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 
 import { LintDefect } from "@calibration-domain";
 
+import { createLintDefect, createLintId } from "./rule-helpers";
+
 function stripCombiningMarks(value: string): string {
   return value.normalize("NFD").replace(/\p{M}+/gu, "").normalize("NFC");
 }
@@ -26,26 +28,38 @@ export class PreservedSpansRule {
       const normalizedSource = stripCombiningMarks(sourceSpan);
       const foundSpan = translatedSpans.find((candidate) => stripCombiningMarks(candidate) === normalizedSource);
       if (foundSpan) {
-        defects.push({
+        defects.push(createLintDefect({
+          id: createLintId("preserved-span", defects.length),
           code: "preserved_span_changed",
+          category: "preservation",
           severity: "hard",
+          repairability: "auto",
+          routingTarget: "repair",
+          scope: "span",
           message: `Preserved span '${sourceSpan}' was altered in translation output.`,
           evidence: [sourceSpan, foundSpan],
+          confidence: 1,
           sourceSpan,
           foundSpan,
           suggestedFix: "Restore the preserved Greek or Hebrew span exactly as it appears in the source excerpt."
-        });
+        }));
         continue;
       }
 
-      defects.push({
+      defects.push(createLintDefect({
+        id: createLintId("preserved-span", defects.length),
         code: "preserved_span_missing",
+        category: "preservation",
         severity: "hard",
+        repairability: "auto",
+        routingTarget: "repair",
+        scope: "span",
         message: `Preserved span '${sourceSpan}' is missing from translation output.`,
         evidence: [sourceSpan],
+        confidence: 1,
         sourceSpan,
         suggestedFix: "Reinsert the preserved Greek or Hebrew span unchanged."
-      });
+      }));
     }
 
     return { defects, passed: defects.length === 0 };

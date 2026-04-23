@@ -56,6 +56,8 @@ Provider keys are read from `.env`. Start from `.env.example`.
 
 The calibration runtime now uses BAML-generated TypeScript clients for translation, repair, and review stages. Prompt source-of-truth lives in `baml_src/`; the prompt-bundle directory now carries bundle metadata only. Generated client code is built from `baml_src/`, and the repo scripts run `pnpm baml:generate` automatically before `build`, `test`, and `typecheck`.
 
+The workflow now leans on deterministic lint before judge review. Cheap structure and surface-form issues are linted first, judge review is reserved for semantic faithfulness and doctrinal ambiguity, and review findings are routed into explicit accept, repair, or escalate decisions with persisted routing artifacts.
+
 Prompt-level BAML tests live beside the functions in `baml_src/calibration.baml`. Run them directly with:
 
 ```bash

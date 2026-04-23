@@ -64,6 +64,7 @@ export class FinalizeNode {
       reviewPayload: state.reviewPayload,
       findingsMarkdown,
       evaluationReport: report,
+      routingSummary: report.routing_summary,
       stageRecords: state.stageRecords
     });
     await this.artifactWriter.removeTransientPublishableArtifacts(state.runDirectories);
@@ -114,6 +115,7 @@ export class FinalizeNode {
       },
       evaluationReport: report,
       unresolvedDefects,
+      routingSummary: report.routing_summary,
       stageRecords: state.stageRecords
     });
     await this.artifactWriter.removeTransientPublishableArtifacts(state.runDirectories);
@@ -207,6 +209,19 @@ export class FinalizeNode {
                 .filter((defect) => defect.code === "output_shape_violation")
                 .map((defect) => defect.message)
                 .join("; ")
+      },
+      {
+        id: "prose-structure",
+        status: latestLint.checks.proseStructure,
+        details:
+          latestLint.hardDefects.filter((defect) =>
+            ["unbalanced_delimiter", "citation_shape_damage"].includes(defect.code)
+          ).length === 0
+            ? "No hard prose-structure defects were found in the translation output."
+            : latestLint.hardDefects
+                .filter((defect) => ["unbalanced_delimiter", "citation_shape_damage"].includes(defect.code))
+                .map((defect) => defect.message)
+                .join("; ")
       }
     ];
 
@@ -251,6 +266,13 @@ export class FinalizeNode {
       glossary_misses: latestLint.hardDefects
         .filter((defect) => defect.code === "glossary_target_missing")
         .map((defect) => defect.evidence.join(" -> ")),
+      routing_summary: {
+        lint_detected: state.lintResults.flatMap((result) => [...result.hardDefects, ...result.softDefects]).map((defect) => defect.id),
+        judge_detected: state.reviewPayload?.findings.map((finding) => finding.id) ?? [],
+        auto_repair_task_ids: state.repairTaskHistory.map((task) => task.taskId),
+        decisions: state.routingHistory.map((entry) => entry.decision),
+        escalated: terminalStatus === "escalated"
+      },
       terminal_status: terminalStatus
     };
   }
@@ -260,12 +282,18 @@ export class FinalizeNode {
       pass: true,
       hardDefects: [],
       softDefects: [],
+      routingSummary: {
+        autoRepair: 0,
+        judgeReview: 0,
+        logOnly: 0
+      },
       checks: {
         preservedLanguageIntegrity: "pass",
         glossaryAdherence: "pass",
         scriptureReferenceNormalization: "pass",
         dutchResidue: "pass",
-        outputShape: "pass"
+        outputShape: "pass",
+        proseStructure: "pass"
       }
     };
   }

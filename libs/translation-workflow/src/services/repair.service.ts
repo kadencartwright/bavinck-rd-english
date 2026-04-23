@@ -1,15 +1,15 @@
 import { Injectable } from "@nestjs/common";
 
-import { LintDefect, ModelProfile, PromptBundleMetadata } from "@calibration-domain";
+import { ModelProfile, PromptBundleMetadata, RepairTask } from "@calibration-domain";
 import { BamlCalibrationClient } from "@provider-clients";
-import type { RepairDefect } from "@provider-clients";
+import type { RepairTask as ProviderRepairTask } from "@provider-clients";
 
 export interface RepairExecutionInput {
   runId: string;
   sliceId: string;
   repairRound: number;
   currentDraft: string;
-  hardDefects: LintDefect[];
+  repairTasks: RepairTask[];
   modelProfile: ModelProfile;
   promptBundleMetadata: PromptBundleMetadata;
   stream?: boolean;
@@ -28,7 +28,7 @@ export class RepairService {
       sliceId: input.sliceId,
       repairRound: input.repairRound,
       currentDraft: input.currentDraft,
-      hardDefects: input.hardDefects.map((defect) => this.toRepairDefect(defect)),
+      repairTasks: input.repairTasks.map((task) => this.toProviderRepairTask(task)),
       stream: input.stream ?? false,
       onStreamDelta: input.onStreamDelta
     });
@@ -69,16 +69,19 @@ export class RepairService {
     };
   }
 
-  private toRepairDefect(defect: LintDefect): RepairDefect {
+  private toProviderRepairTask(task: RepairTask): ProviderRepairTask {
     return {
-      code: defect.code,
-      severity: defect.severity,
-      message: defect.message,
-      evidence: defect.evidence,
-      ...(defect.sourceSpan ? { sourceSpan: defect.sourceSpan } : {}),
-      ...(defect.foundSpan ? { foundSpan: defect.foundSpan } : {}),
-      ...(defect.locationHint ? { locationHint: defect.locationHint } : {}),
-      ...(defect.suggestedFix ? { suggestedFix: defect.suggestedFix } : {})
+      taskId: task.taskId,
+      originStage: task.originStage,
+      findingIds: task.findingIds,
+      handler: task.handler,
+      scope: task.scope,
+      repairability: task.repairability,
+      instructions: task.instructions,
+      evidence: task.evidence,
+      ...(task.sourceSpan ? { sourceSpan: task.sourceSpan } : {}),
+      ...(task.draftSpan ? { draftSpan: task.draftSpan } : {}),
+      ...(task.locationHint ? { locationHint: task.locationHint } : {})
     };
   }
 }

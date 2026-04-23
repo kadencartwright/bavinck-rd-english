@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 
 import { GlossaryDoc, LintDefect } from "@calibration-domain";
 
+import { createLintDefect, createLintId } from "./rule-helpers";
+
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/gu, String.raw`\$&`);
 }
@@ -20,13 +22,19 @@ export class GlossaryRule {
       if (targetPattern.test(draft)) {
         continue;
       }
-      defects.push({
+      defects.push(createLintDefect({
+        id: createLintId("glossary", defects.length),
         code: "glossary_target_missing",
+        category: "glossary",
         severity: "hard",
+        repairability: "auto",
+        routingTarget: "repair",
+        scope: "document",
         message: `Glossary target '${term.target}' is missing for source term '${term.source}'.`,
         evidence: [term.source, term.target],
+        confidence: 0.99,
         suggestedFix: "Restore the expected glossary target in the translated passage."
-      });
+      }));
     }
     return { defects, passed: defects.length === 0 };
   }

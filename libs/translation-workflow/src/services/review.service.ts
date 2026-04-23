@@ -82,17 +82,32 @@ export class ReviewService {
   private normalizeReviewPayload(payload: {
     summary: string;
     checks: {
-      proseQuality: { status: "pass" | "fail" | "incomplete"; details: string };
-      reviewFlagging: { status: "pass" | "fail" | "incomplete"; details: string };
+      semanticFaithfulness: { status: "pass" | "fail" | "incomplete"; details: string };
+      doctrinalAmbiguity: { status: "pass" | "fail" | "incomplete"; details: string };
+      reviewCoverage: { status: "pass" | "fail" | "incomplete"; details: string };
     };
-    findings: Array<{ severity: "high" | "medium" | "low"; category: string; detail: string }>;
+    findings: Array<{
+      id: string;
+      severity: "high" | "medium" | "low" | "info";
+      category: string;
+      detail: string;
+      evidence: string[];
+      repairability: "auto" | "needs_judge" | "manual";
+      disposition: "accept" | "repair" | "re_review" | "escalate";
+      scope: "document" | "paragraph" | "sentence" | "span";
+      confidence: number;
+      locationHint?: string;
+      draftSpan?: string;
+      repairInstruction?: string;
+    }>;
     recommendedFollowUp: string[];
   }): ReviewPayload {
     return {
       summary: payload.summary,
       checks: {
-        "prose-quality": payload.checks.proseQuality,
-        "review-flagging": payload.checks.reviewFlagging
+        "semantic-faithfulness": payload.checks.semanticFaithfulness,
+        "doctrinal-ambiguity": payload.checks.doctrinalAmbiguity,
+        "review-coverage": payload.checks.reviewCoverage
       },
       findings: payload.findings,
       recommended_follow_up: payload.recommendedFollowUp

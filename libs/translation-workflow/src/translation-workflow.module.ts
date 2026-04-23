@@ -10,10 +10,13 @@ import { FinalizeNode } from "./nodes/finalize.node";
 import { LintNode } from "./nodes/lint.node";
 import { LoadInputsNode } from "./nodes/load-inputs.node";
 import { RepairNode } from "./nodes/repair.node";
+import { RouteReviewNode } from "./nodes/route-review.node";
 import { ReviewNode } from "./nodes/review.node";
 import { TranslateNode } from "./nodes/translate.node";
 import { RepairService } from "./services/repair.service";
+import { RepairTaskService } from "./services/repair-task.service";
 import { ReviewService } from "./services/review.service";
+import { ReviewRoutingService } from "./services/review-routing.service";
 import { TranslationService } from "./services/translation.service";
 import { TranslationWorkflowService } from "./services/translation-workflow.service";
 
@@ -22,13 +25,16 @@ import { TranslationWorkflowService } from "./services/translation-workflow.serv
   providers: [
     TranslationService,
     RepairService,
+    RepairTaskService,
     ReviewService,
+    ReviewRoutingService,
     TranslationWorkflowService,
     LoadInputsNode,
     TranslateNode,
     LintNode,
     RepairNode,
     ReviewNode,
+    RouteReviewNode,
     FinalizeNode,
     CalibrationGraphService
   ],
@@ -36,7 +42,9 @@ import { TranslationWorkflowService } from "./services/translation-workflow.serv
     CalibrationGraphService,
     TranslationService,
     RepairService,
+    RepairTaskService,
     ReviewService,
+    ReviewRoutingService,
     TranslationWorkflowService
   ]
 })
