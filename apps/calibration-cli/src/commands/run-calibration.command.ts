@@ -12,7 +12,6 @@ interface RunCalibrationCliOptions {
   skipProviderSmokeTest?: boolean;
   smokeTestOnly?: boolean;
   streamTranslation?: boolean;
-  streamLlm?: boolean;
 }
 
 @Injectable()
@@ -35,7 +34,6 @@ export class RunCalibrationCommand {
       `run id: ${bundle.runManifest.run_id} | slice: ${bundle.runManifest.slice_id} | output: ${resolved.outputRoot} | eval: ${resolved.evalRoot}`
     );
     console.log(`translation streaming: ${resolved.streamTranslation ? "enabled" : "disabled"}`);
-    console.log(`llm live streaming: ${resolved.streamLlm ? "enabled" : "disabled"}`);
 
     if (!resolved.skipProviderSmokeTest) {
       console.log("running provider smoke tests");
@@ -89,9 +87,6 @@ export class RunCalibrationCommand {
         case "--stream-translation":
           options.streamTranslation = true;
           break;
-        case "--stream-llm":
-          options.streamLlm = true;
-          break;
         default:
           if (arg.startsWith("--run-manifest=")) {
             options.runManifest = arg.slice("--run-manifest=".length);
@@ -111,10 +106,6 @@ export class RunCalibrationCommand {
           }
           if (arg === "--stream-translation=true") {
             options.streamTranslation = true;
-            break;
-          }
-          if (arg === "--stream-llm=true") {
-            options.streamLlm = true;
             break;
           }
           throw new Error(`Unknown argument '${arg}'.`);

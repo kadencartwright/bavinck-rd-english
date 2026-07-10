@@ -3,7 +3,6 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 import yaml from "js-yaml";
-import type { CalibrationReview } from "@provider-clients";
 
 export const ACTUAL_MANIFEST_PATH =
   "config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json";
@@ -62,38 +61,43 @@ export function buildBrokenTranslation(excerptText: string): string {
   );
 }
 
-export function buildStageUsage() {
+export function buildReviewResponse(summary = "Review completed.") {
   return {
-    prompt_tokens: 44,
-    completion_tokens: 55,
-    total_tokens: 99,
-    reasoning_tokens: 7,
-    cached_tokens: 3
-  };
-}
-
-export function buildReviewResult(summary = "Review completed."): CalibrationReview {
-  return {
-    summary,
-    checks: {
-      semanticFaithfulness: { status: "pass" as const, details: "Meaning tracks the source." },
-      doctrinalAmbiguity: { status: "pass" as const, details: "No unresolved doctrinal ambiguity detected." },
-      reviewCoverage: { status: "pass" as const, details: "Findings include routing metadata when needed." }
+    usage: {
+      prompt_tokens: 44,
+      completion_tokens: 55,
+      total_tokens: 99,
+      completion_tokens_details: { reasoning_tokens: 7 },
+      prompt_tokens_details: { cached_tokens: 3 }
     },
-    findings: [
+    choices: [
       {
-        id: "review-1",
-        severity: "info" as const,
-        category: "style",
-        detail: "Minor note.",
-        evidence: ["Readability is acceptable."],
-        repairability: "auto" as const,
-        disposition: "accept" as const,
-        scope: "sentence" as const,
-        confidence: 0.8,
-        repairInstruction: "No repair required."
+        message: {
+          content: JSON.stringify({
+            summary,
+            checks: {
+              "semantic-faithfulness": { status: "pass", details: "The draft preserves the source meaning." },
+              "doctrinal-ambiguity": { status: "pass", details: "No material ambiguity was introduced." },
+              "review-coverage": { status: "pass", details: "The review covers the complete fixture." }
+            },
+            findings: [
+              {
+                id: "review-style-note",
+                severity: "low",
+                category: "style",
+                detail: "Minor note.",
+                evidence: ["The fixture remains readable."],
+                repairability: "manual",
+                disposition: "accept",
+                scope: "document",
+                confidence: 0.9
+              }
+            ],
+            recommended_follow_up: ["Keep comparing runs."]
+          })
+        },
+        finish_reason: "stop"
       }
-    ],
-    recommendedFollowUp: ["Keep comparing runs."]
+    ]
   };
 }

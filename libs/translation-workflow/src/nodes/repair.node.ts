@@ -28,9 +28,6 @@ export class RepairNode {
     this.logger.log(
       `Starting repair round ${nextRepairRound} for run ${state.runId}; tasks=${repairTasks.length}`
     );
-    if (state.streamLlm) {
-      process.stdout.write(`\n[repair stream start round=${nextRepairRound}]\n`);
-    }
     const result = await this.repairService.execute({
       runId: state.runId,
       sliceId: state.runManifest?.slice_id ?? state.runId,
@@ -38,21 +35,8 @@ export class RepairNode {
       currentDraft: state.currentDraft,
       repairTasks,
       modelProfile: state.modelProfile,
-      promptBundleMetadata: state.promptBundleMetadata,
-      stream: state.streamLlm,
-      onStreamDelta: state.streamLlm
-        ? (fieldName, text) => {
-            if (fieldName === "reasoning_content") {
-              process.stdout.write(`\n[repair reasoning] ${text}`);
-            } else {
-              process.stdout.write(text);
-            }
-          }
-        : undefined
+      promptBundleMetadata: state.promptBundleMetadata
     });
-    if (state.streamLlm) {
-      process.stdout.write(`\n[repair stream end round=${nextRepairRound}]\n`);
-    }
     await this.artifactWriter.writeRepairRequest(state.runDirectories, nextRepairRound, result.requestRecord);
     await this.artifactWriter.writeRepairTasks(state.runDirectories, nextRepairRound, repairTasks);
     await this.artifactWriter.writeTranslationRound(state.runDirectories, nextRepairRound, result.text, result.response);

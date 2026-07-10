@@ -1,0 +1,175 @@
+# Index of More or Less Expounded Passages of Scripture
+
+- Gen. 1 — II, 457f.
+- Gen. 1:1–3 — II, 397, 457f., 460, 469, 478. According to the restitution theory II, 473; III, 69.
+- Gen. 1:26, 27 — II, 508, 509, 512.
+- Gen. 2:4b f. — II, 490.
+- Gen. 2:7 — II, 536, 540.
+- Gen. 2:17 — III, 155, 176, 187.
+- Gen. 3 — III, 35f., 108, 191.
+- Gen. 3:7f. — III, 188.
+- Gen. 3:9–13 — III, 188f.
+- Gen. 3:14, 15 — III, 189, 213.
+- Gen. 3:16 — III, 189.
+- Gen. 3:17–19 — III, 190.
+- Gen. 3:22–24 — III, 190.
+- Gen. 4:26 — IV, 3.
+- Gen. 6:2 — II, 436.
+- Gen. 9:1–7 — II, 560.
+- Gen. 14:18 — IV, 337.
+- Gen. 18 — II, 231.
+- Exod. 6:3 — II, 109f.
+- Deut. 32:8 — II, 449.
+- Josh. 10:12, 13 — II, 465f.
+- 1 Sam. 28 — IV, 396f.
+- 2 Kings 20:9 — II, 465f.
+- Job — III, 32.
+- Job 33:23 — II, 450.
+- Job 38:7 — II, 434.
+- Ps. 2:7 — II, 243.
+- Ps. 51:7 — III, 105.
+- Ps. 73 — III, 32.
+- Ps. 104:4 — II, 437.
+- Prov. 8:22f. — II, 242.
+- Isa. 53 — III, 363.
+- Isa. 53:11 — III, 531.
+- Isa. 65:20 — IV, 433.
+- Ezek. 16:53–63 — IV, 403f.
+- Ezek. 38 and 39 — IV, 462.
+- Ezek. 40–48 — IV, 431, 442f.
+- Dan. 10:13, 20 — II, 449.
+- Dan. 12:3 — III, 531.
+- Hos. 6:7 — II, 547.
+- Mic. 5:1 — II, 243; III, 231.
+- Hab. 1:4 — III, 17.
+- Zech. 6:13 — III, 203.
+- Mal. 1:11 — IV, 337.
+
+- Matt. 5:22 — III, 99f.; IV, 408.
+- Matt. 7:12 — III, 77.
+- Matt. 10:23 — IV, 477.
+- Matt. 11:23 — IV, 372.
+- Matt. 12:31 — III, 101.
+- Matt. 12:32 — IV, 409, 510.
+- Matt. 16:18 — IV, 4f., 71, 100f., 372.
+- Matt. 16:19 — IV, 135.
+- Matt. 16:28 — IV, 476.
+- Matt. 18:10 — II, 450.
+- Matt. 18:15–17 — IV, 4f., 172.
+- Matt. 20:1–16 — IV, 526.
+- Matt. 20:28 — III, 363.
+- Matt. 22:30 — II, 437.
+- Matt. 23:37–39 — IV, 450.
+- Matt. 24 — IV, 457, 477.
+- Matt. 24:14 — IV, 465.
+- Matt. 24:29 — IV, 477.
+- Matt. 24:34 — IV, 477.
+- Matt. 26:39–42 — III, 355.
+- Matt. 26:64 — IV, 476.
+- Matt. 28:19 — IV, 257, 258f., 270, 274.
+- Mark 10:45 — III, 363.
+- Luke 13:33–35 — IV, 450.
+- Luke 15:7 — II, 450.
+- Luke 16:23 — IV, 373.
+- Luke 21:24 — IV, 450.
+- Luke 22:19 — IV, 338.
+- Luke 22:32 — IV, 100, 101f.
+- Luke 23:34 — III, 400.
+- Luke 23:43 — IV, 373.
+- John 1:1–18 — III, 261.
+- John 3:5 — IV, 295.
+- John 3:6 — III, 105.
+- John 6 — IV, 330, 346.
+- John 7:39 — III, 430.
+- John 8:44 — III, 39.
+- John 14:18–24 — IV, 476.
+- John 14:28 — II, 245.
+- John 21:15–17 — IV, 100, 102.
+- Acts 2:39 — IV, 287.
+- Acts 3:19–21 — IV, 451.
+- Acts 6 — IV, 79f.
+- Acts 11:30 — IV, 80.
+- Acts 13:48 — II, 316.
+- Acts 14:23 — IV, 79.
+- Acts 15 — IV, 180f.
+- Acts 19:1–7 — IV, 256f., 258.
+- Rom. 1:3, 4 — III, 415.
+- Rom. 2:12–16 — III, 75.
+- Rom. 3:25, 26 — III, 312, 339, 533.
+- Rom. 4:17 — II, 399.
+- Rom. 5:12–21 — II, 547; III, 75, 109f.
+- Rom. 7:7–26 — III, 106f., 561.
+- Rom. 8:30 — III, 485.
+- Rom. 9 — II, 316f., 318.
+- Rom. 11:11–32 — IV, 452f.
+- 1 Cor. 3:12–15 — IV, 409.
+- 1 Cor. 5:1f. — IV, 173.
+- 1 Cor. 6:2, 3 — IV, 494.
+- 1 Cor. 6:11 — III, 531.
+- 1 Cor. 7:14 — IV, 288.
+- 1 Cor. 9:9 — III, 18.
+- 1 Cor. 10:2 — IV, 258.
+- 1 Cor. 10:15 — I, 336.
+- 1 Cor. 10:17 — IV, 347.
+- 1 Cor. 10:21 — IV, 338.
+- 1 Cor. 11:10 — II, 437.
+- 1 Cor. 11:30 — IV, 346.
+- 1 Cor. 15:20–28 — IV, 467.
+- 1 Cor. 15:21f. — III, 109.
+- 1 Cor. 15:29 — IV, 349, 415.
+- 1 Cor. 15:35–38 — IV, 488.
+- 1 Cor. 15:45–49 — II, 545; III, 65f.
+- 2 Cor. 3:17 — III, 417.
+- 2 Cor. 5:1–4 — IV, 390.
+- 2 Cor. 5:21 — III, 366.
+- Gal. 3:13 — III, 366.
+- Eph. 1:4 — II, 380, 382.
+- Eph. 1:10 — II, 444; III, 406.
+- Eph. 1:23 — III, 417f.
+- Eph. 2:3 — III, 105.
+- Eph. 4:9 — III, 377.
+- Eph. 4:11 — IV, 76f.
+- Eph. 4:24 — II, 509.
+- Eph. 5:26 — IV, 275f.
+- Phil. 2:5–11 — III, 375, 412.
+- Phil. 3:9 — III, 536.
+- Col. 1:15 — II, 245.
+- Col. 1:19, 20 — II, 444; III, 406.
+- Col. 2:11, 12 — IV, 284.
+- Col. 3:10 — II, 509.
+- 1 Thess. 4:13–18 — IV, 467.
+- 2 Thess. 2 — IV, 463.
+- 1 Tim. 2:4 — according to Augustine II, 321; III, 391; according to the Semi-Pelagians III, 391f.; according to the Scholastics II, 323; III, 393; cf. III, 398f.
+- 1 Tim. 3:6 — III, 39.
+- 1 Tim. 3:15 — IV, 167.
+- 1 Tim. 5:17, 18 — IV, 74, 78.
+- 2 Tim. 3:16 — I, 329f., 342.
+- Titus 3:5 — III, 500.
+- Titus 3:7 — III, 532.
+- Titus 3:10 — IV, 174.
+- Heb. 1:3 — II, 244.
+- Heb. 2:10 — III, 412.
+- Heb. 2:17 — III, 182.
+- Heb. 5:7 — III, 355.
+- Heb. 5:9 — III, 412.
+- Heb. 6:4–8 — III, 103, 567.
+- Heb. 7:22 — III, 204.
+- Heb. 10:25–29 — III, 103, 567.
+- Heb. 11:3 — II, 399.
+- Heb. 12:22–24 — IV, 417.
+- 1 Pet. 1:23 — III, 500f.
+- 1 Pet. 3:19–21 — III, 377, 380, 422; IV, 404f.
+- 1 Pet. 3:21 — IV, 260.
+- 1 Pet. 4:6 — IV, 405.
+- 2 Pet. 1:19–21 — I, 345.
+- 2 Pet. 2:18–22 — III, 567.
+- 1 John 2:17 — IV, 513.
+- 1 John 5:7 — II, 239.
+- 1 John 5:16 — III, 103.
+- Jude 6 — III, 39.
+- Revelation of John — IV, 460f.
+- Rev. 1:20f. — II, 450; IV, 78, 85, 97.
+- Rev. 8:3 — II, 450.
+- Rev. 20 — IV, 462f.
+- Rev. 21 and 22 — IV, 515f.
+- Rev. 22:11 — III, 532.

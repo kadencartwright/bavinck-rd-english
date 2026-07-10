@@ -71,8 +71,7 @@ export class CalibrationGraphService {
       evalRoot: options.evalRoot,
       allowSourceDrift: options.allowSourceDrift,
       maxRepairRounds: options.maxRepairRounds,
-      streamTranslation: options.streamTranslation,
-      streamLlm: options.streamLlm
+      streamTranslation: options.streamTranslation
     })) as CalibrationRuntimeState;
   }
 }

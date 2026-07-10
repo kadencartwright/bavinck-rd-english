@@ -1,8 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 import { ModelProfile, PromptBundleMetadata, RepairTask } from "@calibration-domain";
-import { BamlCalibrationClient } from "@provider-clients";
-import type { RepairTask as ProviderRepairTask } from "@provider-clients";
+import { OpenAiCompatibleClient } from "@provider-clients";
 
 interface RepairExecutionInput {
   runId: string;
@@ -12,32 +11,36 @@ interface RepairExecutionInput {
   repairTasks: RepairTask[];
   modelProfile: ModelProfile;
   promptBundleMetadata: PromptBundleMetadata;
-  stream?: boolean;
-  onStreamDelta?: (fieldName: "content" | "reasoning_content", text: string) => void;
 }
 
 @Injectable()
 export class RepairService {
-  constructor(private readonly providerClient: BamlCalibrationClient) {}
+  constructor(private readonly providerClient: OpenAiCompatibleClient) {}
 
   async execute(input: RepairExecutionInput) {
     const stage = input.modelProfile.stages.translation;
-    const result = await this.providerClient.repair({
-      stage,
-      runId: input.runId,
-      sliceId: input.sliceId,
-      repairRound: input.repairRound,
-      currentDraft: input.currentDraft,
-      repairTasks: input.repairTasks.map((task) => this.toProviderRepairTask(task)),
-      stream: input.stream ?? false,
-      onStreamDelta: input.onStreamDelta
-    });
-
-    const text = `${result.value.trim()}\n`;
-    if (!text.trim()) {
-      throw new Error("Repair provider returned empty output.");
-    }
-
+    const messages = [
+      {
+        role: "system" as const,
+        content:
+          "You repair an English translation draft. Apply the smallest possible edits that complete the listed repair tasks. " +
+          "Return only the corrected translated passage with the original paragraph structure preserved."
+      },
+      {
+        role: "user" as const,
+        content: [
+          `Run ID: ${input.runId}`,
+          `Slice ID: ${input.sliceId}`,
+          `Repair round: ${input.repairRound}`,
+          "",
+          "Current draft:",
+          input.currentDraft.trim(),
+          "",
+          "Repair tasks:",
+          JSON.stringify(input.repairTasks, null, 2)
+        ].join("\n")
+      }
+    ];
     const requestRecord = {
       run_id: input.runId,
       slice_id: input.sliceId,
@@ -47,41 +50,40 @@ export class RepairService {
       provider: stage.provider,
       model: stage.model,
       temperature: stage.temperature,
-      messages: result.messages,
-      prompt_files: result.promptFiles
+      messages,
+      prompt_files: {
+        ...input.promptBundleMetadata.prompt_files,
+        repair_prompt: "inline"
+      }
     };
-
+    const response = await this.providerClient.createChatCompletion({
+      providerName: stage.provider,
+      stageName: "repair",
+      model: stage.model,
+      messages,
+      temperature: stage.temperature,
+      maxTokens: stage.max_tokens,
+      timeoutSeconds: stage.timeout_seconds,
+      stream: false
+    });
+    const text = `${this.providerClient.extractMessageText(response).trim()}\n`;
+    if (!text.trim()) {
+      throw new Error("Repair provider returned empty output.");
+    }
     return {
       requestRecord,
-      response: result.response,
+      response,
       text,
-      prompt: result.prompt,
+      prompt: {
+        system: messages[0].content,
+        user: messages[1].content
+      },
       stageRecord: {
         provider: stage.provider,
         model: stage.model,
         temperature: stage.temperature,
-        promptFiles: result.promptFiles,
-        finishReason: result.finishReason,
-        maxTokens: stage.max_tokens,
-        timeoutSeconds: stage.timeout_seconds,
-        usage: result.usage
+        promptFiles: requestRecord.prompt_files
       }
-    };
-  }
-
-  private toProviderRepairTask(task: RepairTask): ProviderRepairTask {
-    return {
-      taskId: task.taskId,
-      originStage: task.originStage,
-      findingIds: task.findingIds,
-      handler: task.handler,
-      scope: task.scope,
-      repairability: task.repairability,
-      instructions: task.instructions,
-      evidence: task.evidence,
-      ...(task.sourceSpan ? { sourceSpan: task.sourceSpan } : {}),
-      ...(task.draftSpan ? { draftSpan: task.draftSpan } : {}),
-      ...(task.locationHint ? { locationHint: task.locationHint } : {})
     };
   }
 }
