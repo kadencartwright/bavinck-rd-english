@@ -38,6 +38,7 @@ mkdir -p "$(dirname "${output_path}")"
   --variable=geometry:margin=1in \
   --variable=colorlinks:true \
   --output="${output_path}" \
+  "${repo_root}/publication/public-domain-dedication.md" \
   "${source_files[@]}"
 
 echo "Wrote ${output_path} from ${#source_files[@]} Markdown files."

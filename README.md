@@ -1,6 +1,6 @@
 # Bavinck's *Reformed Dogmatics* in English
 
-This repository contains a public-domain English translation of Herman Bavinck's *Gereformeerde Dogmatiek*, based on the public-domain Dutch text of the first edition.
+This repository contains a public-domain English translation of Herman Bavinck's *Gereformeerde Dogmatiek*, based on the public-domain Dutch text of the first edition. The translation is dedicated to the public domain under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ## Contents
 
@@ -29,4 +29,4 @@ Generated publication files are intentionally excluded from Git. They are availa
 
 ## License
 
-See [LICENSE](LICENSE). The project goal is to publish the English text as a public-domain edition.
+To the extent possible under law, the translator and contributors waive all copyright and related rights they hold in the English translation and publication artifacts under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/). The publication scripts remain available under the MIT License. See [LICENSE](LICENSE) for the complete repository licensing statement.
