@@ -4,6 +4,9 @@ __pycache__/
 node_modules/
 .fallow/
 dist/
+# Generated publication artifacts (including custom output paths).
+*.tex
+*.epub
 # Transient raw calibration payloads, retry state, and debug logs live under runs/.
 # The durable Git-tracked calibration artifact surface is data/calibration/evals/.
 data/calibration/runs/
