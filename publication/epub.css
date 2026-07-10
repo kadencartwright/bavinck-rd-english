@@ -1,0 +1,69 @@
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: "Noto Serif", "DejaVu Serif", "Times New Roman", serif;
+  line-height: 1.55;
+  margin: 5%;
+  text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  break-after: avoid;
+  font-family: "Noto Sans", "DejaVu Sans", Arial, sans-serif;
+  line-height: 1.2;
+  margin-block: 1.5em 0.75em;
+  text-align: left;
+}
+
+h1 {
+  font-size: 1.7em;
+}
+
+h2 {
+  font-size: 1.35em;
+}
+
+h3 {
+  font-size: 1.15em;
+}
+
+p {
+  hyphens: auto;
+  margin-block: 0 0.75em;
+  orphans: 2;
+  widows: 2;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+  margin-block: 1em;
+  width: 100%;
+}
+
+th,
+td {
+  border-bottom: 1px solid #999;
+  padding: 0.25em 0.4em;
+  text-align: left;
+  vertical-align: top;
+}
+
+blockquote {
+  margin-inline: 1.5em;
+}
+
+code,
+pre {
+  white-space: pre-wrap;
+}
+
+[dir="rtl"] {
+  direction: rtl;
+  unicode-bidi: isolate;
+}

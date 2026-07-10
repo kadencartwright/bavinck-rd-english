@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+output_path="${1:-${repo_root}/dist/bavinck-reformed-dogmatics.epub}"
+pandoc_bin="${PANDOC:-pandoc}"
+
+if ! command -v "${pandoc_bin}" >/dev/null 2>&1; then
+  echo "pandoc is required. Install it or set PANDOC=/path/to/pandoc." >&2
+  exit 1
+fi
+
+mapfile -d '' source_files < <(
+  find "${repo_root}/translation" -type f -name '*.md' -print0 | sort -z
+)
+
+if [[ ${#source_files[@]} -eq 0 ]]; then
+  echo "No Markdown translation files were found under ${repo_root}/translation." >&2
+  exit 1
+fi
+
+mkdir -p "$(dirname "${output_path}")"
+
+"${pandoc_bin}" \
+  --from=gfm \
+  --to=epub3 \
+  --standalone \
+  --file-scope \
+  --table-of-contents \
+  --toc-depth=2 \
+  --split-level=1 \
+  --metadata-file="${repo_root}/publication/metadata.yaml" \
+  --css="${repo_root}/publication/epub.css" \
+  --output="${output_path}" \
+  "${source_files[@]}"
+
+echo "Wrote ${output_path} from ${#source_files[@]} Markdown files."

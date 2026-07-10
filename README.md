@@ -20,15 +20,19 @@ The project is not a general translation sandbox. Its purpose is specific:
 
 ## Current State
 
-The repository is currently focused on pipeline calibration rather than final publication output.
+The complete four-volume English translation is available under `translation/`.
+It contains 621 Markdown files and approximately 898,000 words, including the
+authorial front matter, all 56 sections, the expanded contents, and the
+Scripture, name, and subject indexes.
 
-At the moment, it contains tooling for:
+The repository also retains tooling for:
 
 - fetching Project Gutenberg source files for the four Dutch volumes
 - extracting clean source text and metadata
 - defining calibration slices and run manifests
 - executing translation and review runs with model-backed prompts
 - storing commit-safe evaluation bundles under `data/calibration/evals/`
+- generating publication-ready LaTeX and EPUB outputs from the translation
 
 ## Repository Layout
 
@@ -39,6 +43,10 @@ At the moment, it contains tooling for:
 - `data/clean/`: cleaned Dutch source text
 - `data/metadata/`: extracted metadata for each source volume
 - `data/calibration/`: slices, transient runs, and durable eval bundles
+- `translation/`: complete English translation, ordered by volume and section
+- `publication/`: shared publication metadata and EPUB styling
+- `scripts/generate-latex`: generate the complete standalone LaTeX book source
+- `scripts/generate-epub`: generate the complete EPUB 3 ebook
 - `plan.md`: working architecture notes for the larger translation effort
 
 ## Basic Workflow
@@ -82,6 +90,30 @@ Artifacts are written under `data/calibration/glossary-candidates/<source_id>/`:
 - `metadata-overview.json`: per-candidate frequency/spread summary for emitted candidates plus counts for retained and excluded candidates
 
 Operator guidance for mining and glossary triage lives in [docs/glossary-candidate-mining.md](docs/glossary-candidate-mining.md).
+
+## Publication Outputs
+
+The complete English translation is stored as ordered Markdown files under
+`translation/volume-1/` through `translation/volume-4/`. Publication scripts
+require [Pandoc](https://pandoc.org/) and may be run from any directory.
+
+Generate a standalone LaTeX book source:
+
+```bash
+./scripts/generate-latex
+```
+
+Generate an EPUB 3 ebook:
+
+```bash
+./scripts/generate-epub
+```
+
+The default outputs are `dist/bavinck-reformed-dogmatics.tex` and
+`dist/bavinck-reformed-dogmatics.epub`. Pass a path as the first argument to
+either script to override its output location. If Pandoc is not on `PATH`, set
+`PANDOC=/path/to/pandoc` when invoking a script. The ignored `dist/` directory
+keeps generated publication files out of version control.
 
 ## License
 
