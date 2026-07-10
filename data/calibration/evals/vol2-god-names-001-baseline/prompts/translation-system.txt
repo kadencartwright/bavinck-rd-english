@@ -1,6 +1,0 @@
-Translate Dutch theological prose into formal English suitable for a scholarly first draft.
-Preserve Greek, Hebrew, Latin, and German spans exactly as they appear in the source.
-Translate Dutch Scripture references, book names, and abbreviations into standard English forms.
-Retain citations and paragraph structure.
-Prefer glossary-approved terminology when the glossary supplies a required target phrase.
-Do not add explanations, headings, or notes outside the translated passage.

@@ -1,8 +1,0 @@
-Review the generated translation against the source excerpt, glossary, and style guide.
-Separate pass-fail checks from narrative findings.
-Flag preserved-language corruption, glossary drift, doctrinal ambiguity, and unnatural English prose.
-Treat Dutch Scripture references, book names, and abbreviations left untranslated in the English output as defects.
-Return exactly one JSON object and nothing else.
-Do not emit markdown, code fences, bullet lists, checklists, or explanatory prose outside the JSON object.
-Use severity values high, medium, or low only.
-Keep the response concise: one summary paragraph, at most 3 findings, and at most 3 follow-up actions.

@@ -1,122 +1,32 @@
-# Bavinck `Reformed Dogmatics` in English
+# Bavinck's *Reformed Dogmatics* in English
 
-This repository exists to create a public domain English copy of Herman Bavinck's *Reformed Dogmatics* from the public domain Dutch text of *Gereformeerde Dogmatiek*.
+This repository contains a public-domain English translation of Herman Bavinck's *Gereformeerde Dogmatiek*, based on the public-domain Dutch text of the first edition.
 
-The code and data here support that goal by:
+## Contents
 
-- downloading and normalizing the Dutch source text
-- carving the source into calibration slices
-- running translation and review prompts against those slices
-- preserving evaluation artifacts so the translation process can be improved and audited
+- `data/raw/`: original Project Gutenberg source files for the four Dutch volumes
+- `data/clean/`: normalized Dutch source text
+- `data/metadata/`: source metadata
+- `translation/`: the complete English translation, arranged in 621 Markdown files across four volumes
+- `publication/`: publication metadata and EPUB styling
+- `scripts/generate-latex`: generate a standalone LaTeX book source
+- `scripts/generate-epub`: generate an EPUB 3 ebook
 
-## Purpose
+The translation contains approximately 898,000 words. It includes Bavinck's front matter, all 56 sections, expanded contents, and the Scripture, name, and subject indexes.
 
-The project is not a general translation sandbox. Its purpose is specific:
+## Generate publication files
 
-- produce a faithful English rendering of Bavinck's *Reformed Dogmatics*
-- work from public domain Dutch source texts
-- preserve scholarly traceability through manifests, prompts, and evaluation bundles
-- move toward an English text that can be published as a public domain edition
-
-## Current State
-
-The complete four-volume English translation is available under `translation/`.
-It contains 621 Markdown files and approximately 898,000 words, including the
-authorial front matter, all 56 sections, the expanded contents, and the
-Scripture, name, and subject indexes.
-
-The repository also retains tooling for:
-
-- fetching Project Gutenberg source files for the four Dutch volumes
-- extracting clean source text and metadata
-- defining calibration slices and run manifests
-- executing translation and review runs with model-backed prompts
-- storing commit-safe evaluation bundles under `data/calibration/evals/`
-- generating publication-ready LaTeX and EPUB outputs from the translation
-
-## Repository Layout
-
-- `src/preprocessing/`: source download and ingestion utilities
-- `src/calibration/`: slice construction, run execution, validation, and eval bundling
-- `config/calibration/`: model profiles, schemas, and run manifests
-- `data/raw/`: raw Project Gutenberg source files
-- `data/clean/`: cleaned Dutch source text
-- `data/metadata/`: extracted metadata for each source volume
-- `data/calibration/`: slices, transient runs, and durable eval bundles
-- `translation/`: complete English translation, ordered by volume and section
-- `publication/`: shared publication metadata and EPUB styling
-- `scripts/generate-latex`: generate the complete standalone LaTeX book source
-- `scripts/generate-epub`: generate the complete EPUB 3 ebook
-- `plan.md`: working architecture notes for the larger translation effort
-
-## Basic Workflow
-
-1. Download the Dutch source volumes into `data/raw/`.
-2. Ingest them into cleaned text plus metadata under `data/clean/` and `data/metadata/`.
-3. Build or refine calibration slices.
-4. Run calibration manifests to test translation and review behavior.
-5. Compare eval bundles and improve prompts, glossary decisions, and model configuration.
-
-## Running Calibration
-
-Provider keys are read from `.env`. Start from `.env.example`.
-
-The default runner entrypoint is:
-
-```bash
-./run-calibration
-```
-
-To target a specific manifest:
-
-```bash
-./run-calibration --run-manifest config/calibration/run-manifests/vol2-god-incomprehensibility-001-baseline.json
-```
-
-## Mining Glossary Candidates
-
-The repository also includes a deterministic glossary candidate miner over cleaned source texts.
-
-To mine one cleaned source volume with the default rules and thresholds:
-
-```bash
-pnpm glossary:candidates:mine -- --source-text data/clean/pg51052.txt
-```
-
-Artifacts are written under `data/calibration/glossary-candidates/<source_id>/`:
-
-- `candidate-terms.json`: unique mined candidates with stable candidate ids, first-seen location, and observed surface forms
-- `usage-locations.json`: one row for every emitted candidate occurrence with line, column, absolute offsets, and line excerpt
-- `metadata-overview.json`: per-candidate frequency/spread summary for emitted candidates plus counts for retained and excluded candidates
-
-Operator guidance for mining and glossary triage lives in [docs/glossary-candidate-mining.md](docs/glossary-candidate-mining.md).
-
-## Publication Outputs
-
-The complete English translation is stored as ordered Markdown files under
-`translation/volume-1/` through `translation/volume-4/`. Publication scripts
-require [Pandoc](https://pandoc.org/) and may be run from any directory.
-
-Generate a standalone LaTeX book source:
+The publication scripts require [Pandoc](https://pandoc.org/) and may be run from any directory.
 
 ```bash
 ./scripts/generate-latex
-```
-
-Generate an EPUB 3 ebook:
-
-```bash
 ./scripts/generate-epub
 ```
 
-The default outputs are `dist/bavinck-reformed-dogmatics.tex` and
-`dist/bavinck-reformed-dogmatics.epub`. Pass a path as the first argument to
-either script to override its output location. If Pandoc is not on `PATH`, set
-`PANDOC=/path/to/pandoc` when invoking a script. The ignored `dist/` directory
-keeps generated publication files out of version control.
+The default outputs are `dist/bavinck-reformed-dogmatics.tex` and `dist/bavinck-reformed-dogmatics.epub`. Pass a path as the first argument to either script to choose another output location. If Pandoc is not on `PATH`, set `PANDOC=/path/to/pandoc` when invoking the script.
+
+Generated publication files are intentionally excluded from Git. They are available from the [v1.0.0 GitHub release](https://github.com/kadencartwright/bavinck-rd-english/releases/tag/v1.0.0).
 
 ## License
 
-Code in this repository is licensed under the terms in [LICENSE](LICENSE).
-
-The project goal is to publish the resulting English text as a public domain edition.
+See [LICENSE](LICENSE). The project goal is to publish the English text as a public-domain edition.
